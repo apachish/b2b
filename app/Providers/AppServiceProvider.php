@@ -36,6 +36,10 @@ class AppServiceProvider extends ServiceProvider
             {
                 $domain = substr (Request::root(), 7); // $domain is now 'www.example.com'
             }
+            if (starts_with(Request::root(), 'https://'))
+            {
+                $domain = substr (Request::root(), 7); // $domain is now 'www.example.com'
+            }
             $prortal  = Portal::whereDomain($domain)->first();
             $site_info = json_decode($prortal->meta_data,true);
             $view->telephone=!empty($site_info['telephone'])?$site_info['telephone']:"";
