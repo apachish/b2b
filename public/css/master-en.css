@@ -1,0 +1,219 @@
+p, li, a, label, input, textarea, span blockquote, em, q, select, option,
+b, big, strong, fieldset, div, ul, section, footer, header, article {
+    font-family: sans-serif;
+    direction: ltr;
+}
+.col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12 {
+    float: left;
+}
+.col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
+    float: left;
+}
+.col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12 {
+    float: ;left;
+}
+.col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12 {
+    float: left;
+}
+h1, h2, h3, h4, h5, h6, button, input ,p,a,li,body{font-family:sans-serif;}
+ul, section, footer, header, article {direction: ltr;}
+.topnav .right .nav {float: left;margin-left: 0;margin-right: 3px;}
+header .topnav ul.nav li {margin: 0 0px 0 6px;}
+header .topnav ul.nav a, header .topnav ul.nav span {padding-right: 6px;padding-left: 0;}
+header .topnav ul.nav li:after {left: 100%;right: auto;}
+.topnav .right .nav:after {left: 99%;right: auto;}
+header .topnav .left ul {float: right;}
+header .topnav ul.nav li.dropdown a {
+    position: relative;
+    padding-right: 6px;
+    padding-left: 15px;
+    margin-left: 5px;
+    margin-right: 0;
+}
+header .topnav ul.nav li.dropdown a::before {left: 0;right: auto;}
+header .translatediv {float: right;text-align: right;}
+header .topsearch .sendquery, header .topsearch .formsearch {float: right;}
+.srch_area {
+    float: left;
+    margin-left: 0;
+    margin-right: 4px;
+}
+.srch_btn {float: right;margin: 0 5px 0 0px;}
+.txtsearchtop {
+      border-right: 1px solid #ccc;
+      margin-right: 4px;
+      border-left: 0;
+      margin-left: 0;
+}
+.t_2_fixer .logo_area, .t_2_fixer_login .logo_area {float: left;}
+.t_2_fixer .searchareadiv, .t_2_fixer_login .searchareadiv {float: right;}
+.select_label p {background: url(../images/dd.png) 88% 58% no-repeat;font-family: sans-serif;}
+ul.select_dg li {background: url(../images/dd1.png) no-repeat 90% center;}
+ul.select_dg li:nth-child(2) {background: url(../images/dd2.png) no-repeat 90% center;}
+ul.select_dg li:nth-child(3) {background: url(../images/dd3.png) no-repeat 90% center;}
+ul.select_dg li:nth-child(4) {background: url(../images/dd4.png) no-repeat 90% center;}
+.morelink {float: right;}
+.morelink a{padding-right: 12px;}
+.morelink a:after {content: "o";right: 0;left: auto;}
+.wrappercontent .right-sidebar li.dc-mega-li:before {content: "s";left:92%;right:auto;}
+.leads .rightlead, .leads .leftlead {padding-left: 0;}
+.wrappercontent .right-sidebar li.dc-mega-li a {padding: 5px 5px 5px 15px;}
+.mega-menu li .sub li.mega-hdr {float: left;}
+.mega-menu .sub ul li {padding-left: 0;padding-right: auto;}
+.leads .leadsbody .title-leads {padding-left: 1px;float: left;padding-right: 0;}
+.leads .leadsbody .allleads { padding-left: 16px;padding-right: 0;left:100%;}
+.leads .leadsbody .allleads:before{left: 5px;right: 0;}
+.leads .leadsbody .body-leads li a {padding-left: 13px;padding-right: 6px;}
+.leads .leadsbody .body-leads li a::before {content: "o";left: 0;right: auto;}
+.leads .leadsbody a.morelead_sell, .leads .leadsbody a.morelead_buy {
+    float: right;
+    text-align: right;
+    font-size: 10px;
+    padding-right: 12px;
+    padding-left: 0;
+}
+.leads .leadsbody .body-leads span.date-lead {text-align: right;float: right;}
+.categories-home .cat-list-home:last-child {padding-right: 0;}
+.categories-home .cat-list-home:first-child {padding-left: 0;}
+.specialproduct .speciallist a{padding-top: 2px;}
+.specialproduct .speciallist a:before {content: "o";right: auto;left: 0;}
+.specialproduct .speciallist a{padding-right: 0;padding-left: 12px;}
+.newsletter .title-newsletter , .btmfooter .nw_list p.titlefooterlink{float: left;}
+.newsletter .des-newsletter {margin: 0 0 0 23px;    float: left;}
+footer a.allphabet {float: left;padding: 0 15px 0 7px;}
+a.end_menu:after {content: "o";right: 2px;left: auto;}
+.btmfooter .copyright{text-align: right;}
+.rq_box {right: 10px;left: auto;}
+.categorylist .subcatlink{font-weight: bold;}
+.item-cat ul.cat_links {
+    float: left;
+    margin-left: 6px !important;
+    margin-right: 0 !important;
+}
+.categorylist li a{font-size: 13px;}
+.categorylist .act{padding-right: 10px;padding-left: 0;}
+.categorylist .act:after {content: "o";left: 66px;right: auto;}
+.breadcrumb .right-align {float: left;margin-right: 5px;margin-left: 0;}
+.breadcrumb .icon-angle-left:before {content: "s";}
+.alphabet b , #cboxLoadedContent span.box , #cboxLoadedContent input.contentselect{float: left;}
+.rq_box p.ttu.red.b.fs13.mb5 {text-align: right;}
+.categorylist h2 {
+    font-size: 1.2em !important;
+    padding-top: 11px !important;
+    padding-bottom: 9px;
+}
+.testimonial .blue1 {
+    position: relative;
+    padding-right: 10px;
+    padding-left: 6px;
+}
+.testimonial .blue1:after {
+    content: "o";
+    left: auto;
+    top: -1px;
+    right: 0;
+}
+.item-cat .cat_pc{float: left;}
+.contentinnerwrapper .contactform label.col-sm-3.col-form-label {
+    padding-left: 0;
+    font-size: 12px;
+    float: left;
+    text-align: left;
+}
+.sitemapwrapper h5 { margin-top: 8px;}
+.sitemapwrapper .sitemap a {background: #fff url(../images/stmp.png) no-repeat 5% center;}
+.sitemapwrapper .sitemap a:hover {padding: 5px 40px 5px 30px;background: #4AA8D4 url(../images/stmp.png) no-repeat 95% center;}
+p.textemail {text-align: left;float: right;padding-left: 23px;padding-right:0px;}
+.icon-email:before {left: 2px;right: auto;}
+#cboxLoadedContent .country-select.inside .flag-dropdown {left: 17px;right: auto;}
+#cboxLoadedContent input.contentselect{padding-right: 13px;padding-left: 0;}
+.country-select .country-list .country{text-align: left;}
+i.icon-check-circle {
+    padding-left: 23px;
+    padding-right: 0;
+}
+p.textsafe{float: left;text-align: left;padding-left: 5px;    padding-right: 0px;}
+.icon-check-circle:before{left: 3px;right: auto;}
+a#checkPassword, a#checkcredential{left: 9px;right: auto;}
+#cboxLoadedContent input.contentselect{    padding-left: 29px;padding-right: 0;}
+p.textsafe input {left: 4px;right: auto;}
+p.textsafe span {padding-left: 16px;padding-right: 0;}
+.changepass .dashboardnav li.dropdown ul a{padding-left: 7px;margin-left: 9px;    text-align: left;}
+.changepass .logout{right: 15px;}
+.changepass .inr_list_req .editreq a{padding: 5px 20px 5px 37px;}
+.changepass .inr_list_req .editreq a .icon-edit {right:auto;left: 13px;}
+.changepass .reqdiv p.leadslink {
+    float: left;
+    margin-top: 22px;
+    left: 0;
+    right: auto;
+}
+.changepass .ts_inr_list_pc{margin: 0 6px 0 0px;}
+.btn2s, .btn2s:visited{line-height: 19px;}
+.leaddetailsdiv .companies .title-company a{float: left;}
+.leaddetailsdiv .companies .location{float: right;}
+.leaddetailsdiv .ads_type a{border-right: 1px solid #ccc;float: left;border-left: 0;}
+.leaddetailsdiv .companies .textcompanies{margin-right: 0;margin-left: 10px;}
+.leaddetailsdiv .companies .btnsend i.icon-email, .abtnmore .icon-android-more-horizontal {left: 16px;right: 0;}
+.leaddetailsdiv .companies .btnsend, .abtnmore{padding: 0  26px 0 56px;}
+.icon-email:before{eft: 2px;right: 0;}
+.left-sidebar-inner .morelink a {text-align: right;float: right;}
+.left-sidebar-inner .morelink a:after{top:6px;}
+.leftmenu li a{padding: 2px 2px 2px 20px;}
+.leftmenu li a:before{left: 4px;right: auto;}
+.spansellertype{margin-left: 20px;margin-right:0; }
+.divmembership {background: url(/images/membership-box-en.png) no-repeat;float: left;margin-left: 27px;margin-right: 0;}
+.inner-memb .linkpay {float: right;margin-right: 53px;margin-left: 0;}
+.inner-memb {width: 333px;padding: 5px 0px 0 21px;float: right;}
+.inner-memb .pricepay {text-align: left;float: left;}
+.pmembership {float: left;}
+input#metaKeywords_tag{text-align: left;}
+.select2-container .select2-selection--single .select2-selection__rendered {padding-right: 8px;padding-left: 20px;}
+.select2-container--default .select2-selection--single .select2-selection__placeholder ,
+.select2-container .select2-selection--single .select2-selection__rendered {
+    color: #999;
+    text-align: left;
+    float: left;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow{left: 1px;right: auto;}
+p.charlimit {
+    float: right;
+    margin-right: 36%;
+    margin-left: 0;
+}
+.ml10 {
+    margin-right: 10px;
+    margin-left: 0;
+}
+.changepass .ordering p, .changepass .ordering label {margin-right: 16px !important;margin-left: 0;}
+.one {padding-top: 10px;}
+.changepass .Enquiriesdate{right: 16px;left: auto;}
+.changepass a.morelink {padding-right: 10px;padding-left: 6px;}
+.changepass a.morelink:before {
+    content: "o";
+    color: #294f7c;
+    font-family: fontastic;
+    position: absolute;
+    right: 0;
+    left: auto;
+    top: -4px;
+}
+.changepass .Enquiriesdelete a{padding-right: 0;padding-left: 33px;}
+.dn.adv_only select#position.form-control.inouttyeptext{float: left;width: 71%;}
+.dn.adv_only .Advertisementform button.btn.btn-primary {
+    float: left;
+    width: 119px;}
+.contactform .dn.adv_only input, .contactform .dn.adv_only .mt5.fls{box-shadow: none;    left: 0 !important}
+.dn.adv_only label.check {padding-left: 15px;}
+.breadcrumb strong {margin-left: 12px;}
+header .topnav ul.nav li ul li {text-align: left;}
+.mega-menu li .sub-container{left: 250px !important;}
+.categories-home .cat-list-home .title-cat{font-weight: bold;}
+.wrappercontent .right-sidebar li.dc-mega-li a{    text-transform: capitalize;}
+.contact-cat input {    left: 3px;
+    right:auto;
+}
+.contact_form.Advertisementform .col-md-3 .icheckbox {
+    left: 0;
+    right: auto;
+}
