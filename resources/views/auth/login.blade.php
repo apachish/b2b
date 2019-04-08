@@ -1,73 +1,91 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+    <div class="loginbody">
+        <section class="loginwrapper">
+            <div class="container">
+                <div class="col-lg-6 col-xs-12 col-sm-6">
+                    <form id="signin-form" class="form_shown" method="post" action="{{ route('login') }}"
+                          novalidate="novalidate">
+                        <div class="logindiv">
+                            @csrf
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
+                            <h3>{{__('Login')}}</h3>
+                            <p>
+                                <input placeholder="{{__('Email ID')}} *" id="identity" type="email"
+                                       class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email"
+                                       value="{{ old('email') }}" required autofocus>
 
                                 @if ($errors->has('email'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
                                 @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+                            </p>
+                            <p>
+                                <input placeholder="{{__('Password')}} *" id="credential" type="password"
+                                       class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
+                                       name="password" required>
 
                                 @if ($errors->has('password'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
                                 @endif
-                            </div>
-                        </div>
+                                <a toggle="#password-field" id="checkcredential"><i class="icon-eye"></i></a>
+                            </p>
 
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                            <p class="remember">
+                                <label>
+                                    {{--                                <input  type="checkbox" value="1"  checked name="remember_me" >--}}
+                                    <input class="form-check-input" type="checkbox" name="remember"
+                                           id="remember" {{ old('remember') ? 'checked' : '' }}>
 
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
+                                        {{ __('Remember Me') }}</label>
+                                <input type="hidden" name="locale" value="{{app()->getLocale()}}">
+                            </p>
+                            <p class="btnlogin1">
+                                <input name="submit" type="submit" value="{{__('Login')}}"
+                                       class="btn btn-dark mybtn trans_eff">
+                            </p>
+                            @if (Route::has('password.request'))
+                                <a class="btn btn-link" href="{{ route('password.request') }}">
+                                    {{ __('Forgot Your Password?') }}
+                                </a>
+                        @endif
+                        <!--                <p class="forget"><a href="-->
+                            <!--" class="uu forgot" title="Forgot Password?">Forgot Password?</a></p>-->
+                            <!--                <p class="orp"><b class="bg-white dib pl5 pr5">OR</b></p>-->
+                            <!--                <p class="btnlogin">-->
+                            <!--                    <input name="" type="button" value="Create New Account" class="btn btn-primary mybtn2 trans_eff" onClick="window.location.href=('')">-->
+                            <!--                </p>-->
                         </div>
                     </form>
                 </div>
+                <div class="col-lg-6 col-xs-12 col-sm-6"><img class="fl" src="/images/syr.gif" alt=""></div>
+
             </div>
-        </div>
+        </section>
     </div>
-</div>
+    <script type="text/javascript" src="js/script.js">
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#checkcredential').click(function () {
+                var type = $('#credential').attr('type');
+                if (type == 'password') {
+                    $('#credential').attr('type', 'text');
+                    $("#checkcredential i").removeClass('icon-eye').addClass("icon-eye-slash");
+                } else {
+                    $('#credential').attr('type', 'password');
+                    $("#checkcredential i").removeClass('icon-eye-slash').addClass("icon-eye");
+                }
+                // $(this).is(':checked') ? $('#input_password').attr('type', 'text') : $('#input_password').attr('type', 'password');
+            });
+        });
+    </script>
+
 @endsection
+
+

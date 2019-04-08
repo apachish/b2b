@@ -66,14 +66,14 @@
                                     </li>
                                 @else
                                     <li>
-                                        <a href="{{ route('login') }}"
+                                        <a href="{{ route('singIn') }}"
                                            title="{{__('Sign In')}}"
                                            class="group1 sing_up">{{__('Sign In')}}
                                         </a>
                                     </li>
-                                    @if (Route::has('register'))
+                                    @if (Route::has('singUp'))
                                         <li>
-                                            <a href="{{ route('register') }}"
+                                            <a href="{{ route('singUp') }}"
                                                class="group1 sing_up" title="{{__("Join Free")}}">
                                                 {{__("Join Free")}}
                                             </a>
@@ -132,43 +132,43 @@
 
                     <div class="translatediv">
                         @if($telephone)
-                        <p class="ph_number">{{__('Contact Us')}}:
-                            <b>{{$telephone}}</b></p>
+                            <p class="ph_number">{{__('Contact Us')}}:
+                                <b>{{$telephone}}</b></p>
                         @endif
                     </div>
                     <div class="topsearch">
                         <div class="sendquery">
                             @if (Route::has('contact_us'))
-                            <a href="{{route('contact_us')}}" class="sendquerybtn"
-                               title="{{__('Send Your Query')}}">{{__('Send Your Query')}}</a>
-                                @endif
+                                <a href="{{route('contact_us')}}" class="sendquerybtn"
+                                   title="{{__('Send Your Query')}}">{{__('Send Your Query')}}</a>
+                            @endif
                         </div>
                         @if (Route::has('search'))
-                        <form class="formsearch" action="{{route('search')}}" method="get">
+                            <form class="formsearch" action="{{route('search')}}" method="get">
 
-                            <div class="srch_area  form-row align-items-center">
-                                <div class="txtsearchtop">
-                                    <label class="sr-only" for="inlineFormInput">{{__("Name")}}?></label>
-                                    <input autocomplete="off" type="text" name="search"
-                                           class=" searchinput form-control mb-2 mb-sm-0" size="30"
-                                           onkeyup="showResult(this.value)"
-                                           placeholder="{{__("Enter your Keyword")}}...." value="">
-                                    <div id="livesearch"></div>
+                                <div class="srch_area  form-row align-items-center">
+                                    <div class="txtsearchtop">
+                                        <label class="sr-only" for="inlineFormInput">{{__("Name")}}?></label>
+                                        <input autocomplete="off" type="text" name="search"
+                                               class=" searchinput form-control mb-2 mb-sm-0" size="30"
+                                               onkeyup="showResult(this.value)"
+                                               placeholder="{{__("Enter your Keyword")}}...." value="">
+                                        <div id="livesearch"></div>
 
+                                    </div>
+                                    <select name="type" class="select_dg custom-select mb-2 mr-sm-2 mb-sm-0" id="type">
+                                    <!--<option value=""><?//=$this->translate("Filter")?></option>-->
+                                        <option value="buyselllead">{{__("Products")}}</option>
+                                        <option value="companies">{{__("Companies")}}</option>
+                                        <option value="buylead"> {{__("Buy Offers")}}</option>
+                                        <option value="selllead"> {{__("Sell Offers")}}</option>
+                                    </select>
                                 </div>
-                                <select name="type" class="select_dg custom-select mb-2 mr-sm-2 mb-sm-0" id="type">
-                                <!--<option value=""><?//=$this->translate("Filter")?></option>-->
-                                    <option value="buyselllead">{{__("Products")}}</option>
-                                    <option value="companies">{{__("Companies")}}</option>
-                                    <option value="buylead"> {{__("Buy Offers")}}</option>
-                                    <option value="selllead"> {{__("Sell Offers")}}</option>
-                                </select>
-                            </div>
-                            <div class="btnsearchtop">
-                                <input name="" type="submit" class="srch_btn trans_eff btn serachbtn" value="&nbsp;">
-                            </div>
-                        </form>
-                            @endif
+                                <div class="btnsearchtop">
+                                    <input name="" type="submit" class="srch_btn trans_eff btn serachbtn" value="&nbsp;">
+                                </div>
+                            </form>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -242,20 +242,20 @@
         </div>
         <div class="col-lg-5 col-md-4 col-sm-5 col-xs-12">
             @if (Route::has('refer-friend'))
-            <a href="{{route('refer-friend')}}. "?link=" .Request::url() . "&text="  {{base64_encode(__("Site Buysellyab"))}} "
-               class="footera ajax group1 refer_friend">
-                <img src="/images/b_icon1.png" alt="">{{_("Refer to friend")}})</a>
-            <!--            <a href="#" class="footera"><img src="/images/b_icon2.png" alt="">Bookmark Us</a>-->
-            <!--            <a href="#" class="footera"><img src="/images/b_icon3.png" alt="">ساخته شده با</a>-->
-                @endif
+                <a href="{{route('refer-friend')}}. "?link=" .Request::url() . "&text="  {{base64_encode(__("Site Buysellyab"))}} "
+                   class="footera ajax group1 refer_friend">
+                    <img src="/images/b_icon1.png" alt="">{{_("Refer to friend")}})</a>
+                <!--            <a href="#" class="footera"><img src="/images/b_icon2.png" alt="">Bookmark Us</a>-->
+                <!--            <a href="#" class="footera"><img src="/images/b_icon3.png" alt="">ساخته شده با</a>-->
+            @endif
         </div>
         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
             <p class="copyright">{{__("Copyright")}}) © {{date('Y')}} <b
                         class="black weight600">{{__($_SERVER['HTTP_HOST'])}}</b> {{__('. All rights reserved.')}}
                 <br>
                 {{__('Developed and Managed by')}} <a href="https://www.apachish.com" target="_blank"
-                                                                      title="apachish.com"
-                                                                      class="uo">{{__("Oxin")}})</a></p>
+                                                      title="apachish.com"
+                                                      class="uo">{{__("Oxin")}})</a></p>
         </div>
     </div>
 </section>
@@ -280,7 +280,7 @@
     <script src="/js/jquery.easing-1.3.js"></script>
     <script src="/js/jquery.mousewheel-3.1.12.js"></script>
     <script src="/js/jquery.jcarousellite.js"></script>
-    <script type='text/javascript' src='/js/script.js'></script>
+    <script type='text/javascript' src='{{ asset('js/script.js')}}'></script>
 
     <script type="text/javascript" src="/js/script.int.dg.js"></script>
     <script type="text/javascript" src="/js/custom_index.js"></script>
