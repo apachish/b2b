@@ -93,8 +93,8 @@
         /*Endtime must be > current time*/
         endtimeYear: 2019,
         endtimeMonth: 4,
-        endtimeDate: 9,
-        endtimeHours: 18,
+        endtimeDate: 10,
+        endtimeHours: 8,
         endtimeMinutes: 0,
         endtimeSeconds: 0,
         timeZone: ""
