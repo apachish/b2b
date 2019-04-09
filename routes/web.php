@@ -26,6 +26,21 @@ Route::middleware('auth')
     ->prefix('admin')
     ->namespace('Admin')
     ->group(function () {
-    Route::get('/','IndexController@index');
+    Route::get('/','IndexController@index')->name('dashbord');
+    Route::get('/profile','IndexController@index')->name('adminProfile');
+    Route::get('/message','IndexController@index')->name('adminMessage');
+    Route::get('/productenquiry','IndexController@index')->name('productenquiry');
+    Route::get('/enquiry','IndexController@index')->name('enquiry');
+    Route::get('enquiry/request_call','IndexController@index')->name('enquiry-request_call');
+    Route::get('products','IndexController@index')->name('products');
+    Route::get('advertise','IndexController@index')->name('advertise');
+    Route::get('members','IndexController@index')->name('members');
+    Route::get('category','IndexController@index')->name('category');
+    Route::get('category/bulkupload','IndexController@index')->name('bulkupload');
+    Route::get('banners','IndexController@index')->name('banners');
+    Route::get('enquiry/request_call','IndexController@index')->name('enquiry/request_call');
+    Route::get('testimonial','IndexController@index')->name('testimonial');
+    Route::get('comment','IndexController@index')->name('comment');
+    Route::get('enquiry-request_call','IndexController@index')->name('enquiry-request_call');
 
 });

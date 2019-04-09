@@ -47,7 +47,20 @@ class AppServiceProvider extends ServiceProvider
                 $site_info = json_decode($prortal->meta_data,true);
                 $view->telephone=!empty($site_info['telephone'])?$site_info['telephone']:"";
             }
-
+            $view->Count_notification_product_enquiry=0;
+            $view->notification_product_enquiry=[];
+            $view->Count_notification_enquiry=0;
+            $view->notification_enquiry=[];
+            $view->Count_notification_product_enquiry=0;
+            $view->notification_product_enquiry=[];
+            $view->Count_notification_requestCall=0;
+            $view->notification_requestCall=[];
+            $view->Count_notification_product=0;
+            $view->notification_product=[];
+            $view->Count_notification_banner=0;
+            $view->notification_banner=[];
+            $view->Count_notification_user=0;
+            $view->notification_user=[];
 
         });
 
