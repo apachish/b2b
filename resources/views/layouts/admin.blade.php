@@ -24,7 +24,7 @@
     <script src="{{ asset('js/admin/plugins/noty/layouts/topLeft.js') }}" defer></script>
     <script src="{{ asset('js/admin/plugins/noty/layouts/topRight.js') }}" defer></script>
     <script src="{{ asset('js/admin/plugins/noty/themes/default.js') }}" defer></script>
-    <script src="{{ asset('js/admin/app.js') }}" defer></script>
+{{--    <script src="{{ asset('js/admin/app.js') }}" defer></script>--}}
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -37,7 +37,7 @@
     <link href="{{ asset('/select2/select2.css') }}" rel="stylesheet">
     <link href="{{ asset('css/admin/persian-datepicker.css') }}" rel="stylesheet">
     <link href="{{ asset('css/admin/magnific-popup.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/admin/app.css') }}" rel="stylesheet">
+{{--    <link href="{{ asset('css/admin/app.css') }}" rel="stylesheet">--}}
 </head>
 <body>
 <!-- START PAGE CONTAINER -->
@@ -48,7 +48,7 @@
         <!-- START X-NAVIGATION -->
         <ul class="x-navigation">
             <li class="xn-logo">
-                <a href="index.html">{{auth()->user()->id}} </a>
+                <a href="index.html">{{auth()->user()->name}} </a>
                 <a href="#" class="x-navigation-control"></a>
             </li>
             <li class="xn-profile">
@@ -109,16 +109,17 @@
                 <div class="informer informer-info {{$Count_notification_product_enquiry?"blink":""}}">{{$Count_notification_product_enquiry}} </div>
                 <div class="panel panel-primary animated zoomIn xn-drop-left xn-panel-dragging">
                     <div class="panel-heading">
-                        <h3 class="panel-title"><span class="fa fa-comments"></span> {{__("Messages For Request Lead")}}</h3>
+                        <h3 class="panel-title"><span class="fa fa-comments"></span> {{__("Messages For Request Lead")}}
+                        </h3>
                         <div class="pull-right">
-                            <span class="label label-danger {{$Count_notification_product_enquiry?"blink":""}} ">
-                                {{$Count_notification_product_enquiry}} {{__("new")}}
-                            </span>
+                        <span class="label label-danger {{$Count_notification_product_enquiry?"blink":""}} ">
+                            {{$Count_notification_product_enquiry}} {{__("new")}}
+                        </span>
                         </div>
                     </div>
                     <div class="panel-body list-group list-group-contacts scroll" style="height: 200px;">
                         @foreach ($notification_product_enquiry as $notification):
-                        <a href="{{route('productenquiry')."?id=".$notification->idItem."&id_notification=".$notification->id}}"
+                        <a href="{{url('admin/request')."?id=".$notification->idItem."&id_notification=".$notification->id}}"
                            class="list-group-item">
                             <div class="list-group-status status-online"></div>
                             <span class="contacts-title">{{$notification->title}}</span>
@@ -128,7 +129,7 @@
                         @endforeach
                     </div>
                     <div class="panel-footer text-center">
-                        <a href="{{route('productenquiry')}}">{{__("Show all Request")}}</a>
+                        <a href="{{url('admin/request')}}">{{__("Show all Request")}}</a>
                     </div>
                 </div>
             </li>
@@ -142,15 +143,15 @@
                         <h3 class="panel-title"><span class="fa fa-comments"></span>
                             {{__("Messages For Request Bug/Question")}}</h3>
                         <div class="pull-right">
-                            <span class="label label-danger {{$Count_notification_enquiry?"blink":""}} ">
-                                {{$Count_notification_enquiry}}{{__("new")}}
-                            </span>
+                        <span class="label label-danger {{$Count_notification_enquiry?"blink":""}} ">
+                            {{$Count_notification_enquiry}}{{__("new")}}
+                        </span>
                         </div>
                     </div>
                     <div class="panel-body list-group list-group-contacts scroll" style="height: 200px;">
 
                         @foreach ($notification_enquiry as $notification):
-                        <a href="{{route("enquiry")."?id=".$notification->idItem."&id_notification=".$notification->id}}"
+                        <a href="{{url("admin/enquiry")."?id=".$notification->idItem."&id_notification=".$notification->id}}"
                            class="list-group-item">
                             <div class="list-group-status status-online"></div>
                             <img src="{{asset("images/users/user2.jpg")}}" class="pull-left"
@@ -162,7 +163,7 @@
                         @endforeach
                     </div>
                     <div class="panel-footer text-center">
-                        <a href="{{route("enquiry")}}">{{__("Show all Request Bug and Question")}}</a>
+                        <a href="{{url("admin/enquiry")}}">{{__("Show all Request Bug and Question")}}</a>
                     </div>
                 </div>
             </li>
@@ -173,17 +174,18 @@
                 </div>
                 <div class="panel panel-primary animated zoomIn xn-drop-left xn-panel-dragging">
                     <div class="panel-heading">
-                        <h3 class="panel-title"><span class="fa fa-comments"></span> {{__("Messages For Request Calls")}}</h3>
+                        <h3 class="panel-title"><span
+                                    class="fa fa-comments"></span> {{__("Messages For Request Calls")}}</h3>
                         <div class="pull-right">
-                            <span class="label label-danger {{$Count_notification_requestCall?"blink":""}} ">
-                                {{$Count_notification_requestCall}} {{__("new")}}
-                            </span>
+                        <span class="label label-danger {{$Count_notification_requestCall?"blink":""}} ">
+                            {{$Count_notification_requestCall}} {{__("new")}}
+                        </span>
                         </div>
                     </div>
                     <div class="panel-body list-group list-group-contacts scroll" style="height: 200px;">
 
                         @foreach ($notification_requestCall as $notification):
-                        <a href="{{route("enquiry-request_call")."?id=".$notification->idItem."&id_notification=".$notification->id}}"
+                        <a href="{{url("admin/enquiry-request_call")."?id=".$notification->idItem."&id_notification=".$notification->id}}"
                            class="list-group-item">
                             <div class="list-group-status status-online"></div>
                             <img src="{{asset("images/users/user2.jpg")}}" class="pull-left"
@@ -196,7 +198,7 @@
                         @endforeach
                     </div>
                     <div class="panel-footer text-center">
-                        <a href="{{route("enquiry-request_call")}}">{{__("Show all Request Calls")}}</a>
+                        <a href="{{url("admin/enquiry-request_call")}}">{{__("Show all Request Calls")}}</a>
                     </div>
                 </div>
             </li>
@@ -204,15 +206,15 @@
             <!-- TASKS -->
             <li class="xn-icon-button pull-right">
                 <a href="#"><span class="fa fa-tasks"></span></a>
-                <div class="informer informer-warning {{$Count_notification_product?"blink":""}}" >
+                <div class="informer informer-warning {{$Count_notification_product?"blink":""}}">
                     {{$Count_notification_product}}
                 </div>
                 <div class="panel panel-primary animated zoomIn xn-drop-left xn-panel-dragging">
                     <div class="panel-heading">
                         <div class="pull-right">
-                            <span class="label label-warning">
-                                {{$Count_notification_product?"blink":""}} {{__("New")}}
-                            </span>
+                        <span class="label label-warning">
+                            {{$Count_notification_product?"blink":""}} {{__("New")}}
+                        </span>
                         </div>
                         <h3 class="panel-title"><span class="fa fa-tasks"></span>{{__("Leads") }}</h3>
 
@@ -220,7 +222,8 @@
                     <div class="panel-body list-group scroll" style="height: 200px;">
 
                         @foreach ($notification_product as $notification):
-                        <a class="list-group-item" href="{{route('products')."?id=".$notification->idItem."&id_notification=".$notification->id}}">
+                        <a class="list-group-item"
+                           href="{{url('admin/products')."?id=".$notification->idItem."&id_notification=".$notification->id}}">
                             <p style="text-align: right"><strong>{{$notification->title}}</strong></p>
                             <p style="text-align: right">{{$notification->description}}</p>
                             <small class="text-muted">{{$notification->createdAt}}</small>
@@ -228,28 +231,30 @@
                         @endforeach
                     </div>
                     <div class="panel-footer text-center">
-                        <a href="{{route('products')}}">{{__("Show all Lead")}}</a>
+                        <a href="{{url('admin/products')}}">{{__("Show all Lead")}}</a>
                     </div>
                 </div>
             </li>
             <li class="xn-icon-button pull-right">
                 <a href="#"><span class="fa fa-image"></span></a>
                 <div class="informer informer-info {{$Count_notification_banner?"blink":""}}">
-                {{$Count_notification_banner}}
+                    {{$Count_notification_banner}}
                 </div>
                 <div class="panel panel-primary animated zoomIn xn-drop-left xn-panel-dragging">
                     <div class="panel-heading">
-                        <h3 class="panel-title"><span class="fa fa-comments"></span> {{__("Messages for advertise")}}</h3>
+                        <h3 class="panel-title"><span class="fa fa-comments"></span> {{__("Messages for advertise")}}
+                        </h3>
                         <div class="pull-right">
-                            <span class="label label-danger {{$Count_notification_banner?"blink":""}} ">
-                                {{$Count_notification_banner}} {{__("new")}}
-                            </span>
+                        <span class="label label-danger {{$Count_notification_banner?"blink":""}} ">
+                            {{$Count_notification_banner}} {{__("new")}}
+                        </span>
                         </div>
                     </div>
                     <div class="panel-body list-group list-group-contacts scroll" style="height: 200px;">
 
                         @foreach ($notification_banner as $notification){?>
-                        <a href="{{route('advertise')."?id=".$notification->idItem."&id_notification=".$notification->id}}" class="list-group-item">
+                        <a href="{{url('admin/advertise')."?id=".$notification->idItem."&id_notification=".$notification->id}}"
+                           class="list-group-item">
                             <div class="list-group-status status-online"></div>
                             <img src="{{asset("images/users/user2.jpg")}}" class="pull-left"
                                  alt="John Doe"/>
@@ -260,7 +265,7 @@
                         @endforeach
                     </div>
                     <div class="panel-footer text-center">
-                        <a href="{{route('advertise')}}">{{__("Show all Advertise")}}</a>
+                        <a href="{{url('admin/advertise')}}">{{__("Show all Advertise")}}</a>
                     </div>
                 </div>
             </li>
@@ -271,17 +276,19 @@
                 </div>
                 <div class="panel panel-primary animated zoomIn xn-drop-left xn-panel-dragging">
                     <div class="panel-heading">
-                        <h3 class="panel-title"><span class="fa fa-comments"></span> {{__("Messages for new user")}}</h3>
+                        <h3 class="panel-title"><span class="fa fa-comments"></span> {{__("Messages for new user")}}
+                        </h3>
                         <div class="pull-right">
-                            <span class="label label-danger {{$Count_notification_user?"blink":""}} ">
-                                {{$Count_notification_user}} {{__("new")}}
-                            </span>
+                        <span class="label label-danger {{$Count_notification_user?"blink":""}} ">
+                            {{$Count_notification_user}} {{__("new")}}
+                        </span>
                         </div>
                     </div>
                     <div class="panel-body list-group list-group-contacts scroll" style="height: 200px;">
 
                         @foreach ($notification_user as $notification){?>
-                        <a href="{{route('members')."?id=".$notification->idItem."&id_notification=".$notification->id}}" class="list-group-item">
+                        <a href="{{url('admin/members')."?id=".$notification->idItem."&id_notification=".$notification->id}}"
+                           class="list-group-item">
                             <div class="list-group-status status-online"></div>
                             <img src="{{asset("images/users/user2.jpg")}}" class="pull-left"
                                  alt="John Doe"/>
@@ -292,7 +299,7 @@
                         @endforeach
                     </div>
                     <div class="panel-footer text-center">
-                        <a href="{{route('members')}}">{{__("Show all Users")}}</a>
+                        <a href="{{url('admin/members')}}">{{__("Show all Users")}}</a>
                     </div>
                 </div>
             </li>
@@ -300,11 +307,13 @@
             <li class="xn-icon-button pull-right">
                 @switch (app()->getLocale())
                     @case('en')
-                        <a href='#' id='fa_IR' class='changelocal' title='{{__("Farsi")}}'><img src='{{asset('/images/flag/fa.png')}}'></a>
-                        @break
+                    <a href='#' id='fa_IR' class='changelocal' title='{{__("Farsi")}}'><img
+                                src='{{asset('/images/flag/fa.png')}}'></a>
+                    @break
                     @case('fa')
-                        <a href='#' id='en_US' class='changelocal' title='{{__("English")}}'><img src='{{asset('/images/flag/en.png')}}'></a>
-                        @break
+                    <a href='#' id='en_US' class='changelocal' title='{{__("English")}}'><img
+                                src='{{asset('/images/flag/en.png')}}'></a>
+                    @break
                 @endswitch
             </li>
 
@@ -343,6 +352,8 @@
 <!-- END TEMPLATE -->
 <!-- END SCRIPTS -->
 </body>
+@yield('javascript')
+
 <script type="text/javascript">
     function notyConfirm() {
         noty({

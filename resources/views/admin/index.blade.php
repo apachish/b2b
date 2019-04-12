@@ -44,7 +44,7 @@
 
                 <!-- START WIDGET REGISTRED -->
                 <div class="widget widget-default widget-item-icon"
-                     onclick="location.href='{{ route('members') }}';">
+                     onclick="location.href='{{ url('admin/members') }}';">
                     <div class="widget-item-left">
                         <span class="fa fa-user"></span>
                     </div>
@@ -66,7 +66,7 @@
 
                 <!-- START WIDGET REGISTRED -->
                 <div class="widget widget-default widget-item-icon"
-                     onclick="location.href='{{ route('members')."?featured=1" }}';">
+                     onclick="location.href='{{ url('admin/members')."?featured=1" }}';">
                     <div class="widget-item-left">
                         <span class="fa fa-user"></span>
                     </div>
@@ -115,14 +115,14 @@
         </div>
         <div class="row">
             <div class="col-md-2">
-                <a href="{{ route("products") }}" class="tile tile-danger ">
+                <a href="{{ url("admin/products") }}" class="tile tile-danger ">
                     {{ $total_lead }}
                     <p>{{__("Total Leads") }}</p>
                     <div class="informer informer-default dir-tr"></div>
                 </a>
             </div>
             <div class="col-md-2">
-                <a href="{{ route("products") . "?startDate=" . date('Y-m-d 00:00:00') . "&endDate=" . date('Y-m-d 23:59:59') }}"
+                <a href="{{ url("admin/products") . "?startDate=" . date('Y-m-d 00:00:00') . "&endDate=" . date('Y-m-d 23:59:59') }}"
                    class="tile tile-danger ">
                     {{ $total_lead_today }}
                     <p>{{__("Today Send Leads") }}</p>
@@ -130,28 +130,28 @@
                 </a>
             </div>
             <div class="col-md-2">
-                <a href="{{ route("products") . "?newStatus=1" }}" class="tile tile-danger ">
+                <a href="{{ url("admin/products") . "?newStatus=1" }}" class="tile tile-danger ">
                     {{ $total_lead_new }}
                     <p>{{__("Total New Leads") }}</p>
                     <div class="informer informer-default dir-tr"></div>
                 </a>
             </div>
             <div class="col-md-2">
-                <a href="{{ route("products") . "?status=1" }}" class="tile tile-danger">
+                <a href="{{ url("admin/products") . "?status=1" }}" class="tile tile-danger">
                     {{ $total_lead_active }}
                     <p>{{__("Total Active Leads") }}</p>
                     <div class="informer informer-default dir-tr"></div>
                 </a>
             </div>
             <div class="col-md-2">
-                <a href="{{ route("products") . "?status=0" }}" class="tile tile-danger">
+                <a href="{{ url("admin/products") . "?status=0" }}" class="tile tile-danger">
                     {{ $total_lead_unactive }}
                     <p>{{__("Total UnActive Leads") }}</p>
                     <div class="informer informer-default dir-tr"></div>
                 </a>
             </div>
             <div class="col-md-2">
-                <a href="{{ route("productenquiry")."?readStatusAdmin=1" }}" class="tile tile-primary">
+                <a href="{{ url("admin/request")."?readStatusAdmin=1" }}" class="tile tile-primary">
                     {{ $total_new_enquiry }}
                     <p>{{__("New Request Lead") }}</p>
                     <div class="informer informer-default dir-tr"><span class="fa fa-comment"></span></div>
@@ -160,21 +160,21 @@
         </div>
         <div class="row">
             <div class="col-md-4">
-                <a href="{{ route("products") . "?approvalStatus_filter=1" }}" class="tile tile-danger">
+                <a href="{{ url("admin/products") . "?approvalStatus_filter=1" }}" class="tile tile-danger">
                     {{ $total_lead_pending }}
                     <p>{{__("Total Pending Leads") }}</p>
                     <div class="informer informer-default dir-tr"></div>
                 </a>
             </div>
             <div class="col-md-4">
-                <a href="{{ route("products") . "?approvalStatus_filter=2" }}" class="tile tile-danger ">
+                <a href="{{ url("admin/products") . "?approvalStatus_filter=2" }}" class="tile tile-danger ">
                     {{ $total_lead_approved }}
                     <p>{{__("Total Approved Leads") }}</p>
                     <div class="informer informer-default dir-tr"></div>
                 </a>
             </div>
             <div class="col-md-4">
-                <a href="{{ route("products") . "?approvalStatus_filter=3" }}" class="tile tile-danger ">
+                <a href="{{ url("admin/products") . "?approvalStatus_filter=3" }}" class="tile tile-danger ">
                     {{ $total_lead_rejected }}
                     <p>{{__("Total Rejected Leads") }}</p>
                     <div class="informer informer-default dir-tr">{{ $date }}</div>
@@ -184,14 +184,14 @@
 
         <div class="row">
             <div class="col-md-2">
-                <a href="{{ route("banners") }}" class="tile  tile-success">
+                <a href="{{ url("admin/banners") }}" class="tile  tile-success">
                     {{ $total_banner }}
                     <p>{{__("Total Banner") }}</p>
                     <div class="informer informer-default dir-tr"></div>
                 </a>
             </div>
             <div class="col-md-2">
-                <a href="{{ route("banners") . "?status_search=1" }}" class="tile tile-success ">
+                <a href="{{ url("admin/banners") . "?status_search=1" }}" class="tile tile-success ">
                     {{ $total_banner_active }}
                     <p>{{__("Total Active Banner") }}</p>
                     <div class="informer informer-default dir-tr">
@@ -199,7 +199,7 @@
                 </a>
             </div>
             <div class="col-md-2">
-                <a href="{{ route("banners") . "?status_search=-1" }}" class="tile tile-success ">
+                <a href="{{ url("admin/banners") . "?status_search=-1" }}" class="tile tile-success ">
                     {{ $total_banner_unactive }}
                     <p>{{__("Total UnActive Banner") }}</p>
                     <div class="informer informer-default dir-tr">
@@ -207,14 +207,14 @@
                 </a>
             </div>
             <div class="col-md-2">
-                <a href="{{ route("advertise") }}" class="tile  tile-warning">
+                <a href="{{ url("admin/advertise") }}" class="tile  tile-warning">
                     {{ $total_advertise }}
                     <p>{{__("Total Advertise") }}</p>
                     <div class="informer informer-default dir-tr"></div>
                 </a>
             </div>
             <div class="col-md-2">
-                <a href="{{ route("advertise") . "?status_search=1" }}" class="tile tile-warning ">
+                <a href="{{ url("admin/advertise") . "?status_search=1" }}" class="tile tile-warning ">
                     {{ $total_advertise_active }}
                     <p>{{__("Total Active Advertise") }}</p>
                     <div class="informer informer-default dir-tr">
@@ -222,7 +222,7 @@
                 </a>
             </div>
             <div class="col-md-2">
-                <a href="{{ route("advertise") . "?status_search=-1" }}" class="tile tile-warning">
+                <a href="{{ url("admin/advertise") . "?status_search=-1" }}" class="tile tile-warning">
                     {{ $total_advertise_unactive }}
                     <p>{{__("Total UnActive Advertise") }}</p>
                     <div class="informer informer-default dir-tr">
@@ -236,7 +236,7 @@
 
                 <!-- START WIDGET MESSAGES -->
                 <div class="widget widget-default widget-item-icon"
-                     onclick="location.href='{{ route('enquiry') . "?new=N" }}';">
+                     onclick="location.href='{{ url('admin/enquiry') . "?new=N" }}';">
                     <div class="widget-item-left">
                         <span class="fa fa-envelope"></span>
                     </div>
@@ -259,7 +259,7 @@
 
                 <!-- START WIDGET MESSAGES -->
                 <div class="widget widget-default widget-item-icon"
-                     onclick="location.href='{{ route('enquiry/request_call') . "?new=N" }}';">
+                     onclick="location.href='{{ url('admin/enquiry/request_call') . "?new=N" }}';">
                     <div class="widget-item-left">
                         <span class="fa fa-envelope"></span>
                     </div>
@@ -281,7 +281,7 @@
 
                 <!-- START WIDGET MESSAGES -->
                 <div class="widget widget-default widget-item-icon"
-                     onclick="location.href='{{ route('testimonial') . "?status=0" }}';">
+                     onclick="location.href='{{ url('admin/testimonial') . "?status=0" }}';">
                     <div class="widget-item-left">
                         <span class="fa fa-envelope"></span>
                     </div>
@@ -303,7 +303,7 @@
 
                 <!-- START WIDGET MESSAGES -->
                 <div class="widget widget-default widget-item-icon"
-                     onclick="location.href='{{ route('comment') . "?status=0" }}';">
+                     onclick="location.href='{{ url('admin/comment') . "?status=0" }}';">
                     <div class="widget-item-left">
                         <span class="fa fa-envelope"></span>
                     </div>

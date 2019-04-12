@@ -18,8 +18,8 @@ class GenerateMenus
 
         \Menu::make('MyNavBar', function ($menu) {
             $menu->add('Dashboard',['route'  => 'dashbord']);
-            $category = $menu->add('Category Management',    ['route'  => 'category']);
-            $category->add('Category','category');
+            $category = $menu->add('Category Management',    ['url'  => 'admin/categories  ']);
+            $category->add('Category','category' , ['url'  => 'admin/categories  ']);
             $category->add('Bulk Upload Category','bulkupload');
             $leads = $menu->add('Manage Leads');
             $leads->add('Leads');

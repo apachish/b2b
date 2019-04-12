@@ -17,17 +17,17 @@ class CreateCategoriesTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('name_fa');
-            $table->string('image');
-            $table->string('image_thumb');
-            $table->text('description');
-            $table->text('description_fa');
-            $table->tinyInteger('sort_order');
-            $table->boolean('status');
-            $table->string('meta_title');
-            $table->text('meta_keywords');
-            $table->text('meta_description');
+            $table->string('friendlyUrl');
+            $table->string('image')->nullable()->default('noImage.png');
+            $table->text('description')->nullable();
+            $table->text('description_fa')->nullable();
+            $table->tinyInteger('sort_order')->nullable();
+            $table->boolean('status')->default(false);
+            $table->string('meta_title')->nullable();
+            $table->text('meta_keywords')->nullable();
+            $table->text('meta_description')->nullable();
             $table->nestedSet();
-            $table->boolean('feature');
+            $table->boolean('feature')->default(false);
             $table->timestamps();
         });
     }
