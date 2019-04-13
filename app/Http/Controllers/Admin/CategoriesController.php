@@ -84,7 +84,23 @@ class CategoriesController extends Controller
             'name' => 'required|max:100',
             'name_fa' => 'required|max:100',
         ]);
-        $category =
+        $category = Category::create([
+            'name'=>$request->name,
+            'name_fa'=>$request->name_fa,
+            'description'=>$request->description,
+            'description_fa'=>$request->description_fa,
+            'sort_order'=>$request->sort_order,
+            'status'=>$request->status,
+            'meta_title'=>$request->meta_title,
+            'meta_keywords'=>$request->meta_keywords,
+            'meta_description'=>$request->meta_description,
+            'feature'=>$request->feature
+            ,'parent_id'=>$request->category2?$request->category2:$request->category
+        ]);
+        Category::$section = 'category';
+        Category::$id = $category->id;
+        $image = Category::upload($request->image);
+        $category->update(['image'=>$image]);
         return redirect('/categories');
     }
 

@@ -9,7 +9,7 @@ use Kalnoy\Nestedset\NodeTrait;
 class Category extends Model
 {
     use NodeTrait;
-    use UploadImage
+    use UploadImage;
     protected $fillable =[  'id',
       'name',
       'name_fa',

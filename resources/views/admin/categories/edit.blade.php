@@ -144,8 +144,8 @@
                                     <label class="col-md-3 control-label">{{ __("Select status") }}</label>
                                     <div class="col-md-9">
                                         <select class="form-control " name="status">
-                                            <option value="0" {{ (isset($category['status']) && $category['status'] == 0) ? 'selected' : '' }}>{{ __("Unactivated") }}</option>
-                                            <option value="1" {{ (isset($category['status']) && $category['status'] == 1) ? 'selected' : '' }}>{{ __("active") }}</option>
+                                            <option value="0" {{$category->status == 0 ? 'selected' : '' }}>{{ __("Unactivated") }}</option>
+                                            <option value="1" {{$category->status == 1 ? 'selected' : '' }}>{{ __("active") }}</option>
                                         </select>
                                         <span class="help-block"></span>
                                     </div>
@@ -158,7 +158,7 @@
                                         <label class="check"><input type="checkbox" class="icheckbox"
                                                                     name="feature"
                                                                     value="1"
-                                                                    @if (isset($category['feature']) && ($category['feature'] == true))
+                                                                    @if ($category->feature)
                                                                         checked="checked"
                                                                     @endif
                                             />{{ __("Feature") }}</label>
@@ -168,7 +168,7 @@
                                 <div class="form-group">
                                     <label class="col-md-3 control-label">{{__("meta Keywords")}}</label>
                                     <div class="col-md-9">
-                                        <input type="text" name="metaKeywords" class="tagsinput" value="{{$category['metaKeywords']}}"/>
+                                        <input type="text" name="metaKeywords" class="tagsinput" value="{{$category->metaKeywords}}"/>
 
                                         <span class="help-block">{{__("input different type title category for search")}}</span>
                                     </div>
@@ -185,94 +185,8 @@
                     </div>
                 </div>
             </form>
-            <script type='text/javascript' src='/js/admin/plugins/icheck/icheck.min.js'></script>
-            <script type="text/javascript" src="/js/admin/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
-            <script type="text/javascript" src="/js/admin/plugins/bootstrap/bootstrap-select.js"></script>
-            <script type="text/javascript" src="/js/admin/plugins/bootstrap/bootstrap-file-input.js"></script>
-            <script type="text/javascript" src="/js/admin/settings.js"></script>
-            <script type="text/javascript" src="/js/admin/plugins/blueimp/jquery.blueimp-gallery.min.js"></script>
-            <script type="text/javascript" src="/js/admin/plugins/tagsinput/jquery.tagsinput.min.js"></script>
-
-            <script type="text/javascript" src="/js/admin/plugins.js"></script>
-            <script type="text/javascript" src="/js/admin/actions.js"></script>
-            <script>
-                $(document).on('ready', function (e) {
-                    $('.mb-control-close').on('click', function () {
-                        $('#mb-remove-row').hide();
-
-                    })
-                    $('.mb-control-yes').on('click', function () {
-                        var id = $('#Delete_id').val();
-                        if(!id){
-                            console.log('idish nist');
-                            toastr.error("{{  __("Can Not Delete Image")}}");
-                            return false;
-                        }
-                        $.ajax({
-                            url: '{{url('admin/category/image-delete',['id'=>$category['categoryId']])}}',
-                            type: 'POST',
-                            data: {status: status},
-                            success: function (data) {
-                                console.log(data);
-                                if (data.status == 200) {
-                                    $('.gallery-item-remove').parents(".gallery-item").fadeOut(400,function(){
-                                        $('.gallery-item-remove').remove();
-                                    });
-                                    toastr.success(data.message);
-                                    $('#mb-remove-row').hide();
-
-                                } else {
-                                    toastr.error(data.message);
-                                }
-
-                            }
-                            , error: function (jqXHR, textStatus, errorThrown) {
-                                toastr.error("{{  __("Can Not Delete Image")}}");
-                                //if fails
-                            }
-                        });
-
-                    })
-                    $('#category').on("change", function (e) {
-                        $("#category2").val('');
-                        $("#category3").val('');
-                        var parent_id = $('#category').val();
-                        console.log(parent_id);
-                        if (!parent_id) {
-                            $("#div_category3").hide();
-                            $("#div_category2").hide();
-                        }
-                        $("#div_category3").hide();
-                        if (parent_id) {
-                            $("#div_category2").show();
-                            // mostly used event, fired to the original element when the value changes
-                            $.ajax({
-                                url: "/api/category?p_pid=" + parent_id,
-                                type: 'Get',
-                                success: function (data) {
-                                    var option = "<option value=''>{{__('Select  Sub Category')}}</option>";
-                                    if (data) {
-                                        $.each(data, function (index, value) {
-                                            option += "<option value='" + value.categoryId + "'>" + value.title + "</option>"
-                                        });
-                                        $('#category2').html(option);
-                                        $('#category2').selectpicker('refresh');
-
-                                    }
-                                }
-                                , error: function (jqXHR, textStatus, errorThrown) {
-
-                                    //if fails
-                                }
-                            });
-
-                        }
 
 
-                    });
-
-                });
-            </script>
         </div>
     </div>
 
@@ -306,5 +220,18 @@
     </div>
 </div>
 <!-- END MESSAGE BOX-->
+@endsection
+@section('javascript')
+    <script type='text/javascript' src={{ asset('/js/admin/plugins/icheck/icheck.min.js')}} defer></script>
+    <script type="text/javascript" src={{ asset('/js/admin/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js')}} defer></script>
+    <script type="text/javascript" src={{ asset('/js/admin/plugins/bootstrap/bootstrap-select.js')}} defer></script>
+    <script type="text/javascript" src={{ asset('/js/admin/plugins/bootstrap/bootstrap-file-input.js')}} defer></script>
+    <script type="text/javascript" src={{ asset('/js/admin/settings.js')}} defer></script>
+    <script type="text/javascript" src={{ asset('/js/admin/plugins/blueimp/jquery.blueimp-gallery.min.js')}} defer></script>
+    <script type="text/javascript" src={{ asset('/js/admin/plugins/tagsinput/jquery.tagsinput.min.js')}} defer></script>
+
+    <script type="text/javascript" src={{ asset('/js/admin/plugins.js')}} defer></script>
+    <script type="text/javascript" src={{ asset('/js/admin/actions.js')}} defer></script>
+    <script type="text/javascript" src={{ asset('/js/admin/category.js')}} defer></script>
 
 @endsection

@@ -10,14 +10,15 @@
     <title>{{ config('app.name', 'B2B') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/admin/jquery.magnific-popup.js') }}" defer></script>
-    <script src="{{ asset('js/admin/persian-date.min.js') }}" defer></script>
-    <script src="{{ asset('js/admin/persian-datepicker.js') }}" defer></script>
-    <script src="{{ asset('/select2/select2.min.js') }}" defer></script>
+{{--    <script src="{{ asset('js/admin/jquery.magnific-popup.js') }}" defer></script>--}}
+    <script src="{{ asset('js/admin/plugins/jquery/jquery.min.js') }}" defer></script>
+
+    {{--    <script src="{{ asset('js/admin/persian-date.min.js') }}" defer></script>--}}
+{{--    <script src="{{ asset('js/admin/persian-datepicker.js') }}" defer></script>--}}
+{{--    <script src="{{ asset('/select2/select2.min.js') }}" defer></script>--}}
     <script src="{{ asset('/js/toastr.js') }}" defer></script>
     <script src="{{ asset('js/admin/plugins/bootstrap/bootstrap.min.js') }}" defer></script>
     <script src="{{ asset('js/admin/plugins/jquery/jquery-ui.min.js') }}" defer></script>
-    <script src="{{ asset('js/admin/plugins/jquery/jquery.min.js') }}" defer></script>
     <script src="{{ asset('js/admin/layout_admin.js') }}" defer></script>
     <script src="{{ asset('js/admin/plugins/noty/jquery.noty.js') }}" defer></script>
     <script src="{{ asset('js/admin/plugins/noty/layouts/topCenter.js') }}" defer></script>
@@ -355,44 +356,9 @@
 @yield('javascript')
 
 <script type="text/javascript">
-    function notyConfirm() {
-        noty({
-            text: 'Do you want to continue?',
-            layout: 'topRight',
-            buttons: [
-                {
-                    addClass: 'btn btn-success btn-clean', text: 'Ok', onClick: function ($noty) {
-                        $noty.close();
-                        noty({text: 'You clicked "Ok" button', layout: 'topRight', type: 'success'});
-                    }
-                },
-                {
-                    addClass: 'btn btn-danger btn-clean', text: 'Cancel', onClick: function ($noty) {
-                        $noty.close();
-                        noty({text: 'You clicked "Cancel" button', layout: 'topRight', type: 'error'});
-                    }
-                }
-            ]
-        })
-    }
+
 </script>
 <script type="text/javascript">
-    $(document).ready(function () {
-        $('.changelocal').on('click', function () {
-            var locale = $(this).attr('id');
-            console.log(locale);
-            var port = "<?= $_SERVER['SERVER_PORT']?>";
-            var http = "http://";
-            if (port == "443") {
-                http = "https://"
-            }
 
-            $.post(http + "<?=$_SERVER['HTTP_HOST']?>/change-locale", {locale: locale}, function (data, status) {
-                console.log(data);
-                window.location = "/";
-            });
-        })
-
-    })
 </script>
 </html>
