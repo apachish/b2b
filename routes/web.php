@@ -27,7 +27,7 @@ Route::middleware('auth')
     ->prefix('admin')
     ->namespace('Admin')
     ->group(function () {
-    Route::get('/','IndexController@index')->name('dashbord');
+    Route::get('/','IndexController@index')->name('admin');
     Route::get('/profile','IndexController@index')->name('adminProfile');
     Route::get('/message','IndexController@index')->name('adminMessage');
 //    Route::get('/productenquiry','IndexController@index')->name('productenquiry');
@@ -45,7 +45,11 @@ Route::middleware('auth')
 //    Route::get('enquiry-request_call','IndexController@index')->name('enquiry-request_call');
 
     Route::resource('categories','CategoriesController');
-    Route::resource('products','ProductsController');
+    Route::get('categories/excel/upload','CategoriesController@Formupload');
+    Route::post('categories/excel/upload','CategoriesController@uploadExcel')->name('uploadExcelCategory');
+    Route::resource('leads','LeadsController');
+    Route::get('leads/excel/upload','LeadsController@Formupload');
+    Route::post('leads/excel/upload','LeadsController@uploadExcel')->name('uploadExcelLead');
     Route::resource('requests','RequestsController');
     Route::resource('articles','ArticlesController');
     Route::resource('comments','CommentsController');

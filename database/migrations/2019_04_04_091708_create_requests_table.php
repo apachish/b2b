@@ -15,10 +15,10 @@ class CreateRequestsTable extends Migration
     {
         Schema::create('requests', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('product_id');
-            $table->foreign('product_id')
+            $table->unsignedBigInteger('lead_id');
+            $table->foreign('lead_id')
                 ->references('id')
-                ->on('products')
+                ->on('leads')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
             $table->unsignedBigInteger('member_id');
@@ -49,7 +49,7 @@ class CreateRequestsTable extends Migration
     {
         Schema::dropIfExists('requests', function(Blueprint $table){
 
-            $table->dropForeign('requests_product_id_foreign');
+            $table->dropForeign('requests_lead_id_foreign');
             $table->dropForeign('requests_member_id_foreign');
 
         });

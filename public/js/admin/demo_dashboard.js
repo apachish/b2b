@@ -1,14 +1,14 @@
-$(function(){        
+$(function(){
     /* reportrange */
-    if($("#reportrange").length > 0){   
-        $("#reportrange").daterangepicker({                    
+    if($("#reportrange").length > 0){
+        $("#reportrange").daterangepicker({
             ranges: {
-               'Today': [moment(), moment()],
-               'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-               'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-               'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-               'This Month': [moment().startOf('month'), moment().endOf('month')],
-               'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                'Today': [moment(), moment()],
+                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                'This Month': [moment().startOf('month'), moment().endOf('month')],
+                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
             },
             opens: 'left',
             buttonClasses: ['btn btn-default'],
@@ -17,30 +17,30 @@ $(function(){
             format: 'MM.DD.YYYY',
             separator: ' to ',
             startDate: moment().subtract('days', 29),
-            endDate: moment()            
-          },function(start, end) {
-              $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+            endDate: moment()
+        },function(start, end) {
+            $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
         });
-        
+
         $("#reportrange span").html(moment().subtract('days', 29).format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
     }
     /* end reportrange */
-    
+
     /* Rickshaw dashboard chart */
     // var seriesData = [ [], [] ];
     // var random = new Rickshaw.Fixtures.RandomData(1000);
 
     // for(var i = 0; i < 100; i++) {
-        // random.addData(seriesData);
+    // random.addData(seriesData);
     // }
 
     // var rdc = new Rickshaw.Graph( {
-            // element: document.getElementById("dashboard-chart"),
-            // renderer: 'area',
-            // width: $("#dashboard-chart").width(),
-            // height: 250,
-            // series: [{color: "#33414E",data: seriesData[0],name: 'New'}, 
-                     // {color: "#1caf9a",data: seriesData[1],name: 'Returned'}]
+    // element: document.getElementById("dashboard-chart"),
+    // renderer: 'area',
+    // width: $("#dashboard-chart").width(),
+    // height: 250,
+    // series: [{color: "#33414E",data: seriesData[0],name: 'New'},
+    // {color: "#1caf9a",data: seriesData[1],name: 'Returned'}]
     // } );
 
     // rdc.render();
@@ -48,23 +48,23 @@ $(function(){
     // var legend = new Rickshaw.Graph.Legend({graph: rdc, element: document.getElementById('dashboard-legend')});
     // var shelving = new Rickshaw.Graph.Behavior.Series.Toggle({graph: rdc,legend: legend});
     // var order = new Rickshaw.Graph.Behavior.Series.Order({graph: rdc,legend: legend});
-    // var highlight = new Rickshaw.Graph.Behavior.Series.Highlight( {graph: rdc,legend: legend} );        
+    // var highlight = new Rickshaw.Graph.Behavior.Series.Highlight( {graph: rdc,legend: legend} );
 
-    // var rdc_resize = function() {                
-            // rdc.configure({
-                    // width: $("#dashboard-area-1").width(),
-                    // height: $("#dashboard-area-1").height()
-            // });
-            // rdc.render();
+    // var rdc_resize = function() {
+    // rdc.configure({
+    // width: $("#dashboard-area-1").width(),
+    // height: $("#dashboard-area-1").height()
+    // });
+    // rdc.render();
     // }
 
     // var hoverDetail = new Rickshaw.Graph.HoverDetail({graph: rdc});
 
-    // window.addEventListener('resize', rdc_resize);        
+    // window.addEventListener('resize', rdc_resize);
 
     // rdc_resize();
     /* END Rickshaw dashboard chart */
-    
+
     /* Donut dashboard chart */
     var info_ALL_product = $('#info_all_product').val();
     info_ALL_product = JSON.parse(info_ALL_product);
@@ -75,8 +75,8 @@ $(function(){
         resize: true
     });
     /* END Donut dashboard chart */
-	/*
-	[
+    /*
+    [
             { y: 'Oct 10', a: 75, b: 35 },
             { y: 'Oct 11', a: 64, b: 26 },
             { y: 'Oct 12', a: 78, b: 39 },
@@ -85,8 +85,8 @@ $(function(){
             { y: 'Oct 15', a: 94, b: 40 },
             { y: 'Oct 16', a: 96, b: 41 }
         ]
-	 */
-	var info_sale_buy = $('#info_sale_buy').val();
+     */
+    var info_sale_buy = $('#info_sale_buy').val();
     info_sale_buy = JSON.parse(info_sale_buy);
     /* Bar dashboard chart */
     Morris.Bar({
@@ -122,18 +122,18 @@ $(function(){
      */
     /* Line dashboard chart */
     Morris.Line({
-      element: 'dashboard-line-1',
-      data:info_adv_banner,
-      xkey: 'y',
-      ykeys: ['a','b'],
-      labels: info_adv_banner_label,
-      resize: true,
-      hideHover: true,
-      xLabels: 'day',
-      gridTextSize: '10px',
-      lineColors: ['#1caf9a','#33414E'],
-      gridLineColor: '#E5E5E5'
-    });   
+        element: 'dashboard-line-1',
+        data:info_adv_banner,
+        xkey: 'y',
+        ykeys: ['a','b'],
+        labels: info_adv_banner_label,
+        resize: true,
+        hideHover: true,
+        xLabels: 'day',
+        gridTextSize: '10px',
+        lineColors: ['#1caf9a','#33414E'],
+        gridLineColor: '#E5E5E5'
+    });
     /* EMD Line dashboard chart */
     /* Moris Area Chart */
     //   Morris.Area({
@@ -173,24 +173,24 @@ $(function(){
                                               {latLng: [39.91, 116.39], name: 'Beijing - 3'}]
      */
     var jvm_wm = new jvm.WorldMap({container: $('#dashboard-map-seles'),
-                                    map: 'world_mill_en', 
-                                    backgroundColor: '#FFFFFF',                                      
-                                    regionsSelectable: true,
-                                    regionStyle: {selected: {fill: '#B64645'},
-                                                    initial: {fill: '#33414E'}},
-                                    markerStyle: {initial: {fill: '#1caf9a',
-                                                   stroke: '#1caf9a'}},
-                                    markers:info_location_lead
-                                });    
+        map: 'world_mill_en',
+        backgroundColor: '#FFFFFF',
+        regionsSelectable: true,
+        regionStyle: {selected: {fill: '#B64645'},
+            initial: {fill: '#33414E'}},
+        markerStyle: {initial: {fill: '#1caf9a',
+                stroke: '#1caf9a'}},
+        markers:info_location_lead
+    });
     /* END Vector Map */
 
-    
+
     $(".x-navigation-minimize").on("click",function(){
         setTimeout(function(){
             rdc_resize();
-        },200);    
+        },200);
     });
-    
-    
+
+
 });
 

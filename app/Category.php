@@ -14,7 +14,7 @@ class Category extends Model
       'name',
       'name_fa',
       'image',
-      'image_thumb',
+      'friendlyUrl',
       'description',
       'description_fa',
       'sort_order',

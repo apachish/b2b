@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources;
 
-use App\Product;
+use App\Lead;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class Category extends JsonResource
@@ -31,7 +31,7 @@ class Category extends JsonResource
             'meta_keywords' => $this->meta_keywords,
             'meta_description' => $this->meta_description,
             'title' => app()->getLocale()=='fa'?$this->name_fa:$this->name_fa,
-            'noProduct' => Product::with('categories')
+            'noProduct' => Lead::with('categories')
                 ->whereHas('categories', function($q) use ($id) {
                     $q->where('category_id', $id);
                 })->count(),

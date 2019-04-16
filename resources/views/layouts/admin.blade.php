@@ -11,78 +11,81 @@
 
     <!-- Scripts -->
 {{--    <script src="{{ asset('js/admin/jquery.magnific-popup.js') }}" defer></script>--}}
-    <script src="{{ asset('js/admin/plugins/jquery/jquery.min.js') }}" defer></script>
+{{--    <script src="{{ asset('js/admin/plugins/jquery/jquery.min.js') }}" defer></script>--}}
 
-    {{--    <script src="{{ asset('js/admin/persian-date.min.js') }}" defer></script>--}}
+{{--    --}}{{--    <script src="{{ asset('js/admin/persian-date.min.js') }}" defer></script>--}}
 {{--    <script src="{{ asset('js/admin/persian-datepicker.js') }}" defer></script>--}}
 {{--    <script src="{{ asset('/select2/select2.min.js') }}" defer></script>--}}
-    <script src="{{ asset('/js/toastr.js') }}" defer></script>
-    <script src="{{ asset('js/admin/plugins/bootstrap/bootstrap.min.js') }}" defer></script>
-    <script src="{{ asset('js/admin/plugins/jquery/jquery-ui.min.js') }}" defer></script>
-    <script src="{{ asset('js/admin/layout_admin.js') }}" defer></script>
-    <script src="{{ asset('js/admin/plugins/noty/jquery.noty.js') }}" defer></script>
-    <script src="{{ asset('js/admin/plugins/noty/layouts/topCenter.js') }}" defer></script>
-    <script src="{{ asset('js/admin/plugins/noty/layouts/topLeft.js') }}" defer></script>
-    <script src="{{ asset('js/admin/plugins/noty/layouts/topRight.js') }}" defer></script>
-    <script src="{{ asset('js/admin/plugins/noty/themes/default.js') }}" defer></script>
+{{--    <script src="{{ asset('/js/toastr.js') }}" defer></script>--}}
+{{--    <script src="{{ asset('js/admin/plugins/bootstrap/bootstrap.min.js') }}" defer></script>--}}
+{{--    <script src="{{ asset('js/admin/plugins/jquery/jquery-ui.min.js') }}" defer></script>--}}
+{{--    <script src="{{ asset('js/admin/layout_admin.js') }}" defer></script>--}}
+{{--    <script src="{{ asset('js/admin/plugins/noty/jquery.noty.js') }}" defer></script>--}}
+{{--    <script src="{{ asset('js/admin/plugins/noty/layouts/topCenter.js') }}" defer></script>--}}
+{{--    <script src="{{ asset('js/admin/plugins/noty/layouts/topLeft.js') }}" defer></script>--}}
+{{--    <script src="{{ asset('js/admin/plugins/noty/layouts/topRight.js') }}" defer></script>--}}
+{{--    <script src="{{ asset('js/admin/plugins/noty/themes/default.js') }}" defer></script>--}}
 {{--    <script src="{{ asset('js/admin/app.js') }}" defer></script>--}}
 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+<!-- Fonts -->
+    {{--    <link rel="dns-prefetch" href="//fonts.gstatic.com">--}}
+    {{--    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">--}}
 
-    <!-- Styles -->
-    <link href="{{ asset('css/admin/theme-default.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/admin/pnotify.custom.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/toastr.css') }}" rel="stylesheet">
-    <link href="{{ asset('/select2/select2.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/admin/persian-datepicker.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/admin/magnific-popup.css') }}" rel="stylesheet">
-{{--    <link href="{{ asset('css/admin/app.css') }}" rel="stylesheet">--}}
+    {{--    <!-- Styles -->--}}
+    {{--    <link href="{{ asset('css/admin/theme-default.css') }}" rel="stylesheet">--}}
+    {{--    <link href="{{ asset('css/admin/pnotify.custom.min.css') }}" rel="stylesheet">--}}
+    {{--    <link href="{{ asset('css/toastr.css') }}" rel="stylesheet">--}}
+    {{--    <link href="{{ asset('/select2/select2.css') }}" rel="stylesheet">--}}
+    {{--    <link href="{{ asset('css/admin/persian-datepicker.css') }}" rel="stylesheet">--}}
+    {{--    <link href="{{ asset('css/admin/magnific-popup.css') }}" rel="stylesheet">--}}
+    {{--    <link href="{{ asset('css/admin/app.css') }}" rel="stylesheet">--}}
+    <link rel="stylesheet" type="text/css" id="theme" href="css/admin/theme-default.css"/>
+
 </head>
 <body>
 <!-- START PAGE CONTAINER -->
 <div class="page-container">
 
-    <!-- START PAGE SIDEBAR -->
-    <div class="page-sidebar">
-        <!-- START X-NAVIGATION -->
-        <ul class="x-navigation">
-            <li class="xn-logo">
-                <a href="index.html">{{auth()->user()->name}} </a>
-                <a href="#" class="x-navigation-control"></a>
-            </li>
-            <li class="xn-profile">
-                <a href="#" class="profile-mini">
-                    <img src="{{asset('images/users/avatar.jpg')}}"
-                         alt="{{auth()->user()->name}}"/>
-                </a>
-                <div class="profile">
-                    <div class="profile-image">
-                        <img src="{{asset('images/users/avatar.jpg')}}"
-                             alt="{{auth()->user()->name}}"/>
-                    </div>
-                    <div class="profile-data">
-                        <div class="profile-data-name">{{auth()->user()->name}}</div>
-                        <div class="profile-data-title">{{auth()->user()->role}}</div>
-                    </div>
-                    <div class="profile-controls">
-                        <a href="{{route('adminProfile')}}" class="profile-control-left"><span
-                                    class="fa fa-info"></span></a>
-                        <a href="{{route('adminMessage')}}" class="profile-control-right"><span
-                                    class="fa fa-envelope"></span></a>
-                    </div>
-                </div>
-            </li>
+{{--    <!-- START PAGE SIDEBAR -->--}}
+{{--    <div class="page-sidebar">--}}
+{{--        <!-- START X-NAVIGATION -->--}}
+{{--        <ul class="x-navigation">--}}
+{{--            <li class="xn-logo">--}}
+{{--                <a href="index.html">{{auth()->user()->name}} </a>--}}
+{{--                <a href="#" class="x-navigation-control"></a>--}}
+{{--            </li>--}}
+{{--            <li class="xn-profile">--}}
+{{--                <a href="#" class="profile-mini">--}}
+{{--                    <img src="{{asset('images/users/avatar.jpg')}}"--}}
+{{--                         alt="{{auth()->user()->name}}"/>--}}
+{{--                </a>--}}
+{{--                <div class="profile">--}}
+{{--                    <div class="profile-image">--}}
+{{--                        <img src="{{asset('images/users/avatar.jpg')}}"--}}
+{{--                             alt="{{auth()->user()->name}}"/>--}}
+{{--                    </div>--}}
+{{--                    <div class="profile-data">--}}
+{{--                        <div class="profile-data-name">{{auth()->user()->name}}</div>--}}
+{{--                        <div class="profile-data-title">{{auth()->user()->role}}</div>--}}
+{{--                    </div>--}}
+{{--                    <div class="profile-controls">--}}
+{{--                        <a href="{{route('adminProfile')}}" class="profile-control-left"><span--}}
+{{--                                    class="fa fa-info"></span></a>--}}
+{{--                        <a href="{{route('adminMessage')}}" class="profile-control-right"><span--}}
+{{--                                    class="fa fa-envelope"></span></a>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </li>--}}
 
-            {!! $MyNavBar->asUl() !!}
+{{--            {!! $MyNavBar->asUl() !!}--}}
 
-        </ul>
-        <!-- END X-NAVIGATION -->
-    </div>
-    <!-- END PAGE SIDEBAR -->
+{{--        </ul>--}}
+{{--        <!-- END X-NAVIGATION -->--}}
+{{--    </div>--}}
+<!-- END PAGE SIDEBAR -->
+@include('admin.layouts._left_menu')
 
-    <!-- PAGE CONTENT -->
+<!-- PAGE CONTENT -->
     <div class="page-content">
 
         <!-- START X-NAVIGATION VERTICAL -->
@@ -353,12 +356,36 @@
 <!-- END TEMPLATE -->
 <!-- END SCRIPTS -->
 </body>
+<!-- START PLUGINS -->
+<script type="text/javascript" src="js/admin/plugins/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="js/admin/plugins/jquery/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/admin/plugins/bootstrap/bootstrap.min.js"></script>
+<!-- END PLUGINS -->
+
+<!-- START THIS PAGE PLUGINS-->
+<script type='text/javascript' src='js/admin/plugins/icheck/icheck.min.js'></script>
+<script type="text/javascript" src="js/admin/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
+<script type="text/javascript" src="js/admin/plugins/scrolltotop/scrolltopcontrol.js"></script>
+
+<script type="text/javascript" src="js/admin/plugins/morris/raphael-min.js"></script>
+<script type="text/javascript" src="js/admin/plugins/morris/morris.min.js"></script>
+<script type="text/javascript" src="js/admin/plugins/rickshaw/d3.v3.js"></script>
+<script type="text/javascript" src="js/admin/plugins/rickshaw/rickshaw.min.js"></script>
+<script type='text/javascript' src='js/admin/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js'></script>
+<script type='text/javascript' src='js/admin/plugins/jvectormap/jquery-jvectormap-world-mill-en.js'></script>
+<script type='text/javascript' src='js/admin/plugins/bootstrap/bootstrap-datepicker.js'></script>
+<script type="text/javascript" src="js/admin/plugins/owl/owl.carousel.min.js"></script>
+
+<script type="text/javascript" src="js/admin/plugins/moment.min.js"></script>
+<script type="text/javascript" src="js/admin/plugins/daterangepicker/daterangepicker.js"></script>
+<!-- END THIS PAGE PLUGINS-->
+
+<!-- START TEMPLATE -->
+<script type="text/javascript" src="js/admin/settings.js"></script>
+
+<script type="text/javascript" src="js/admin/plugins.js"></script>
+<script type="text/javascript" src="js/admin/actions.js"></script>
+
+<script type="text/javascript" src="js/admin/demo_dashboard.js"></script>
 @yield('javascript')
-
-<script type="text/javascript">
-
-</script>
-<script type="text/javascript">
-
-</script>
 </html>

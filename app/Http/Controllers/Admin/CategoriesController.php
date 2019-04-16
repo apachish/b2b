@@ -4,9 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Category;
 use App\Http\Resources\CategoryCollection;
-use App\Product;
+use App\Lead;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 
 class CategoriesController extends Controller
 {
@@ -47,7 +48,7 @@ class CategoriesController extends Controller
             $id = $category->id;
             $item = $category;
             $item->title = app()->getLocale() == 'fa' ? $category->name_fa : $category->name_fa;
-            $item->noProduct = Product::with('categories')
+            $item->noProduct = Lead::with('categories')
                 ->whereHas('categories', function ($q) use ($id) {
                     $q->where('category_id', $id);
                 })->count();
@@ -226,12 +227,11 @@ class CategoriesController extends Controller
 
         foreach ($tbl_categories as $category) {
             if (!$category->parent && !$category->parent_id) {
-
                 $category_first = Category::create([
                     'name' => htmlspecialchars_decode($category->category_name),
                     'name_fa' => htmlspecialchars_decode($category->category_name_fa),
                     'image' => $category->category_image ?: "noImage.png",
-                    'image_thumb' => $category->category_image_thumb ?: "noImage.png",
+                    'friendlyUrl'=>Str::slug($category->category_name),
                     'description' => htmlspecialchars_decode($category->category_description),
                     'description_fa' => htmlspecialchars_decode($category->category_description_fa),
                     'sort_order' => $category->sort_order,
@@ -250,8 +250,9 @@ class CategoriesController extends Controller
                         $category_second = Category::create([
                             'name' => htmlspecialchars_decode($category22->category_name),
                             'name_fa' => htmlspecialchars_decode($category22->category_name_fa),
+                            'friendlyUrl'=>Str::slug($category22->category_name),
+
                             'image' => $category22->category_image ?: "noImage.png",
-                            'image_thumb' => $category22->category_image_thumb ?: "noImage.png",
                             'description' => htmlspecialchars_decode($category22->category_description),
                             'description_fa' => htmlspecialchars_decode($category22->category_description_fa),
                             'sort_order' => $category22->sort_order,
@@ -272,8 +273,8 @@ class CategoriesController extends Controller
                             Category::create([
                                 'name' => htmlspecialchars_decode($category33->category_name),
                                 'name_fa' => htmlspecialchars_decode($category33->category_name_fa),
+                                'friendlyUrl'=>Str::slug($category33->category_name),
                                 'image' => $category33->category_image ?: "noImage.png",
-                                'image_thumb' => $category->category_image_thumb ?: "noImage.png",
                                 'description' => htmlspecialchars_decode($category33->category_description),
                                 'description_fa' => htmlspecialchars_decode($category33->category_description_fa),
                                 'sort_order' => $category33->sort_order,
@@ -303,7 +304,7 @@ class CategoriesController extends Controller
             if ($noSubCategory) $item->noSubCategory = \App\Category::descendantsOf($id)->count();
 
             if ($noProduct) {
-                $item->noProduct = Product::with('categories')
+                $item->noProduct = Lead::with('categories')
                     ->whereHas('categories', function ($q) use ($id) {
                         $q->where('category_id', $id);
                     })->count();
