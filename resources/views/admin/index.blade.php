@@ -610,3 +610,8 @@
 
 {{--    <script type="text/javascript" src="/js/admin/demo_dashboard.js"></script>--}}
 @endsection
+@section('javascript')
+    <script type="text/javascript" src="/js/admin/demo_dashboard.js"></script>
+
+    @endsection
+

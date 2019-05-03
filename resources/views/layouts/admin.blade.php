@@ -39,7 +39,8 @@
     {{--    <link href="{{ asset('css/admin/persian-datepicker.css') }}" rel="stylesheet">--}}
     {{--    <link href="{{ asset('css/admin/magnific-popup.css') }}" rel="stylesheet">--}}
     {{--    <link href="{{ asset('css/admin/app.css') }}" rel="stylesheet">--}}
-    <link rel="stylesheet" type="text/css" id="theme" href="css/admin/theme-default.css"/>
+    <link rel="stylesheet" type="text/css" id="theme" href="/css/admin/theme-default.css"/>
+    @yield('css')
 
 </head>
 <body>
@@ -357,35 +358,35 @@
 <!-- END SCRIPTS -->
 </body>
 <!-- START PLUGINS -->
-<script type="text/javascript" src="js/admin/plugins/jquery/jquery.min.js"></script>
-<script type="text/javascript" src="js/admin/plugins/jquery/jquery-ui.min.js"></script>
-<script type="text/javascript" src="js/admin/plugins/bootstrap/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/admin/plugins/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="/js/admin/plugins/jquery/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/js/admin/plugins/bootstrap/bootstrap.min.js"></script>
 <!-- END PLUGINS -->
 
 <!-- START THIS PAGE PLUGINS-->
-<script type='text/javascript' src='js/admin/plugins/icheck/icheck.min.js'></script>
-<script type="text/javascript" src="js/admin/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
-<script type="text/javascript" src="js/admin/plugins/scrolltotop/scrolltopcontrol.js"></script>
+<script type='text/javascript' src='/js/admin/plugins/icheck/icheck.min.js'></script>
+<script type="text/javascript" src="/js/admin/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
+<script type="text/javascript" src="/js/admin/plugins/scrolltotop/scrolltopcontrol.js"></script>
 
-<script type="text/javascript" src="js/admin/plugins/morris/raphael-min.js"></script>
-<script type="text/javascript" src="js/admin/plugins/morris/morris.min.js"></script>
-<script type="text/javascript" src="js/admin/plugins/rickshaw/d3.v3.js"></script>
-<script type="text/javascript" src="js/admin/plugins/rickshaw/rickshaw.min.js"></script>
-<script type='text/javascript' src='js/admin/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js'></script>
-<script type='text/javascript' src='js/admin/plugins/jvectormap/jquery-jvectormap-world-mill-en.js'></script>
-<script type='text/javascript' src='js/admin/plugins/bootstrap/bootstrap-datepicker.js'></script>
-<script type="text/javascript" src="js/admin/plugins/owl/owl.carousel.min.js"></script>
+<script type="text/javascript" src="/js/admin/plugins/morris/raphael-min.js"></script>
+<script type="text/javascript" src="/js/admin/plugins/morris/morris.min.js"></script>
+<script type="text/javascript" src="/js/admin/plugins/rickshaw/d3.v3.js"></script>
+<script type="text/javascript" src="/js/admin/plugins/rickshaw/rickshaw.min.js"></script>
+<script type='text/javascript' src='/js/admin/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js'></script>
+<script type='text/javascript' src='/js/admin/plugins/jvectormap/jquery-jvectormap-world-mill-en.js'></script>
+<script type='text/javascript' src='/js/admin/plugins/bootstrap/bootstrap-datepicker.js'></script>
+<script type="text/javascript" src="/js/admin/plugins/owl/owl.carousel.min.js"></script>
 
-<script type="text/javascript" src="js/admin/plugins/moment.min.js"></script>
-<script type="text/javascript" src="js/admin/plugins/daterangepicker/daterangepicker.js"></script>
+<script type="text/javascript" src="/js/admin/plugins/moment.min.js"></script>
+<script type="text/javascript" src="/js/admin/plugins/daterangepicker/daterangepicker.js"></script>
 <!-- END THIS PAGE PLUGINS-->
 
 <!-- START TEMPLATE -->
-<script type="text/javascript" src="js/admin/settings.js"></script>
 
-<script type="text/javascript" src="js/admin/plugins.js"></script>
-<script type="text/javascript" src="js/admin/actions.js"></script>
 
-<script type="text/javascript" src="js/admin/demo_dashboard.js"></script>
 @yield('javascript')
+<script type="text/javascript" src="/js/admin/settings.js"></script>
+
+<script type="text/javascript" src="/js/admin/plugins.js"></script>
+<script type="text/javascript" src="/js/admin/actions.js"></script>
 </html>

@@ -30,8 +30,8 @@
         <li class="xn-openable">
             <a href="#"><span class="fa fa-tags"></span> <span class="xn-text">{{__('Category Management')}}</span></a>
             <ul>
-                <li><a href="{{url('admin/category')}}"><span class="fa fa-image"></span> {{__('Category')}}</a></li>
-                <li><a href="{{url('admin/category/bulkupload')}}"><span class="fa fa-align-center"></span> {{__('Bulk Upload Category')}}</a></li>
+                <li><a href="{{url('admin/categories')}}"><span class="fa fa-image"></span> {{__('Category')}}</a></li>
+                <li><a href="{{url('admin/categories/excel/upload')}}"><span class="fa fa-align-center"></span> {{__('Bulk Upload Category')}}</a></li>
             </ul>
         </li>
         <li class="xn-openable">
@@ -71,8 +71,8 @@
         <li class="xn-openable">
             <a href="#"><span class="fa fa-bars"></span> <span class="xn-text">{{__('Manage Menu')}}</span></a>
             <ul>
-                <li><a href="{{url('admin/menu/category')}}"><span class="fa fa-tag">{{__('Category')}}</span></a></li>
-                <li><a href="{{url('admin/menu')}}"><span class="fa fa-minus">{{__('Menus')}}</span></a></li>
+                <li><a href="{{url('admin/menus/categories')}}"><span class="fa fa-tag">{{__('Category')}}</span></a></li>
+                <li><a href="{{url('admin/menus')}}"><span class="fa fa-minus">{{__('Menus')}}</span></a></li>
             </ul>
         </li>
         <li>

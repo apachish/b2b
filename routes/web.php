@@ -17,6 +17,33 @@ Auth::routes();
 Route::get('/move', 'Admin\CategoriesController@move');
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/member/post-lead', 'HomeController@index')->name('members.post_lead');
+Route::get('members/myaccount', 'HomeController@index')->name('members.myaccount');
+Route::get('members/login', 'HomeController@index')->name('members.login');
+Route::get('members/register', 'HomeController@index')->name('members.register');
+
+Route::get('/member/manage-leads', 'HomeController@index')->name('members.manage_leads');
+Route::get('/member/manage-enquiry', 'HomeController@index')->name('members.manage_enquiry');
+Route::get('/member/edit-account', 'HomeController@index')->name('members.edit_account');
+Route::get('/member/post_lead/{type_ad}', 'HomeController@index')->name('members.post_lead.type_ad');
+Route::get('/member/newleads/{type_ad}', 'HomeController@index')->name('members.newleads.type_ad');
+Route::get('/member/logout', 'HomeController@index')->name('members.logout');
+Route::get('/pages/{id}/{page}', 'HomeController@index')->name('home.pages');
+Route::get('home/buylead', 'HomeController@index')->name('home.buylead');
+Route::get('home/advertisement', 'HomeController@index')->name('advertisement');
+Route::get('home/help', 'HomeController@index')->name('help');
+Route::get('home/contact_us', 'HomeController@index')->name('contact_us');
+Route::get('home/companies', 'HomeController@index')->name('home.companies');
+Route::get('home/buyselllead', 'HomeController@index')->name('home.buyselllead');
+Route::get('home/selllead', 'HomeController@index')->name('home.selllead');
+Route::get('home/articles', 'HomeController@index')->name('home.articles');
+Route::get('home/sitemap', 'HomeController@index')->name('sitemap');
+Route::get('home/products', 'HomeController@index')->name('home.products');
+Route::get('home/categories', 'HomeController@index')->name('home.categories');
+Route::get('companies', 'HomeController@index')->name('companies');
+Route::get('testimonials', 'HomeController@index')->name('testimonials');
+Route::get('newsLetter', 'HomeController@index')->name('newsLetter');
+
 Route::get('users/singIn', 'UserController@login')->name('singIn');
 Route::post('users/email', 'UserController@email')->name('email');
 Route::get('users/singUp', 'UserController@register')->name('singUp');
@@ -45,8 +72,8 @@ Route::middleware('auth')
 //    Route::get('enquiry-request_call','IndexController@index')->name('enquiry-request_call');
 
     Route::resource('categories','CategoriesController');
-    Route::get('categories/excel/upload','CategoriesController@Formupload');
-    Route::post('categories/excel/upload','CategoriesController@uploadExcel')->name('uploadExcelCategory');
+    Route::get('categories/excel/upload','CategoriesController@formUpload');
+    Route::post('categories/excel/import','CategoriesController@import')->name('categories.import');
     Route::resource('leads','LeadsController');
     Route::get('leads/excel/upload','LeadsController@Formupload');
     Route::post('leads/excel/upload','LeadsController@uploadExcel')->name('uploadExcelLead');
@@ -59,7 +86,9 @@ Route::middleware('auth')
     Route::resource('countries','CountriesController');
     Route::resource('satates','SatatesController');
     Route::resource('cities','CitiesController');
-    Route::resource('/menu/categories','CategoriesMenuController');
+    Route::resource('/menus/categories','CategoriesMenuController',[
+        'as' => 'menus'
+    ]);
     Route::resource('menus','MenusController');
     Route::resource('newsletters','NewslettersController');
     Route::resource('templates/mail','TemplatesMailController');

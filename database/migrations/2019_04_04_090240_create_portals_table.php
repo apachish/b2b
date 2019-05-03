@@ -20,6 +20,8 @@ class CreatePortalsTable extends Migration
             $table->string('domain');
             $table->string('locale');
             $table->text('social');
+            $table->boolean('status')->default(false);
+
             $table->text('meta_data');
             $table->timestamps();
         });

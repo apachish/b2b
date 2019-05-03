@@ -1,5 +1,8 @@
 @extends('layouts.admin')
+@section('css')
+    <link rel="stylesheet" type="text/css" id="theme" href="{{asset('/css/admin/persian-datepicker.css')}}"/>
 
+@endsection
 @section('content')
     <!-- START BREADCRUMB -->
     <ul class="breadcrumb">
@@ -531,20 +534,19 @@
         @endsection
 
         @section('javascript')
-            <script type='text/javascript' src='/js/plugins/icheck/icheck.min.js'></script>
-            <script type="text/javascript" src="/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
+            <script type='text/javascript' src='/js/admin/plugins/icheck/icheck.min.js'></script>
+            <script type="text/javascript" src="/js/admin/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
 
-            <script type="text/javascript" src="/js/plugins/datatables/jquery.dataTables.min.js"></script>
-            <script type="text/javascript" src="/js/plugins/bootstrap/bootstrap-datepicker.js"></script>
-            <script type="text/javascript" src="/js/plugins/bootstrap/bootstrap-select.js"></script>
+            <script type="text/javascript" src="/js/admin/plugins/datatables/jquery.dataTables.min.js"></script>
+            <script type="text/javascript" src="/js/admin/plugins/bootstrap/bootstrap-datepicker.js"></script>
+            <script type="text/javascript" src="/js/admin/plugins/bootstrap/bootstrap-select.js"></script>
+            <script type="text/javascript" src="/js/admin/persian-date.min.js"></script>
+            <script type="text/javascript" src="/js//admin/persian-datepicker.js"></script>
             <!-- END PAGE PLUGINS -->
 
             <!-- Datepicker main script -->
             <!-- ------------------------------------------------------------------------------------ -->
-            <script type="text/javascript" src="/js/admin/settings.js"></script>
 
-            <script type="text/javascript" src="/js/admin/plugins.js"></script>
-            <script type="text/javascript" src="/js/admin/actions.js"></script>
             <script type="text/javascript">
                 $(document).ready(function () {
                     $('#category').on("change", function (e) {

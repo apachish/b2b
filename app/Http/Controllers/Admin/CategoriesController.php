@@ -3,11 +3,17 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Category;
+use App\Excel\ExcelImport;
 use App\Http\Resources\CategoryCollection;
+use App\Imports\CategoryImport;
+use App\Imports\CategoryImport1;
+use App\Imports\FirstSheetImport;
 use App\Lead;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CategoriesController extends Controller
 {
@@ -86,22 +92,22 @@ class CategoriesController extends Controller
             'name_fa' => 'required|max:100',
         ]);
         $category = Category::create([
-            'name'=>$request->name,
-            'name_fa'=>$request->name_fa,
-            'description'=>$request->description,
-            'description_fa'=>$request->description_fa,
-            'sort_order'=>$request->sort_order,
-            'status'=>$request->status,
-            'meta_title'=>$request->meta_title,
-            'meta_keywords'=>$request->meta_keywords,
-            'meta_description'=>$request->meta_description,
-            'feature'=>$request->feature
-            ,'parent_id'=>$request->category2?$request->category2:$request->category
+            'name' => $request->name,
+            'name_fa' => $request->name_fa,
+            'description' => $request->description,
+            'description_fa' => $request->description_fa,
+            'sort_order' => $request->sort_order,
+            'status' => $request->status,
+            'meta_title' => $request->meta_title,
+            'meta_keywords' => $request->meta_keywords,
+            'meta_description' => $request->meta_description,
+            'feature' => $request->feature
+            , 'parent_id' => $request->category2 ? $request->category2 : $request->category
         ]);
         Category::$section = 'category';
         Category::$id = $category->id;
         $image = Category::upload($request->image);
-        $category->update(['image'=>$image]);
+        $category->update(['image' => $image]);
         return redirect('/categories');
     }
 
@@ -158,14 +164,14 @@ class CategoriesController extends Controller
         $categories = $this->categories($categories)['list'];
         $result = Category::withDepth()->find($id);
         $subcategories = [];
-        $parent  =  Category::ancestorsOf($id);
+        $parent = Category::ancestorsOf($id);
 
-        if($result->depth==2){
+        if ($result->depth == 2) {
             $subcategories = Category::descendantsOf($parent[0]->id);
             $subcategories = $this->categories($subcategories)['list'];
         }
 
-        return view('admin.categories.edit', compact('category', 'categories','subcategories','parent'));
+        return view('admin.categories.edit', compact('category', 'categories', 'subcategories', 'parent'));
     }
 
     /**
@@ -178,7 +184,7 @@ class CategoriesController extends Controller
     public function update(Request $request, $id)
     {
         $category = Category::find($id);
-        if(!$category) abort(404);
+        if (!$category) abort(404);
         $request->validate([
             'name' => 'required|max:100',
             'name_fa' => 'required|max:100',
@@ -188,18 +194,18 @@ class CategoriesController extends Controller
         Category::$id = $id;
         $image = Category::upload($request->image);
         $category->update([
-            'name'=>$request->name,
-            'name_fa'=>$request->name_fa,
-            'image'=>$image,
-            'description'=>$request->description,
-            'description_fa'=>$request->description_fa,
-            'sort_order'=>$request->sort_order,
-            'status'=>$request->status,
-            'meta_title'=>$request->meta_title,
-            'meta_keywords'=>$request->meta_keywords,
-            'meta_description'=>$request->meta_description,
-            'feature'=>$request->feature
-            ,'parent_id'=>$request->category2?$request->category2:$request->category
+            'name' => $request->name,
+            'name_fa' => $request->name_fa,
+            'image' => $image,
+            'description' => $request->description,
+            'description_fa' => $request->description_fa,
+            'sort_order' => $request->sort_order,
+            'status' => $request->status,
+            'meta_title' => $request->meta_title,
+            'meta_keywords' => $request->meta_keywords,
+            'meta_description' => $request->meta_description,
+            'feature' => $request->feature
+            , 'parent_id' => $request->category2 ? $request->category2 : $request->category
         ]);
         return redirect('admin/categories');
     }
@@ -213,9 +219,33 @@ class CategoriesController extends Controller
     public function destroy($id)
     {
         $category = Category::find($id);
-        if(!$category) abort(404);
+        if (!$category) abort(404);
 
         $category->delete();
+    }
+
+    public function formUpload()
+    {
+        return view('admin.categories.upload_excel');
+
+    }
+
+    public function import(Request $request)
+    {
+        $file = $request->file('file');
+        if ($file) {
+            $path = '/uploads/excel/';
+            $ext = $file->getClientOriginalExtension();
+            $filename = 'category_excel_' . Carbon::now() . '.' . $ext;
+            $file->move(public_path($path), $filename);
+        }
+        $import_excel = new CategoryImport();
+        $import_excel->sheet=[$import_excel];
+        $category = Excel::import($import_excel, public_path($path . $filename));
+        $excel_import = with(new ExcelImport(public_path($path . $filename),$import_excel->category_array))->import();
+dd($excel_import);
+        return redirect('admin/categories');
+
     }
 
 
@@ -231,7 +261,7 @@ class CategoriesController extends Controller
                     'name' => htmlspecialchars_decode($category->category_name),
                     'name_fa' => htmlspecialchars_decode($category->category_name_fa),
                     'image' => $category->category_image ?: "noImage.png",
-                    'friendlyUrl'=>Str::slug($category->category_name),
+                    'friendlyUrl' => Str::slug($category->category_name),
                     'description' => htmlspecialchars_decode($category->category_description),
                     'description_fa' => htmlspecialchars_decode($category->category_description_fa),
                     'sort_order' => $category->sort_order,
@@ -250,7 +280,7 @@ class CategoriesController extends Controller
                         $category_second = Category::create([
                             'name' => htmlspecialchars_decode($category22->category_name),
                             'name_fa' => htmlspecialchars_decode($category22->category_name_fa),
-                            'friendlyUrl'=>Str::slug($category22->category_name),
+                            'friendlyUrl' => Str::slug($category22->category_name),
 
                             'image' => $category22->category_image ?: "noImage.png",
                             'description' => htmlspecialchars_decode($category22->category_description),
@@ -273,7 +303,7 @@ class CategoriesController extends Controller
                             Category::create([
                                 'name' => htmlspecialchars_decode($category33->category_name),
                                 'name_fa' => htmlspecialchars_decode($category33->category_name_fa),
-                                'friendlyUrl'=>Str::slug($category33->category_name),
+                                'friendlyUrl' => Str::slug($category33->category_name),
                                 'image' => $category33->category_image ?: "noImage.png",
                                 'description' => htmlspecialchars_decode($category33->category_description),
                                 'description_fa' => htmlspecialchars_decode($category33->category_description_fa),

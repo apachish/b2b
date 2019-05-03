@@ -41,7 +41,9 @@ class CategoryMenuTableSeeder extends Seeder
 
         ];
         foreach ($category as $set) {
-            \App\CategoryMenu::updateOrCreate($set);
+            $category_menu = \App\CategoryMenu::updateOrCreate($set);
+            $category_menu->portals()->attach([5,6]);
+
         }
     }
 }

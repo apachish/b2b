@@ -275,10 +275,7 @@
     <!-- END THIS PAGE PLUGINS-->
 
     <!-- START TEMPLATE -->
-    <script type="text/javascript" src="{{ asset("/js/admin/settings.js")}}"></script>
 
-    <script type="text/javascript" src="{{ asset("/js/admin/plugins.js")}}"></script>
-    <script type="text/javascript" src="{{ asset("/js/admin/actions.js")}}"></script>
     <!-- END TEMPLATE -->
 
     <!--<script>-->

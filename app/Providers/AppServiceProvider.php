@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\CategoryMenu;
+use App\Menu;
 use App\Portal;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
@@ -42,25 +44,42 @@ class AppServiceProvider extends ServiceProvider
             }
             $view->telephone="";
 
-            $prortal  = Portal::whereDomain($domain)->first();
-            if($prortal){
-                $site_info = json_decode($prortal->meta_data,true);
+            $portal  = Portal::whereDomain($domain)->first();
+            if($portal){
+                $site_info = json_decode($portal->meta_data,true);
                 $view->telephone=!empty($site_info['telephone'])?$site_info['telephone']:"";
             }
-            $view->Count_notification_product_enquiry=0;
-            $view->notification_product_enquiry=[];
-            $view->Count_notification_enquiry=0;
-            $view->notification_enquiry=[];
-            $view->Count_notification_product_enquiry=0;
-            $view->notification_product_enquiry=[];
-            $view->Count_notification_requestCall=0;
-            $view->notification_requestCall=[];
-            $view->Count_notification_product=0;
-            $view->notification_product=[];
-            $view->Count_notification_banner=0;
-            $view->notification_banner=[];
-            $view->Count_notification_user=0;
-            $view->notification_user=[];
+            if (Request::is('admin/*')) {
+                $view->Count_notification_product_enquiry = 0;
+                $view->notification_product_enquiry = [];
+                $view->Count_notification_enquiry = 0;
+                $view->notification_enquiry = [];
+                $view->Count_notification_product_enquiry = 0;
+                $view->notification_product_enquiry = [];
+                $view->Count_notification_requestCall = 0;
+                $view->notification_requestCall = [];
+                $view->Count_notification_product = 0;
+                $view->notification_product = [];
+                $view->Count_notification_banner = 0;
+                $view->notification_banner = [];
+                $view->Count_notification_user = 0;
+                $view->notification_user = [];
+            }else{
+                $menus = CategoryMenu::with('menus')->where('locale',app()->getLocale())
+                    ->whereHas('menus',function ($q){
+                        $q->where('status',1);
+                    })->whereHas('portals',function ($q) use ($portal){
+                        $q->where('portal_id',$portal->id);
+                    })
+                    ->get();
+                $list_menu= [];
+                foreach ($menus  as $menu){
+                    $list_menu[$menu->position] = $menu;
+                }
+                $view->routeName = Request::route()->getName();
+                //Route::getCurrentRoute()->getPath();
+                $view->menus = $list_menu;
+            }
 
         });
 

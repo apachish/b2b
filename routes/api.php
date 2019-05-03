@@ -16,4 +16,6 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::resource('categories','Admin\CategoriesController');
+Route::get('categories/{id?}/{status?}/{language?}','Api\CategoriesController@index');
+
+//Route::resource('categories','Admin\CategoriesController');

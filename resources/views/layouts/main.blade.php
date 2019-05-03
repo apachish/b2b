@@ -59,6 +59,35 @@
                             @if (Route::has('login'))
 
                                 @auth
+                                    @if(data_get($menus,'header_1'))
+                                        <li class="dropdown">
+                                            <a href="{{ !empty($menus['header_1']['url']) ? url($menus['header_1']['url']) : "" }}"
+                                               title="{{data_get($menus,'header_1.title')}}">{{ auth()->user()->getDisplayName() ." ". __('Welcome')}}
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                @if (!empty($menus['header_1']['menus']))
+                                                    @foreach ($menus['header_1']['menus'] as $menu)
+
+                                                        @if (!empty($menu->page_url))
+                                                            @php $param = json_decode($menu->page_url, true); @endphp
+
+                                                        @else
+                                                            @php $param = []; @endphp
+                                                        @endif
+
+                                                        <li>
+                                                            <a href="{{$menu->base_url?route($menu->base_url, $param):""}}"
+                                                               title="{{$menu->title }}"
+                                                               class="{{data_get($menu,'class')}}"
+                                                            >
+                                                                {{$menu->title}}
+                                                            </a>
+                                                        </li>
+                                                    @endforeach
+                                                @endif
+                                            </ul>
+                                        </li>
+                                    @endif
                                     <li>
                                         <a href="{{route('logout')}}"
                                            title="{{__('Logout')}}">{{__('Logout')}}
@@ -101,6 +130,59 @@
                     </div>
                     <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6 left">
                         <ul class="nav">
+                            @if(data_get($menus,'header_2'))
+                                <li class="dropdown">
+                                    <a href="">{{data_get($menus,'header_2.title')}}</a>
+                                    <ul class="dropdown-menu">
+                                        @if (!empty($menus['header_2']['menus']))
+                                            @foreach ($menus['header_2']['menus'] as $menu)
+
+                                                @if (!empty($menu->page_url))
+                                                    @php $param = json_decode($menu->page_url, true); @endphp
+
+                                                @else
+                                                    @php $param = []; @endphp
+                                                @endif
+                                                <li>
+                                                    <a href="{{$menu->base_url?route($menu->base_url, $param):""}}"
+                                                       title="{{$menu->title }}"
+                                                       class="{{data_get($menu,'class')}}"
+                                                    >
+                                                        {{$menu->title}}
+                                                    </a>
+                                                </li>
+                                            @endforeach
+                                        @endif
+                                    </ul>
+                                </li>
+                            @endif
+                            @if(data_get($menus,'header_3'))
+
+                                <li class="dropdown"><a href="">{{data_get($menus,'header_3.title')}}</a>
+                                    <ul class="dropdown-menu">
+                                        @if (!empty($menus['header_3']['menus']))
+                                            @foreach ($menus['header_3']['menus'] as $menu)
+
+                                                @if (!empty($menu->page_url))
+                                                    @php $param = json_decode($menu->page_url, true); @endphp
+
+                                                @else
+                                                    @php $param = []; @endphp
+                                                @endif
+
+                                                <li>
+                                                    <a href="{{$menu->base_url?route($menu->base_url, $param):""}}"
+                                                       title="{{$menu->title }}"
+                                                       class="{{data_get($menu,'class')}}"
+                                                    >
+                                                        {{$menu->title}}
+                                                    </a>
+                                                </li>
+                                            @endforeach
+                                        @endif
+                                    </ul>
+                                </li>
+                            @endif
                             @if (Route::has('help'))
                                 <li><a href="{{route('help')}}">{{__("Help Center")}}</a></li>
                             @endif
@@ -157,7 +239,7 @@
 
                                     </div>
                                     <select name="type" class="select_dg custom-select mb-2 mr-sm-2 mb-sm-0" id="type">
-                                    <!--<option value=""><?//=$this->translate("Filter")?></option>-->
+                                    <!--<option value=""><?//=__("Filter")?></option>-->
                                         <option value="buyselllead">{{__("Products")}}</option>
                                         <option value="companies">{{__("Companies")}}</option>
                                         <option value="buylead"> {{__("Buy Offers")}}</option>
@@ -165,7 +247,8 @@
                                     </select>
                                 </div>
                                 <div class="btnsearchtop">
-                                    <input name="" type="submit" class="srch_btn trans_eff btn serachbtn" value="&nbsp;">
+                                    <input name="" type="submit" class="srch_btn trans_eff btn serachbtn"
+                                           value="&nbsp;">
                                 </div>
                             </form>
                         @endif
@@ -181,10 +264,45 @@
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        @php
+            $class="class='act'";
+    $class_active="active";
 
+    $route_current = $routeName;
+        @endphp
         <div class="collapse navbar-collapse" id="navbarNav">
             <div class="container">
                 <ul class="navbar-nav">
+                    @if (!empty($menus['main_menu']['menus']))
+                        @foreach ($menus['main_menu']['menus'] as $menu)
+                            @php $active_route = false; @endphp
+                            @if (!empty($menu->page_url))
+                                @php $param = json_decode($menu->page_url, true); @endphp
+
+                            @else
+                                @php $param = []; @endphp
+                            @endif
+                            @if(!empty($menu['base_url']) && $menu['base_url']==$route_current)
+                                @php $active_route = true;@endphp
+                            @elseif(!empty($menu['base_url']) && $menu['base_url']!= 'home')
+                                @php $current = explode('/',$route_current);
+                            $menu_current = explode('/',$menu['base_url']);
+                            $array = $menu_current+$current;
+                            $path= implode('/',$array);@endphp
+                                @if($route_current==$path)
+                                    @php $active_route = true;@endphp
+                                @endif
+                            @endif
+                            <li class="nav-item <?= $active_route ? $class_active : ''?>">
+                                <a class="nav-link" href="{{route($menu->base_url,$param)}} "
+                                   title="{{$menu->title}}" class="{{$menu->class}}"
+
+                                >{{$menu->title}}
+                                </a>
+                            </li>
+                        @endforeach
+                    @endif
+
                 </ul>
             </div>
         </div>
@@ -200,32 +318,246 @@
     <div class="container">
         <div class="col-lg-2 col-md-6 col-xs-12">
             <ul class="footerlink">
+                @if (!empty($menus['footer_1']['menus']))
+
+
+                    <h6>{{data_get($menus,'footer_1.title')}}</h6>
+                    @foreach($menus['footer_1']['menus'] as $menu)
+
+                        @if($menu->page_url)
+                        @php $param = json_decode($menu->page_url,true); @endphp
+                        @else
+                            @php $param = [];@endphp
+                        @endif
+                        @php $metaData = json_decode($menu['metaData'],true);
+                $url = !empty($metaData['url'])?$metaData['url']:'/';@endphp
+                        @if($menu['permission']=='customer' && !$this->identity())
+                        @php $href = route('user/email', array("title" => __('Sign In'))); @endphp
+                        @else
+                            @php $href = route($menu['base_url'], $param); @endphp
+                        @endif
+                        @if(!empty($menu['permission']) && auth()->user())
+                        @php $menu['class'] = str_replace('group1','',$menu['class']);@endphp
+                        @endif
+
+                        <li>
+                            <a href="{{$href}}"
+                               title="{{$menu->title}}" class="{{data_get($menu,'class')}}"
+
+                            >{{$menu->title}}
+                            </a>
+                        </li>
+                    @endforeach
+                @endif
             </ul>
         </div>
         <div class="col-lg-2 col-md-6 col-xs-12">
             <ul class="footerlink">
+                @if (!empty($menus['footer_2']['menus']))
+
+
+                    <h6>{{data_get($menus,'footer_2.title')}}</h6>
+                    @foreach ($menus['footer_2']['menus'] as $menu)
+
+                        @if($menu->page_url)
+                        @php $param = json_decode($menu->page_url,true); @endphp
+                        @else
+                            @php $param = [];@endphp
+                        @endif
+                        @php $metaData = json_decode($menu['metaData'],true);
+                $url = !empty($metaData['url'])?$metaData['url']:'/';@endphp
+                        @if($menu['permission']=='customer' && !auth()->user())
+                        @php $href = route('user/email', array("title" => __('Sign In'))); @endphp
+                        @else
+                            @php $href = route($menu['base_url'], $param); @endphp
+                        @endif
+                        @if(!empty($menu['permission']) && auth()->user())
+                        @php $menu['class'] = str_replace('group1','',$menu['class']);@endphp
+                        @endif
+
+                        <li>
+                            <a href="{{$href}}"
+                               title="{{$menu->title}}" class="{{data_get($menu,'class')}}"
+
+                            >{{$menu->title}}
+                            </a>
+                        </li>
+                    @endforeach
+                @endif
 
             </ul>
             <ul class="footerlink">
+                @if (!empty($menus['footer_3']['menus']))
+
+                    <h6>{{data_get($menus,'footer_3.title')}}</h6>
+                    @foreach ($menus['footer_3']['menus'] as $menu)
+
+                        @if($menu->page_url)
+                        @php $param = json_decode($menu->page_url,true); @endphp
+                        @else
+                            @php $param = [];@endphp
+                        @endif
+                        @php $metaData = json_decode($menu['metaData'],true);
+                $url = !empty($metaData['url'])?$metaData['url']:'/';@endphp
+                        @if($menu['permission']=='customer' && !auth()->user())
+                        @php $href = route('user/email', array("title" => __('Sign In'))); @endphp
+                        @else
+                            @php $href = route($menu['base_url'], $param); @endphp
+                        @endif
+                        @if(!empty($menu['permission']) && auth()->user())
+                        @php $menu['class'] = str_replace('group1','',$menu['class']);@endphp
+                        @endif
+
+                        <li>
+                            <a href="{{$href}}"
+                               title="{{$menu->title}}" class="{{data_get($menu,'class')}}"
+
+                            >{{$menu->title}}
+                            </a>
+                        </li>
+                    @endforeach
+                @endif
 
             </ul>
         </div>
         <div class="col-lg-2 hidden-md col-xs-12">
             <ul class="footerlink">
+                @if (!empty($menus['footer_4']['menus']))
+
+
+                    <h6>{{data_get($menus,'footer_4.title')}}</h6>
+                    @foreach ($menus['footer_4']['menus'] as $menu)
+
+                        @if($menu->page_url)
+                        @php $param = json_decode($menu->page_url,true); @endphp
+                        @else
+                            @php $param = [];@endphp
+                        @endif
+                        @php $metaData = json_decode($menu['metaData'],true);
+                $url = !empty($metaData['url'])?$metaData['url']:'/';@endphp
+                        @if($menu['permission']=='customer' && !auth()->user())
+                        @php $href = route('user/email', array("title" => __('Sign In'))); @endphp
+                        @else
+                            @php $href = route($menu['base_url'], $param); @endphp
+                        @endif
+                        @if(!empty($menu['permission']) && auth()->user())
+                        @php $menu['class'] = str_replace('group1','',$menu['class']);@endphp
+                        @endif
+
+                        <li>
+                            <a href="{{$href}}"
+                               title="{{$menu->title}}" class="{{data_get($menu,'class')}}"
+
+                            >{{$menu->title}}
+                            </a>
+                        </li>
+                    @endforeach
+                @endif
 
             </ul>
             <ul class="footerlink">
+                @if (!empty($menus['footer_5']['menus']))
+
+
+                    <h6>{{data_get($menus,'footer_5.title')}}</h6>
+                    @foreach ($menus['footer_5']['menus'] as $menu)
+
+                        @if($menu->page_url)
+                        @php $param = json_decode($menu->page_url,true); @endphp
+                        @else
+                            @php $param = [];@endphp
+                        @endif
+                        @php $metaData = json_decode($menu['metaData'],true);
+                $url = !empty($metaData['url'])?$metaData['url']:'/';@endphp
+                        @if($menu['permission']=='customer' && !auth()->user())
+                        @php $href = route('user/email', array("title" => __('Sign In'))); @endphp
+                        @else
+                            @php $href = route($menu['base_url'], $param); @endphp
+                        @endif
+                        @if(!empty($menu['permission']) && auth()->user())
+                        @php $menu['class'] = str_replace('group1','',$menu['class']);@endphp
+                        @endif
+
+                        <li>
+                            <a href="{{$href}}"
+                               title="{{$menu->title}}" class="{{data_get($menu,'class')}}"
+
+                            >{{$menu->title}}
+                            </a>
+                        </li>
+                    @endforeach
+                @endif
 
             </ul>
         </div>
         <div class="col-lg-4 col-md-8 col-xs-12">
             <ul class="footerlink footerlink2">
+                @if (!empty($menus['footer_6']['menus']))
 
+
+                    <h6>{{data_get($menus,'footer_6.title')}}</h6>
+                    @foreach ($menus['footer_6']['menus'] as $menu)
+
+                        @if($menu->page_url)
+                        @php $param = json_decode($menu->page_url,true); @endphp
+                        @else
+                            @php $param = [];@endphp
+                        @endif
+                        @php $metaData = json_decode($menu['metaData'],true);
+                $url = !empty($metaData['url'])?$metaData['url']:'/';@endphp
+                        @if($menu['permission']=='customer' && !auth()->user())
+                        @php $href = route('user/email', array("title" => __('Sign In'))); @endphp
+                        @else
+                            @php $href = route($menu['base_url'], $param); @endphp
+                        @endif
+                        @if(!empty($menu['permission']) && auth()->user())
+                        @php $menu['class'] = str_replace('group1','',$menu['class']);@endphp
+                        @endif
+
+                        <li>
+                            <a href="{{$href}}"
+                               title="{{$menu->title}}" class="{{data_get($menu,'class')}}"
+
+                            >{{$menu->title}}
+                            </a>
+                        </li>
+                    @endforeach
+                @endif
             </ul>
         </div>
         <div class="col-lg-2 col-md-4 col-xs-12">
             <ul class="footerlink">
+                @if (!empty($menus['footer_7']['menus']))
 
+
+                    <h6>{{data_get($menus,'footer_7.title')}}</h6>
+                    @foreach ($menus['footer_7']['menus'] as $menu)
+
+                        @if($menu->page_url)
+                        @php $param = json_decode($menu->page_url,true); @endphp
+                        @else
+                            @php $param = [];@endphp
+                        @endif
+                        @php $metaData = json_decode($menu['metaData'],true);
+                $url = !empty($metaData['url'])?$metaData['url']:'/';@endphp
+                        @if($menu['permission']=='customer' && !auth()->user())
+                        @php $href = route('user/email', array("title" => __('Sign In'))); @endphp
+                        @else
+                            @php $href = route($menu['base_url'], $param); @endphp
+                        @endif
+                        @if(!empty($menu['permission']) && auth()->user())
+                        @php $menu['class'] = str_replace('group1','',$menu['class']);@endphp
+                        @endif
+
+                        <li>
+                            <a href="{{$href}}"
+                               title="{{$menu->title}}" class="{{data_get($menu,'class')}}"
+
+                            >{{$menu->title}}
+                            </a>
+                        </li>
+                    @endforeach
+                @endif
             </ul>
 
         </div>
@@ -242,7 +574,8 @@
         </div>
         <div class="col-lg-5 col-md-4 col-sm-5 col-xs-12">
             @if (Route::has('refer-friend'))
-                <a href="{{route('refer-friend')}}. "?link=" .Request::url() . "&text="  {{base64_encode(__("Site Buysellyab"))}} "
+                <a href="{{route('refer-friend')}}. " ?link=" .Request::url() . "
+                   &text="  {{base64_encode(__("Site Buysellyab"))}} "
                    class="footera ajax group1 refer_friend">
                     <img src="/images/b_icon1.png" alt="">{{_("Refer to friend")}})</a>
                 <!--            <a href="#" class="footera"><img src="/images/b_icon2.png" alt="">Bookmark Us</a>-->
@@ -364,7 +697,7 @@
                         }
                     });
                     if (option) {
-                        //option="<p><?//=$this->translate("no suggestion")?>//</p>"
+                        //option="<p><?//=__("no suggestion")?>//</p>"
                         $("#livesearch").html(option);
 
                     }

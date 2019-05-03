@@ -106,7 +106,7 @@
                                             <option value="">{{ __("Select a Category...") }}</option>
 
                                             @foreach ($categories as $cat)
-                                            <option {{ $parent[0]->id == $cat->id ? 'selected' : '' }}
+                                            <option {{ data_get($parent,'0.id') == $cat->id ? 'selected' : '' }}
                                                     value="{{ $cat->id }}">{{ $cat->title }}</option>
                                             @endforeach
                                         </select>
@@ -122,7 +122,7 @@
 
                                             @if (!empty($subcategories))
                                                 @foreach ($subcategories as $sub_cat)
-                                                    <option {{  $parent[1]->id == $sub_cat->id ? 'selected' : '' }}
+                                                    <option {{  data_get($parent,'1.id') == $sub_cat->id ? 'selected' : '' }}
                                                             value="{{ $sub_cat->id }}">{{ $sub_cat->title }}</option>
                                                 @endforeach
                                             @endif
@@ -230,8 +230,7 @@
     <script type="text/javascript" src={{ asset('/js/admin/plugins/blueimp/jquery.blueimp-gallery.min.js')}} defer></script>
     <script type="text/javascript" src={{ asset('/js/admin/plugins/tagsinput/jquery.tagsinput.min.js')}} defer></script>
 
-    <script type="text/javascript" src={{ asset('/js/admin/plugins.js')}} defer></script>
-    <script type="text/javascript" src={{ asset('/js/admin/actions.js')}} defer></script>
+
     <script type="text/javascript" src={{ asset('/js/admin/category.js')}} defer></script>
 
 @endsection

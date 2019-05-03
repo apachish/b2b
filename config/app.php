@@ -168,6 +168,7 @@ return [
         /*
          * Package Service Providers...
          */
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -230,6 +231,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Menu'      => Lavary\Menu\Facade::class,
         'Moloquent'       => Jenssegers\Mongodb\Eloquent\Model::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
     ],
 
