@@ -5,9 +5,9 @@
         <div class="container">
             <div class="">
                 <div id="blog-sidebar" class="col-lg-3 hidden-md  hidden-sm right-sidebar hidden-xs">
-                    <p class="morelink"><a href="<?= $this->url('home/category') ?>"
-                                           title="View All"><?= __("View All") ?></a></p>
-                    <h3 class="title-cat"><?= __("Categories") ?></h3>
+                    <p class="morelink"><a href="{{route("home.categories")}}"
+                                           title="View All">{{ __("View All") }}</a></p>
+                    <h3 class="title-cat">{{ __("Categories") }}</h3>
                     <div class="wrap">
                         <div class="demo-container right clear">
                             <div class="dcjq-vertical-mega-menu">
@@ -17,9 +17,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="right-sideimg">
-                        {{$banner_right}}
-                    </div>
+                    @if($banner_right)
+                        <div class="right-sideimg">
+                            {{$banner_right}}
+                        </div>
+                    @endif
                 </div>
                 <div id="blog-main" class="col-lg-9 col-md-12 col-xs-12 col-sm-12 ">
                     <div class="row">
@@ -30,8 +32,8 @@
                                     <div class="fluid_dg_wrap fluid_dg_charcoal_skin fluid_container"
                                          id="fluid_dg_wrap_1">
                                         @foreach ($home_scrolling as $j => $scroll)
-                                            @if (!empty($scroll->src)) { ?>
-                                            <div data-src="{{$scroll->src}}"></div>
+                                            @if (!empty($scroll->src))
+                                                <div data-src="{{$scroll->src}}"></div>
                                             @endif
                                         @endforeach
                                     </div>
@@ -39,192 +41,166 @@
                             @endif
                         </div>
                         @if (!empty($articles))
-                        <div class="articles col-lg-4 col-md-4 col-xs-12">
-                            <p class="morelink"><a href="{{route('articles')}}"
-                                                   title="View All">{{__("View All")}}  </a></p>
-                            <h3 class="title-cat">{{__("Articles")}}  </h3>
-                            <div class="bodyarticles">
-                                <p class="art-title"><a
-                                            href="{{route('articles',['id'=>$articles->id])}}">{{$articles->title}}</a>
-                                </p>
-                                <p class="art-date"><?= __("Posted on") ?>
-                                    : {{$articles->updated_at}}
-                                    - <?= __("by") ?> {{$article->last_modified_by}}</p>
+                            <div class="articles col-lg-4 col-md-4 col-xs-12">
+                                <p class="morelink"><a href="{{route('articles')}}"
+                                                       title="View All">{{__("View All")}}  </a></p>
+                                <h3 class="title-cat">{{__("Articles")}}  </h3>
+                                <div class="bodyarticles">
+                                    <p class="art-title"><a
+                                                href="{{route('articles',['id'=>$articles->id])}}">{{$articles->title}}</a>
+                                    </p>
+                                    <p class="art-date">{{ __("Posted on")}}
+                                        : {{$articles->updated_at}}
+                                        - {{__("by")}} {{$article->last_modified_by}}</p>
 
-                                <p class="art-des">{{$article->description}},....</p>
+                                    <p class="art-des">{{$article->description}},....</p>
+                                </div>
                             </div>
-                        </div>
                         @endif
                     </div>
                     <div class="leads row">
                         <div class="rightlead col-lg-6 col-md-6 col-xs-12">
                             <div class="leadsbody">
-                                <h3 class="title-leads"><?= __('New Buying Leads') ?><a
-                                            href="<?= $this->url('home/products_new', ['type' => 'buy']) ?>"
+                                <h3 class="title-leads">{{__('New Buying Leads')}}<a
+                                            href="{{route("home.products", ['type' => 'buy'])}}"
                                             class="allleads">{{$count_buy}}</a></h3>
                                 <a class="morelead_buy"
-                                   href="<?= $this->url('home/products_new', ['type' => 'buy']) ?>"><?= __('View All') ?>
+                                   href="{{route('home.products', ['type' => 'buy'])}}">{{__('View All')}}
                                 </a>
                                 <div style="height:120px;" class="rel o-hid">
                                     <div class="{{$count_buy>= 10 ?"lead_scroll1":"" }} body-leads">
                                         <ul class="leads_list">
                                             @foreach ($buy_leads as $buy)
-                                            <li>
-                                                <a href="{{route('leads',[])}}<?= $this->url('home/product', ['cat_id' => $buy['categoryId'], 'id' => $buy['id']]) ?>"
-                                                   title=""> <?= $buy['title'] ?> <span
-                                                            class="date-lead"><?= $buy['productPublishDate'] ?></span></a>
-                                            </li>
-                                            <?php } ?>
+                                                <li>
+                                                    <a href="{{route('leads',['id'=>$buy->id,'category_id'=> $buy->category->id])}}"
+                                                       title="">{{$buy->tittle}}<span
+                                                                class="date-lead">{{$buy->publish_at}}</span></a>
+                                                </li>
+                                            @endforeach
                                         </ul>
                                     </div>
                                 </div>
-                                <a class="more-leads <?= $this->identity() ? "" : "group1"?>"
-                                   href="<?= $this->identity() ? $this->url('members/post_lead/type_ad', ['type_ad' => 'buy']) : $this->url('user/email', array("title" => __('Sign In')))?>"
+                                <a class="more-leads {{ auth()->check()?"":"group1"}}"
+                                   href="{{auth()->check()?route('members/post_lead/type_ad',['type_ad' => 'buy']):route('singUp') }}"
 
-                                   title="<?= $this->identity() ? __('Post Buying Leads') : __('Sign In')?>"><?= __('Post Buying Leads') ?></a>
+                                   title="{{auth()->check() ? __('Post Buying Leads') : __('Sign In')}}">{{__('Post Buying Leads')}}</a>
 
                             </div>
                         </div>
                         <div class="leftlead col-lg-6 col-md-6 col-xs-12">
                             <div class="leadsbody">
-                                <h3 class="title-leads"><?= __('New Selling Leads') ?><a
-                                            href="<?= $this->url('home/products_new', ['type' => 'sell']) ?>"
-                                            class="allleads"><?= $count_sell ?></a></h3>
+                                <h3 class="title-leads">{{__('New Selling Leads')}}<a
+                                            href="{{route("home.products", ['type' => 'sell'])}}"
+                                            class="allleads">{{$count_sell}}</a></h3>
                                 <a class="morelead_sell"
-                                   href="<?= $this->url('home/products_new', ['type' => 'Sale']) ?>"><?= __('View All') ?>
+                                   href="{{route('home.products', ['type' => 'buy'])}}">{{__('View All')}}
                                 </a>
                                 <div style="height:120px;" class="rel o-hid">
-                                    <div class="<?=sizeof($sell_leads) >= 10 ? "lead_scroll2" : ""?> body-leads">
+                                    <div class="{{$count_buy>= 10 ?"lead_scroll2":"" }}  body-leads">
                                         <ul class="leads_list">
-                                            <?php foreach ($sell_leads as $sell) { ?>
-                                            <li>
-                                                <a href="<?= $this->url('home/product', ['cat_id' => $sell['categoryId'], 'id' => $sell['id']]) ?>"
-                                                   title=""> <?= $sell['title'] ?> <span
-                                                            class="date-lead"><?= $sell['productPublishDate'] ?></span></a>
-                                            </li>
-                                            <?php } ?>
+                                            @foreach ($sell_leads as $sell)
+                                                <li>
+                                                    <a href="{{route('leads',['id'=>$sell->id,'category_id'=> $sell->category->id])}}"
+                                                       title=""> {{$sell->title}} <span
+                                                                class="date-lead">{{$buy->publish_at}}</span></a>
+                                                </li>
+                                            @endforeach
                                         </ul>
                                     </div>
                                 </div>
-                                <a class="more-leads <?= $this->identity() ? "" : "group1"?>"
-                                   href="<?= $this->identity() ? $this->url('members/post_lead/type_ad', ['type_ad' => 'sell']) : $this->url('user/email', array("title" => __('Sign In')))?>"
-                                   title="<?= $this->identity() ? __('Post Selling Leads') : __('Sign In')?>"><?= __('Post Selling Leads') ?></a>
+                                <a class="more-leads {{ auth()->check()?"":"group1"}}"
+                                   href="{{auth()->check()?route('members/post_lead/type_ad',['type_ad' => 'sell']):route('singUp') }}"
+
+                                   title="{{auth()->check() ? __('Post Selling Leads') : __('Sign In')}}">{{__('Post Selling Leads')}}</a>
                             </div>
                         </div>
                     </div>
                     <div class="row">
 
                         <div class="buttom-lead col-lg-9 col-md-12 col-xs-12 col-sm-9">
-                            <?php if ($products_featured1 || $products_featured2 || $products_featured3) { ?>
-                            <div class="hidden-xs products-home col-lg-12">
-                                <p class="morelink products-home-more"><a
-                                            href="<?=$this->url('home/featured') . '?featured=-1'?>"
-                                            title="View All"><?= __("View All") ?></a>
-                                </p>
-                                <h3 class="title-cat products-home-title"><?= __("Featured Products") ?></h3>
-                                <!--list row 1-->
-                                <?php echo $this->partial('buysellyab/product/featured_slider.phtml', ['products_featured' => $products_featured1, 'index' => 1]) ?>
-                                <?php echo $this->partial('buysellyab/product/featured_slider.phtml', ['products_featured' => $products_featured2, 'index' => 2]) ?>
-                                <?php echo $this->partial('buysellyab/product/featured_slider.phtml', ['products_featured' => $products_featured3, 'index' => 3]) ?>
-                            </div>
-                        <?php } ?>
+                            @if ($products_featured1 || $products_featured2 || $products_featured3)
+                                <div class="hidden-xs products-home col-lg-12">
+                                    <p class="morelink products-home-more"><a
+                                                href="{{route('home/featured',['select'=>'all'])}}"
+                                                title="View All">{{ __("View All")}} </a>
+                                    </p>
+                                    <h3 class="title-cat products-home-title">{{__("Featured Products")}}</h3>
+                                    <!--list row 1-->
+                                    @include('leads.featured_slider',['products_featured' => $products_featured1, 'index' => 1])
+                                    @include('leads.featured_slider',['products_featured' => $products_featured2, 'index' => 2])
+                                    @include('leads.featured_slider',['products_featured' => $products_featured3, 'index' => 3])
+                                </div>
+                        @endif
                         <!-- End Product Home -->
                             <!-- Categories Home -->
                             <div class="categories-home">
-                                <p class="morelink"><a href="<?= $this->url('home/category') ?>" title="View All"
-                                                       class="allcat"><?= __("View All") ?></a></p>
-                                <h3 class="title-cat"><?= __("Category") ?></h3>
-                                <?php if ($categories) { ?>
-                                <?php foreach ($categories as $i => $category):
-                                if ($i == 6) {
-                                    break;
-                                }
-                                ?>
-                                <?php if ($i % 3 == 0) {
-                                    echo "<div>";
-                                } ?>
+                                <p class="morelink"><a href="{{route('home.categories')}}" title="{{ __("View All") }}"
+                                                       class="allcat">{{ __("View All") }}</a></p>
+                                <h3 class="title-cat">{{__("Category") }}</h3>
+                                @if ($categories)
+                                    @foreach ($categories as $i => $category):
+                                    @if ($i == 6)
+                                        @break
 
-                                <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12 cat-list-home">
-                                    <a href="<?= $this->url("home/category/cms-page-cat", ["cat" => $category['friendlyUrl'], "id" => $category["categoryId"]]); ?>"
-                                       title=""
-                                       class="title-cat"><?= $category['categoryName'];//mb_substr(we, 0, 20) ?></a>
-                                    <div class="cat_box">
-                                        <a class="cat-img"
-                                           href="<?= $this->url("home/category/cms-page-cat", ["cat" => $category['friendlyUrl'], "id" => $category["categoryId"]]); ?>"
-                                           title="<?= $category['categoryName'] ?>">
-                                            <img src="<?= !empty($category['categoryImage']) ? $this->baseUrl . '/uploaded_files/category/' . $category['categoryImage'] : $this->baseUrl . '/images/noimg.jpg' ?>"
-                                                 width="173" height="80"
-                                                 alt="<?= $category['categoryName'] ?>">
-                                        </a>
-                                        <ul class="cat_links">
-                                            <?php foreach ($category['subcategory'] as $s=>$subcategory):
-                                            if ($s == 4) {
-                                                break;
-                                            }
-                                            $url_Cat = array_filter(explode("/", $subcategory['friendlyUrl']));
-                                            if (empty($url_Cat))
-                                                continue;
-                                            ?>
-                                            <li class="cat-list"><a
-                                                        href="<?= $this->url("home/category/cms-page-subcat", ["cat" => isset($url_Cat[0]) ? $url_Cat[0] : 0, "subcat" => isset($url_Cat[1]) ? $url_Cat[1] : 0, "id" => $subcategory['categoryId']]) ?>"
-                                                        title="<?= $subcategory['categoryName'] ?>"><?= $subcategory['categoryName'];//mb_substr(, 0, 20) ?></a>
-                                            </li>
-                                            <?php endforeach; ?>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <?php if ($i % 3 == 2) {
-                                    echo "</div>";
-                                } ?>
-                                <?php endforeach; ?>
-                                <?php } ?>
+                                    @endif
+                                    @if ($i % 3 == 0)
+                                        <div>
+                                            @endif
+
+                                            <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12 cat-list-home">
+                                                <a href="{{route("home.categories", ["id" => $category["categoryId"]])}}"
+                                                   title="{{ $category->title}}"
+                                                   class="title-cat">{{ $category->title}}</a>
+                                                <div class="cat_box">
+                                                    <a class="cat-img"
+                                                       href="{{route("home.categories", ["id" => $category->id])}}"
+                                                       title="{{ $category->title}}">
+                                                        <img src="{{url('images/category'.$category->image)}}"
+                                                             width="173" height="80"
+                                                             alt="{{$category->title}}">
+                                                    </a>
+                                                    <ul class="cat_links">
+                                                        @foreach ($category['subcategory'] as $s=>$subcategory)
+                                                            @if ($s == 4)
+                                                                @break
+                                                            @endif
+
+                                                            <li class="cat-list"><a
+                                                                        href="{{route("home.categories", ["id" => $category->id])}}"
+                                                                        title="{{$subcategory->title}}">{{$subcategory->title}}</a>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            @if ($i % 3 == 2)
+                                        </div>
+                                    @endif
+                                    @endforeach
+                                @endif
                             </div>
                             <!-- End Categories -->
                             <!--Special Product -->
-                        <?php echo $this->partial('buysellyab/company/company_featured.phtml', ['company_featured' => $companies, 'company_featured_type' => 2]) ?>
+                        @include('companies.company_featured',['company_featured' => $companies, 'company_featured_type' => 2])
+
 
                         <!-- End Special -->
                         </div>
                         <div class="innerleftsidebar col-lg-3 hidden-md col-xs-12 hidden-sm">
-                        <?php if ($banner_left) { ?>
-                        <!--Left Sidebar Images -->
-                            <div class="imgleftsidebar">
-                                <?= $banner_left ?>
-                            </div>
-                            <!-- End Left Sidebar Images -->
-                        <?php } ?>
+                        @if ($banner_left)
+                            <!--Left Sidebar Images -->
+                                <div class="imgleftsidebar">
+                                    {{$banner_left}}
+                                </div>
+                                <!-- End Left Sidebar Images -->
+                        @endif
 
                         <!-- Testmonials -->
-                            <div class="testimonial">
-                                <p class="morelink"><a class="more-testimonial" href="<?= $this->url('testimonials') ?>"
-                                                       title="<?= __('View All') ?>"
-                                                       class="uo"><?= __('View All') ?></a></p>
-                                <h3 class="title-cat"><?= __('Testimonials') ?></h3>
-                                <div class="t_scroll col-lg-12">
-                                    <div class="testimonial_scroll">
-                                        <ul>
-                                            <?php foreach ($testimonials as $testimonial) { ?>
-                                            <li>
-                                                <div class="inner">
-                                                    <p class="text-testimonial"><?= substr($testimonial['testimonialDescription'], 0, 100) ?>
-                                                        <b class="blue1">...<a
-                                                                    href="<?=$this->url('testimonials/details', ['id' => $testimonial['testimonialId']])?>"
-                                                                    class="uo"
-                                                                    title="more"><?= __('more') ?></a></b>
-                                                    </p>
-                                                    <p class="name-testimonial"><?= !empty($testimonial['poster_name']) ? $testimonial['poster_name'] : "" ?></p>
-                                                    <p class="from-testimonial"><?= !empty($testimonial['company']) ? $testimonial['company'] : "" ?></p>
-                                                </div>
-                                            </li>
-                                            <?php } ?>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End Testmonials -->
+                        @include('testimonials.scroll-side')
+
+                        <!-- End Testmonials -->
                             <div class="imgleftsidebar">
-                                <?= $banner_left_2 //                        <img src="/images/r_bnr7.jpg" class="last-imgsidebar" alt="">
-                                ?>
+                                {{$banner_left_2}}
                             </div>
                         </div>
 
@@ -238,31 +214,31 @@
     <!-- MIDDLE ENDS -->
     <section id="blog-footer" class="btm-content">
         <div class="container newsletter">
-            <p class="title-newsletter"><?= __("NEWSLETTER") ?></p>
-            <p class="des-newsletter"><?= __("Enter your email address to sign up for our special offers and product promotions") ?></p>
+            <p class="title-newsletter">{{__("NEWSLETTER")}}</p>
+            <p class="des-newsletter">{{__("Enter your email address to sign up for our special offers and product promotions")}}</p>
             <div class="newletterform">
-                <form id="newletterform" action="<?= $this->url('newsLetter') ?>" method="post">
+                <form id="newletterform" action="{{route('newsLetter')}}" method="post">
+                    {{csrf_field()}}
                     <input name="letter[subscriberName]" type="text" class="textbox-newsletter"
-                           placeholder="<?= __("FullName") ?>">
-                    <input name="letter[subscriberEmail]" type="email" class="textbox-newsletter" id="letter_email"
-                           placeholder="<?= __("Email Address") ?>">
-                    <input name="letter[verification_code_newsletter]" id="verification_code_newsletter" type="text"
+                           placeholder="{{__("FullName")}}">
+                    <input name="subscriberEmail" type="email" class="textbox-newsletter" id="letter_email"
+                           placeholder="{{__("Email Address")}}">
+                    <input name="verification_code_newsletter" id="verification_code_newsletter" type="text"
                            autocomplete="off"
-                           placeholder="<?= __("Enter the security code") ?>"
+                           placeholder="{{__("Enter the security code")}}"
                            class="textbox-newsletter captcha">
-                    <img src="<?= $this->url("captcha", ['id' => uniqid(time()), 'text_color' => 'ffffff', 'image_bg_color' => '36b3d1', 'name' => 'newsletter']); ?>"
+                    <img src="{{route("captcha", ['id' => uniqid(time()), 'text_color' => 'ffffff', 'image_bg_color' => '36b3d1', 'name' => 'newsletter'])}}"
                          class="vam ml10" alt="" id="captchaimage"/>
                     <a href="javascript:false;" title="Change Verification Code">
                         <img src="/images/ref2.png"
                              alt="Refresh"
-                             onclick="document.getElementById('captchaimage').src='<?= $this->url("captcha", ['id' => uniqid(time()), 'text_color' => 'ffffff', 'image_bg_color' => '36b3d1', 'name' => 'newsletter']); ?>'; document.getElementById('verification_code_newsletter').value=''; document.getElementById('verification_code_newsletter').focus(); return true;"
+                             onclick="document.getElementById('captchaimage').src='{{route("captcha", ['id' => uniqid(time()), 'text_color' => 'ffffff', 'image_bg_color' => '36b3d1', 'name' => 'newsletter'])}}'; document.getElementById('verification_code_newsletter').value=''; document.getElementById('verification_code_newsletter').focus(); return true;"
                              class="vam ml5">
                     </a>
-                    <button class="btn-sub btn-letter" name="letter[status]" value=1
-                            type="submit"><?= __("Subscribe") ?></button>
-                    <button class="btn-sub btn-letter" name="letter[status]" btn-unsub
-                    " value=0
-                    type="submit"><?= __("Unsubscribe") ?></button>
+                    <button class="btn-sub btn-letter" name="status" value=1
+                            type="submit">{{__("Subscribe")}}</button>
+                    <button class="btn-sub btn-unsub btn-letter" name="status" value=0
+                            type="submit">{{__("Unsubscribe")}}</button>
                     <img src="/img/blueimp/loading.gif" id="loding_email"
                          style="width: 30px;height: 30px;display: none"/>
 
@@ -270,23 +246,22 @@
                 </form>
             </div>
         </div>
-        <?php if (!empty($articles[4])) { ?>
-        <?php $text = explode("<hr>", $articles[4]['detail']) ?>
-        <div class="container aboutus">
-            <p class="morelink"><a href="<?= $this->url("home/articles", ["id" => $articles[4]['id']]) ?>"
-                                   title="Read More" class="more-about"><?= __("More") ?></a></p>
-            <h3 class="title-cat"><?= $articles[4]['title'] ?></h3>
-            <p class="des-about"><?= $text[0] ?></div>
-        <?php } ?>
+        @if ($articles)
+            <div class="container aboutus">
+                <p class="morelink"><a href="{{route("home/articles", ["id" => $articles->id])}}"
+                                       title="Read More" class="more-about">{{__("More")}}</a></p>
+                <h3 class="title-cat">{{$articles->title}} </h3>
+                <p class="des-about">{{$articles->description}}</div>
+        @endif
     </section>
-    <?php if($banner_button){?>
-    <div class="bg-gray">
-        <div class="wrapper ac">
-            <!--        <img src="/images/b_bnr1.jpg" alt=""> <img src="/images/b_bnr2.jpg" class="ml5" alt="">-->
-            <?=$banner_button?>
+    @if($banner_button)
+        <div class="bg-gray">
+            <div class="wrapper ac">
+                <!--        <img src="/images/b_bnr1.jpg" alt=""> <img src="/images/b_bnr2.jpg" class="ml5" alt="">-->
+                {{$banner_button}}
+            </div>
         </div>
-    </div>
-    <?php }?>
+    @endif
     <!--<script src="/old_js/jssor.slider-25.0.7.min.js" type="text/javascript"></script>-->
     <script type="text/javascript">
         jQuery(document).ready(function ($) {

@@ -34,7 +34,7 @@ class CreateLeadsTable extends Migration
             $table->tinyInteger('approval_status');
             $table->boolean('push_request')->default(false);
             $table->tinyInteger('sort_order');
-            $table->dateTime('publish_date');
+            $table->dateTime('publish_at');
             $table->text('meta_data');
             $table->unsignedBigInteger('city_id');
 

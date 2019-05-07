@@ -43,6 +43,7 @@ Route::get('home/categories', 'HomeController@index')->name('home.categories');
 Route::get('companies', 'HomeController@index')->name('companies');
 Route::get('testimonials', 'HomeController@index')->name('testimonials');
 Route::get('newsLetter', 'HomeController@index')->name('newsLetter');
+Route::get('captcha', 'HomeController@index')->name('captcha');
 
 Route::get('users/singIn', 'UserController@login')->name('singIn');
 Route::post('users/email', 'UserController@email')->name('email');
