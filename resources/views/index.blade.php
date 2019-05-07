@@ -218,28 +218,27 @@
             <p class="des-newsletter">{{__("Enter your email address to sign up for our special offers and product promotions")}}</p>
             <div class="newletterform">
                 <form id="newletterform" action="{{route('newsLetter')}}" method="post">
-                    {{csrf_field()}}
-                    <input name="letter[subscriberName]" type="text" class="textbox-newsletter"
+                    <input name="subscriberName" type="text" class="textbox-newsletter" id="letter_name"
                            placeholder="{{__("FullName")}}">
                     <input name="subscriberEmail" type="email" class="textbox-newsletter" id="letter_email"
                            placeholder="{{__("Email Address")}}">
-                    <input name="verification_code_newsletter" id="verification_code_newsletter" type="text"
+                    <input name="captcha_newsletter" id="verification_code_newsletter" type="text"
                            autocomplete="off"
                            placeholder="{{__("Enter the security code")}}"
                            class="textbox-newsletter captcha">
-                    <img src="{{route("captcha", ['id' => uniqid(time()), 'text_color' => 'ffffff', 'image_bg_color' => '36b3d1', 'name' => 'newsletter'])}}"
+                    <img src="{{captcha_src('flat')}}"
                          class="vam ml10" alt="" id="captchaimage"/>
                     <a href="javascript:false;" title="Change Verification Code">
                         <img src="/images/ref2.png"
                              alt="Refresh"
-                             onclick="document.getElementById('captchaimage').src='{{route("captcha", ['id' => uniqid(time()), 'text_color' => 'ffffff', 'image_bg_color' => '36b3d1', 'name' => 'newsletter'])}}'; document.getElementById('verification_code_newsletter').value=''; document.getElementById('verification_code_newsletter').focus(); return true;"
+                             onclick="document.getElementById('captchaimage').src='{{ captcha_src('flat')}}'; document.getElementById('verification_code_newsletter').value=''; document.getElementById('verification_code_newsletter').focus(); return true;"
                              class="vam ml5">
                     </a>
                     <button class="btn-sub btn-letter" name="status" value=1
                             type="submit">{{__("Subscribe")}}</button>
                     <button class="btn-sub btn-unsub btn-letter" name="status" value=0
                             type="submit">{{__("Unsubscribe")}}</button>
-                    <img src="/img/blueimp/loading.gif" id="loding_email"
+                    <img src="/images/loading.gif" id="loding_email"
                          style="width: 30px;height: 30px;display: none"/>
 
 

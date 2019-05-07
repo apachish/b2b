@@ -42,7 +42,7 @@ Route::get('home/products', 'HomeController@index')->name('home.products');
 Route::get('home/categories', 'HomeController@index')->name('home.categories');
 Route::get('companies', 'HomeController@index')->name('companies');
 Route::get('testimonials', 'HomeController@index')->name('testimonials');
-Route::get('newsLetter', 'HomeController@index')->name('newsLetter');
+Route::post('newsLetter', 'NewsLettersController@send')->name('newsLetter');
 Route::get('captcha', 'HomeController@index')->name('captcha');
 
 Route::get('users/singIn', 'UserController@login')->name('singIn');
@@ -91,7 +91,9 @@ Route::middleware('auth')
         'as' => 'menus'
     ]);
     Route::resource('menus','MenusController');
-    Route::resource('newsletters','NewslettersController');
+    Route::resource('newsletters','NewslettersController',[
+        'as' => 'admin.newsletters'
+    ]);
     Route::resource('templates/mail','TemplatesMailController');
     Route::resource('enquiries','EnquiriesController');
     Route::resource('banners','BannersController');

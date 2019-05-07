@@ -1,13 +1,7 @@
 $(document).ready(function () {
 
 
-// Enable debug
-//     $.i18n.debug = true;
-//     'use strict';
-//     var i18n = $.i18n(), language, person, kittens, message, gender;
-//     language = $( '#translate-this' ).attr('data-language');
-//     i18n.locale = language;
-//     i18n.load( 'i18n/' + i18n.locale + '.json', i18n.locale );
+
 
     $('#checkcredential').click(function(){
         var type = $('#credential').attr('type');
@@ -128,75 +122,84 @@ $(document).ready(function () {
         e.preventDefault(); //Prevent Default action.
     });
     $("#newletterform").submit(function (e) {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        e.preventDefault();
         $('input.btn-letter').prop('disabled', true);
         $('#loding_email').show( );
-
-
         var formObj = $(this);
         var formURL = formObj.attr("action");
-        var formData = new FormData(this);
-
-        formData.append('letter[status]', ButtonValue);
         var email = $('#letter_email').val();
+        var name = $('#letter_name').val();
         if (email == '' || email == 'Enter Your Email ID') {
-            toastr.error( i18n.localize('Enter Email'));
+            toastr.error( 'Enter Email');
+            $('input.btn-letter').prop('disabled', false);
+            $('#loding_email').hide( );
+            return false;
+        }
+        if (name == '') {
+            toastr.error( 'Enter name');
+            $('input.btn-letter').prop('disabled', false);
+            $('#loding_email').hide( );
             return false;
         }
         if ((email.length) > 80) {
-            toastr.error(i18n.localize('Email can not be greater than 80 characters'));
+            toastr.error('Email can not be greater than 80 characters');
+            $('input.btn-letter').prop('disabled', false);
+            $('#loding_email').hide( );
             return false;
         }
         if (!isEmailAddr(email)) {
-            toastr.error(i18n.localize('Please Enter Valid  Email'));
+            toastr.error('Please Enter Valid  Email');
             $('#letter_email').focus();
+            $('input.btn-letter').prop('disabled', false);
+            $('#loding_email').hide( );
             return false;
 
         }
         $.ajax({
-            url: formURL,
-            type: 'POST',
-            data: formData,
-            mimeType: "multipart/form-data",
-            contentType: false,
-            cache: false,
-            processData: false,
-            success: function (data, textStatus, jqXHR) {
-                $('input.btn-letter').prop('disabled', false);
-                $('#loding_email').hide( );
+            type: "POST",
+            url: formURL ,
+            dataType: "json",
+            data: $('#newletterform').serialize()+ '&status=' + ButtonValue,
+            success: function(response) {
 
-                document.getElementById('captchaimage').src = 'captcha/normal/' + Math.random() + '/ffffff/36b3d1/newsletter';
-                document.getElementById('verification_code_newsletter').value = '';
-                document.getElementById('verification_code_newsletter').focus();
-                data = JSON.parse(data);
 
-                if(data.status == 200){
-                    toastr.success(data.message);
+                if (response.status == 'failed' ) {
+                    var message = response.meta.message;
+                    if(message && (typeof message === 'object' || typeof message === 'Array') ) {
 
-                }else {
-                    console.log(data.message);
-                    // var message =JSON.parse(data.message);
-                    // if(message && (typeof message === 'object' || typeof message === 'Array') ){
-                    //     $.each(message, function( index, value ) {
-                    //         toastr.error( index + ": " + value );
-                    //
-                    //     });
-                    // }else{
-                        toastr.error(data.message);
-                    // }
+                        $.each(message, function (index, value) {
+                            $.each(value, function (key, item) {
+                                toastr.error(item);
+
+                            });
+
+                        });
+                    } else {
+                        toastr.error(message);
+                    }
                 }
-                // if (data.status == 400 ) {//&& data.error == "The code entered is incorrect"
-                //
-                //     toastr.error(data.error);
-                // }
-                // if (data.status == 200) {
-                //
-                //     toastr.success(data.message);
-                // }
+                if (response.status == 200) {
+
+                    toastr.success(response.meta.message);
+
+                }
+                document.getElementById('captchaimage').src=response.data.captcha;
+                document.getElementById('verification_code_newsletter').value='';
+                document.getElementById('verification_code_newsletter').focus();
+                return true;
             },
-            error: function (jqXHR, textStatus, errorThrown) {
+            error: function(response) {
+                document.getElementById('captchaimage').src=response.data.captcha;
+                document.getElementById('verification_code_newsletter').value='';
+                document.getElementById('verification_code_newsletter').focus();
+                return true;
             }
         });
-        e.preventDefault(); //Prevent Default action.
     });
     $(".english_input").keypress(function(event){
         var ew = event.which;

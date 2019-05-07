@@ -18,9 +18,9 @@ class CreateNewslettersTable extends Migration
             $table->string('name');
             $table->string('email');
             $table->boolean('status');
-            $table->boolean('mail_status');
-            $table->dateTime('mail_sent_date');
-            $table->unsignedBigInteger('member_id');
+            $table->boolean('mail_status')->nullable();
+            $table->dateTime('mail_sent_date')->nullable();
+            $table->unsignedBigInteger('member_id')->nullable();
             $table->foreign('member_id')
                 ->references('id')
                 ->on('users')

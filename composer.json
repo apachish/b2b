@@ -17,6 +17,7 @@
         "laravel/tinker": "^1.0",
         "lavary/laravel-menu": "^1.7",
         "maatwebsite/excel": "^3.1",
+        "mews/captcha": "^2.2",
         "morilog/jalali": "^3.1",
         "spatie/laravel-translation-loader": "^2.3"
     },
