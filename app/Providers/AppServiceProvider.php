@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\CategoryMenu;
+use App\Country;
 use App\Menu;
 use App\Portal;
 use Illuminate\Support\Facades\DB;
@@ -43,8 +44,14 @@ class AppServiceProvider extends ServiceProvider
                 $domain = substr (Request::root(), 7); // $domain is now 'www.example.com'
             }
             $view->telephone="";
-            $view->countries=[];
-
+            $countries =  Country::where('status',1)->get();
+            $view->countries = $countries;
+            $user_country = auth()->check()?auth()->user()->country:null;
+            if(!$user_country){
+                $ip_info = \Cache::get(Request::ip());
+                $user_country = data_get($ip_info,'country_id');
+            }
+            $view->user_country = $user_country;
             $portal  = Portal::whereDomain($domain)->first();
             if($portal){
                 $site_info = json_decode($portal->meta_data,true);

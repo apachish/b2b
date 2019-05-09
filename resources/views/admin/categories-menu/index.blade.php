@@ -5,14 +5,14 @@
 
 <!-- START BREADCRUMB -->
 <ul class="breadcrumb">
-    <li><a href="{{route('admin')}}">{{__("Home")}}</a></li>
-    <li class="active"><a href="#">{{__("Manage Menu")}}</a></li>
+    <li><a href="{{route('admin')}}">{{__("messages.Home")}}</a></li>
+    <li class="active"><a href="#">{{__("messages.Manage Menu")}}</a></li>
 </ul>
 <!-- END BREADCRUMB -->
 
 <!-- PAGE TITLE -->
 <div class="page-title">
-    <h2><span class="fa fa-arrow-circle-o-left"></span>{{__("Category")}}</h2>
+    <h2><span class="fa fa-arrow-circle-o-left"></span>{{__("messages.Category")}}</h2>
 </div>
 <!-- END PAGE TITLE -->
 
@@ -34,13 +34,13 @@
                             <div class="col-md-5">
                             </div>
                             <div class="col-md-1" style="text-align: right">
-                                <label>{{__("Filter")}}:</label>
+                                <label>{{__("messages.Filter")}}:</label>
                             </div>
                             <div class="col-md-2">
                                 <select name="language" class="form-control" onchange="this.form.submit()">
-                                    <option {{empty($language)?"selected":"" }} value="" >{{__("Select language")}}</option>
-                                    <option  {{$language=="fa_IR"?"selected":"" }} value="fa_IR" >{{__("fa_IR")}}</option>
-                                    <option {{$language==="en_US"?"selected":"" }} value="en_US" >{{__("en_US")}}</option>
+                                    <option {{empty($language)?"selected":"" }} value="" >{{__("messages.Select language")}}</option>
+                                    <option  {{$language=="fa_IR"?"selected":"" }} value="fa_IR" >{{__("messages.fa_IR")}}</option>
+                                    <option {{$language==="en_US"?"selected":"" }} value="en_US" >{{__("messages.en_US")}}</option>
                                 </select>
                             </div>
                         </div>
@@ -49,13 +49,13 @@
                             <table id="customers2" class="table ">
                                 <thead>
                                 <tr>
-                                    <th>{{__("Title")}}</th>
-                                    <th>{{__("Position")}}</th>
-                                    <th>{{__("created")}}</th>
-                                    <th>{{__("modified")}}</th>
-                                    <th>{{__("status")}}</th>
-                                    <th>{{__("language")}}</th>
-                                    <th>{{__("Action")}}</th>
+                                    <th>{{__("messages.Title")}}</th>
+                                    <th>{{__("messages.Position")}}</th>
+                                    <th>{{__("messages.created")}}</th>
+                                    <th>{{__("messages.modified")}}</th>
+                                    <th>{{__("messages.status")}}</th>
+                                    <th>{{__("messages.language")}}</th>
+                                    <th>{{__("messages.Action")}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -75,7 +75,7 @@
                                                 {{app()->getLocale()=='fa'?jdate(strtotime($category->updated_at)):$category->updated_at }}
                                             </td>
                                             <td>
-                                                {{$category->status?__('active'):__('unactivated') }}
+                                                {{$category->status?__('messages.active'):__('messages.unactivated') }}
                                             </td>
                                             <td>
                                                 {{$category->locale }}
@@ -110,14 +110,14 @@
             <div class="mb-middle">
                 <div class="mb-title"><span class="fa fa-times"></span> Remove <strong>Data</strong> ?</div>
                 <div class="mb-content">
-                    <p>{{__("Are you sure you want to remove this row?")}}</p>
-                    <p>{{__("Press Yes if you sure.")}}</p>
+                    <p>{{__("messages.Are you sure you want to remove this row?")}}</p>
+                    <p>{{__("messages.Press Yes if you sure.")}}</p>
                     <input type="hidden" value="" id="Delete_id">
                 </div>
                 <div class="mb-footer">
                     <div class="pull-right">
-                        <button class="btn btn-success btn-lg mb-control-yes">{{__("Yes")}}</button>
-                        <button class="btn btn-default btn-lg mb-control-close">{{__("No")}}</button>
+                        <button class="btn btn-success btn-lg mb-control-yes">{{__("messages.Yes")}}</button>
+                        <button class="btn btn-default btn-lg mb-control-close">{{__("messages.No")}}</button>
                     </div>
                 </div>
             </div>
@@ -199,15 +199,15 @@
             })
             var table = $('#customers2').DataTable( {
                 "language": {
-                    "lengthMenu": "{{__('Display')}} _MENU_ {{__('records per page')}}",
-                    "zeroRecords": "{{__('Nothing found - sorry')}}",
-                    "info": "{{__('Showing page')}}  _PAGE_ {{__('of')}} _PAGES_",
-                    "infoEmpty": "{{__('No records available')}}",
-                    "infoFiltered": "({{__('filtered from')}} _MAX_ {{__('total records')}})",
-                    "search": "{{__('Search')}}:",
+                    "lengthMenu": "{{__('messages.Display')}} _MENU_ {{__('messages.records per page')}}",
+                    "zeroRecords": "{{__('messages.Nothing found - sorry')}}",
+                    "info": "{{__('messages.Showing page')}}  _PAGE_ {{__('messages.of')}} _PAGES_",
+                    "infoEmpty": "{{__('messages.No records available')}}",
+                    "infoFiltered": "({{__('messages.filtered from')}} _MAX_ {{__('messages.total records')}})",
+                    "search": "{{__('messages.Search')}}:",
                     "paginate": {
-                        "previous": "{{__('Previous')}}",
-                        "next": "{{__('Next')}}",
+                        "previous": "{{__('messages.Previous')}}",
+                        "next": "{{__('messages.Next')}}",
                     }
 
 

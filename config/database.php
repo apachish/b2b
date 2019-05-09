@@ -88,7 +88,7 @@ return [
             'driver'   => 'mongodb',
             'host'     => env('DB_HOST', 'localhost'),
             'port'     => env('DB_PORT_MONGO', 27017),
-            'database' => env('DB_DATABASE'),
+            'database' => env('DB_DATABASE_MONGO'),
             'username' => env('DB_USERNAME_MONGO'),
             'password' => env('DB_PASSWORD_MONGO'),
             'options'  => [

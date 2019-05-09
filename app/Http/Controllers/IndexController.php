@@ -4,10 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Banner;
 use Illuminate\Http\Request;
+use Spatie\TranslationLoader\LanguageLine;
 
 class IndexController extends Controller
 {
     public function index(){
+        $translate = LanguageLine::find(512);
+        if($translate == null) return abort(404);
+        $translate->update(['text'=>['en'=>'Join Free','fa'=>'ورود به سایت']]);
         $banner_right = Banner::where('banner_position','right')->where('status',1)->get();
         $banner_left  = Banner::where('banner_position','left')->where('status',1)->get();
         $banner_left_2   = Banner::where('banner_position','left')->where('status',1)->get();
@@ -30,5 +34,15 @@ class IndexController extends Controller
             'categories','companies','testimonials','articles',
             'products_featured1','products_featured2','products_featured3'));
 
+    }
+    public function reCaptcha(Request $request){
+        return response()->json([
+            'status' => 'success',
+            'meta' => [
+                'code' => 200,
+                'message' => '',
+            ],
+            'data' => ['captcha'=>captcha_src('flat')]
+        ], 200);
     }
 }

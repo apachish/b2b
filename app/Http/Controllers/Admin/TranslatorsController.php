@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Spatie\TranslationLoader\LanguageLine;
 
 class TranslatorsController extends Controller
 {
@@ -69,7 +70,9 @@ class TranslatorsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $translate = LanguageLine::find($id);
+        if($translate == null) return abort(404);
+        $translate->update($request->only('text'));
     }
 
     /**
@@ -81,5 +84,21 @@ class TranslatorsController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function move(){
+        $translates = \DB::connection('mongodb')->collection('Translate')->get();
+        foreach ($translates as $translate){
+            $title = data_get($translate,'title');
+            if($title){
+                LanguageLine::create([
+                    'group' => 'messages',
+                    'key' => $title,
+                    'text' => ['en' => $title, 'fa' => data_get($translate,'translate')],
+                ]);
+            }
+
+        }
+
+
     }
 }

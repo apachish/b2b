@@ -20,7 +20,6 @@ class ContactUsController extends Controller
     }
     public function postRequest(Request $request)
     {
-
         $validator = Validator()->make($request->all(), [
             'captcha_request' => 'required|captcha',
             'email' => 'required|email',
@@ -41,7 +40,7 @@ class ContactUsController extends Controller
         }
         $user = auth()->user();
         $member_id = $user ? $user->id : null;
-        $ip_info = Cache::get($request->ip());
+        $ip_info = \Cache::get($request->ip());
         $enquiry = Enquiry::create([
             'type'=>4,
             'member_id'=>$member_id,
@@ -50,15 +49,15 @@ class ContactUsController extends Controller
             'company_name'=>$request->company_name,
             'mobile'=>$request->mobile,
             'country_id'=>$request->country,
-            'state_id'=>data_get($ip_info,'state,id'),
-            'city_id'=>data_get($ip_info,'city,id'),
+            'state_id'=>data_get($ip_info,'state_id'),
+            'city_id'=>data_get($ip_info,'city_id'),
             'status'=>1,
-            'reply_status'=>"N",
+            'reply_status'=>0,
             'locale'=>app()->getLocale()
         ]);
         if($enquiry == null){
             return response()->json([
-                'status' => 'success',
+                'status' => 'failed',
                 'meta' => [
                     'code' => 200,
                     'message' => __('Can Not Send Request'),

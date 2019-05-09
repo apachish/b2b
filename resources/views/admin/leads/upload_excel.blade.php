@@ -10,9 +10,9 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <h3><span class="fa fa-download"></span>{{ __('Export Product')}}</h3>
-                    <p>{{ __("Add file")}}  <code><a href="/sample_user.xls"> {{ __("excel[sample]")}}</a></code>
-                        {{ __("to get  box")}}</p>
+                    <h3><span class="fa fa-download"></span>{{ __('messages.Export Product')}}</h3>
+                    <p>{{ __("messages.Add file")}}  <code><a href="/sample_user.xls"> {{ __("messages.excel[sample]")}}</a></code>
+                        {{ __("messages.to get  box")}}</p>
                     <form action="#" class="dropzone" id="myId"></form>
                 </div>
             </div>

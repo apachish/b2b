@@ -113,11 +113,11 @@
                 <div class="informer informer-info {{$Count_notification_product_enquiry?"blink":""}}">{{$Count_notification_product_enquiry}} </div>
                 <div class="panel panel-primary animated zoomIn xn-drop-left xn-panel-dragging">
                     <div class="panel-heading">
-                        <h3 class="panel-title"><span class="fa fa-comments"></span> {{__("Messages For Request Lead")}}
+                        <h3 class="panel-title"><span class="fa fa-comments"></span> {{__("messages.Messages For Request Lead")}}
                         </h3>
                         <div class="pull-right">
                         <span class="label label-danger {{$Count_notification_product_enquiry?"blink":""}} ">
-                            {{$Count_notification_product_enquiry}} {{__("new")}}
+                            {{$Count_notification_product_enquiry}} {{__("messages.new")}}
                         </span>
                         </div>
                     </div>
@@ -133,7 +133,7 @@
                         @endforeach
                     </div>
                     <div class="panel-footer text-center">
-                        <a href="{{url('admin/request')}}">{{__("Show all Request")}}</a>
+                        <a href="{{url('admin/request')}}">{{__("messages.Show all Request")}}</a>
                     </div>
                 </div>
             </li>
@@ -145,10 +145,10 @@
                 <div class="panel panel-primary animated zoomIn xn-drop-left xn-panel-dragging">
                     <div class="panel-heading">
                         <h3 class="panel-title"><span class="fa fa-comments"></span>
-                            {{__("Messages For Request Bug/Question")}}</h3>
+                            {{__("messages.Messages For Request Bug/Question")}}</h3>
                         <div class="pull-right">
                         <span class="label label-danger {{$Count_notification_enquiry?"blink":""}} ">
-                            {{$Count_notification_enquiry}}{{__("new")}}
+                            {{$Count_notification_enquiry}}{{__("messages.new")}}
                         </span>
                         </div>
                     </div>
@@ -167,7 +167,7 @@
                         @endforeach
                     </div>
                     <div class="panel-footer text-center">
-                        <a href="{{url("admin/enquiry")}}">{{__("Show all Request Bug and Question")}}</a>
+                        <a href="{{url("admin/enquiry")}}">{{__("messages.Show all Request Bug and Question")}}</a>
                     </div>
                 </div>
             </li>
@@ -179,10 +179,10 @@
                 <div class="panel panel-primary animated zoomIn xn-drop-left xn-panel-dragging">
                     <div class="panel-heading">
                         <h3 class="panel-title"><span
-                                    class="fa fa-comments"></span> {{__("Messages For Request Calls")}}</h3>
+                                    class="fa fa-comments"></span> {{__("messages.Messages For Request Calls")}}</h3>
                         <div class="pull-right">
                         <span class="label label-danger {{$Count_notification_requestCall?"blink":""}} ">
-                            {{$Count_notification_requestCall}} {{__("new")}}
+                            {{$Count_notification_requestCall}} {{__("messages.new")}}
                         </span>
                         </div>
                     </div>
@@ -202,7 +202,7 @@
                         @endforeach
                     </div>
                     <div class="panel-footer text-center">
-                        <a href="{{url("admin/enquiry-request_call")}}">{{__("Show all Request Calls")}}</a>
+                        <a href="{{url("admin/enquiry-request_call")}}">{{__("messages.Show all Request Calls")}}</a>
                     </div>
                 </div>
             </li>
@@ -217,10 +217,10 @@
                     <div class="panel-heading">
                         <div class="pull-right">
                         <span class="label label-warning">
-                            {{$Count_notification_product?"blink":""}} {{__("New")}}
+                            {{$Count_notification_product?"blink":""}} {{__("messages.New")}}
                         </span>
                         </div>
-                        <h3 class="panel-title"><span class="fa fa-tasks"></span>{{__("Leads") }}</h3>
+                        <h3 class="panel-title"><span class="fa fa-tasks"></span>{{__("messages.Leads") }}</h3>
 
                     </div>
                     <div class="panel-body list-group scroll" style="height: 200px;">
@@ -235,7 +235,7 @@
                         @endforeach
                     </div>
                     <div class="panel-footer text-center">
-                        <a href="{{url('admin/products')}}">{{__("Show all Lead")}}</a>
+                        <a href="{{url('admin/products')}}">{{__("messages.Show all Lead")}}</a>
                     </div>
                 </div>
             </li>
@@ -246,11 +246,11 @@
                 </div>
                 <div class="panel panel-primary animated zoomIn xn-drop-left xn-panel-dragging">
                     <div class="panel-heading">
-                        <h3 class="panel-title"><span class="fa fa-comments"></span> {{__("Messages for advertise")}}
+                        <h3 class="panel-title"><span class="fa fa-comments"></span> {{__("messages.Messages for advertise")}}
                         </h3>
                         <div class="pull-right">
                         <span class="label label-danger {{$Count_notification_banner?"blink":""}} ">
-                            {{$Count_notification_banner}} {{__("new")}}
+                            {{$Count_notification_banner}} {{__("messages.new")}}
                         </span>
                         </div>
                     </div>
@@ -269,7 +269,7 @@
                         @endforeach
                     </div>
                     <div class="panel-footer text-center">
-                        <a href="{{url('admin/advertise')}}">{{__("Show all Advertise")}}</a>
+                        <a href="{{url('admin/advertise')}}">{{__("messages.Show all Advertise")}}</a>
                     </div>
                 </div>
             </li>
@@ -280,11 +280,11 @@
                 </div>
                 <div class="panel panel-primary animated zoomIn xn-drop-left xn-panel-dragging">
                     <div class="panel-heading">
-                        <h3 class="panel-title"><span class="fa fa-comments"></span> {{__("Messages for new user")}}
+                        <h3 class="panel-title"><span class="fa fa-comments"></span> {{__("messages.Messages for new user")}}
                         </h3>
                         <div class="pull-right">
                         <span class="label label-danger {{$Count_notification_user?"blink":""}} ">
-                            {{$Count_notification_user}} {{__("new")}}
+                            {{$Count_notification_user}} {{__("messages.new")}}
                         </span>
                         </div>
                     </div>
@@ -303,7 +303,7 @@
                         @endforeach
                     </div>
                     <div class="panel-footer text-center">
-                        <a href="{{url('admin/members')}}">{{__("Show all Users")}}</a>
+                        <a href="{{url('admin/members')}}">{{__("messages.Show all Users")}}</a>
                     </div>
                 </div>
             </li>
@@ -311,11 +311,11 @@
             <li class="xn-icon-button pull-right">
                 @switch (app()->getLocale())
                     @case('en')
-                    <a href='#' id='fa_IR' class='changelocal' title='{{__("Farsi")}}'><img
+                    <a href='#' id='fa_IR' class='changelocal' title='{{__("messages.Farsi")}}'><img
                                 src='{{asset('/images/flag/fa.png')}}'></a>
                     @break
                     @case('fa')
-                    <a href='#' id='en_US' class='changelocal' title='{{__("English")}}'><img
+                    <a href='#' id='en_US' class='changelocal' title='{{__("messages.English")}}'><img
                                 src='{{asset('/images/flag/en.png')}}'></a>
                     @break
                 @endswitch
@@ -339,14 +339,14 @@
         <div class="mb-middle">
             <div class="mb-title"><span class="fa fa-sign-out"></span> Log <strong>Out</strong> ?</div>
             <div class="mb-content">
-                <p>{{__("Are you sure you want to log out?") }}</p>
-                <p>{{__("Press No if youwant to continue work. Press Yes to logout current user.")}}</p>
+                <p>{{__("messages.Are you sure you want to log out?") }}</p>
+                <p>{{__("messages.Press No if youwant to continue work. Press Yes to logout current user.")}}</p>
             </div>
             <div class="mb-footer">
                 <div class="pull-right">
                     <a href="{{route('logout')}}"
-                       class="btn btn-success btn-lg">{{__("Yes")}}</a>
-                    <button class="btn btn-default btn-lg mb-control-close">{{__("No")}}</button>
+                       class="btn btn-success btn-lg">{{__("messages.Yes")}}</a>
+                    <button class="btn btn-default btn-lg mb-control-close">{{__("messages.No")}}</button>
                 </div>
             </div>
         </div>

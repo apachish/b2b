@@ -29,8 +29,8 @@ class CreateCitiesTable extends Migration
                 ->on('states')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-            $table->string('latitude');
-            $table->string('longitude');
+            $table->string('latitude')->nullable();
+            $table->string('longitude')->nullable();
             $table->boolean('is_popular')->default(false);
             $table->boolean('status')->default(false);
             $table->text('description')->nullable();

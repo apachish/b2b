@@ -4,9 +4,9 @@
 
     <!-- START BREADCRUMB -->
     <ul class="breadcrumb push-down-0">
-        <li><a href="{{ url('admin') }}">{{ __("Home") }}</a></li>
+        <li><a href="{{ url('admin') }}">{{ __("messages.Home") }}</a></li>
         {{--    <li class="{{!$rout_category ? 'active' : '' }}"><a--}}
-        {{--                href="{{ url('admin/category') }}">{{ __("Category Management") }}</a></li>--}}
+        {{--                href="{{ url('admin/category') }}">{{ __("messages.Category Management") }}</a></li>--}}
         {{--    @foreach ($rout_category as $i => $rout)--}}
         {{--        {{$class = ""}}--}}
         {{--        @if ($i == (sizeof($rout_category) - 1))--}}
@@ -23,14 +23,14 @@
         <!-- START CONTENT FRAME TOP -->
         <div class="content-frame-top">
             <div class="page-title">
-                <h2><span class="fa fa-image"></span> {{ __("Category") }}</h2>
+                <h2><span class="fa fa-image"></span> {{ __("messages.Category") }}</h2>
             </div>
             <div class="pull-right">
                 <a href="{{ url('admin/category/bulkupload')}}" class="btn btn-primary"><span
-                            class="fa fa-upload"></span> {{ __("Upload") }}</a>
+                            class="fa fa-upload"></span> {{ __("messages.Upload") }}</a>
                 <a href="{{ url('admin/category/add')}}" class="btn btn-primary">
                     <span class="fa fa-plus-circle">
-                    </span>{{ __("Add Category") }}
+                    </span>{{ __("messages.Add Category") }}
                 </a>
                 <button class="btn btn-default content-frame-right-toggle"><span class="fa fa-bars"></span></button>
             </div>
@@ -42,32 +42,32 @@
                 <form action="{{url()->current()}}" method="post">
 
                     <select name="search[order]" class="form-control ">
-                        <option value="">{{ __("Ordering") }}</option>
-                        <option {{$search['order']=="categoryName"?"selected":""}} value="categoryName">{{ __("CategoryName") }}</option>
-                        <option {{$search['order']=="categoryNameFa"?"selected":""}} value="categoryNameFa">{{ __("Category Name Farsi") }}</option>
-                        <option {{$search['order']=="dateAdded"?"selected":""}} value="dateAdded">{{ __("Date Add Category") }}</option>
-                        <option {{$search['order']=="dateModified"?"selected":""}} value="dateModified">{{ __("Date update Category") }}</option>
+                        <option value="">{{ __("messages.Ordering") }}</option>
+                        <option {{$search['order']=="categoryName"?"selected":""}} value="categoryName">{{ __("messages.CategoryName") }}</option>
+                        <option {{$search['order']=="categoryNameFa"?"selected":""}} value="categoryNameFa">{{ __("messages.Category Name Farsi") }}</option>
+                        <option {{$search['order']=="dateAdded"?"selected":""}} value="dateAdded">{{ __("messages.Date Add Category") }}</option>
+                        <option {{$search['order']=="dateModified"?"selected":""}} value="dateModified">{{ __("messages.Date update Category") }}</option>
                     </select>
                     <select name="search[by]" class="form-control ">
-                        <option {{$search['by']=="ASC"?"selected":""}} value="ASC">{{ __("Ascending") }}</option>
-                        <option {{$search['by']=="DESC"?"selected":""}} value="DESC">{{ __("Descending") }}</option>
+                        <option {{$search['by']=="ASC"?"selected":""}} value="ASC">{{ __("messages.Ascending") }}</option>
+                        <option {{$search['by']=="DESC"?"selected":""}} value="DESC">{{ __("messages.Descending") }}</option>
 
                     </select>
                     <input type="hidden" value="{{$search['status']}}" name="search[status]">
                     <input type="hidden" value="{{$search['text']}}" name="search[text]">
                     <div class="input-group-btn">
-                        <button type="submit" class="btn btn-primary">{{ __("Ordering") }}</button>
+                        <button type="submit" class="btn btn-primary">{{ __("messages.Ordering") }}</button>
                     </div>
                 </form>
             </div>
 
             <div class="list-group border-bottom push-down-20">
-                <a href="#" class="list-group-item active">{{ __("List Category") }} <span
+                <a href="#" class="list-group-item active">{{ __("messages.List Category") }} <span
                             class="badge badge-primary">
                     @if($params['parent'] && $params['sub_cat'])
-                            {{ __("Leads") }} {{ $count_products }}
+                            {{ __("messages.Leads") }} {{ $count_products }}
                         @else
-                            {{ __("Subcategory") }}{{ $count }}
+                            {{ __("messages.Subcategory") }}{{ $count }}
                         @endif
                 </span></a>
                 @foreach ($categories as $key => $category)
@@ -98,10 +98,10 @@
 
                     <form action="" class="form-horizontal" method="post">
                         <div class="col-md-8">
-                            <p>{{ __("Use search to find Category. You can search by: CategoryName.") }}</p></div>
+                            <p>{{ __("messages.Use search to find Category. You can search by: CategoryName.") }}</p></div>
                         <div class="col-md-4" align="right">
                             <button type="submit" name="clear" value="true"
-                                    class="btn btn-primary">{{ __("Clear Filter") }}</button>
+                                    class="btn btn-primary">{{ __("messages.Clear Filter") }}</button>
                         </div>
                         <div class="form-group">
                             <div class="col-md-6">
@@ -111,17 +111,17 @@
                                     </div>
                                     <input name="search[text]" type="text" class="form-control"
                                            value="{{$search['text']}}"
-                                           placeholder="{{ __("what is it looking for?") }}"/>
+                                           placeholder="{{ __("messages.what is it looking for?") }}"/>
                                     <div class="input-group-btn">
-                                        <button type="submit" class="btn btn-primary">{{ __("Search") }}</button>
+                                        <button type="submit" class="btn btn-primary">{{ __("messages.Search") }}</button>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <select name="search[status]" class="form-control " onchange="this.form.submit()">
-                                    <option value="">{{ __("status") }}</option>
-                                    <option {{$search['status']=="1"?"selected":""}} value="1">{{ __("Active") }}</option>
-                                    <option {{$search['status']=="0"?"selected":""}} value="0">{{ __("in-active") }}</option>
+                                    <option value="">{{ __("messages.status") }}</option>
+                                    <option {{$search['status']=="1"?"selected":""}} value="1">{{ __("messages.Active") }}</option>
+                                    <option {{$search['status']=="0"?"selected":""}} value="0">{{ __("messages.in-active") }}</option>
                                 </select>
 
                                 <input type="hidden" name="search[order]" value="{{$search['order']}}">
@@ -130,17 +130,17 @@
 
                             <div class="col-md-2">
                                 <select name="search[feature]" class="form-control " onchange="this.form.submit()">
-                                    <option value="">{{ __("Featured") }}</option>
-                                    <option {{$search['feature']=="1"?"selected":""}} value="1">{{ __("YES") }}</option>
-                                    <option {{$search['feature']=="0"?"selected":""}} value="0">{{ __("NO") }}</option>
+                                    <option value="">{{ __("messages.Featured") }}</option>
+                                    <option {{$search['feature']=="1"?"selected":""}} value="1">{{ __("messages.YES") }}</option>
+                                    <option {{$search['feature']=="0"?"selected":""}} value="0">{{ __("messages.NO") }}</option>
                                 </select>
                             </div>
                             <div class="col-md-2">
                                 <select name="search[location_search]" class="form-control "
                                         onchange="this.form.submit()">
-                                    <option value="">{{ __("Location Search") }}</option>
-                                    <option {{!empty($search['location_search'])?"selected":""}} value=true>{{ __("In This page") }}</option>
-                                    <option {{empty($search['location_search'])?"selected":""}} value=false>{{ __("All Category") }}</option>
+                                    <option value="">{{ __("messages.Location Search") }}</option>
+                                    <option {{!empty($search['location_search'])?"selected":""}} value=true>{{ __("messages.In This page") }}</option>
+                                    <option {{empty($search['location_search'])?"selected":""}} value=false>{{ __("messages.All Category") }}</option>
                                 </select>
                             </div>
                         </div>
@@ -149,7 +149,7 @@
             </div>
 
             <div class="pull-left push-up-10">
-                <button class="btn btn-primary" id="gallery-toggle-items">{{ __("Toggle All") }}</button>
+                <button class="btn btn-primary" id="gallery-toggle-items">{{ __("messages.Toggle All") }}</button>
             </div>
             <form action="{{ url("admin/category/action") }}" id="jvalidate" class="form-horizontal" method="post">
 
@@ -157,15 +157,15 @@
                     <div class="btn-group">
 
                         <button class="btn btn-primary submit" value="delete" name="action" type="submit"><span
-                                    class="fa fa-trash-o"></span>{{ __("Delete") }}</button>
+                                    class="fa fa-trash-o"></span>{{ __("messages.Delete") }}</button>
                         <button class="btn btn-primary submit" value="deactivate" name="action" type="submit"><span
-                                    class="fa fa-circle-thin"></span>{{ __("Deactivate") }}</button>
+                                    class="fa fa-circle-thin"></span>{{ __("messages.Deactivate") }}</button>
                         <button class="btn btn-primary submit" value="activate" name="action" type="submit"><span
-                                    class="fa fa-circle"></span>{{ __("activate") }}</button>
+                                    class="fa fa-circle"></span>{{ __("messages.activate") }}</button>
                         <button class="btn btn-primary submit" value="featured" name="action" type="submit"><span
-                                    class="fa fa-circle"></span>{{ __("Featured") }}</button>
+                                    class="fa fa-circle"></span>{{ __("messages.Featured") }}</button>
                         <button class="btn btn-primary submit" value="not_featured" name="action" type="submit"><span
-                                    class="fa fa-circle"></span>{{ __("No Featured") }}</button>
+                                    class="fa fa-circle"></span>{{ __("messages.No Featured") }}</button>
                     </div>
                 </div>
 
@@ -203,13 +203,13 @@
                                 @if ($params['depth']==1)
                                         <a href="{{$category->url_product}}"
                                                    title="{{ $category['categoryName'] }}">
-                                                    {{ __("Leads") }}
+                                                    {{ __("messages.Leads") }}
                                                     [{{ $category->noProduct }}]</a>
                                     @else
 
                                         <a href="{{$category->url}}"
                                            title="{{ $category['categoryName'] }}">
-                                                        {{ __("Subcategory") }}
+                                                        {{ __("messages.Subcategory") }}
                                             [{{ $category->noSubCategory }}]</a>
                                     @endif
 

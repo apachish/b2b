@@ -6,8 +6,8 @@
 
 
     <ul class="breadcrumb">
-        <li><a href="{{route('admin')}}">{{__("Home")}}</a></li>
-        <li class="active"><a href="#">{{ __("Manage Menu")  }}</a></li>
+        <li><a href="{{route('admin')}}">{{__("messages.Home")}}</a></li>
+        <li class="active"><a href="#">{{ __("messages.Manage Menu")  }}</a></li>
     </ul>
 
 
@@ -15,7 +15,7 @@
 
     <!-- PAGE TITLE -->
     <div class="page-title">
-        <h2><span class="fa fa-arrow-circle-o-left"></span>{{ __("Menus") }}</h2>
+        <h2><span class="fa fa-arrow-circle-o-left"></span>{{ __("messages.Menus") }}</h2>
     </div>
     <!-- END PAGE TITLE -->
 
@@ -37,63 +37,63 @@
                                 <div class="col-md-1" style="text-align: right">
                                 </div>
                                 <div class="col-md-2">
-                                    <label>{{__("language")}}:</label>
+                                    <label>{{__("messages.language")}}:</label>
 
                                     <select name="language" class="form-control select" data-live-search="true"
                                             onchange="this.form.submit()">
                                         <option
-                                            {{ empty($filter['language']) ? "selected" : "" }} value="">{{ __("Select language") }}</option>
+                                            {{ empty($filter['language']) ? "selected" : "" }} value="">{{ __("messages.Select language") }}</option>
                                         <option
-                                            {{$filter['language'] == "fa_IR" ? "selected" : "" }} value="fa_IR">{{ __("fa_IR") }}</option>
+                                            {{$filter['language'] == "fa_IR" ? "selected" : "" }} value="fa_IR">{{ __("messages.fa_IR") }}</option>
                                         <option
-                                            {{$filter['language'] === "en_US" ? "selected" : "" }} value="en_US">{{ __("en_US") }}</option>
+                                            {{$filter['language'] === "en_US" ? "selected" : "" }} value="en_US">{{ __("messages.en_US") }}</option>
                                     </select>
                                 </div>
                                 <div class="col-md-2">
-                                    <label>{{__("Category")}}:</label>
+                                    <label>{{__("messages.Category")}}:</label>
 
                                     <select class="form-control select" data-live-search="true" name="category"
                                             onchange="this.form.submit()">
-                                        <option value="">{{ __("Category") }}</option>
+                                        <option value="">{{ __("messages.Category") }}</option>
                                         @foreach ($categories as $category)
                                             <option {{$filter['category'] == $category->id?"selected":""}}  value='{{$category->id }}' >{{ $category->title . "-" . $category->position }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="col-md-2">
-                                    <label>{{__("Type Menu")}}:</label>
+                                    <label>{{__("messages.Type Menu")}}:</label>
 
                                     <select class="form-control select" data-live-search="true" name="type"
                                             onchange="this.form.submit()">
-                                        <option value="">{{ __("Type Menu") }}</option>
+                                        <option value="">{{ __("messages.Type Menu") }}</option>
                                         <option
-                                            {{$filter['type'] == 'main_page' ? 'selected' : ''}} value="main_page">{{__("Main Page")}}</option>
+                                            {{$filter['type'] == 'main_page' ? 'selected' : ''}} value="main_page">{{__("messages.Main Page")}}</option>
                                         <option
-                                            {{$filter['type'] == 'category' ? 'selected' : ''}} value="category">{{__("Category")}}</option>
+                                            {{$filter['type'] == 'category' ? 'selected' : ''}} value="category">{{__("messages.Category")}}</option>
                                         <option
-                                            {{$filter['type'] == 'product' ? 'selected' : ''}} value="product">{{__("Product")}}</option>
+                                            {{$filter['type'] == 'product' ? 'selected' : ''}} value="product">{{__("messages.Product")}}</option>
                                         <option
-                                            {{$filter['type'] == 'article' ? 'selected' : ''}} value="article">{{__("Article")}}</option>
+                                            {{$filter['type'] == 'article' ? 'selected' : ''}} value="article">{{__("messages.Article")}}</option>
                                         <option
-                                            {{$filter['type'] == 'page' ? 'selected' : ''}} value="page">{{__("Page")}}</option>
+                                            {{$filter['type'] == 'page' ? 'selected' : ''}} value="page">{{__("messages.Page")}}</option>
                                         <option
-                                            {{$filter['type'] == 'url' ? 'selected' : ''}} value="url">{{__("Url")}}</option>
+                                            {{$filter['type'] == 'url' ? 'selected' : ''}} value="url">{{__("messages.Url")}}</option>
                                         <option
-                                            {{$filter['type'] == 'sitemap' ? 'selected' : ''}} value="sitemap">{{__("SiteMap")}}</option>
+                                            {{$filter['type'] == 'sitemap' ? 'selected' : ''}} value="sitemap">{{__("messages.SiteMap")}}</option>
                                         <option
-                                            {{$filter['type'] == 'member' ? 'selected' : ''}}  value="member">{{__("Member")}}</option>
+                                            {{$filter['type'] == 'member' ? 'selected' : ''}}  value="member">{{__("messages.Member")}}</option>
                                         <option
-                                            {{$filter['type'] == 'testimonials' ? 'selected' : ''}} value="testimonials">{{__("Testimonials")}}</option>
+                                            {{$filter['type'] == 'testimonials' ? 'selected' : ''}} value="testimonials">{{__("messages.Testimonials")}}</option>
                                         <option
-                                            {{$filter['type'] == 'help' ? 'selected' : ''}} value="help">{{__("Help Center")}}</option>
+                                            {{$filter['type'] == 'help' ? 'selected' : ''}} value="help">{{__("messages.Help Center")}}</option>
                                         <option
-                                            {{$filter['type'] == 'newsletter' ? 'selected' : ''}} value="newsletter">{{__("Newsletter")}}</option>
+                                            {{$filter['type'] == 'newsletter' ? 'selected' : ''}} value="newsletter">{{__("messages.Newsletter")}}</option>
                                         <option
-                                            {{$filter['type'] == 'advertisement' ? 'selected' : ''}} value="advertisement">{{__("Advertisement")}}</option>
+                                            {{$filter['type'] == 'advertisement' ? 'selected' : ''}} value="advertisement">{{__("messages.Advertisement")}}</option>
                                         <option
-                                            {{$filter['type'] == 'contact_us' ? 'selected' : ''}} value="contact_us">{{__("Contact Us")}}</option>
+                                            {{$filter['type'] == 'contact_us' ? 'selected' : ''}} value="contact_us">{{__("messages.Contact Us")}}</option>
                                         <option
-                                            {{$filter['type'] == 'company' ? 'selected' : ''}} value="company">{{__("Company")}}</option>
+                                            {{$filter['type'] == 'company' ? 'selected' : ''}} value="company">{{__("messages.Company")}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -108,14 +108,14 @@
                                 <table id="customers2" class="table ">
                                     <thead>
                                     <tr>
-                                        <th>{{ __("Title") }}</th>
-                                        <th>{{ __("Type") }}</th>
-                                        <th>{{ __("Category") }}</th>
-                                        <th>{{ __("created") }}</th>
-                                        <th>{{ __("modified") }}</th>
-                                        <th>{{ __("status") }}</th>
-                                        <th>{{ __("language") }}</th>
-                                        <th>{{ __("Action") }}</th>
+                                        <th>{{ __("messages.Title") }}</th>
+                                        <th>{{ __("messages.Type") }}</th>
+                                        <th>{{ __("messages.Category") }}</th>
+                                        <th>{{ __("messages.created") }}</th>
+                                        <th>{{ __("messages.modified") }}</th>
+                                        <th>{{ __("messages.status") }}</th>
+                                        <th>{{ __("messages.language") }}</th>
+                                        <th>{{ __("messages.Action") }}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -138,7 +138,7 @@
                                             {{app()->getLocale()=='fa'?jdate(strtotime($category->updated_at)):$category->updated_at }}
                                         </td>
                                         <td>
-                                            {{$category->status?__('active'):__('unactivated') }}
+                                            {{$category->status?__('messages.active'):__('messages.unactivated') }}
                                         </td>
                                         <td>
                                             {{ $menu->locale}}
@@ -170,18 +170,18 @@
         <div class="message-box animated fadeIn" data-sound="alert" id="mb-remove-row">
             <div class="mb-container">
                 <div class="mb-middle">
-                    <div class="mb-title"><span class="fa fa-times"></span> {{ __("Remove")}}
-                        <strong>{{ __("Data")}}</strong> ?
+                    <div class="mb-title"><span class="fa fa-times"></span> {{ __("messages.Remove")}}
+                        <strong>{{ __("messages.Data")}}</strong> ?
                     </div>
                     <div class="mb-content">
-                        <p>{{ __("Are you sure you want to remove this row?")}}</p>
-                        <p>{{ __("Press Yes if you sure.")}}</p>
+                        <p>{{ __("messages.Are you sure you want to remove this row?")}}</p>
+                        <p>{{ __("messages.Press Yes if you sure.")}}</p>
                         <input type="hidden" value="" id="Delete_id">
                     </div>
                     <div class="mb-footer">
                         <div class="pull-right">
-                            <button class="btn btn-success btn-lg mb-control-yes">{{ __("Yes")}}</button>
-                            <button class="btn btn-default btn-lg mb-control-close">{{ __("No")}}</button>
+                            <button class="btn btn-success btn-lg mb-control-yes">{{ __("messages.Yes")}}</button>
+                            <button class="btn btn-default btn-lg mb-control-close">{{ __("messages.No")}}</button>
                         </div>
                     </div>
                 </div>
@@ -260,15 +260,15 @@
                 })
                 var table = $('#customers2').DataTable({
                     "language": {
-                        "lengthMenu": "{{__('Display')}} _MENU_ {{__('records per page')}}",
-                        "zeroRecords": "{{__('Nothing found - sorry')}}",
-                        "info": "{{__('Showing page')}}  _PAGE_ {{__('of')}} _PAGES_",
-                        "infoEmpty": "{{__('No records available')}}",
-                        "infoFiltered": "({{__('filtered from')}} _MAX_ {{__('total records')}})",
-                        "search": "{{__('Search')}}:",
+                        "lengthMenu": "{{__('messages.Display')}} _MENU_ {{__('messages.records per page')}}",
+                        "zeroRecords": "{{__('messages.Nothing found - sorry')}}",
+                        "info": "{{__('messages.Showing page')}}  _PAGE_ {{__('messages.of')}} _PAGES_",
+                        "infoEmpty": "{{__('messages.No records available')}}",
+                        "infoFiltered": "({{__('messages.filtered from')}} _MAX_ {{__('messages.total records')}})",
+                        "search": "{{__('messages.Search')}}:",
                         "paginate": {
-                            "previous": "{{__('Previous')}}",
-                            "next": "{{__('Next')}}",
+                            "previous": "{{__('messages.Previous')}}",
+                            "next": "{{__('messages.Next')}}",
                         }
 
 

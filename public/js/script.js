@@ -31,8 +31,8 @@ $(document).ready(function () {
     var myVar = setInterval(myTimer,  20 * 60 * 1000);
 
     function myTimer() {
-        $.post('/api/user/check-login', function(data, status){
-            if(!data.login){
+        $.post('/users/checkLogin', function(data, status){
+            if(!data.data.login){
                 if ($('#cboxOverlay').css('display')=='block'){
                     console.log('omadam1');
                 }else if ($(".sing_up").length){
@@ -62,61 +62,77 @@ $(document).ready(function () {
     $('.btn-letter').click(function(e){
         ButtonValue = $(this).val();
     });
+    $('.reCaptcha').on('click',function () {
+        $.get('/reCaptcha',function (response) {
+            $('.reCaptcha-img').attr('src',response.data.captcha);
+        });
+    })
     $("#submit_popup_form").click(function () {
         $("#popup_form").submit();
     })
     $("#popup_form").submit(function (e) {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
         var formObj = $(this);
         var formURL = formObj.attr("action");
-        var formData = new FormData(this);
         var email = $('#email_enquery').val();
         if (email == '' || email == 'Enter Your Email ID') {
-            toastr.error( i18n.localize('Enter Email'));
+            toastr.error( 'Enter Email');
             return false;
         }
         if ((email.length) > 80) {
-            toastr.error( i18n.localize('Email can not be greater than 80 characters'));
+            toastr.error('Email can not be greater than 80 characters');
             return false;
         }
         if (!isEmailAddr(email)) {
-            toastr.error( i18n.localize('Please Enter Valid  Email'));
+            toastr.error('Please Enter Valid  Email');
             $('#email_enquery').focus();
             return false;
 
         }
         $.ajax({
-            url: formURL,
-            type: 'POST',
-            data: formData,
-            mimeType: "multipart/form-data",
-            contentType: false,
-            cache: false,
-            processData: false,
-            success: function (data, textStatus, jqXHR) {
-                data = JSON.parse(data);
-                document.getElementById('captchaimage_request').src = 'captcha/normal/' + Math.random() + '/ffffff/36b3d1/request';
-                document.getElementById('verification_code_request').value = '';
-                document.getElementById('verification_code_request').focus();
-                if(data.status == 200){
-                    toastr.success(data.message);
+            type: "POST",
+            url: formURL ,
+            dataType: "json",
+            data: $('#popup_form').serialize(),
 
-                }else {
-                    console.log(data.error);
-                    var message =data.error;
-                    if(message && (typeof message === 'object' || typeof message === 'Array') ){
-                        $.each(message, function( index, value ) {
-                            $.each(value, function( key, item ) {
-                                toastr.error( i18n.localize(index) + ": " + item );
+            success: function(response) {
+
+
+                if (response.status == 'failed' ) {
+                    var message = response.meta.message;
+                    if(message && (typeof message === 'object' || typeof message === 'Array') ) {
+
+                        $.each(message, function (index, value) {
+                            $.each(value, function (key, item) {
+                                toastr.error(item);
 
                             });
 
                         });
-                    }else{
+                    } else {
                         toastr.error(message);
                     }
                 }
+                if (response.status=='success') {
+
+                    toastr.success(response.meta.message);
+
+                }
+                $('.reCaptcha-img').attr('src',response.data.captcha);
+
+                document.getElementById('verification_code_newsletter').value='';
+                document.getElementById('verification_code_newsletter').focus();
+                return true;
             },
-            error: function (jqXHR, textStatus, errorThrown) {
+            error: function(response) {
+                $('.reCaptcha-img').attr('src',response.data.captcha);
+                document.getElementById('verification_code_newsletter').value='';
+                document.getElementById('verification_code_newsletter').focus();
+                return true;
             }
         });
         e.preventDefault(); //Prevent Default action.
@@ -183,18 +199,19 @@ $(document).ready(function () {
                         toastr.error(message);
                     }
                 }
-                if (response.status == 200) {
+                if (response.status=='success') {
 
                     toastr.success(response.meta.message);
 
                 }
-                document.getElementById('captchaimage').src=response.data.captcha;
+                $('.reCaptcha-img').attr('src',response.data.captcha);
+
                 document.getElementById('verification_code_newsletter').value='';
                 document.getElementById('verification_code_newsletter').focus();
                 return true;
             },
             error: function(response) {
-                document.getElementById('captchaimage').src=response.data.captcha;
+                $('.reCaptcha-img').attr('src',response.data.captcha);
                 document.getElementById('verification_code_newsletter').value='';
                 document.getElementById('verification_code_newsletter').focus();
                 return true;

@@ -11,9 +11,9 @@
                             @csrf
 
 
-                            <h3>{{__('Login')}}</h3>
+                            <h3>{{__('messages.Login')}}</h3>
                             <p>
-                                <input placeholder="{{__('Email ID')}} *" id="identity" type="email"
+                                <input placeholder="{{__('messages.Email ID')}} *" id="identity" type="email"
                                        class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email"
                                        value="{{ old('email') }}" required autofocus>
 
@@ -24,7 +24,7 @@
                                 @endif
                             </p>
                             <p>
-                                <input placeholder="{{__('Password')}} *" id="credential" type="password"
+                                <input placeholder="{{__('messages.Password')}} *" id="credential" type="password"
                                        class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
                                        name="password" required>
 
@@ -42,16 +42,16 @@
                                     <input class="form-check-input" type="checkbox" name="remember"
                                            id="remember" {{ old('remember') ? 'checked' : '' }}>
 
-                                        {{ __('Remember Me') }}</label>
+                                        {{ __('messages.Remember Me') }}</label>
                                 <input type="hidden" name="locale" value="{{app()->getLocale()}}">
                             </p>
                             <p class="btnlogin1">
-                                <input name="submit" type="submit" value="{{__('Login')}}"
+                                <input name="submit" type="submit" value="{{__('messages.Login')}}"
                                        class="btn btn-dark mybtn trans_eff">
                             </p>
                             @if (Route::has('password.request'))
                                 <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    {{ __('Forgot Your Password?') }}
+                                    {{ __('messages.Forgot Your Password?') }}
                                 </a>
                         @endif
                         <!--                <p class="forget"><a href="-->

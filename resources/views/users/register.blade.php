@@ -35,24 +35,24 @@
 {{--        @else:--}}
 {{--            <p class="mt8 red">' . $error . '</p>--}}
 {{--        @endif;--}}
-        <p class="textemail"><i class="icon-email"></i>{{__("Enter your Email")}}</p>
+        <p class="textemail"><i class="icon-email"></i>{{__("messages.Enter your Email")}}</p>
         <p class="mt8">
             <span class="box">
                     <input id="country_selector" class="datatext p8 w40 radius-3 vam" type="text">
                     <label for="country_selector"
-                           style="display:none;">{{__("Select a country here...")}}</label>
-                    <input type="text" name="identity" placeholder="{{__("Email")}}"
+                           style="display:none;">{{__("messages.Select a country here...")}}</label>
+                    <input type="text" name="identity" placeholder="{{__("messages.Email")}}"
                            class="contentselect p8 w40 radius-3 vam"
                            id="contentselect">
             </span>
-        <p class="textsafe"><i class="icon-check-circle">{{__("Your email is safe with us")}}</i></p>
+        <p class="textsafe"><i class="icon-check-circle">{{__("messages.Your email is safe with us")}}</i></p>
         <img src="/images/loading.gif" id="loding_email"  style="width: 30px;height: 30px;display: none"/>
 
-        <input name="input" type="submit" id="submit" value="{{__("Sign In")}}">
+        <input name="input" type="submit" id="submit" value="{{__("messages.Sign In")}}">
         <i class="icon-android-send"></i>
         <a style="display: none" href=""
            class="group2 sing_up_form" title="">
-            {{__("Join Free")}}
+            {{__("messages.Join Free")}}
         </a>
         </p>
     </form>
@@ -77,7 +77,7 @@
         $("#email_form").submit(function (e) {
 
             if (!validateEmail($('#contentselect').val())) {
-                toastr.error('{{__('email  valid between 4 to 100 character')}}');
+                toastr.error('{{__('messages.email  valid between 4 to 100 character')}}');
                 return false;
             }
             $(':input[type="submit"]').prop('disabled', true);
@@ -150,7 +150,7 @@
                     }else if(typeof data.error === 'string') {
                         toastr.error(data.error);
                     }else{
-                        toastr.error('{{__('can not register')}}');
+                        toastr.error('{{__('messages.can not register')}}');
                     }
 
                 }

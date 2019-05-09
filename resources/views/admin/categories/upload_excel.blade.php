@@ -6,9 +6,9 @@
 
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <h3><span class="fa fa-download"></span>{{ __('Export Category')}}</h3>
-                    <p> {{ __("Add file")}}  <code><a href="/sample.xls">  {{ __("excel[sample]")}}</a></code>
-                         {{ __("to get  box")}}</p>
+                    <h3><span class="fa fa-download"></span>{{ __('messages.Export Category')}}</h3>
+                    <p> {{ __("messages.Add file")}}  <code><a href="/sample.xls">  {{ __("messages.excel[sample]")}}</a></code>
+                         {{ __("messages.to get  box")}}</p>
                     <form action="{{route('categories.import')}}" class="dropzone" id="myId">
                         @csrf
 

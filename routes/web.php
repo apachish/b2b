@@ -17,6 +17,8 @@ Auth::routes();
 Route::get('/move', 'Admin\CategoriesController@move');
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('reCaptcha', 'IndexController@reCaptcha')->name('reCaptcha');
+
 Route::get('/member/post-lead', 'HomeController@index')->name('members.post_lead');
 Route::get('members/myaccount', 'HomeController@index')->name('members.myaccount');
 Route::get('members/login', 'HomeController@index')->name('members.login');
@@ -45,12 +47,14 @@ Route::get('testimonials', 'HomeController@index')->name('testimonials');
 Route::post('newsLetter', 'NewsLettersController@send')->name('newsLetter');
 Route::post('post_request', 'ContactUsController@postRequest')->name('post_request');
 Route::get('captcha', 'HomeController@index')->name('captcha');
+Route::post('search', 'SearchController@index')->name('search');
 
 Route::get('users/singIn', 'UserController@login')->name('singIn');
 Route::post('users/email', 'UserController@email')->name('email');
 Route::get('users/singUp', 'UserController@register')->name('singUp');
 Route::post('users/store', 'UserController@store')->name('userStore');
 Route::get('users/getInfo', 'UserController@getInfo')->name('getInfo');
+Route::get('users/checkLogin', 'UserController@checkLogin')->name('checkLogin');
 Route::get('admin','Admin\IndexController@showLoginForm');
 Route::middleware('auth')
     ->prefix('admin')
@@ -107,3 +111,4 @@ Route::middleware('auth')
     Route::resource('search','SearchController');
 
 });
+Route::get('translators/move','Admin\TranslatorsController@move');

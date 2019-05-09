@@ -7,9 +7,9 @@
 
 
     <ul class="breadcrumb">
-        <li><a href="{{route('admin')}}">{{__("Home")}}</a></li>
-        <li><a href="{{route('menus.index')}}">{{ __("Manage Menu")  }}</a></li>
-        <li class="active"><a href="#">{{ __("Add") }}</a></li>
+        <li><a href="{{route('admin')}}">{{__("messages.Home")}}</a></li>
+        <li><a href="{{route('menus.index')}}">{{ __("messages.Manage Menu")  }}</a></li>
+        <li class="active"><a href="#">{{ __("messages.Add") }}</a></li>
     </ul>
     <!-- END BREADCRUMB -->
 
@@ -24,14 +24,14 @@
                       enctype="multipart/form-data">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h3 class="panel-title"><strong>{{__("Add")}}</strong> {{__("Menu")}}</h3>
+                            <h3 class="panel-title"><strong>{{__("messages.Add")}}</strong> {{__("messages.Menu")}}</h3>
                             <ul class="panel-controls">
                                 <li><a href="#" class="panel-remove"><span class="fa fa-times"></span></a></li>
                             </ul>
                         </div>
                         <div class="panel-body">
                             <p>
-                                {{ __("Enter text to display on the screen here") }}                        </p>
+                                {{ __("messages.Enter text to display on the screen here") }}                        </p>
                         </div>
                         <div class="panel-body">
 
@@ -40,44 +40,44 @@
                                 <div class="col-md-12">
 
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">{{__("Title Menu")}}</label>
+                                        <label class="col-md-3 control-label">{{__("messages.Title Menu")}}</label>
                                         <div class="col-md-9">
                                             <div class="input-group input-group-lg">
                                                 <span class="input-group-addon"><span
                                                             class="fa fa-pencil"></span></span>
                                                 <input type="text" name="title" id="title" class=" form-control"/>
                                             </div>
-                                            <span class="help-block">{{__("Except character:space-#-@-$ min value = 3")}}</span>
+                                            <span class="help-block">{{__("messages.Except character:space-#-@-$ min value = 3")}}</span>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">{{__("Type Menu")}}</label>
+                                        <label class="col-md-3 control-label">{{__("messages.Type Menu")}}</label>
                                         <div class="col-md-9">
                                             <select class="form-control " id="change_type" name="type">
-                                                <option value="main_page">{{__("Main Page")}}</option>
-                                                <option value="category">{{__("Category")}}</option>
-                                                <option value="product">{{__("Product")}}</option>
-                                                <option value="article">{{__("Article")}}</option>
-                                                <option value="page">{{__("Page")}}</option>
-                                                <option value="url">{{__("Url")}}</option>
-                                                <option value="sitemap">{{__("SiteMap")}}</option>
-                                                <option value="member">{{__("Member")}}</option>
-                                                <option value="testimonials">{{__("Testimonials")}}</option>
-                                                <option value="help">{{__("Help Center")}}</option>
-                                                <option value="newsletter">{{__("Newsletter")}}</option>
-                                                <option value="advertisement">{{__("Advertisement")}}</option>
-                                                <option value="contact_us">{{__("Contact Us")}}</option>
-                                                <option value="company">{{__("Company")}}</option>
+                                                <option value="main_page">{{__("messages.Main Page")}}</option>
+                                                <option value="category">{{__("messages.Category")}}</option>
+                                                <option value="product">{{__("messages.Product")}}</option>
+                                                <option value="article">{{__("messages.Article")}}</option>
+                                                <option value="page">{{__("messages.Page")}}</option>
+                                                <option value="url">{{__("messages.Url")}}</option>
+                                                <option value="sitemap">{{__("messages.SiteMap")}}</option>
+                                                <option value="member">{{__("messages.Member")}}</option>
+                                                <option value="testimonials">{{__("messages.Testimonials")}}</option>
+                                                <option value="help">{{__("messages.Help Center")}}</option>
+                                                <option value="newsletter">{{__("messages.Newsletter")}}</option>
+                                                <option value="advertisement">{{__("messages.Advertisement")}}</option>
+                                                <option value="contact_us">{{__("messages.Contact Us")}}</option>
+                                                <option value="company">{{__("messages.Company")}}</option>
 
                                             </select>
                                             <span class="help-block"></span>
                                         </div>
                                     </div>
                                     <div class="form-group" id="parent">
-                                        <label class="col-md-3 control-label">{{__("Select Category Menu ")}}</label>
+                                        <label class="col-md-3 control-label">{{__("messages.Select Category Menu ")}}</label>
                                         <div class="col-md-9">
                                             <select class="form-control" id="parent" name="category">
-                                                <option value="">{{__("Select Category Menu")}}</option>
+                                                <option value="">{{__("messages.Select Category Menu")}}</option>
 
                                                 @foreach ($category_menus as $category_menu)
                                                     <option value="{{$category_menu['id']}}">{{$category_menu['title']}}</option>
@@ -87,10 +87,10 @@
                                         </div>
                                     </div>
                                     <div class="form-group" id="parent">
-                                        <label class="col-md-3 control-label">{{__("Select Parent")}}</label>
+                                        <label class="col-md-3 control-label">{{__("messages.Select Parent")}}</label>
                                         <div class="col-md-9">
                                             <select class="form-control" id="parent" name="parent">
-                                                <option value="">{{__("Select Parent")}}</option>
+                                                <option value="">{{__("messages.Select Parent")}}</option>
 
                                                 @foreach ($menus as $menu)
                                                     <option value="{{$menu['id']}}">{{$menu['title']}}</option>
@@ -100,45 +100,45 @@
                                         </div>
                                     </div>
                                     <div class="form-group extend" id="type_category" style="display: none">
-                                        <label class="col-md-3 control-label">{{__("Select Category Type")}}</label>
+                                        <label class="col-md-3 control-label">{{__("messages.Select Category Type")}}</label>
                                         <div class="col-md-9">
                                             <select class="form-control" id="select_category_type" name="type_category">
-                                                <option value="">{{__("Select Category Type")}}</option>
-                                                <option value="companies">{{__("Companies")}}</option>
-                                                <option value="buyselllead">{{__("Product")}}</option>
-                                                <option value="selllead">{{__("Sell")}}</option>
-                                                <option value="buylead">{{__("Buy")}}</option>
+                                                <option value="">{{__("messages.Select Category Type")}}</option>
+                                                <option value="companies">{{__("messages.Companies")}}</option>
+                                                <option value="buyselllead">{{__("messages.Product")}}</option>
+                                                <option value="selllead">{{__("messages.Sell")}}</option>
+                                                <option value="buylead">{{__("messages.Buy")}}</option>
                                             </select>
                                             <span class="help-block"></span>
                                         </div>
                                     </div>
 
                                     <div class="form-group extend" id="member_link" style="display: none">
-                                        <label class="col-md-3 control-label">{{__("Type Member Link")}}</label>
+                                        <label class="col-md-3 control-label">{{__("messages.Type Member Link")}}</label>
                                         <div class="col-md-9">
                                             <select class="form-control" id="select_member_link"
                                                     name="member_link_item">
-                                                <option value="">{{__("Select Mmber Link")}}</option>
-                                                <option value="post_lead">{{__("Post New Lead")}}</option>
-                                                <option value="newleads">{{__("Newly Added Products")}}</option>
-                                                <option value="manage_leads">{{__("Manage Leads")}}</option>
-                                                <option value="manage_enquiry">{{__("Manage Enquiries")}}</option>
-                                                <option value="edit_account">{{__("Update Profile Info")}}</option>
-                                                <option value="logout">{{__("LogOut")}}</option>
-                                                <option value="login">{{__("LogIn")}}</option>
-                                                <option value="register">{{__("Register")}}</option>
-                                                <option value="myaccount">{{__("Profile")}}</option>
+                                                <option value="">{{__("messages.Select Mmber Link")}}</option>
+                                                <option value="post_lead">{{__("messages.Post New Lead")}}</option>
+                                                <option value="newleads">{{__("messages.Newly Added Products")}}</option>
+                                                <option value="manage_leads">{{__("messages.Manage Leads")}}</option>
+                                                <option value="manage_enquiry">{{__("messages.Manage Enquiries")}}</option>
+                                                <option value="edit_account">{{__("messages.Update Profile Info")}}</option>
+                                                <option value="logout">{{__("messages.LogOut")}}</option>
+                                                <option value="login">{{__("messages.LogIn")}}</option>
+                                                <option value="register">{{__("messages.Register")}}</option>
+                                                <option value="myaccount">{{__("messages.Profile")}}</option>
                                             </select>
                                             <span class="help-block"></span>
                                         </div>
                                     </div>
                                     <div class="form-group extend" id="type_company" style="display: none">
-                                        <label class="col-md-3 control-label">{{__("Type Company")}}</label>
+                                        <label class="col-md-3 control-label">{{__("messages.Type Company")}}</label>
                                         <div class="col-md-9">
 
                                             <select class="form-control inouttyeptext" name="sellerType"
                                                     id="select_type_company">
-                                                <option value="">{{__("Select")}}</option>
+                                                <option value="">{{__("messages.Select")}}</option>
 
                                                 @foreach($seller_type as $seller)
 
@@ -150,18 +150,18 @@
                                         </div>
                                     </div>
                                     <div class="form-group extend" id="type_lead" style="display: none">
-                                        <label class="col-md-3 control-label">{{__("Type Lead")}}</label>
+                                        <label class="col-md-3 control-label">{{__("messages.Type Lead")}}</label>
                                         <div class="col-md-9">
                                             <select class="form-control" id="select_type_lead" name="type_lead">
-                                                <option value="">{{__("Select Type Lead")}}</option>
-                                                <option value="buy">{{__("Buy")}}</option>
-                                                <option value="sell">{{__("Sell")}}</option>
+                                                <option value="">{{__("messages.Select Type Lead")}}</option>
+                                                <option value="buy">{{__("messages.Buy")}}</option>
+                                                <option value="sell">{{__("messages.Sell")}}</option>
                                             </select>
                                             <span class="help-block"></span>
                                         </div>
                                     </div>
                                     <div class="form-group extend" id="category" style="display: none">
-                                        <label class="col-md-3 control-label">{{__("Select Category")}}</label>
+                                        <label class="col-md-3 control-label">{{__("messages.Select Category")}}</label>
                                         <div class="col-md-9">
                                             <select class="form-control select2_category" id="select_category"
                                                     name="category_item">
@@ -171,7 +171,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group extend" id="sub_category" style="display: none">
-                                        <label class="col-md-3 control-label">{{__("Select Sub Category")}}</label>
+                                        <label class="col-md-3 control-label">{{__("messages.Select Sub Category")}}</label>
                                         <div class="col-md-9">
                                             <select class="form-control select2_subcategory" id="select_sub_category"
                                                     name="sub_category">
@@ -181,7 +181,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group extend" id="sub_sub_category" style="display: none">
-                                        <label class="col-md-3 control-label">{{__("Select sub sub Category")}}</label>
+                                        <label class="col-md-3 control-label">{{__("messages.Select sub sub Category")}}</label>
                                         <div class="col-md-9">
                                             <select class="form-control select2_sub_subcategory"
                                                     id="select_sub_sub_category" name="sub_sub_category">
@@ -191,7 +191,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group extend" id="product" style="display: none">
-                                        <label class="col-md-3 control-label">{{__("Select Product")}}</label>
+                                        <label class="col-md-3 control-label">{{__("messages.Select Product")}}</label>
                                         <div class="col-md-9">
                                             <select class="form-control select2_product" id="select_product"
                                                     name="product">
@@ -201,7 +201,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group extend" id="article" style="display: none">
-                                        <label class="col-md-3 control-label">{{__("Select Article")}}</label>
+                                        <label class="col-md-3 control-label">{{__("messages.Select Article")}}</label>
                                         <div class="col-md-9">
                                             <select class="form-control select2_article" id="select_article"
                                                     name="article">
@@ -211,7 +211,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group extend" id="page" style="display: none">
-                                        <label class="col-md-3 control-label">{{__("Select Page")}}</label>
+                                        <label class="col-md-3 control-label">{{__("messages.Select Page")}}</label>
                                         <div class="col-md-9">
                                             <select class="form-control select2_page" id="select_page" name="page">
 
@@ -220,21 +220,21 @@
                                         </div>
                                     </div>
                                     <div class="form-group extend" id="url" style="display: none">
-                                        <label class="col-md-3 control-label">{{__("Insert Url")}}</label>
+                                        <label class="col-md-3 control-label">{{__("messages.Insert Url")}}</label>
                                         <div class="col-md-9">
                                             <input class="form-control" type="url" name="url">
                                             <span class="help-block"></span>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">{{__("meta Description")}}</label>
+                                        <label class="col-md-3 control-label">{{__("messages.meta Description")}}</label>
                                         <div class="col-md-9">
                                             <textarea name="meta_description" rows="5" id="meta_description"
                                                       class=" form-control"></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">{{__("meta keyword")}}</label>
+                                        <label class="col-md-3 control-label">{{__("messages.meta keyword")}}</label>
                                         <div class="col-md-9">
                                             <textarea name="meta_keyword" rows="5" id="meta_keyword"
                                                       class=" form-control"></textarea>
@@ -243,56 +243,56 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">{{__("Icon")}}</label>
+                                        <label class="col-md-3 control-label">{{__("messages.Icon")}}</label>
                                         <div class="col-md-9">
                                             <input type="file" class="form-control" name="icon"/>
-                                            <span class="help-block">{{__("Input type file")}}</span>
+                                            <span class="help-block">{{__("messages.Input type file")}}</span>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">{{__("Class")}}</label>
+                                        <label class="col-md-3 control-label">{{__("messages.Class")}}</label>
                                         <div class="col-md-9">
                                             <input type="text" class="form-control" name="class"/>
-                                            <span class="help-block">{{__("class for link")}}</span>
+                                            <span class="help-block">{{__("messages.class for link")}}</span>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">{{__("Select status")}}</label>
+                                        <label class="col-md-3 control-label">{{__("messages.Select status")}}</label>
                                         <div class="col-md-9">
                                             <select class="form-control " name="status">
-                                                <option value="-1">{{__("Unactive")}}</option>
-                                                <option value="1">{{__("active")}}</option>
-                                                <option value="2">{{__("Deleted")}}</option>
-                                                <option value="3">{{__("Archive")}}</option>
+                                                <option value="-1">{{__("messages.Unactive")}}</option>
+                                                <option value="1">{{__("messages.active")}}</option>
+                                                <option value="2">{{__("messages.Deleted")}}</option>
+                                                <option value="3">{{__("messages.Archive")}}</option>
                                             </select>
                                             <span class="help-block"></span>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">{{__("Order")}}</label>
+                                        <label class="col-md-3 control-label">{{__("messages.Order")}}</label>
                                         <div class="col-md-9">
                                             <input type="number" class="form-control " name="orderMenu">
-                                            <span class="help-block">{{__("after item select location")}}</span>
+                                            <span class="help-block">{{__("messages.after item select location")}}</span>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">{{__("Select Language")}}</label>
+                                        <label class="col-md-3 control-label">{{__("messages.Select Language")}}</label>
                                         <div class="col-md-9">
                                             <select class="form-control " name="locale">
-                                                <option value="en">{{__("en_US")}}</option>
-                                                <option value="fa">{{__("fa_IR")}}</option>
+                                                <option value="en">{{__("messages.en_US")}}</option>
+                                                <option value="fa">{{__("messages.fa_IR")}}</option>
                                             </select>
                                             <span class="help-block"></span>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">{{__("Select permission")}}</label>
+                                        <label class="col-md-3 control-label">{{__("messages.Select permission")}}</label>
                                         <div class="col-md-9">
                                             <select class="form-control " name="permission">
-                                                <option value="">{{__("Select Access")}}</option>
-                                                <option value="admin">{{__("Admin")}}</option>
-                                                <option value="customer">{{__("User")}}</option>
-                                                <option value="guest">{{__("Guest")}}</option>
+                                                <option value="">{{__("messages.Select Access")}}</option>
+                                                <option value="admin">{{__("messages.Admin")}}</option>
+                                                <option value="customer">{{__("messages.User")}}</option>
+                                                <option value="guest">{{__("messages.Guest")}}</option>
                                             </select>
                                             <span class="help-block"></span>
                                         </div>
@@ -305,8 +305,8 @@
                         </div>
                         <div class="panel-footer">
                             <button class="btn btn-primary" type="button"
-                                    onClick="$('#validate').validationEngine('hide');">{{__("Clear Form")}}</button>
-                            <button class="btn btn-primary submit" type="submit">{{__("Submit")}}</button>
+                                    onClick="$('#validate').validationEngine('hide');">{{__("messages.Clear Form")}}</button>
+                            <button class="btn btn-primary submit" type="submit">{{__("messages.Submit")}}</button>
                         </div>
                     </div>
                 </form>
@@ -354,7 +354,7 @@
                         $('#type_category').show();
                         $('#' + select).show();
                         $('.select2_category').select2({
-                            placeholder: "{{__('Select a Category')}}",
+                            placeholder: "{{__('messages.Select a Category')}}",
                             width: '100%',
                             minimumInputLength: 2,
                             tags: [],

@@ -63,7 +63,7 @@
                                     @if(data_get($menus,'header_1'))
                                         <li class="dropdown">
                                             <a href="{{ !empty($menus['header_1']['url']) ? url($menus['header_1']['url']) : "" }}"
-                                               title="{{data_get($menus,'header_1.title')}}">{{ auth()->user()->getDisplayName() ." ". __('Welcome')}}
+                                               title="{{data_get($menus,'header_1.title')}}">{{ auth()->user()->getDisplayName() ." ". __('messages.Welcome')}}
                                             </a>
                                             <ul class="dropdown-menu">
                                                 @if (!empty($menus['header_1']['menus']))
@@ -91,21 +91,21 @@
                                     @endif
                                     <li>
                                         <a href="{{route('logout')}}"
-                                           title="{{__('Logout')}}">{{__('Logout')}}
+                                           title="{{__('messages.Logout')}}">{{__('messages.Logout')}}
                                         </a>
                                     </li>
                                 @else
                                     <li>
                                         <a href="{{ route('singIn') }}"
-                                           title="{{__('Sign In')}}"
-                                           class="group1 sing_up">{{__('Sign In')}}
+                                           title="{{__('messages.Sign In')}}"
+                                           class="group1 sing_up">{{__('messages.Sign In')}}
                                         </a>
                                     </li>
                                     @if (Route::has('singUp'))
                                         <li>
                                             <a href="{{ route('singUp') }}"
-                                               class="group1 sing_up" title="{{__("Join Free")}}">
-                                                {{__("Join Free")}}
+                                               class="group1 sing_up" title="{{__("messages.Join Free")}}">
+                                                {{__("messages.Join Free")}}
                                             </a>
                                         </li>
                                     @endif
@@ -119,11 +119,11 @@
 
                             @switch ( app()->getLocale())
                                 @case('en')
-                                <a href='#' id='fa_IR' class='changelocal' title='{{__('Farsi')}}'><img
+                                <a href='#' id='fa_IR' class='changelocal' title='{{__('messages.Farsi')}}'><img
                                             src='/images/flag/fa.png'></a>
                                 @break
                                 @case('fa')
-                                <a href='#' id='en_US' class='changelocal' title='{{__('English')}}'> <img
+                                <a href='#' id='en_US' class='changelocal' title='{{__('messages.English')}}'> <img
                                             src='/images/flag/en.png'></a>
                                 @break
                             @endswitch
@@ -185,11 +185,11 @@
                                 </li>
                             @endif
                             @if (Route::has('help'))
-                                <li><a href="{{route('help')}}">{{__("Help Center")}}</a></li>
+                                <li><a href="{{route('help')}}">{{__("messages.Help Center")}}</a></li>
                             @endif
                             @if (Route::has('advertisement'))
                                 <li>
-                                    <a href="{{route('advertisement')}}">{{__("Advertise with Us")}}</a>
+                                    <a href="{{route('advertisement')}}">{{__("messages.Advertise with Us")}}</a>
                                 </li>
                             @endif
                         </ul>
@@ -215,7 +215,7 @@
 
                     <div class="translatediv">
                         @if($telephone)
-                            <p class="ph_number">{{__('Contact Us')}}:
+                            <p class="ph_number">{{__('messages.Contact Us')}}:
                                 <b>{{$telephone}}</b></p>
                         @endif
                     </div>
@@ -223,7 +223,7 @@
                         <div class="sendquery">
                             @if (Route::has('contact_us'))
                                 <a href="{{route('contact_us')}}" class="sendquerybtn"
-                                   title="{{__('Send Your Query')}}">{{__('Send Your Query')}}</a>
+                                   title="{{__('messages.Send Your Query')}}">{{__('messages.Send Your Query')}}</a>
                             @endif
                         </div>
                         @if (Route::has('search'))
@@ -231,20 +231,20 @@
 
                                 <div class="srch_area  form-row align-items-center">
                                     <div class="txtsearchtop">
-                                        <label class="sr-only" for="inlineFormInput">{{__("Name")}}?></label>
+                                        <label class="sr-only" for="inlineFormInput">{{__("messages.Name")}}?></label>
                                         <input autocomplete="off" type="text" name="search"
                                                class=" searchinput form-control mb-2 mb-sm-0" size="30"
                                                onkeyup="showResult(this.value)"
-                                               placeholder="{{__("Enter your Keyword")}}...." value="">
+                                               placeholder="{{__("messages.Enter your Keyword")}}...." value="">
                                         <div id="livesearch"></div>
 
                                     </div>
                                     <select name="type" class="select_dg custom-select mb-2 mr-sm-2 mb-sm-0" id="type">
-                                    <!--<option value=""><?//=__("Filter")?></option>-->
-                                        <option value="buyselllead">{{__("Products")}}</option>
-                                        <option value="companies">{{__("Companies")}}</option>
-                                        <option value="buylead"> {{__("Buy Offers")}}</option>
-                                        <option value="selllead"> {{__("Sell Offers")}}</option>
+                                    <!--<option value=""><?//=__("messages.Filter")?></option>-->
+                                        <option value="buyselllead">{{__("messages.Products")}}</option>
+                                        <option value="companies">{{__("messages.Companies")}}</option>
+                                        <option value="buylead"> {{__("messages.Buy Offers")}}</option>
+                                        <option value="selllead"> {{__("messages.Sell Offers")}}</option>
                                     </select>
                                 </div>
                                 <div class="btnsearchtop">
@@ -333,7 +333,7 @@
                         @php $metaData = json_decode($menu['metaData'],true);
                 $url = !empty($metaData['url'])?$metaData['url']:'/';@endphp
                         @if($menu['permission']=='customer' && !$this->identity())
-                            @php $href = route('user/email', array("title" => __('Sign In'))); @endphp
+                            @php $href = route('user/email', array("title" => __('messages.Sign In'))); @endphp
                         @else
                             @php $href = route($menu['base_url'], $param); @endphp
                         @endif
@@ -368,7 +368,7 @@
                         @php $metaData = json_decode($menu['metaData'],true);
                 $url = !empty($metaData['url'])?$metaData['url']:'/';@endphp
                         @if($menu['permission']=='customer' && !auth()->user())
-                            @php $href = route('user/email', array("title" => __('Sign In'))); @endphp
+                            @php $href = route('user/email', array("title" => __('messages.Sign In'))); @endphp
                         @else
                             @php $href = route($menu['base_url'], $param); @endphp
                         @endif
@@ -401,7 +401,7 @@
                         @php $metaData = json_decode($menu['metaData'],true);
                 $url = !empty($metaData['url'])?$metaData['url']:'/';@endphp
                         @if($menu['permission']=='customer' && !auth()->user())
-                            @php $href = route('user/email', array("title" => __('Sign In'))); @endphp
+                            @php $href = route('user/email', array("title" => __('messages.Sign In'))); @endphp
                         @else
                             @php $href = route($menu['base_url'], $param); @endphp
                         @endif
@@ -437,7 +437,7 @@
                         @php $metaData = json_decode($menu['metaData'],true);
                 $url = !empty($metaData['url'])?$metaData['url']:'/';@endphp
                         @if($menu['permission']=='customer' && !auth()->user())
-                            @php $href = route('user/email', array("title" => __('Sign In'))); @endphp
+                            @php $href = route('user/email', array("title" => __('messages.Sign In'))); @endphp
                         @else
                             @php $href = route($menu['base_url'], $param); @endphp
                         @endif
@@ -471,7 +471,7 @@
                         @php $metaData = json_decode($menu['metaData'],true);
                 $url = !empty($metaData['url'])?$metaData['url']:'/';@endphp
                         @if($menu['permission']=='customer' && !auth()->user())
-                            @php $href = route('user/email', array("title" => __('Sign In'))); @endphp
+                            @php $href = route('user/email', array("title" => __('messages.Sign In'))); @endphp
                         @else
                             @php $href = route($menu['base_url'], $param); @endphp
                         @endif
@@ -507,7 +507,7 @@
                         @php $metaData = json_decode($menu['metaData'],true);
                 $url = !empty($metaData['url'])?$metaData['url']:'/';@endphp
                         @if($menu['permission']=='customer' && !auth()->user())
-                            @php $href = route('user/email', array("title" => __('Sign In'))); @endphp
+                            @php $href = route('user/email', array("title" => __('messages.Sign In'))); @endphp
                         @else
                             @php $href = route($menu['base_url'], $param); @endphp
                         @endif
@@ -542,7 +542,7 @@
                         @php $metaData = json_decode($menu['metaData'],true);
                 $url = !empty($metaData['url'])?$metaData['url']:'/';@endphp
                         @if($menu['permission']=='customer' && !auth()->user())
-                            @php $href = route('user/email', array("title" => __('Sign In'))); @endphp
+                            @php $href = route('user/email', array("title" => __('messages.Sign In'))); @endphp
                         @else
                             @php $href = route($menu['base_url'], $param); @endphp
                         @endif
@@ -602,7 +602,7 @@
         <div class="col-lg-5 col-md-4 col-sm-5 col-xs-12">
             @if (Route::has('refer-friend'))
                 <a href="{{route('refer-friend')}}. " ?link=" .Request::url() . "
-                   &text="  {{base64_encode(__("Site Buysellyab"))}} "
+                   &text="  {{base64_encode(__("messages.Site Buysellyab"))}} "
                    class="footera ajax group1 refer_friend">
                     <img src="/images/b_icon1.png" alt="">{{_("Refer to friend")}})</a>
                 <!--            <a href="#" class="footera"><img src="/images/b_icon2.png" alt="">Bookmark Us</a>-->
@@ -610,12 +610,12 @@
             @endif
         </div>
         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-            <p class="copyright">{{__("Copyright")}}) © {{date('Y')}} <b
-                        class="black weight600">{{__($_SERVER['HTTP_HOST'])}}</b> {{__('. All rights reserved.')}}
+            <p class="copyright">{{__("messages.Copyright")}}) © {{date('Y')}} <b
+                        class="black weight600">{{__($_SERVER['HTTP_HOST'])}}</b> {{__('messages.. All rights reserved.')}}
                 <br>
-                {{__('Developed and Managed by')}} <a href="https://www.apachish.com" target="_blank"
+                {{__('messages.Developed and Managed by')}} <a href="https://www.apachish.com" target="_blank"
                                                       title="apachish.com"
-                                                      class="uo">{{__("Oxin")}})</a></p>
+                                                      class="uo">{{__("messages.Oxin")}})</a></p>
         </div>
     </div>
 </section>
@@ -624,7 +624,7 @@
 <!-- requset -->
 <div class="rq_box">
     <p class="ttu red b fs13 mb5"><a href="javascript:void(0)"
-                                     onClick="$('.rq_box').hide(0)">[X]{{__('Close')}}</a></p>
+                                     onClick="$('.rq_box').hide(0)">[X]{{__('messages.Close')}}</a></p>
     <a href="javascript:void(0)" class="req_link" onClick="$(this).hide(0); $('.req_form').show(0)"><img
                 src="{{app()->getLocale() ==  'fa' ? '/images/request_call_fa.jpeg' : '/images/request_call.gif'}}"
                 alt=""></a>
@@ -632,39 +632,42 @@
 
         <form id="popup_form" action="{{route('post_request')}}" method="post">
 
-            <p><label for="name">{{__("Full Name")}}</label></p>
+            <p><label for="name">{{__("messages.Full Name")}}</label></p>
             <p><input name="name" id="name" type="text" class="w100 p4 radius-3"></p>
-            <p class="mt7"><label for="company_name">{{__("Company Name")}}</label></p>
+            <p class="mt7"><label for="company_name">{{__("messages.Company Name")}}</label></p>
             <p><input name="company_name" id="company_name" type="text" class="w100 p4 radius-3"></p>
-            <p class="mt7"><label for="email_id">{{__("Email")}}</label></p>
+            <p class="mt7"><label for="email_id">{{__("messages.Email")}}</label></p>
             <p><input name="email" id="email_enquery" type="email" class="w100 p4 radius-3"></p>
-            <p class="mt7"><label for="country">{{__("Country")}}</label></p>
+            <p class="mt7"><label for="country">{{__("messages.Country")}}</label></p>
             <p><select name="country"  class="country w100 p4 radius-3">
-                    <option value="">{{__('SELECT Country')}}</option>
+                    <option value="">{{__('messages.SELECT Country')}}</option>
                     @foreach ($countries as $country)
-                    <option {{auth()->user()->country==$country->id?"selected":""}}  ?> value="{{$country->id}}">{{$country->title}}</option>
+                    <option {{($user_country ==$country->id)?"selected":""}}
+                            value="{{$country->id}}" >
+                        {{app()->getLocale()=='fa'?$country->name_fa:$country->name}}
+                    </option>
                     @endforeach
                 </select></p>
-            <p class="mt7"><label for="mobile">{{ __("Mobile Number") }}</label></p>
+            <p class="mt7"><label for="mobile">{{ __("messages.Mobile Number") }}</label></p>
             <p>
                 <input name="mobile" id="mobile" type="text" class="w78 p4 radius-3">
             </p>
-            <p class="mt7"><label for="verification_code">{{__('verification_code')}}</label></p>
+            <p class="mt7"><label for="verification_code">{{__('messages.verification_code')}}</label></p>
             <p>
-                <input  name="captcha_request" id="verification_code_request" type="text" title="{{__('verification_code')}}"
-                        placeholder="{{__("Enter the security code") }}" class="inouttyeptext w30 p4 radius-3 vam">
+                <input  name="captcha_request" id="verification_code_request" type="text" title="{{__('messages.verification_code')}}"
+                        placeholder="{{__("messages.Enter the security code") }}" class="inouttyeptext w30 p4 radius-3 vam">
                 <img src="{{ captcha_src('flat')}}"
-                     class="vam" alt="" id="captchaimage_request"/>
+                     class="vam reCaptcha-img" alt="" id="captchaimage_request"/>
                 <a href="javascript:false;" title="Change Verification Code">
                     <img src="/images/ref2.png"
                          alt="Refresh"
-                         onclick="document.getElementById('captchaimage_request').src='{{ captcha_src('flat')}}'; document.getElementById('verification_code_request').value=''; document.getElementById('verification_code_request').focus(); return true;"
-                         width="24" height="23" class="vam ml5">
+                         onclick="document.getElementById('verification_code_request').value=''; document.getElementById('verification_code_request').focus(); return true;"
+                         width="24" height="23" class="reCaptcha vam ml5">
                 </a>
             </p>
             <p class="mt10">
-                <input name="input" type="button" id="submit_popup_form" class="btn1  radius-5" value="{{__("Submit")}}">
-                <input name="input" type="reset" class="btn2 radius-5" value="{{__("Cancel")}}" onClick="$('.req_link').show(0); $('.req_form').hide(0)"></p>
+                <input name="input" type="button" id="submit_popup_form" class="btn1  radius-5" value="{{__("messages.Submit")}}">
+                <input name="input" type="reset" class="btn2 radius-5" value="{{__("messages.Cancel")}}" onClick="$('.req_link').show(0); $('.req_form').hide(0)"></p>
         </form>
     </div>
 
@@ -761,7 +764,7 @@
                         }
                     });
                     if (option) {
-                        //option="<p><?//=__("no suggestion")}}//</p>"
+                        //option="<p><?//=__("messages.no suggestion")}}//</p>"
                         $("#livesearch").html(option);
 
                     }

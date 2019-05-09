@@ -14,7 +14,12 @@ class DatabaseSeeder extends Seeder
 //         $this->call(UsersTableSeeder::class);
         $this->call(CountryTableSeeder::class);
         $this->call(StateTableSeeder::class);
-        $this->call(CityTableSeedeer::class);
+        $this->call(CityTableSeeder::class);
+        $this->call(City1TableSeeder::class);
+        $this->call(City2TableSeeder::class);
+        $this->call(City3TableSeeder::class);
+        $this->call(City4TableSeeder::class);
+        $this->call(City5TableSeeder::class);
         $this->call(PortalTableSeeder::class);
         factory(\App\User::class,1)->create();
         $this->call(CategoryMenuTableSeeder::class);

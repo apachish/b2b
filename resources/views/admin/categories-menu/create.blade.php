@@ -6,9 +6,9 @@
     <link rel="stylesheet" type="text/css" href="/select2/select2.css">
 </head>
 <ul class="breadcrumb">
-    <li><a href="{{route('admin')}}">{{__("Home")}}</a></li>
-    <li ><a href="{{ url('admin/menu/category') }}">{{__("Menu Category")}}  </a></li>
-    <li class="active"><a href="#">{{ __("Add")  }}</a></li>
+    <li><a href="{{route('admin')}}">{{__("messages.Home")}}</a></li>
+    <li ><a href="{{ url('admin/menu/category') }}">{{__("messages.Menu Category")}}  </a></li>
+    <li class="active"><a href="#">{{ __("messages.Add")  }}</a></li>
 </ul>
 <!-- END BREADCRUMB -->
 
@@ -24,14 +24,14 @@
 
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title"><strong>{{ __("Add") }}</strong> {{ __("Menu Category") }}</h3>
+                        <h3 class="panel-title"><strong>{{ __("messages.Add") }}</strong> {{ __("messages.Menu Category") }}</h3>
                         <ul class="panel-controls">
                             <li><a href="#" class="panel-remove"><span class="fa fa-times"></span></a></li>
                         </ul>
                     </div>
                     <div class="panel-body">
                         <p>
-                           {{ __("Enter text to display on the screen here")  }}                        </p>
+                           {{ __("messages.Enter text to display on the screen here")  }}                        </p>
                     </div>
                     <div class="panel-body">
 
@@ -40,40 +40,40 @@
                             <div class="col-md-12">
 
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label">{{ __("Title Menu") }}</label>
+                                    <label class="col-md-3 control-label">{{ __("messages.Title Menu") }}</label>
                                     <div class="col-md-9">
                                         <div class="input-group input-group-lg">
                                             <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
                                             <input type="text" name="title" id="title" class=" form-control"/>
                                         </div>
-                                        <span class="help-block">{{ __("Except character:space-#-@-$ min value = 3") }}</span>
+                                        <span class="help-block">{{ __("messages.Except character:space-#-@-$ min value = 3") }}</span>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label">{{ __("Url") }}</label>
+                                    <label class="col-md-3 control-label">{{ __("messages.Url") }}</label>
                                     <div class="col-md-9">
                                         <div class="input-group input-group-lg">
                                             <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
                                             <input type="text" name="url" id="url" value="" class=" form-control"/>
                                         </div>
-                                        <span class="help-block">{{ __("url for title menu") }}</span>
+                                        <span class="help-block">{{ __("messages.url for title menu") }}</span>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label">{{ __("meta Description") }}</label>
+                                    <label class="col-md-3 control-label">{{ __("messages.meta Description") }}</label>
                                     <div class="col-md-9">
                                             <textarea name="meta_description" rows="5" id="meta_description" class=" form-control"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label">{{ __("meta keyword") }}</label>
+                                    <label class="col-md-3 control-label">{{ __("messages.meta keyword") }}</label>
                                     <div class="col-md-9">
                                             <textarea name="meta_keyword" rows="5" id="meta_keyword" class=" form-control"></textarea>
 
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label">{{ __("Select Domain")  }}</label>
+                                    <label class="col-md-3 control-label">{{ __("messages.Select Domain")  }}</label>
                                     <div class="col-md-9">
                                         <select class="form-control " name="portal_id[]" multiple>
                                             @foreach ($portals as $portal)
@@ -84,57 +84,57 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label">{{ __("Select status") }}</label>
+                                    <label class="col-md-3 control-label">{{ __("messages.Select status") }}</label>
                                     <div class="col-md-9">
                                         <select class="form-control " name="status">
-                                            <option value=0 >{{ __("Unactivated") }}</option>
-                                            <option value=1 >{{ __("active") }}</option>
+                                            <option value=0 >{{ __("messages.Unactivated") }}</option>
+                                            <option value=1 >{{ __("messages.active") }}</option>
 
                                         </select>
                                         <span class="help-block"></span>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label">{{ __("Select Language") }}</label>
+                                    <label class="col-md-3 control-label">{{ __("messages.Select Language") }}</label>
                                     <div class="col-md-9">
                                         <select class="form-control " name="locale">
-                                            <option value="en" >{{ __("en_US") }}</option>
-                                            <option value="fa" >{{ __("fa_IR") }}</option>
+                                            <option value="en" >{{ __("messages.en_US") }}</option>
+                                            <option value="fa" >{{ __("messages.fa_IR") }}</option>
                                         </select>
                                         <span class="help-block"></span>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label">{{ __("Select Type Default") }}</label>
+                                    <label class="col-md-3 control-label">{{ __("messages.Select Type Default") }}</label>
                                     <div class="col-md-9">
                                         <select class="form-control " name="type_menu">
-                                            <option  value="" >{{ __("Select Type Default Menu") }}</option>
-                                            <option  value="category" >{{ __("Category") }}</option>
-                                            <option value="product" >{{ __("Lead") }}</option>
-                                            <option  value="sell" >{{ __("Sell Lead") }}</option>
-                                            <option  value="buy" >{{ __("Buy Lead") }}</option>
+                                            <option  value="" >{{ __("messages.Select Type Default Menu") }}</option>
+                                            <option  value="category" >{{ __("messages.Category") }}</option>
+                                            <option value="product" >{{ __("messages.Lead") }}</option>
+                                            <option  value="sell" >{{ __("messages.Sell Lead") }}</option>
+                                            <option  value="buy" >{{ __("messages.Buy Lead") }}</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label">{{ __("Position") }}</label>
+                                    <label class="col-md-3 control-label">{{ __("messages.Position") }}</label>
                                     <div class="col-md-9">
                                         <select class="form-control " name="position">
-                                            <option  value="" >{{ __("Select Type Default Menu") }}</option>
-                                            <option  value="main_menu" >{{ __("Main Menu") }}</option>
-                                            <option  value="footer_1" >{{ __("Footer 1") }}</option>
-                                            <option  value="footer_2" >{{ __("Footer 2") }}</option>
-                                            <option  value="footer_3" >{{ __("Footer 3") }}</option>
-                                            <option  value="footer_4" >{{ __("Footer 4") }}</option>
-                                            <option  value="footer_5" >{{ __("Footer 5") }}</option>
-                                            <option  value="footer_6" >{{ __("Footer 6") }}</option>
-                                            <option  value="footer_7" >{{ __("Footer 7") }}</option>
-                                            <option  value="header_1" >{{ __("Header 1") }}</option>
-                                            <option  value="header_2" >{{ __("Header 2") }}</option>
-                                            <option  value="header_3" >{{ __("Header 3") }}</option>
-                                            <option  value="network" >{{ __("Network") }}</option>
+                                            <option  value="" >{{ __("messages.Select Type Default Menu") }}</option>
+                                            <option  value="main_menu" >{{ __("messages.Main Menu") }}</option>
+                                            <option  value="footer_1" >{{ __("messages.Footer 1") }}</option>
+                                            <option  value="footer_2" >{{ __("messages.Footer 2") }}</option>
+                                            <option  value="footer_3" >{{ __("messages.Footer 3") }}</option>
+                                            <option  value="footer_4" >{{ __("messages.Footer 4") }}</option>
+                                            <option  value="footer_5" >{{ __("messages.Footer 5") }}</option>
+                                            <option  value="footer_6" >{{ __("messages.Footer 6") }}</option>
+                                            <option  value="footer_7" >{{ __("messages.Footer 7") }}</option>
+                                            <option  value="header_1" >{{ __("messages.Header 1") }}</option>
+                                            <option  value="header_2" >{{ __("messages.Header 2") }}</option>
+                                            <option  value="header_3" >{{ __("messages.Header 3") }}</option>
+                                            <option  value="network" >{{ __("messages.Network") }}</option>
                                         </select>
-                                        <span class="help-block">{{ __("If Select not Load menu only load type select") }}</span>
+                                        <span class="help-block">{{ __("messages.If Select not Load menu only load type select") }}</span>
                                     </div>
                                 </div>
                                 <div class="block push-up-10 ">
@@ -144,8 +144,8 @@
 
                     </div>
                     <div class="panel-footer">
-                        <button class="btn btn-primary" type="button" onClick="$('#validate').validationEngine('hide');">{{ __("Clear Form") }}</button>
-                        <button class="btn btn-primary submit" type="submit">{{ __("Submit")  }}</button>
+                        <button class="btn btn-primary" type="button" onClick="$('#validate').validationEngine('hide');">{{ __("messages.Clear Form") }}</button>
+                        <button class="btn btn-primary submit" type="submit">{{ __("messages.Submit")  }}</button>
                     </div>
                 </div>
             </form>

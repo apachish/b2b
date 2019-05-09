@@ -3,9 +3,9 @@
 @section('content')
     <!-- START BREADCRUMB -->
     <ul class="breadcrumb">
-        <li><a href="{{ url('admin') }}">{{ __("Home") }}</a></li>
-        <li><a href="{{ url('admin/category')}}">{{ __("Category") }}</a></li>
-        <li class="active"><a href="#">{{ __("Create Category") }}</a></li>
+        <li><a href="{{ url('admin') }}">{{ __("messages.Home") }}</a></li>
+        <li><a href="{{ url('admin/category')}}">{{ __("messages.Category") }}</a></li>
+        <li class="active"><a href="#">{{ __("messages.Create Category") }}</a></li>
     </ul>
     <!-- END BREADCRUMB -->
     <!-- PAGE CONTENT WRAPPER -->
@@ -20,13 +20,13 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h3 class="panel-title">
-                                <strong>{{ __("Create") }}</strong> {{ __("Category") }}</h3>
+                                <strong>{{ __("messages.Create") }}</strong> {{ __("messages.Category") }}</h3>
                             <ul class="panel-controls">
                             </ul>
                         </div>
                         <div class="panel-body">
                             <p>
-                                {{ __("[ ( File should be .jpg, .png, .gif format and file size should not be more then 2 MB (2048 KB)) ( Best image size 173X80 ) ]") }}
+                                {{ __("messages.[ ( File should be .jpg, .png, .gif format and file size should not be more then 2 MB (2048 KB)) ( Best image size 173X80 ) ]") }}
                             </p>
                         </div>
                         <div class="panel-body">
@@ -36,43 +36,43 @@
                                 <div class="col-md-6">
 
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">{{ __("Name") }}</label>
+                                        <label class="col-md-3 control-label">{{ __("messages.Name") }}</label>
                                         <div class="col-md-9">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
                                                 <input type="text" name="name" id="name"
                                                        class=" form-control" value="{{ old('name') }}"/>
                                             </div>
-                                            <span class="help-block">{{ __("Except character:space-#-@-$ min value = 3") }}</span>
+                                            <span class="help-block">{{ __("messages.Except character:space-#-@-$ min value = 3") }}</span>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">{{ __("Name Farsi") }}</label>
+                                        <label class="col-md-3 control-label">{{ __("messages.Name Farsi") }}</label>
                                         <div class="col-md-9">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
                                                 <input type="text" name="name_fa" id="name_fa"
                                                        class=" form-control" value="{{ old('name_fa') }}"/>
                                             </div>
-                                            <span class="help-block">{{ __("Except character:space-#-@-$ min value = 3 only persian") }}</span>
+                                            <span class="help-block">{{ __("messages.Except character:space-#-@-$ min value = 3 only persian") }}</span>
                                         </div>
                                     </div>
 
 
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">{{ __("Description") }}</label>
+                                        <label class="col-md-3 control-label">{{ __("messages.Description") }}</label>
                                         <div class="col-md-9 col-xs-12">
                                         <textarea class="form-control" name="description"
                                                   rows="5">{{ old('description') }}</textarea>
-                                            <span class="help-block">{{ __("Default textarea field") }}</span>
+                                            <span class="help-block">{{ __("messages.Default textarea field") }}</span>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">{{ __("Image") }}</label>
+                                        <label class="col-md-3 control-label">{{ __("messages.Image") }}</label>
                                         <div class="col-md-9">
                                             <input type="file" class="fileinput btn-primary" name="image"/>
-                                            <span class="help-block">{{ __("Input type file") }}</span>
+                                            <span class="help-block">{{ __("messages.Input type file") }}</span>
                                         </div>
                                     </div>
                                     <div class=" form-group gallery" >
@@ -88,13 +88,13 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">{{ __("Category") }}</label>
+                                        <label class="col-md-3 control-label">{{ __("messages.Category") }}</label>
                                         <div class="col-md-9">
                                             <select id="category" class="form-control select" data-live-search="true"
                                                     name="category"
-                                                    placeholder="{{ __("Select a Category...") }}">
+                                                    placeholder="{{ __("messages.Select a Category...") }}">
 
-                                                <option value="">{{ __("Select a Category...") }}</option>
+                                                <option value="">{{ __("messages.Select a Category...") }}</option>
 
                                                 @foreach ($categories as $cat)
                                                     <option
@@ -105,31 +105,31 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">{{ __("Sub Category") }}</label>
+                                        <label class="col-md-3 control-label">{{ __("messages.Sub Category") }}</label>
                                         <div class="col-md-9">
                                             <select name="category2" id="category2" class="form-control select"
                                                     data-show-subtext="true" data-live-search="true">
-                                                <option value=''>{{ __('Select  Sub Category') }}</option>
+                                                <option value=''>{{ __('messages.Select  Sub Category') }}</option>
                                             </select>
 
                                             <span class="help-block"></span>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">{{ __("Description Farsi") }}</label>
+                                        <label class="col-md-3 control-label">{{ __("messages.Description Farsi") }}</label>
                                         <div class="col-md-9 col-xs-12">
                                         <textarea class="form-control" name="description_fa"
                                                   rows="5">{{ old('description_fa') }}</textarea>
-                                            <span class="help-block">{{ __("Default textarea field") }}</span>
+                                            <span class="help-block">{{ __("messages.Default textarea field") }}</span>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">{{ __("Select status") }}</label>
+                                        <label class="col-md-3 control-label">{{ __("messages.Select status") }}</label>
                                         <div class="col-md-9">
                                             <select class="form-control " name="status">
-                                                <option value="0" >{{ __("Unactivated") }}</option>
-                                                <option value="1" >{{ __("active") }}</option>
+                                                <option value="0" >{{ __("messages.Unactivated") }}</option>
+                                                <option value="1" >{{ __("messages.active") }}</option>
                                             </select>
                                             <span class="help-block"></span>
                                         </div>
@@ -142,16 +142,16 @@
                                             <label class="check"><input type="checkbox" class="icheckbox"
                                                                         name="feature"
                                                                         value="1"
-                                                />{{ __("Feature") }}</label>
-                                            <span class="help-block">{{ __("Selected For Feature Category") }}</span>
+                                                />{{ __("messages.Feature") }}</label>
+                                            <span class="help-block">{{ __("messages.Selected For Feature Category") }}</span>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">{{__("meta Keywords")}}</label>
+                                        <label class="col-md-3 control-label">{{__("messages.meta Keywords")}}</label>
                                         <div class="col-md-9">
                                             <input type="text" name="metaKeywords" class="tagsinput" value="{{old('metaKeywords')}}"/>
 
-                                            <span class="help-block">{{__("input different type title category for search")}}</span>
+                                            <span class="help-block">{{__("messages.input different type title category for search")}}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -161,8 +161,8 @@
                         </div>
                         <div class="panel-footer">
                             <button class="btn btn-primary" type="button"
-                                    onClick="$('#validate').validationEngine('hide');">{{ __("Clear Form") }}</button>
-                            <button class="btn btn-primary submit" type="submit">{{ __("Submit") }}</button>
+                                    onClick="$('#validate').validationEngine('hide');">{{ __("messages.Clear Form") }}</button>
+                            <button class="btn btn-primary submit" type="submit">{{ __("messages.Submit") }}</button>
                         </div>
                     </div>
                 </form>
@@ -196,7 +196,7 @@
                                     url: "/api/category?p_pid=" + parent_id,
                                     type: 'Get',
                                     success: function (data) {
-                                        var option = "<option value=''>{{__('Select  Sub Category')}}</option>";
+                                        var option = "<option value=''>{{__('messages.Select  Sub Category')}}</option>";
                                         if (data) {
                                             $.each(data, function (index, value) {
                                                 option += "<option value='" + value.categoryId + "'>" + value.title + "</option>"
@@ -235,17 +235,17 @@
     <div class="message-box animated fadeIn" data-sound="alert" id="mb-remove-row">
         <div class="mb-container">
             <div class="mb-middle">
-                <div class="mb-title"><span class="fa fa-times"></span> {{ __("Remove")}} <strong>{{ __("Data")}}</strong> ?</div>
+                <div class="mb-title"><span class="fa fa-times"></span> {{ __("messages.Remove")}} <strong>{{ __("messages.Data")}}</strong> ?</div>
                 <div class="mb-content">
-                    <p>{{ __("Are you sure you want to remove this row?")}}</p>
-                    <p>{{ __("Press Yes if you sure.")}}</p>
+                    <p>{{ __("messages.Are you sure you want to remove this row?")}}</p>
+                    <p>{{ __("messages.Press Yes if you sure.")}}</p>
                     <input type="hidden" value="" id="Delete_id">
 
                 </div>
                 <div class="mb-footer">
                     <div class="pull-right">
-                        <button class="btn btn-success btn-lg mb-control-yes">{{ __("Yes")}}</button>
-                        <button class="btn btn-default btn-lg mb-control-close">{{ __("No")}}</button>
+                        <button class="btn btn-success btn-lg mb-control-yes">{{ __("messages.Yes")}}</button>
+                        <button class="btn btn-default btn-lg mb-control-close">{{ __("messages.No")}}</button>
                     </div>
                 </div>
             </div>
