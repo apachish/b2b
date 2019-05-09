@@ -18,14 +18,14 @@ return [
     ],
 
     'flat' => [
-        'length' => 2,
+        'length' => 5,
         'width' => 160,
-        'height' => 30,
+        'height' => 40,
         'quality' => 90,
-        'lines' => 2,
+        'lines' => 0,
         'bgImage' => false,
-        'bgColor' => '#ecf2f4',
-        'fontColors' => ['#2c3e50', '#c0392b', '#16a085', '#c0392b', '#8e44ad', '#303f9f', '#f57c00', '#795548'],
+        'bgColor' => '#36b3d1',
+        'fontColors' => ['#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff'],
         'contrast' => -5,
     ],
     'mini' => [

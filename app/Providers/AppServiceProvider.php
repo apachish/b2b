@@ -43,10 +43,13 @@ class AppServiceProvider extends ServiceProvider
                 $domain = substr (Request::root(), 7); // $domain is now 'www.example.com'
             }
             $view->telephone="";
+            $view->countries=[];
 
             $portal  = Portal::whereDomain($domain)->first();
             if($portal){
                 $site_info = json_decode($portal->meta_data,true);
+                $view->social = json_decode($portal->social,true);
+
                 $view->telephone=!empty($site_info['telephone'])?$site_info['telephone']:"";
             }
             if (Request::is('admin/*')) {

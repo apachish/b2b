@@ -294,7 +294,7 @@
                                     @php $active_route = true;@endphp
                                 @endif
                             @endif
-                            <li class="nav-item <?= $active_route ? $class_active : ''?>">
+                            <li class="nav-item {{ $active_route ? $class_active : ''}}">
                                 <a class="nav-link" href="{{route($menu->base_url,$param)}} "
                                    title="{{$menu->title}}" class="{{$menu->class}}"
 
@@ -326,19 +326,19 @@
                     @foreach($menus['footer_1']['menus'] as $menu)
 
                         @if($menu->page_url)
-                        @php $param = json_decode($menu->page_url,true); @endphp
+                            @php $param = json_decode($menu->page_url,true); @endphp
                         @else
                             @php $param = [];@endphp
                         @endif
                         @php $metaData = json_decode($menu['metaData'],true);
                 $url = !empty($metaData['url'])?$metaData['url']:'/';@endphp
                         @if($menu['permission']=='customer' && !$this->identity())
-                        @php $href = route('user/email', array("title" => __('Sign In'))); @endphp
+                            @php $href = route('user/email', array("title" => __('Sign In'))); @endphp
                         @else
                             @php $href = route($menu['base_url'], $param); @endphp
                         @endif
                         @if(!empty($menu['permission']) && auth()->user())
-                        @php $menu['class'] = str_replace('group1','',$menu['class']);@endphp
+                            @php $menu['class'] = str_replace('group1','',$menu['class']);@endphp
                         @endif
 
                         <li>
@@ -361,19 +361,19 @@
                     @foreach ($menus['footer_2']['menus'] as $menu)
 
                         @if($menu->page_url)
-                        @php $param = json_decode($menu->page_url,true); @endphp
+                            @php $param = json_decode($menu->page_url,true); @endphp
                         @else
                             @php $param = [];@endphp
                         @endif
                         @php $metaData = json_decode($menu['metaData'],true);
                 $url = !empty($metaData['url'])?$metaData['url']:'/';@endphp
                         @if($menu['permission']=='customer' && !auth()->user())
-                        @php $href = route('user/email', array("title" => __('Sign In'))); @endphp
+                            @php $href = route('user/email', array("title" => __('Sign In'))); @endphp
                         @else
                             @php $href = route($menu['base_url'], $param); @endphp
                         @endif
                         @if(!empty($menu['permission']) && auth()->user())
-                        @php $menu['class'] = str_replace('group1','',$menu['class']);@endphp
+                            @php $menu['class'] = str_replace('group1','',$menu['class']);@endphp
                         @endif
 
                         <li>
@@ -394,19 +394,19 @@
                     @foreach ($menus['footer_3']['menus'] as $menu)
 
                         @if($menu->page_url)
-                        @php $param = json_decode($menu->page_url,true); @endphp
+                            @php $param = json_decode($menu->page_url,true); @endphp
                         @else
                             @php $param = [];@endphp
                         @endif
                         @php $metaData = json_decode($menu['metaData'],true);
                 $url = !empty($metaData['url'])?$metaData['url']:'/';@endphp
                         @if($menu['permission']=='customer' && !auth()->user())
-                        @php $href = route('user/email', array("title" => __('Sign In'))); @endphp
+                            @php $href = route('user/email', array("title" => __('Sign In'))); @endphp
                         @else
                             @php $href = route($menu['base_url'], $param); @endphp
                         @endif
                         @if(!empty($menu['permission']) && auth()->user())
-                        @php $menu['class'] = str_replace('group1','',$menu['class']);@endphp
+                            @php $menu['class'] = str_replace('group1','',$menu['class']);@endphp
                         @endif
 
                         <li>
@@ -430,19 +430,19 @@
                     @foreach ($menus['footer_4']['menus'] as $menu)
 
                         @if($menu->page_url)
-                        @php $param = json_decode($menu->page_url,true); @endphp
+                            @php $param = json_decode($menu->page_url,true); @endphp
                         @else
                             @php $param = [];@endphp
                         @endif
                         @php $metaData = json_decode($menu['metaData'],true);
                 $url = !empty($metaData['url'])?$metaData['url']:'/';@endphp
                         @if($menu['permission']=='customer' && !auth()->user())
-                        @php $href = route('user/email', array("title" => __('Sign In'))); @endphp
+                            @php $href = route('user/email', array("title" => __('Sign In'))); @endphp
                         @else
                             @php $href = route($menu['base_url'], $param); @endphp
                         @endif
                         @if(!empty($menu['permission']) && auth()->user())
-                        @php $menu['class'] = str_replace('group1','',$menu['class']);@endphp
+                            @php $menu['class'] = str_replace('group1','',$menu['class']);@endphp
                         @endif
 
                         <li>
@@ -464,19 +464,19 @@
                     @foreach ($menus['footer_5']['menus'] as $menu)
 
                         @if($menu->page_url)
-                        @php $param = json_decode($menu->page_url,true); @endphp
+                            @php $param = json_decode($menu->page_url,true); @endphp
                         @else
                             @php $param = [];@endphp
                         @endif
                         @php $metaData = json_decode($menu['metaData'],true);
                 $url = !empty($metaData['url'])?$metaData['url']:'/';@endphp
                         @if($menu['permission']=='customer' && !auth()->user())
-                        @php $href = route('user/email', array("title" => __('Sign In'))); @endphp
+                            @php $href = route('user/email', array("title" => __('Sign In'))); @endphp
                         @else
                             @php $href = route($menu['base_url'], $param); @endphp
                         @endif
                         @if(!empty($menu['permission']) && auth()->user())
-                        @php $menu['class'] = str_replace('group1','',$menu['class']);@endphp
+                            @php $menu['class'] = str_replace('group1','',$menu['class']);@endphp
                         @endif
 
                         <li>
@@ -500,19 +500,19 @@
                     @foreach ($menus['footer_6']['menus'] as $menu)
 
                         @if($menu->page_url)
-                        @php $param = json_decode($menu->page_url,true); @endphp
+                            @php $param = json_decode($menu->page_url,true); @endphp
                         @else
                             @php $param = [];@endphp
                         @endif
                         @php $metaData = json_decode($menu['metaData'],true);
                 $url = !empty($metaData['url'])?$metaData['url']:'/';@endphp
                         @if($menu['permission']=='customer' && !auth()->user())
-                        @php $href = route('user/email', array("title" => __('Sign In'))); @endphp
+                            @php $href = route('user/email', array("title" => __('Sign In'))); @endphp
                         @else
                             @php $href = route($menu['base_url'], $param); @endphp
                         @endif
                         @if(!empty($menu['permission']) && auth()->user())
-                        @php $menu['class'] = str_replace('group1','',$menu['class']);@endphp
+                            @php $menu['class'] = str_replace('group1','',$menu['class']);@endphp
                         @endif
 
                         <li>
@@ -535,19 +535,19 @@
                     @foreach ($menus['footer_7']['menus'] as $menu)
 
                         @if($menu->page_url)
-                        @php $param = json_decode($menu->page_url,true); @endphp
+                            @php $param = json_decode($menu->page_url,true); @endphp
                         @else
                             @php $param = [];@endphp
                         @endif
                         @php $metaData = json_decode($menu['metaData'],true);
                 $url = !empty($metaData['url'])?$metaData['url']:'/';@endphp
                         @if($menu['permission']=='customer' && !auth()->user())
-                        @php $href = route('user/email', array("title" => __('Sign In'))); @endphp
+                            @php $href = route('user/email', array("title" => __('Sign In'))); @endphp
                         @else
                             @php $href = route($menu['base_url'], $param); @endphp
                         @endif
                         @if(!empty($menu['permission']) && auth()->user())
-                        @php $menu['class'] = str_replace('group1','',$menu['class']);@endphp
+                            @php $menu['class'] = str_replace('group1','',$menu['class']);@endphp
                         @endif
 
                         <li>
@@ -570,7 +570,33 @@
 
         <div class="col-lg-3 col-md-4 col-sm-7 col-xs-12">
             <ul class="social">
+                @if(!empty($social['facebook']))
+                    <li><a href="{{ $social['facebook']}}" class="icon-facebook" target="_blank"></a></li>
+                @endif
+                @if(!empty($social['twitter']))
 
+                    <li><a href="{{ $social['twitter']}}" class="icon-twitter" target="_blank"></a></li>
+                @endif
+                @if(!empty($social['plus']))
+
+                    <li><a href="{{ $social['plus']}}" class="icon-social-google" target="_blank"></a></li>
+                @endif
+                @if(!empty($social['linkedin']))
+
+                    <li><a href="{{ $social['linkedin']}}" class="icon-social-linkedin" target="_blank"></a></li>
+                @endif
+                @if(!empty($social['youtube']))
+
+                    <li><a href="{{ $social['youtube']}}" class="icon-youtube" target="_blank"></a></li>
+                @endif
+                @if(!empty($social['telegram']))
+
+                    <li><a href="{{ $social['telegram']}}" class="icon-paper-plane" target="_blank"></a></li>
+                @endif
+                @if(!empty($social['instagram']))
+
+                <li><a href="{{ $social['instagram']}}" class="icon-social-instagram" target="_blank"></a></li>
+                @endif
             </ul>
         </div>
         <div class="col-lg-5 col-md-4 col-sm-5 col-xs-12">
@@ -603,6 +629,43 @@
                 src="{{app()->getLocale() ==  'fa' ? '/images/request_call_fa.jpeg' : '/images/request_call.gif'}}"
                 alt=""></a>
     <div class="req_form fs12 dn">
+
+        <form id="popup_form" action="{{route('post_request')}}" method="post">
+
+            <p><label for="name">{{__("Full Name")}}</label></p>
+            <p><input name="name" id="name" type="text" class="w100 p4 radius-3"></p>
+            <p class="mt7"><label for="company_name">{{__("Company Name")}}</label></p>
+            <p><input name="company_name" id="company_name" type="text" class="w100 p4 radius-3"></p>
+            <p class="mt7"><label for="email_id">{{__("Email")}}</label></p>
+            <p><input name="email" id="email_enquery" type="email" class="w100 p4 radius-3"></p>
+            <p class="mt7"><label for="country">{{__("Country")}}</label></p>
+            <p><select name="country"  class="country w100 p4 radius-3">
+                    <option value="">{{__('SELECT Country')}}</option>
+                    @foreach ($countries as $country)
+                    <option {{auth()->user()->country==$country->id?"selected":""}}  ?> value="{{$country->id}}">{{$country->title}}</option>
+                    @endforeach
+                </select></p>
+            <p class="mt7"><label for="mobile">{{ __("Mobile Number") }}</label></p>
+            <p>
+                <input name="mobile" id="mobile" type="text" class="w78 p4 radius-3">
+            </p>
+            <p class="mt7"><label for="verification_code">{{__('verification_code')}}</label></p>
+            <p>
+                <input  name="captcha_request" id="verification_code_request" type="text" title="{{__('verification_code')}}"
+                        placeholder="{{__("Enter the security code") }}" class="inouttyeptext w30 p4 radius-3 vam">
+                <img src="{{ captcha_src('flat')}}"
+                     class="vam" alt="" id="captchaimage_request"/>
+                <a href="javascript:false;" title="Change Verification Code">
+                    <img src="/images/ref2.png"
+                         alt="Refresh"
+                         onclick="document.getElementById('captchaimage_request').src='{{ captcha_src('flat')}}'; document.getElementById('verification_code_request').value=''; document.getElementById('verification_code_request').focus(); return true;"
+                         width="24" height="23" class="vam ml5">
+                </a>
+            </p>
+            <p class="mt10">
+                <input name="input" type="button" id="submit_popup_form" class="btn1  radius-5" value="{{__("Submit")}}">
+                <input name="input" type="reset" class="btn2 radius-5" value="{{__("Cancel")}}" onClick="$('.req_link').show(0); $('.req_form').hide(0)"></p>
+        </form>
     </div>
 
     <!--BODY ENDS-->
@@ -644,13 +707,13 @@
 
                 var locale = $(this).attr('id');
                 console.log(locale);
-                var port = "<?= $_SERVER['SERVER_PORT']?>";
+                var port = "{{ $_SERVER['SERVER_PORT']}}";
                 var http = "http://";
                 if (port == "443") {
                     http = "https://"
                 }
 
-                $.post(http + "<?=$_SERVER['HTTP_HOST']?>/change-locale", {locale: locale}, function (data, status) {
+                $.post(http + "{{$_SERVER['HTTP_HOST']}}/change-locale", {locale: locale}, function (data, status) {
                     console.log(data);
 
                     window.location = "/";
@@ -698,7 +761,7 @@
                         }
                     });
                     if (option) {
-                        //option="<p><?//=__("no suggestion")?>//</p>"
+                        //option="<p><?//=__("no suggestion")}}//</p>"
                         $("#livesearch").html(option);
 
                     }
