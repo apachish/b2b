@@ -31,12 +31,13 @@ class IndexController extends Controller
             ["start"=>18,'finish'=>36],
             ["start"=>33,'finish'=>51],
         ];
-        $period = $period_array[rand(0,2)];
+        $period = $period_array[0];
+        $categories_images = Category::whereFeature(true)->where('image','!=','noImage.png')->get()->toTree();
         $companies  =[];
         $testimonials =[];
         $articles =[];
         return view('index',compact('banner_right','home_scrolling','banner_left','banner_left_2','banner_button'
-            ,'count_buy','period',
+            ,'count_buy','period','categories_images',
             'buy_leads','count_sell','sell_leads',
             'categories','companies','testimonials','articles',
             'products_featured1','products_featured2','products_featured3'));
