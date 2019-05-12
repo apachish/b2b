@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Banner;
+use App\Category;
 use Illuminate\Http\Request;
 use Spatie\TranslationLoader\LanguageLine;
 
@@ -24,12 +25,18 @@ class IndexController extends Controller
         $products_featured1 =[];
         $products_featured2 =[];
         $products_featured3 =[];
-        $categories =[];
+        $categories = Category::get()->toTree();
+        $period_array = [
+            ["start"=>0,'finish'=>18],
+            ["start"=>18,'finish'=>36],
+            ["start"=>33,'finish'=>51],
+        ];
+        $period = $period_array[rand(0,2)];
         $companies  =[];
         $testimonials =[];
         $articles =[];
         return view('index',compact('banner_right','home_scrolling','banner_left','banner_left_2','banner_button'
-            ,'count_buy',
+            ,'count_buy','period',
             'buy_leads','count_sell','sell_leads',
             'categories','companies','testimonials','articles',
             'products_featured1','products_featured2','products_featured3'));
