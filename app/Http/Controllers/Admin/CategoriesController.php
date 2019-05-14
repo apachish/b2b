@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Category;
+use App\CategorySlug;
 use App\Excel\ExcelImport;
 use App\Http\Resources\CategoryCollection;
 use App\Imports\CategoryImport;
@@ -10,8 +11,10 @@ use App\Imports\CategoryImport1;
 use App\Imports\FirstSheetImport;
 use App\Lead;
 use Carbon\Carbon;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -254,14 +257,37 @@ dd($excel_import);
 
         $tbl_categories = \DB::table('tbl_categories')->get();
 
+        $config = [
+            'uniqueSuffix' => function ($slug, $separator, Collection $list) {
+                $size = count($list);
 
+                return Str::random(9);
+            },
+            'unique'=>true
+        ];
         foreach ($tbl_categories as $category) {
-            if (!$category->parent && !$category->parent_id) {
+            if (!$category->parent && !$category->parent_id) {dd([
+                'name' => htmlspecialchars_decode($category->category_name),
+                'name_fa' => htmlspecialchars_decode($category->category_name_fa),
+                'image' => $category->category_image ?: "noImage.png",
+//                    'friendlyUrl' => Str::slug($category->category_name),
+                'description' => htmlspecialchars_decode($category->category_description),
+                'description_fa' => htmlspecialchars_decode($category->category_description_fa),
+                'sort_order' => $category->sort_order,
+                'status' => $category->status ?: false,
+                'meta_title' => $category->meta_title,
+                'meta_keywords' => $category->meta_keywords,
+                'meta_description' => $category->meta_description,
+                'feature' => $category->feature ?: false,
+                'parent_id' => $category->parent_id,
+                'slug'=> SlugService::createSlug(CategorySlug::class, 'slug',  htmlspecialchars_decode($category->category_name),$config),
+                'slug_fa'=> SlugService::createSlug(CategorySlug::class, 'slug_fa',  htmlspecialchars_decode($category->category_name_fa),$config),
+            ]);
                 $category_first = Category::create([
                     'name' => htmlspecialchars_decode($category->category_name),
                     'name_fa' => htmlspecialchars_decode($category->category_name_fa),
                     'image' => $category->category_image ?: "noImage.png",
-                    'friendlyUrl' => Str::slug($category->category_name),
+//                    'friendlyUrl' => Str::slug($category->category_name),
                     'description' => htmlspecialchars_decode($category->category_description),
                     'description_fa' => htmlspecialchars_decode($category->category_description_fa),
                     'sort_order' => $category->sort_order,
@@ -270,9 +296,12 @@ dd($excel_import);
                     'meta_keywords' => $category->meta_keywords,
                     'meta_description' => $category->meta_description,
                     'feature' => $category->feature ?: false,
-                    'parent_id' => $category->parent_id
+                    'parent_id' => $category->parent_id,
+                    'slug'=> SlugService::createSlug(CategorySlug::class, 'slug',  htmlspecialchars_decode($category->category_name)),
+                    'slug_fa'=> SlugService::createSlug(CategorySlug::class, 'slug_fa',  htmlspecialchars_decode($category->category_name_fa)),
 
                 ]);
+exit;
                 $category2 = \DB::table('tbl_categories')->where('parent_id', $category->category_id)->get();
                 foreach ($category2 as $category22) {
                     if (!$category22->parent && $category22->parent_id == $category->category_id) {
@@ -280,7 +309,7 @@ dd($excel_import);
                         $category_second = Category::create([
                             'name' => htmlspecialchars_decode($category22->category_name),
                             'name_fa' => htmlspecialchars_decode($category22->category_name_fa),
-                            'friendlyUrl' => Str::slug($category22->category_name),
+//                            'friendlyUrl' => Str::slug($category22->category_name),
 
                             'image' => $category22->category_image ?: "noImage.png",
                             'description' => htmlspecialchars_decode($category22->category_description),
@@ -303,7 +332,7 @@ dd($excel_import);
                             Category::create([
                                 'name' => htmlspecialchars_decode($category33->category_name),
                                 'name_fa' => htmlspecialchars_decode($category33->category_name_fa),
-                                'friendlyUrl' => Str::slug($category33->category_name),
+//                                'friendlyUrl' => Str::slug($category33->category_name),
                                 'image' => $category33->category_image ?: "noImage.png",
                                 'description' => htmlspecialchars_decode($category33->category_description),
                                 'description_fa' => htmlspecialchars_decode($category33->category_description_fa),

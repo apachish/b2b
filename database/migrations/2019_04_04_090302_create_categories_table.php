@@ -17,7 +17,8 @@ class CreateCategoriesTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('name_fa');
-            $table->string('friendlyUrl')->nullable();
+            $table->string('slug')->nullable();
+            $table->string('slug_fa')->nullable();
             $table->string('image')->nullable()->default('noImage.png');
             $table->text('description')->nullable();
             $table->text('description_fa')->nullable();

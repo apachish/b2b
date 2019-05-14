@@ -25,4 +25,5 @@ class Category extends Model
       'feature',
         'parent_id'
     ];
+
 }
