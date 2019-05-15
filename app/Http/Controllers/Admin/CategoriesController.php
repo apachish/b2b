@@ -243,10 +243,10 @@ class CategoriesController extends Controller
             $file->move(public_path($path), $filename);
         }
         $import_excel = new CategoryImport();
-        $import_excel->sheet=[$import_excel];
+        $import_excel->sheet = [$import_excel];
         $category = Excel::import($import_excel, public_path($path . $filename));
-        $excel_import = with(new ExcelImport(public_path($path . $filename),$import_excel->category_array))->import();
-dd($excel_import);
+        $excel_import = with(new ExcelImport(public_path($path . $filename), $import_excel->category_array))->import();
+        dd($excel_import);
         return redirect('admin/categories');
 
     }
@@ -263,27 +263,11 @@ dd($excel_import);
 
                 return Str::random(9);
             },
-            'unique'=>true
+            'unique' => true
         ];
         foreach ($tbl_categories as $category) {
-            if (!$category->parent && !$category->parent_id) {dd([
-                'name' => htmlspecialchars_decode($category->category_name),
-                'name_fa' => htmlspecialchars_decode($category->category_name_fa),
-                'image' => $category->category_image ?: "noImage.png",
-//                    'friendlyUrl' => Str::slug($category->category_name),
-                'description' => htmlspecialchars_decode($category->category_description),
-                'description_fa' => htmlspecialchars_decode($category->category_description_fa),
-                'sort_order' => $category->sort_order,
-                'status' => $category->status ?: false,
-                'meta_title' => $category->meta_title,
-                'meta_keywords' => $category->meta_keywords,
-                'meta_description' => $category->meta_description,
-                'feature' => $category->feature ?: false,
-                'parent_id' => $category->parent_id,
-                'slug'=> SlugService::createSlug(CategorySlug::class, 'slug',  htmlspecialchars_decode($category->category_name),$config),
-                'slug_fa'=> SlugService::createSlug(CategorySlug::class, 'slug_fa',  htmlspecialchars_decode($category->category_name_fa),$config),
-            ]);
-                $category_first = Category::create([
+            if (!$category->parent && !$category->parent_id) {
+                $i = [
                     'name' => htmlspecialchars_decode($category->category_name),
                     'name_fa' => htmlspecialchars_decode($category->category_name_fa),
                     'image' => $category->category_image ?: "noImage.png",
@@ -297,20 +281,16 @@ dd($excel_import);
                     'meta_description' => $category->meta_description,
                     'feature' => $category->feature ?: false,
                     'parent_id' => $category->parent_id,
-                    'slug'=> SlugService::createSlug(CategorySlug::class, 'slug',  htmlspecialchars_decode($category->category_name)),
-                    'slug_fa'=> SlugService::createSlug(CategorySlug::class, 'slug_fa',  htmlspecialchars_decode($category->category_name_fa)),
-
-                ]);
-exit;
+                    'slug' => SlugService::createSlug(CategorySlug::class, 'slug', htmlspecialchars_decode($category->category_name), $config),
+                    'slug_fa' => SlugService::createSlug(CategorySlug::class, 'slug_fa', htmlspecialchars_decode($category->category_name_fa), $config),
+                ];
+                $category_first = Category::create($i);
                 $category2 = \DB::table('tbl_categories')->where('parent_id', $category->category_id)->get();
                 foreach ($category2 as $category22) {
                     if (!$category22->parent && $category22->parent_id == $category->category_id) {
-
-                        $category_second = Category::create([
+                        $b = [
                             'name' => htmlspecialchars_decode($category22->category_name),
                             'name_fa' => htmlspecialchars_decode($category22->category_name_fa),
-//                            'friendlyUrl' => Str::slug($category22->category_name),
-
                             'image' => $category22->category_image ?: "noImage.png",
                             'description' => htmlspecialchars_decode($category22->category_description),
                             'description_fa' => htmlspecialchars_decode($category22->category_description_fa),
@@ -320,19 +300,19 @@ exit;
                             'meta_keywords' => $category22->meta_keywords,
                             'meta_description' => $category22->meta_description,
                             'feature' => $category22->feature ?: false,
-                            'parent_id' => $category_first->id
-
-                        ]);
+                            'parent_id' => $category_first->id,
+                            'slug' => SlugService::createSlug(CategorySlug::class, 'slug', htmlspecialchars_decode($category22->category_name), $config),
+                            'slug_fa' => SlugService::createSlug(CategorySlug::class, 'slug_fa', htmlspecialchars_decode($category22->category_name_fa), $config),
+                        ];
+                        $category_second = Category::create($b);
                     }
                     $category3 = \DB::table('tbl_categories')->where('parent_id', $category->category_id)->where('parent', $category22->category_id)->get();
 
                     foreach ($category3 as $category33) {
                         if ($category33->parent == $category22->category_id && $category33->parent_id == $category->category_id) {
-
-                            Category::create([
+                            $c = [
                                 'name' => htmlspecialchars_decode($category33->category_name),
                                 'name_fa' => htmlspecialchars_decode($category33->category_name_fa),
-//                                'friendlyUrl' => Str::slug($category33->category_name),
                                 'image' => $category33->category_image ?: "noImage.png",
                                 'description' => htmlspecialchars_decode($category33->category_description),
                                 'description_fa' => htmlspecialchars_decode($category33->category_description_fa),
@@ -342,9 +322,13 @@ exit;
                                 'meta_keywords' => $category33->meta_keywords,
                                 'meta_description' => $category33->meta_description,
                                 'feature' => $category33->feature ?: false,
-                                'parent_id' => $category_second->id
+                                'parent_id' => $category_second->id,
 
-                            ]);
+                            'slug' => SlugService::createSlug(CategorySlug::class, 'slug', htmlspecialchars_decode($category33->category_name), $config),
+                            'slug_fa' => SlugService::createSlug(CategorySlug::class, 'slug_fa', htmlspecialchars_decode($category33->category_name_fa), $config),
+
+                            ];
+                            Category::create($c);
                         }
                     }
                 }
