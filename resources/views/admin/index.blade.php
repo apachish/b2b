@@ -1,7 +1,6 @@
 @extends('layouts.admin')
 
 @section('content')
-
     <!-- START BREADCRUMB -->
     <ul class="breadcrumb">
         <li><a href="#">{{__("messages.Home") }}</a></li>
@@ -609,6 +608,7 @@
 {{--    <script type="text/javascript" src="/js/actions.js"></script>--}}
 
 {{--    <script type="text/javascript" src="/js/admin/demo_dashboard.js"></script>--}}
+
 @endsection
 @section('javascript')
     <script type="text/javascript" src="/js/admin/demo_dashboard.js"></script>

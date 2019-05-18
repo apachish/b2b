@@ -4,6 +4,7 @@ namespace App;
 
 use App\Traits\UploadImage;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Kalnoy\Nestedset\NodeTrait;
@@ -12,6 +13,8 @@ use \Illuminate\Support\Collection;
 class CategorySlug extends Model
 {
     use Sluggable;
+    use SluggableScopeHelpers;
+
     protected $table = 'categories';
     protected $fillable =[  'id',
       'name',

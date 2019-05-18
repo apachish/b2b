@@ -90,7 +90,7 @@
                 <li><a href="{{url('admin/testimonial')}}"><span class="fa fa-archive"></span> {{__('messages.Manage Testimonial')}}</a></li>
                 <li><a href="{{url('admin/faq')}}"><span class="fa fa-h-square"></span>{{__('messages.Manage Help')}}</a></li>
                 <li><a href="{{url('admin/portals')}}"><span class="fa fa-windows"></span> {{__('messages.Portals')}}</a></li>
-                <li><a href="{{url('admin/translator')}}"><span class="fa fa-font"></span> {{__('messages.Translator')}}</a></li>
+                <li><a href="{{url('admin/translators')}}"><span class="fa fa-font"></span> {{__('messages.Translator')}}</a></li>
                 <li><a href="{{url('admin/sliders')}}"><span class="fa fa-align-right"></span>{{__('messages.Sliders')}}</a></li>
                 <li><a href="{{url('admin/searchList')}}"><span class="fa fa-align-right"></span> {{__('messages.Search list')}}</a></li>
             </ul>

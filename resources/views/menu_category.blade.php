@@ -16,7 +16,7 @@
                             @endif
                         <li class="dc-mega-li" id="menu-item-{{$i_row}}">
                             <a class="dc-mega"
-                               href="#"
+                               href="{{route('home.categories',['slug'=>app()->getLocale()=='fa'?$category->slug_fa:$category->slug]) }}"
                                data-id="{{$category->id }}"
                                title=" {{app()->getLocale()=='fa'?$category->name_fa:$category->name }}"
                                alt=" {{app()->getLocale()=='fa'?$category->name_fa:$category->name }}"
@@ -39,7 +39,8 @@
                                                 @endif
                                                 <li id="menu-item-{{$i_row}}-{{$li}}" class="mega-unit mega-hdr">
                                                     <h5>
-                                                        <a href="#"
+                                                        <a
+                                                                href="{{route('home.categories',['slug'=>app()->getLocale()=='fa'?$sub_category->slug_fa:$sub_category->slug]) }}"
                                                            title="{{app()->getLocale()=='fa'?$sub_category->name_fa:$sub_category->name }}">
                                                             {{app()->getLocale()=='fa'?$sub_category->name_fa:$sub_category->name }}
                                                         </a>
@@ -58,7 +59,8 @@
                                                                     @break
                                                                 @endif
                                                                 <li class="menu-item-{{$i_row}}" >
-                                                                    <a href="#"
+                                                                    <a
+                                                                            href="{{route('home.categories',['slug'=>app()->getLocale()=='fa'?$sub_sub_cat->slug_fa:$sub_sub_cat->slug]) }}"
                                                                        title="{{app()->getLocale()=='fa'?$sub_sub_cat->name_fa:$sub_sub_cat->name }}">
                                                                         {{app()->getLocale()=='fa'?$sub_sub_cat->name_fa:$sub_sub_cat->name }}
                                                                     </a>
@@ -83,7 +85,7 @@
                                                                     <ul>
                                                                         <li class="menu-item-{{$i_row}}">
                                                                             <a class="bg-image text-center full"
-                                                                               href="#"
+                                                                               href="{{route('home.categories',['slug'=>app()->getLocale()=='fa'?$images->slug_fa:$images->slug]) }}"
                                                                                style="background-image: url('{{url('images/category/'.$images->image)}}'); background-repeat: no-repeat;">
                                                                                 <span class="title">{{app()->getLocale()=='fa'?$images->name_fa:$images->name}}</span>
                                                                             </a>
@@ -99,7 +101,7 @@
                                                                         <li class="menu-item-{{$i_row}}">
 
                                                                             <a class="bg-image text-center {{$im==1?'first':'second'}}"
-                                                                               href="#"
+                                                                               href="{{route('home.categories',['slug'=>app()->getLocale()=='fa'?$images->slug_fa:$images->slug]) }}"
                                                                                style="background-image: url('{{url('images/category/'.$images->image)}}'); background-repeat: no-repeat;">
                                                                                 <span class="title">{{app()->getLocale()=='fa'?$images->name_fa:$images->name}}</span>
                                                                             </a>

@@ -41,7 +41,8 @@ Route::get('home/selllead', 'HomeController@index')->name('home.selllead');
 Route::get('home/articles', 'HomeController@index')->name('home.articles');
 Route::get('home/sitemap', 'HomeController@index')->name('sitemap');
 Route::get('home/products', 'HomeController@index')->name('home.products');
-Route::get('home/categories', 'HomeController@index')->name('home.categories');
+Route::get('home/featured', 'HomeController@index')->name('home.featured');
+Route::get('home/categories/{slug?}', 'CategoriesController@index')->name('home.categories');
 Route::get('companies', 'HomeController@index')->name('companies');
 Route::get('testimonials', 'HomeController@index')->name('testimonials');
 Route::post('newsLetter', 'NewsLettersController@send')->name('newsLetter');
@@ -107,6 +108,8 @@ Route::middleware('auth')
     Route::resource('helps','HelpsController');
     Route::resource('portals','PortalsController');
     Route::resource('translators','TranslatorsController');
+    Route::post('translators/change','TranslatorsController@change')->name('admin.translates.change');
+    Route::get('translators/get/dataTable','TranslatorsController@dataTable')->name('admin.translates.dataTable');
     Route::resource('sliders','SlidersController');
     Route::resource('search','SearchController');
 

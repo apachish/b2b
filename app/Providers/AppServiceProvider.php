@@ -59,7 +59,7 @@ class AppServiceProvider extends ServiceProvider
 
                 $view->telephone=!empty($site_info['telephone'])?$site_info['telephone']:"";
             }
-            if (Request::is('admin/*')) {
+            if (Request::is('admin*') ) {
                 $view->Count_notification_product_enquiry = 0;
                 $view->notification_product_enquiry = [];
                 $view->Count_notification_enquiry = 0;
@@ -87,6 +87,11 @@ class AppServiceProvider extends ServiceProvider
                     $list_menu[$menu->position] = $menu;
                 }
                 $view->routeName = Request::route()->getName();
+                $view->title_menu = null;
+                foreach (data_get($list_menu,'main_menu.menus') as $menu_main){
+                    if($menu_main->base_url == $view->routeName)
+                        $view->title_menu = $menu_main->title;
+                }
                 //Route::getCurrentRoute()->getPath();
                 $view->menus = $list_menu;
             }

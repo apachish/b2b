@@ -15,9 +15,34 @@ class TranslatorsController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $translates = LanguageLine::paginate(10);
+        $count = LanguageLine::count();
+        return view('admin.translates.index',compact('translates','count'));
 
+    }
+    public function dataTable(Request $request)
+    {
+//        $list = auth()->user()->notifications()->with(['user', 'group'])->paginate(10);
+//        return $notifications = new NotificationCollection($list);
+
+        $search = $request->search;
+        $list = LanguageLine::query();
+        if (data_get($search, 'value')) {
+           $list->where('key','like',"%".data_get($search, 'value')."%")
+               ->orWhere('text','like',"%".data_get($search, 'value')."%");
+
+        }
+        $count = $list->count();
+        $list = $list->skip($request->start)->take($request->length)->get();
+        return  $response = array(
+            "draw"=> intval($request->draw),
+            "recordsTotal"=> $count,
+            "recordsFiltered"=> $count,
+            "data"=>$list,
+        );;
+
+
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -84,6 +109,15 @@ class TranslatorsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function change(Request $request)
+    {
+        foreach ($request->translator as $key=>$translator){
+            $language = LanguageLine::find($key);
+            $language->update(['text'=>$translator]);
+        }
+        return response()->json(['status'=>200,'message'=>__('messages.successfully to update translator!')]);
     }
     public function move(){
         $translates = \DB::connection('mongodb')->collection('Translate')->get();

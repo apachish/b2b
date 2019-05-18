@@ -20,6 +20,7 @@
     <link href="/css/dcverticalmegamenu.css" media="screen" rel="stylesheet" type="text/css">
     <link href="/css/fluid_dg.css" media="screen" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="/select2/select2.css">
+    @yield('css')
 
     <script src="/js/jquery-3.2.1.slim.min.js"
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -780,7 +781,8 @@
             });
         }
     </script>
+        @yield('javascript')
 
 
-</body>
+                        </body>
 </html>

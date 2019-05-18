@@ -40,6 +40,7 @@
     {{--    <link href="{{ asset('css/admin/magnific-popup.css') }}" rel="stylesheet">--}}
     {{--    <link href="{{ asset('css/admin/app.css') }}" rel="stylesheet">--}}
     <link rel="stylesheet" type="text/css" id="theme" href="/css/admin/theme-default.css"/>
+    <link rel="stylesheet" type="text/css" id="theme" href="/css/toastr.css"/>
     @yield('css')
 
 </head>
@@ -347,7 +348,7 @@
                 <div class="pull-right">
                     <a href="{{route('logout')}}"
                        class="btn btn-success btn-lg">{{__("messages.Yes")}}</a>
-                    <button class="btn btn-default btn-lg mb-control-close">{{__("messages.No")}}</button>
+                    <button class="btn btn-default btn-lg mb-control-close">{{ __("messages.NO")}}</button>
                 </div>
             </div>
         </div>
@@ -385,6 +386,7 @@
 
 
 @yield('javascript')
+<script type="text/javascript" src="/js/toastr.js"></script>
 <script type="text/javascript" src="/js/admin/settings.js"></script>
 
 <script type="text/javascript" src="/js/admin/plugins.js"></script>

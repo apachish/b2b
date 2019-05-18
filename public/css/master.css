@@ -3638,18 +3638,18 @@ a.trans_eff i:before{top: 2px;}
 
 .listchar .letter_sort {
   border-bottom: 1px solid #ddd;
-  padding: 6px 5px;
+  padding: 6px 0px;
   text-align: center;
 }
 .listchar .letter_sort a {
   display: inline-block;
-  margin: 2px 1px;
+  margin: 2px 9px;
   border: 1px solid #ddd;
   padding: 2px 2px;
   background: #fff;
   border-radius: 2px;
   font-size: .7em;
-  width: 21px;
+  width: 27px;
   text-align: center;
 }
 .listchar .letter_sort a:hover, .listchar .letter_sort a.act {
