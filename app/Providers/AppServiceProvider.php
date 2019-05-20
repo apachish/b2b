@@ -92,6 +92,7 @@ class AppServiceProvider extends ServiceProvider
                     if($menu_main->base_url == $view->routeName)
                         $view->title_menu = $menu_main->title;
                 }
+
                 //Route::getCurrentRoute()->getPath();
                 $view->menus = $list_menu;
             }

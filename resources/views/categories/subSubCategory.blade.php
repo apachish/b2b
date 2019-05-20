@@ -18,19 +18,29 @@
                     </div>
                     <i class="right-align icon-angle-left"></i>
                 @endif
-
-                @foreach ($breadcrumbs as $breadcrumb)
-                    <i class="right-align icon-angle-left"></i>
-                    <div class="right-align left-margin" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
-                        <a href="{{route($routeName)}}"
-                           itemprop="url">
-                            <span itemprop="title">{{$breadcrumb['title']}}</span></a>
-                    </div>
-                @endforeach
-                <i class="right-align icon-angle-left"></i>
-                <div class="right-align divinhere" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
-                    <span itemprop="title"><strong>{{$page_name}}</strong></span>
+                <div class="right-align left-margin" itemscope="" itemtype="{{route('home.categories')}}">
+                    <a href="{{route('home.categories')}}" itemprop="url">
+                        <span itemprop="title">{{__("messages.Browse by Category")}}</span></a>
                 </div>
+                <i class="p-2 right-align icon-angle-left"></i>
+            @if($category)
+                    @foreach ($category->ancestors as $breadcrumb)
+                        <div class="right-align left-margin" itemscope=""
+                             itemtype="http://data-vocabulary.org/Breadcrumb">
+                            <a
+                                    href="{{route('home.categories',['slug'=>app()->getLocale()=='fa'?$breadcrumb->slug_fa:$breadcrumb->slug]) }}"
+                               itemprop="url">
+                                <span itemprop="title">{{app()->getLocale()=='fa'?$breadcrumb->name_fa:$breadcrumb->name}}</span></a>
+                        </div>
+                        <i class="right-align icon-angle-left"></i>
+
+                    @endforeach
+                        <i class="right-align icon-angle-left"></i>
+                        <div class="right-align divinhere" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                            <span itemprop="title"><strong>{{app()->getLocale()=='fa'?$category->name_fa:$category->name}}</strong></span>
+                        </div>
+                @endif
+
             </div>
         </section>
 
@@ -40,12 +50,12 @@
                     <div class="col-lg-9 col-sm-12 col-md-9 col-xs-12 divmaincontent leaddetailsdiv listselldiv1">
                         <h2 class="title-cat listsell">{{app()->getLocale()=='fa'?$category->name_fa:$category->name}}</h2>
                         <div class="textselllist">
-                            @if($category->image)
+                            @if($category->image != 'noImage.png')
                                 <figure><img
                                             src="{{url('images/category/'.$category->image)}}"
                                             width="173" height="80" alt=""></figure>
                             @endif
-                            <p class="i fs14 gray">{{$category->description}}</p>
+                            <p class="i fs14 gray">{{app()->getLocale()=='fa'?$category->description_fa:$category->description}}</p>
 
                         </div>
                         <div class="ads_type">
@@ -215,7 +225,7 @@
                                     <a
                                             href="{{route('home.categories',['slug'=>app()->getLocale()=='fa'?$siblings->slug_fa:$siblings->slug]) }}"
                                     >
-                                    {{app()->getLocale()=='fa'?$siblings->name_fa:$siblings->name}}
+                                        {{app()->getLocale()=='fa'?$siblings->name_fa:$siblings->name}}
 
                                     </a>
                                 </li>
