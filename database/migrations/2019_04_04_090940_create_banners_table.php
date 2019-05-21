@@ -26,7 +26,7 @@ class CreateBannersTable extends Migration
             $table->string('image');
             $table->string('banner_url');
             $table->string('banner_page');
-            $table->enum('status',[-1,1,2])->comment('-1-> new ,1-> active,2->deactivate');
+            $table->enum('status',[-1,1,0])->comment('0-> new ,1-> active,-1->deactivate');
             $table->enum('banner_type',[1,2]);
             $table->dateTime('start_date');
             $table->dateTime('end_date');

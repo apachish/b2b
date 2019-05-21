@@ -21,10 +21,11 @@ class DatabaseSeeder extends Seeder
         $this->call(City4TableSeeder::class);
         $this->call(City5TableSeeder::class);
         $this->call(PortalTableSeeder::class);
-        factory(\App\User::class,1)->create();
         $this->call(CategoryMenuTableSeeder::class);
         $this->call(MenuTableSeeder::class);
         $this->call(SellerTableSeeder::class);
         $this->call(CategorySeeder::class);
+        $this->call(PagePositionSeed::class);
+        $this->call(UserSeed::class);
     }
 }

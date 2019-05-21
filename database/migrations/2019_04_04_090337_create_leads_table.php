@@ -28,9 +28,7 @@ class CreateLeadsTable extends Migration
             $table->string('product_friendly_url');
             $table->string('description');
             $table->text('detail_description');
-            $table->string('featured_product');//0=No,1=Home,2=Category,3=SubCategory,4=SubSubCatgeory
-            $table->boolean('status')->default(false);
-            $table->boolean('new_status')->default(true);
+            $table->enum('status',[0,1,-1])->comment('0-> new ,1-> active,-1->deactivate');
             $table->tinyInteger('approval_status');
             $table->boolean('push_request')->default(false);
             $table->tinyInteger('sort_order');
