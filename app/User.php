@@ -42,4 +42,21 @@ class User extends Authenticatable
         $user = auth()->user();
         return $user->first_name." ".$user->last_name;
     }
+
+    public function leads()
+    {
+        return $this->hasMany(Lead::class);
+    }
+    public function banners()
+    {
+        return $this->hasMany(Banner::class);
+    }
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class)->withTimestamps();//withPivot(['created_at'])//change pivot to tag
+    }
+    public function sellers()
+    {
+        return $this->belongsToMany(Seller::class)->withTimestamps();//withPivot(['created_at'])//change pivot to tag
+    }
 }

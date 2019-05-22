@@ -1,5 +1,6 @@
 <?php
 
+use App\Media;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -15,13 +16,9 @@ class CreateMediaTable extends Migration
     {
         Schema::create('media', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->enum('media_type',['photo', 'video', 'pdf']);
+            $table->enum('media_type', Media::type_media());
             $table->string('media');
-            $table->string('media_thumb');
-            $table->string('media_small');
-            $table->string('media_large');
-            $table->boolean('is_default');
-            $table->tinyInteger('sort_order');
+            $table->boolean('status')->default(0);
             $table->timestamps();
         });
     }

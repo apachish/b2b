@@ -27,6 +27,8 @@ class CreateMediaLeadTable extends Migration
                 ->on('media')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
+            $table->boolean('is_default');
+            $table->tinyInteger('sort_order');
             $table->timestamps();
         });
     }

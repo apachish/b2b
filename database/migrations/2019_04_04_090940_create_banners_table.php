@@ -1,5 +1,6 @@
 <?php
 
+use App\Banner;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -15,8 +16,8 @@ class CreateBannersTable extends Migration
     {
         Schema::create('banners', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('member_id');
-            $table->foreign('member_id')
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade')
@@ -27,7 +28,7 @@ class CreateBannersTable extends Migration
             $table->string('banner_url');
             $table->string('banner_page');
             $table->enum('status',[-1,1,0])->comment('0-> new ,1-> active,-1->deactivate');
-            $table->enum('banner_type',[1,2]);
+            $table->enum('banner_type',[Banner::BANNER_ADMIN,Banner::BANNER_USER]);
             $table->dateTime('start_date');
             $table->dateTime('end_date');
             $table->tinyInteger('sort_order');

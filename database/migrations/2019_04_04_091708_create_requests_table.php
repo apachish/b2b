@@ -32,9 +32,8 @@ class CreateRequestsTable extends Migration
             $table->string('email');
             $table->string('mobile');
             $table->longText('comments');
-            $table->boolean('read_status')->default(true);
-            $table->boolean('read_status_admin')->default(true);
-            $table->boolean('status');
+
+            $table->enum('status',[0,1,2,-1,3])->comment('0->new,1->active,2->read,-1->deactivate,3->new for user');
             $table->text('reply');
             $table->timestamps();
         });

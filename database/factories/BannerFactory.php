@@ -7,7 +7,6 @@ use Faker\Generator as Faker;
 use Illuminate\Support\Arr;
 
 $factory->define(Banner::class, function (Faker $faker) {
-    Banner::$section = 'banner';
     return [
         'banner_position' => Arr::random(Banner::type_position('key')),
         'time_duration' => $faker->numberBetween(1, 12),
@@ -17,7 +16,7 @@ $factory->define(Banner::class, function (Faker $faker) {
         'banner_type' => Arr::random(Banner::$banner_type),
         'start_date' => now(),
         'end_date' => now()->addDays(60),
-        'sort_order' => $faker->randomNumber(),
+        'sort_order' => $faker->numberBetween(0,200),
         'locale' => Arr::random(['fa', 'en'])
     ];
 });
