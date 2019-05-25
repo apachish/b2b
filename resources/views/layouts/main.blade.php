@@ -813,7 +813,6 @@
                         }
                     });
                     if (option) {
-                        //option="<p><?//=__("messages.no suggestion")}}//</p>"
                         $("#livesearch").html(option);
 
                     }
