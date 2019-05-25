@@ -7,8 +7,8 @@ use Faker\Generator as Faker;
 
 $factory->define(Media::class, function (Faker $faker) {
     return [
-        'media_type' => Media::TYPE_MEDIA_PHOTO,
-        'media' => $faker->image(Media::$path, Media::$width, Media::$height),
+        'type' => Media::TYPE_MEDIA_PHOTO,
+        'media' => $faker->image(Media::$path, Media::$width, Media::$height,null, false),
         'status'=>1
     ];
 });

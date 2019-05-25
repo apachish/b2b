@@ -26,22 +26,16 @@
 </style>
 </head>
 <div class="p10 pt5 pb0">
-    <form action="{{route('userStore')}}" id="email_form" class="form-horizontal"
+    <form action="{{route('checkRegister')}}" id="email_form" class="form-horizontal"
           method="post" enctype="multipart/form-data">
-{{--        @if (is_array($error)):--}}
-{{--            @foreach ($error as $err):--}}
-{{--                <p class="mt8 red">{{$err}}</p>--}}
-{{--            @endforeach;--}}
-{{--        @else:--}}
-{{--            <p class="mt8 red">' . $error . '</p>--}}
-{{--        @endif;--}}
+
         <p class="textemail"><i class="icon-email"></i>{{__("messages.Enter your Email")}}</p>
         <p class="mt8">
             <span class="box">
-                    <input id="country_selector" class="datatext p8 w40 radius-3 vam" type="text">
+                    <input id="country_selector" class="datatext p8 w40 radius-3 vam" type="text" name="country">
                     <label for="country_selector"
                            style="display:none;">{{__("messages.Select a country here...")}}</label>
-                    <input type="text" name="identity" placeholder="{{__("messages.Email")}}"
+                    <input type="text" name="email" placeholder="{{__("messages.Email")}}"
                            class="contentselect p8 w40 radius-3 vam"
                            id="contentselect">
             </span>
@@ -51,7 +45,7 @@
         <input name="input" type="submit" id="submit" value="{{__("messages.Sign In")}}">
         <i class="icon-android-send"></i>
         <a style="display: none" href=""
-           class="group2 sing_up_form" title="">
+           class="group2 sing_up_form" title="{{__("messages.Join Free")}}">
             {{__("messages.Join Free")}}
         </a>
         </p>
@@ -66,7 +60,7 @@
     $("#country_selector").countrySelect({
         //defaultCountry: "jp",
         //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
-        preferredCountries: ['{{strtolower(app()->getLocale())}}']
+        preferredCountries: ['{{$countryCode}}']
     });
     $(document).ready(function () {
 
@@ -80,78 +74,54 @@
                 toastr.error('{{__('messages.email  valid between 4 to 100 character')}}');
                 return false;
             }
+            toastr.clear();
             $(':input[type="submit"]').prop('disabled', true);
             $('#loding_email').show( );
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
             var formObj = $(this);
             var formURL = formObj.attr("action");
-            var formData = new FormData(this);
-            var username = $('#contentselect').val();
-
+            var country = $('.flag').attr('class');
+            country = country.replace("flag ", "");
             $.ajax({
                 url: formURL,
                 type: 'POST',
-                data: formData,
-                mimeType: "multipart/form-data",
-                contentType: false,
-                cache: false,
-                processData: false,
-                success: function (data, textStatus, jqXHR) {
-                    console.log(data);
-                    data = JSON.parse(data);
-                    console.log(data);
-                    if (data.Successful == 'register'  || data.Successful == 'password') {
-                        // $('.sing_up_form').show();
-                        $('.sing_up_form').attr('href', "{{route('getInfo')}}" + username)
-                        $('.sing_up_form').click();
-                    } else if (data.status == 'login') {
+                data: $('#email_form').serialize()+'&country='+country,
+                dataType: "json",
 
-                        toastr.success(data.Successful);
-                        $(".ajax").colorbox.close();
-                        window.location = "members/myAccount";
+                success: function (response, textStatus, jqXHR) {
+                    if (response.status == 'failed' ) {
+                        var message = response.data;
+                        if(message && (typeof message === 'object' || typeof message === 'Array') ) {
 
-                    } else if (data.status == 'email_not_accept') {
+                            $.each(message, function (index, value) {
+                                $.each(value, function (key, item) {
+                                    toastr.error(item);
+
+                                });
+
+                            });
+                        } else {
+                            toastr.error(message);
+                        }
                         $(':input[type="submit"]').prop('disabled', false);
                         $('#loding_email').hide( );
-
-                        toastr.error(data.error);
-
-                        return false;
-
-                    } else if (data.Successful) {
-                        $(':input[type="submit"]').prop('disabled', false);
-                        $('#loding_email').hide( );
-
-                        return false;
-
-                    } else {
-
-                        toastr.error(data.error);
-                        $(':input[type="submit"]').prop('disabled', false);
-                        $('#loding_email').hide( );
-
-                        return false;
                     }
+                    if (response.status=='success') {
+
+                        $('.sing_up_form').attr('href', "{{route('getInfo')}}" + response.data.send)
+                        $('.sing_up_form').click();
+
+                    }
+
 
                 },
                 error: function (data, textStatus, errorThrown) {
                     console.log(data.responseText);
-                    data = JSON.parse(data.responseText);
-
-                    console.log(textStatus);
-                    $(':input[type="submit"]').prop('disabled', false);
-                    if (typeof data.error === 'array') {
-                        $.each(data.error, function( index, value ) {
-                            $.each(value, function( index1, value1 ) {
-                                toastr.error(value1);
-                            });
-
-                            // alert( index + ": " + value );
-                        });
-                    }else if(typeof data.error === 'string') {
-                        toastr.error(data.error);
-                    }else{
-                        toastr.error('{{__('messages.can not register')}}');
-                    }
+                   return false;
 
                 }
             });

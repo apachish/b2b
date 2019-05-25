@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('css')
-    <style href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"></style>
+    <style href="{{asset('css/jquery.dataTables.min.css')}}"></style>
 @endsection
 @section('content')
 <!-- START PAGE CONTAINER -->
@@ -30,7 +30,8 @@
 
                     <form id="formtranslator" action="{{ route('admin.translates.change') }}" method="post">
                         {{csrf_field()}}
-
+                        <a href="{{route('translators.create')}}" class="btn btn-info "><i
+                                    class="fa fa-plus"></i></a>
                         <button class="btn btn-info "><i
                                     class="fa fa-exchange"></i></button>
                         <div class="panel-body">
@@ -70,7 +71,7 @@
             <script type='text/javascript' src='/js/admin/plugins/icheck/icheck.min.js'></script>
             <script type="text/javascript" src="/js/admin/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
 
-            <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
+            <script type="text/javascript" src="{{asset('js/datatables.min.js')}}"></script>
             <!-- END PAGE PLUGINS -->
 
             <!-- START TEMPLATE -->

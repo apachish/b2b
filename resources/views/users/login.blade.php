@@ -28,13 +28,8 @@
 <div class="p10 pt5 pb0">
     <form action="{{route('email')}}" id="email_form" class="form-horizontal"
           method="post" enctype="multipart/form-data">
-        {{--        @if (is_array($error)):--}}
-        {{--            @foreach ($error as $err):--}}
-        {{--                <p class="mt8 red">{{$err}}</p>--}}
-        {{--            @endforeach;--}}
-        {{--        @else:--}}
-        {{--            <p class="mt8 red">' . $error . '</p>--}}
-        {{--        @endif;--}}
+        {{csrf_field()}}
+
         <p class="textemail"><i class="icon-email"></i>{{__("messages.Enter your Email")}}</p>
         <p class="mt8">
             <span class="box">

@@ -33,33 +33,32 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
-        view()->composer('*', function($view)
-        {
-            if (starts_with(Request::root(), 'http://'))
-            {
-                $domain = substr (Request::root(), 7); // $domain is now 'www.example.com'
+        view()->composer('*', function ($view) {
+            if (starts_with(Request::root(), 'http://')) {
+                $domain = substr(Request::root(), 7); // $domain is now 'www.example.com'
             }
-            if (starts_with(Request::root(), 'https://'))
-            {
-                $domain = substr (Request::root(), 7); // $domain is now 'www.example.com'
+            if (starts_with(Request::root(), 'https://')) {
+                $domain = substr(Request::root(), 7); // $domain is now 'www.example.com'
             }
-            $view->telephone="";
-            $countries =  Country::where('status',1)->get();
+            $view->telephone = "";
+            $countries = Country::where('status', 1)->get();
             $view->countries = $countries;
-            $user_country = auth()->check()?auth()->user()->country:null;
-            if(!$user_country){
+            $user_country = auth()->check() ? auth()->user()->country : null;
+            if (!$user_country) {
                 $ip_info = \Cache::get(Request::ip());
-                $user_country = data_get($ip_info,'country_id');
+                $user_country = data_get($ip_info, 'country_id');
             }
             $view->user_country = $user_country;
-            $portal  = Portal::whereDomain($domain)->first();
-            if($portal){
-                $site_info = json_decode($portal->meta_data,true);
-                $view->social = json_decode($portal->social,true);
-
-                $view->telephone=!empty($site_info['telephone'])?$site_info['telephone']:"";
+            $portal = Portal::whereDomain($domain)->first();
+            if ($portal) {
+                $site_info = json_decode($portal->meta_data, true);
+                $view->social = json_decode($portal->social, true);
+                \Cache::rememberForever('portal',function () use($portal){
+                   return $portal;
+                });
+                $view->telephone = !empty($site_info['telephone']) ? $site_info['telephone'] : "";
             }
-            if (Request::is('admin*') ) {
+            if (Request::is('admin*')) {
                 $view->Count_notification_product_enquiry = 0;
                 $view->notification_product_enquiry = [];
                 $view->Count_notification_enquiry = 0;
@@ -74,22 +73,24 @@ class AppServiceProvider extends ServiceProvider
                 $view->notification_banner = [];
                 $view->Count_notification_user = 0;
                 $view->notification_user = [];
-            }else{
-                $menus = CategoryMenu::with('menus')->where('locale',app()->getLocale())
-                    ->whereHas('menus',function ($q){
-                        $q->where('status',1);
-                    })->whereHas('portals',function ($q) use ($portal){
-                        $q->where('portal_id',$portal->id);
+            } else {
+                $menus = CategoryMenu::with('menus')->where('locale', app()->getLocale())
+                    ->whereHas('menus', function ($q) {
+                        $q->where('status', 1);
+                    })->whereHas('portals', function ($q) use ($portal) {
+                        $q->where('portal_id', $portal->id);
                     })
                     ->get();
-                $list_menu= [];
-                foreach ($menus  as $menu){
+                $list_menu = [];
+                foreach ($menus as $menu) {
                     $list_menu[$menu->position] = $menu;
                 }
-                $view->routeName = Request::route()->getName();
+                $view->routeName = "";
+                if (Request::route())
+                    $view->routeName = Request::route()->getName();
                 $view->title_menu = null;
-                foreach (data_get($list_menu,'main_menu.menus') as $menu_main){
-                    if($menu_main->base_url == $view->routeName)
+                foreach (data_get($list_menu, 'main_menu.menus') as $menu_main) {
+                    if ($menu_main->base_url == $view->routeName)
                         $view->title_menu = $menu_main->title;
                 }
 

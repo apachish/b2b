@@ -16,17 +16,16 @@ class CreateArticlesTable extends Migration
         Schema::create('articles', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title');
+            $table->string('slug');
             $table->text('description');
             $table->text('body');
-            $table->text('detail');
-            $table->string('image');
-            $table->tinyInteger('sort_order');
+            $table->string('image')->default('noImage.png');
+            $table->mediumInteger('sort_order');
             $table->boolean('status')->default(false);
             $table->string('locale');
-            $table->tinyInteger('position');
             $table->boolean('feature');
-            $table->unsignedBigInteger('last_modified_by');
-            $table->foreign('last_modified_by')
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade')
@@ -44,7 +43,7 @@ class CreateArticlesTable extends Migration
     {
         Schema::dropIfExists('articles', function(Blueprint $table){
 
-            $table->dropForeign('articles_last_modified_by_foreign');
+            $table->dropForeign('articles_user_id_foreign');
         });
     }
 }

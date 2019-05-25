@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Media extends Model
 {
     use UploadImage;
-    protected $fillable = ['media_type', 'media'];
+    protected $fillable = ['type', 'media'];
 
     const TYPE_MEDIA_PHOTO = 'photo';
     const TYPE_MEDIA_VIDEO = 'video';

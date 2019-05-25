@@ -31,7 +31,7 @@ $(document).ready(function () {
     var myVar = setInterval(myTimer,  20 * 60 * 1000);
 
     function myTimer() {
-        $.post('/users/checkLogin', function(data, status){
+        $.get('/users/checkLogin', function(data, status){
             if(!data.data.login){
                 if ($('#cboxOverlay').css('display')=='block'){
                     console.log('omadam1');

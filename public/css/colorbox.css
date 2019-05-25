@@ -29,7 +29,7 @@
     padding: 1px;
     position: absolute;
     top: 12px;}
-        #cboxLoadingGraphic{background:url(images/loading.gif) no-repeat center center;}
+        #cboxLoadingGraphic{background:url(/images/loading.gif) no-repeat center center;}
         #cboxLoadingOverlay{background:#000;}
         #cboxTitle{position: absolute;
     top: -22px;

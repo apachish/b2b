@@ -50,7 +50,7 @@ class TranslatorsController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.translates.create');
     }
 
     /**
@@ -61,7 +61,19 @@ class TranslatorsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'key' => 'required',
+            'name_fa' => 'required',
+            'name_en' => 'required',
+        ]);
+
+        LanguageLine::create([
+            'group' => 'messages',
+            'key' => $request->key,
+            'text' => ['en' => $request->name_en, 'fa' => $request->name_fa],
+        ]);
+        return redirect('admin/translators');
+
     }
 
     /**

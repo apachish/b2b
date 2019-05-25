@@ -12,6 +12,8 @@
 */
 
 Route::get('/','IndexController@index');
+Auth::routes(['verify' => true]);
+
 
 Auth::routes();
 Route::get('/move', 'Admin\CategoriesController@move');
@@ -36,24 +38,32 @@ Route::get('home/advertisement', 'HomeController@index')->name('advertisement');
 Route::get('home/help', 'HomeController@index')->name('help');
 Route::get('home/contact_us', 'HomeController@index')->name('contact_us');
 Route::get('home/companies', 'HomeController@index')->name('home.companies');
+Route::get('home/company/featured/{slug_category?}', 'HomeController@index')->name('company.featured');
+Route::get('home/companies/{slug}', 'HomeController@index')->name('company.detail');
 Route::get('home/buyselllead', 'HomeController@index')->name('home.buyselllead');
 Route::get('home/selllead', 'HomeController@index')->name('home.selllead');
 Route::get('home/articles', 'HomeController@index')->name('home.articles');
+Route::get('home/articles/{slug}', 'HomeController@index')->name('home.articles.details');
 Route::get('home/sitemap', 'HomeController@index')->name('sitemap');
-Route::get('home/products', 'HomeController@index')->name('home.products');
-Route::get('home/featured', 'HomeController@index')->name('home.featured');
+Route::get('home/leads/{slug-category}/{slug-product}', 'HomeController@index')->name('home.leads.details');
+Route::get('home/leads', 'HomeController@index')->name('home.leads');
+Route::get('home/leads', 'HomeController@index')->name('home.products');
+Route::get('home/featured/{/select}', 'HomeController@index')->name('home.featured');
 Route::get('home/categories/{slug?}', 'CategoriesController@index')->name('home.categories');
 Route::get('companies', 'HomeController@index')->name('companies');
 Route::get('testimonials', 'HomeController@index')->name('testimonials');
+Route::get('testimonials/{slug}', 'HomeController@index')->name('testimonials.details');
 Route::post('newsLetter', 'NewsLettersController@send')->name('newsLetter');
 Route::post('post_request', 'ContactUsController@postRequest')->name('post_request');
 Route::get('captcha', 'HomeController@index')->name('captcha');
 Route::post('search', 'SearchController@index')->name('search');
+Route::post('refer-friend', 'SearchController@index')->name('refer-friend');
 
 Route::get('users/singIn', 'UserController@login')->name('singIn');
 Route::post('users/email', 'UserController@email')->name('email');
 Route::get('users/singUp', 'UserController@register')->name('singUp');
-Route::post('users/store', 'UserController@store')->name('userStore');
+Route::post('users/checkRegister', 'UserController@checkRegister')->name('checkRegister');
+Route::post('users/store', 'UserController@store')->name('users.store');
 Route::get('users/getInfo', 'UserController@getInfo')->name('getInfo');
 Route::get('users/checkLogin', 'UserController@checkLogin')->name('checkLogin');
 Route::get('admin','Admin\IndexController@showLoginForm');

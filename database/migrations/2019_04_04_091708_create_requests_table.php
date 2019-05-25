@@ -34,7 +34,7 @@ class CreateRequestsTable extends Migration
             $table->longText('comments');
 
             $table->enum('status',[0,1,2,-1,3])->comment('0->new,1->active,2->read,-1->deactivate,3->new for user');
-            $table->text('reply');
+            $table->text('reply')->nullable();
             $table->timestamps();
         });
     }

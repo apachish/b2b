@@ -27,4 +27,8 @@ class Category extends Model
         'parent_id'
     ];
 
+    public function getCategoryTitle()
+    {
+        return app()->getLocale()=='fa'?$this->name_fa:$this->name;
+    }
 }

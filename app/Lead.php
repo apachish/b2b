@@ -26,11 +26,21 @@ class Lead extends Model
         return $this->belongsToMany(Media::class)->withTimestamps();//withPivot(['created_at'])//change pivot to tag
     }
 
+
+    public function pagePositions()
+    {
+        return $this->belongsToMany(PagePosition::class,'page_position_model','id_model');//withPivot(['created_at'])//change pivot to tag
+    }
+
     public function requests()
     {
         return $this->hasMany(Request::class);
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
     /**
      * Return the sluggable configuration array for this model.
      *

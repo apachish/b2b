@@ -22,18 +22,18 @@ class CreateBannersTable extends Migration
                 ->on('users')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-            $table->string('banner_position');
+            $table->enum('banner_position',Banner::type_position('key'));
             $table->tinyInteger('time_duration');
             $table->string('image');
+            $table->string('title');
             $table->string('banner_url');
-            $table->string('banner_page');
             $table->enum('status',[-1,1,0])->comment('0-> new ,1-> active,-1->deactivate');
             $table->enum('banner_type',[Banner::BANNER_ADMIN,Banner::BANNER_USER]);
             $table->dateTime('start_date');
             $table->dateTime('end_date');
-            $table->tinyInteger('sort_order');
-            $table->integer('clicks');
-            $table->string('locale');
+            $table->integer('sort_order');
+            $table->integer('clicks')->default(0);
+            $table->string('locale')->default('fa');
             $table->timestamps();
         });
     }

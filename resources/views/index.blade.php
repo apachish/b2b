@@ -7,119 +7,31 @@
                 <div id="blog-sidebar" class="col-lg-3 hidden-md  hidden-sm right-sidebar hidden-xs">
 
                     @include('menu_category')
+                    @include('banner_right')
 
-                    @if($banner_right)
-                        <div class="right-sideimg">
-                            {{$banner_right}}
-                        </div>
-                    @endif
                 </div>
                 <div id="blog-main" class="col-lg-9 col-md-12 col-xs-12 col-sm-12 ">
                     <div class="row">
-
-                        <div class="slider col-lg-8 col-md-8 col-xs-12">
-                            @if ($home_scrolling)
-                                <div class="fluid_container">
-                                    <div class="fluid_dg_wrap fluid_dg_charcoal_skin fluid_container"
-                                         id="fluid_dg_wrap_1">
-                                        @foreach ($home_scrolling as $j => $scroll)
-                                            @if (!empty($scroll->src))
-                                                <div data-src="{{$scroll->src}}"></div>
-                                            @endif
-                                        @endforeach
-                                    </div>
-                                </div>
-                            @endif
-                        </div>
-                        @if (!empty($articles))
-                            <div class="articles col-lg-4 col-md-4 col-xs-12">
-                                <p class="morelink"><a href="{{route('articles')}}"
-                                                       title="View All">{{__("messages.View All")}}  </a></p>
-                                <h3 class="title-cat">{{__("messages.Articles")}}  </h3>
-                                <div class="bodyarticles">
-                                    <p class="art-title"><a
-                                                href="{{route('articles',['id'=>$articles->id])}}">{{$articles->title}}</a>
-                                    </p>
-                                    <p class="art-date">{{ __("messages.Posted on")}}
-                                        : {{$articles->updated_at}}
-                                        - {{__("messages.by")}} {{$article->last_modified_by}}</p>
-
-                                    <p class="art-des">{{$article->description}},....</p>
-                                </div>
-                            </div>
-                        @endif
+                        @include('home_scrolling')
+                        @include('articles')
                     </div>
                     <div class="leads row">
-                        <div class="rightlead col-lg-6 col-md-6 col-xs-12">
-                            <div class="leadsbody">
-                                <h3 class="title-leads">{{__('messages.New Buying Leads')}}<a
-                                            href="{{route("home.products", ['type' => 'buy'])}}"
-                                            class="allleads">{{$count_buy}}</a></h3>
-                                <a class="morelead_buy"
-                                   href="{{route('home.products', ['type' => 'buy'])}}">{{__('messages.View All')}}
-                                </a>
-                                <div style="height:120px;" class="rel o-hid">
-                                    <div class="{{$count_buy>= 10 ?"lead_scroll1":"" }} body-leads">
-                                        <ul class="leads_list">
-                                            @foreach ($buy_leads as $buy)
-                                                <li>
-                                                    <a href="{{route('leads',['id'=>$buy->id,'category_id'=> $buy->category->id])}}"
-                                                       title="">{{$buy->tittle}}<span
-                                                                class="date-lead">{{$buy->publish_at}}</span></a>
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                </div>
-                                <a class="more-leads {{ auth()->check()?"":"group1"}}"
-                                   href="{{auth()->check()?route('members.post_lead.type_ad',['type_ad' => 'buy']):route('singUp') }}"
-
-                                   title="{{auth()->check() ? __('messages.Post Buying Leads') : __('messages.Sign In')}}">{{__('messages.Post Buying Leads')}}</a>
-
-                            </div>
-                        </div>
-                        <div class="leftlead col-lg-6 col-md-6 col-xs-12">
-                            <div class="leadsbody">
-                                <h3 class="title-leads">{{__('messages.New Selling Leads')}}<a
-                                            href="{{route("home.products", ['type' => 'sell'])}}"
-                                            class="allleads">{{$count_sell}}</a></h3>
-                                <a class="morelead_sell"
-                                   href="{{route('home.products', ['type' => 'buy'])}}">{{__('messages.View All')}}
-                                </a>
-                                <div style="height:120px;" class="rel o-hid">
-                                    <div class="{{$count_buy>= 10 ?"lead_scroll2":"" }}  body-leads">
-                                        <ul class="leads_list">
-                                            @foreach ($sell_leads as $sell)
-                                                <li>
-                                                    <a href="{{route('leads',['id'=>$sell->id,'category_id'=> $sell->category->id])}}"
-                                                       title=""> {{$sell->title}} <span
-                                                                class="date-lead">{{$buy->publish_at}}</span></a>
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                </div>
-                                <a class="more-leads {{ auth()->check()?"":"group1"}}"
-                                   href="{{auth()->check()?route('members.post_lead.type_ad',['type_ad' => 'sell']):route('singUp') }}"
-
-                                   title="{{auth()->check() ? __('messages.Post Selling Leads') : __('messages.Sign In')}}">{{__('messages.Post Selling Leads')}}</a>
-                            </div>
-                        </div>
+                        @include('leads_list',['leads'=>$leads_buy,'class'=>'rightlead','title_lead'=>__('messages.New Buying Leads'),'type'=>'buy','scroll_class'=>'lead_scroll1'])
+                        @include('leads_list',['leads'=>$leads_sell,'class'=>'leftlead','title_lead'=>__('messages.New Selling Leads'),'type'=>'sell','scroll_class'=>'lead_scroll2'])
                     </div>
                     <div class="row">
-
                         <div class="buttom-lead col-lg-9 col-md-12 col-xs-12 col-sm-9">
-                            @if ($products_featured1 || $products_featured2 || $products_featured3)
+                            @if ($products_featured)
                                 <div class="hidden-xs products-home col-lg-12">
                                     <p class="morelink products-home-more"><a
-                                                href="{{route('home/featured',['select'=>'all'])}}"
+                                                href="{{route('home.featured',['select'=>'all'])}}"
                                                 title="View All">{{ __("messages.View All")}} </a>
                                     </p>
                                     <h3 class="title-cat products-home-title">{{__("messages.Featured Products")}}</h3>
                                     <!--list row 1-->
-                                    @include('leads.featured_slider',['products_featured' => $products_featured1, 'index' => 1])
-                                    @include('leads.featured_slider',['products_featured' => $products_featured2, 'index' => 2])
-                                    @include('leads.featured_slider',['products_featured' => $products_featured3, 'index' => 3])
+                                    @include('leads.featured_slider',['offset' => 0, 'limit' => 10,'index'=>1])
+                                    @include('leads.featured_slider',['offset' => 10, 'limit' => 20,'index'=>2])
+                                    @include('leads.featured_slider',['offset' => 20, 'limit' => 300,'index'=>3])
                                 </div>
                         @endif
                         <!-- End Product Home -->
@@ -127,27 +39,21 @@
                         @include('box_category')
                         <!-- End Categories -->
                             <!--Special Product -->
-                        @include('companies.company_featured',['company_featured' => $companies, 'company_featured_type' => 2])
+                        @include('companies.company_featured',[ 'company_featured_type' => 2,'category_slug'=>null])
 
 
                         <!-- End Special -->
                         </div>
                         <div class="innerleftsidebar col-lg-3 hidden-md col-xs-12 hidden-sm">
-                        @if ($banner_left)
-                            <!--Left Sidebar Images -->
-                                <div class="imgleftsidebar">
-                                    {{$banner_left}}
-                                </div>
-                                <!-- End Left Sidebar Images -->
-                        @endif
+
+                        @include('banner_left',['offset'=>0,'limit' => 5])
 
                         <!-- Testmonials -->
                         @include('testimonials.scroll-side')
 
                         <!-- End Testmonials -->
-                            <div class="imgleftsidebar">
-                                {{$banner_left_2}}
-                            </div>
+                            @include('banner_left',['offset'=>5,'limit' => 6])
+
                         </div>
 
                     </div>
@@ -191,22 +97,15 @@
                 </form>
             </div>
         </div>
-        @if ($articles)
+        @if (data_get($articles,1))
             <div class="container aboutus">
-                <p class="morelink"><a href="{{route("home/articles", ["id" => $articles->id])}}"
+                <p class="morelink"><a href="{{route("home.articles.details", ["slug" => $articles[1]->slug])}}"
                                        title="Read More" class="more-about">{{__("messages.More")}}</a></p>
-                <h3 class="title-cat">{{$articles->title}} </h3>
-                <p class="des-about">{{$articles->description}}</div>
+                <h3 class="title-cat">{{$articles[1]->title}} </h3>
+                <p class="des-about">{{$articles[1]->description}}</div>
         @endif
-    </section>
-    @if($banner_button)
-        <div class="bg-gray">
-            <div class="wrapper ac">
-                <!--        <img src="/images/b_bnr1.jpg" alt=""> <img src="/images/b_bnr2.jpg" class="ml5" alt="">-->
-                {{$banner_button}}
-            </div>
-        </div>
-    @endif
+
+        @include('banner_button')
     <!--<script src="/old_js/jssor.slider-25.0.7.min.js" type="text/javascript"></script>-->
     <script type="text/javascript">
         jQuery(document).ready(function ($) {

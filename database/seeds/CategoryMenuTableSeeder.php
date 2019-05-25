@@ -42,6 +42,7 @@ class CategoryMenuTableSeeder extends Seeder
         ];
         foreach ($category as $set) {
             $category_menu = \App\CategoryMenu::updateOrCreate($set);
+            if($set['id'] != 27 || $set['id'] != 26)
             $category_menu->portals()->attach([5,6]);
 
         }

@@ -13,5 +13,6 @@ return [
         'admin_email' => 'support@buysellyab.com',//'info@worldbtob.com',//support@buysellyab.com
         'admin_name' => 'Manegment Site Buysellyab',
         'admin_name_fa' => 'مدیریت سایت بایسیل یاب',
-    ]
+    ],
+    'portal'=>0
 ];

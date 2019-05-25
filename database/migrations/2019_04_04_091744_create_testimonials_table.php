@@ -17,19 +17,19 @@ class CreateTestimonialsTable extends Migration
             $table->bigIncrements('id');
             $table->string('title');
             $table->string('poster_name');
+            $table->string('slug');
             $table->string('company');
             $table->string('email');
-            $table->text('testimonial_description');
+            $table->text('description');
             $table->unsignedBigInteger('city_id');
             $table->foreign('city_id')
                 ->references('id')
                 ->on('cities')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-            $table->string('photo');
             $table->boolean('is_footer')->default(false);
             $table->boolean('status')->default(false);
-            $table->string('locale');
+            $table->string('locale')->default('fa');
             $table->timestamps();
         });
     }
