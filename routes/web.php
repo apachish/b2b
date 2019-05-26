@@ -25,6 +25,7 @@ Route::get('/member/post-lead', 'HomeController@index')->name('members.post_lead
 Route::get('members/myaccount', 'HomeController@index')->name('members.myaccount');
 Route::get('members/login', 'HomeController@index')->name('members.login');
 Route::get('members/register', 'HomeController@index')->name('members.register');
+Route::get('members/forgot/password', 'HomeController@index')->name('members.forgot_password');
 
 Route::get('/member/manage-leads', 'HomeController@index')->name('members.manage_leads');
 Route::get('/member/manage-enquiry', 'HomeController@index')->name('members.manage_enquiry');

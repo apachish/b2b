@@ -508,24 +508,14 @@
                     <h6>{{data_get($menus,'footer_6.title')}}</h6>
                     @foreach ($menus['footer_6']['menus'] as $menu)
 
-                        @if($menu->page_url)
+                    @if($menu->page_url)
                             @php $param = json_decode($menu->page_url,true); @endphp
                         @else
                             @php $param = [];@endphp
                         @endif
-                        @php $metaData = json_decode($menu['metaData'],true);
-                $url = !empty($metaData['url'])?$metaData['url']:'/';@endphp
-                        @if($menu['permission']=='customer' && !auth()->user())
-                            @php $href = route('user/email', array("title" => __('messages.Sign In'))); @endphp
-                        @else
-                            @php $href = route($menu['base_url'], $param); @endphp
-                        @endif
-                        @if(!empty($menu['permission']) && auth()->user())
-                            @php $menu['class'] = str_replace('group1','',$menu['class']);@endphp
-                        @endif
 
                         <li>
-                            <a href="{{$href}}"
+                            <a href="{{route($menu->base_url,$param)}}"
                                title="{{$menu->title}}" class="{{data_get($menu,'class')}}"
 
                             >{{$menu->title}}

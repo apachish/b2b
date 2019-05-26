@@ -29,7 +29,7 @@
     <form action="{{route('email')}}" id="email_form" class="form-horizontal"
           method="post" enctype="multipart/form-data">
         {{csrf_field()}}
-
+        <div id="get_email">
         <p class="textemail"><i class="icon-email"></i>{{__("messages.Enter your Email")}}</p>
         <p class="mt8">
             <span class="box">
@@ -41,15 +41,37 @@
                            id="contentselect">
             </span>
         <p class="textsafe"><i class="icon-check-circle">{{__("messages.Your email is safe with us")}}</i></p>
-        <img src="/images/loading.gif" id="loding_email"  style="width: 30px;height: 30px;display: none"/>
 
-        <input name="input" type="submit" id="submit" value="{{__("messages.Sign In")}}">
+        <input name="input" type="button" id="submit" value="{{__("messages.Sign In")}}">
         <i class="icon-android-send"></i>
-        <a style="display: none" href=""
-           class="group2 sing_up_form" title="">
-            {{__("messages.Join Free")}}
-        </a>
+
         </p>
+        </div>
+        <div id="get_pasword"  style="display: none">
+            <p class="textemail"><i class="icon-email"></i>{{__('messages.Enter your Password')}}</p>
+            <p class="mt8">
+            <span class="box">
+                    <input type="password" name="credential" placeholder="{{__("messages.Password")}} "
+                           class="contentselect p8 w40 radius-3 vam" value="{{old('password')}}"
+                           id="input_password"><a toggle="#password-field" id="checkPassword"><i class="icon-eye"></i></a>
+            </span>
+            <p class="textsafe">
+                <label>
+                    <input  type="checkbox" value="1"  checked name="remember_me" >
+                    <span>{{__('messages.Keep Me Logged In')}})</span> </label>
+            </p>
+            <a  href="{{route('members.forgot_password')}}"
+                class="group3 sing_up_form" title="{{__('messages.Forgot my password')}}">
+                <p class="textsafe"><i class="icon-lock"></i>
+                    {{__('messages.Forgot my password')}}
+                </p>
+            </a>
+            <input name="input" type="submit" id="submit" value="{{__('messages.Login')}}">
+            <i class="icon-android-send"></i>
+
+            </p>
+        </div>
+
     </form>
 </div>
 <!-- Load jQuery from CDN so can run demo immediately -->
@@ -65,11 +87,28 @@
     });
     $(document).ready(function () {
 
-        $(".group2").colorbox({transition: "none", width: "auto", height: "auto"});
-
+        $('#checkPassword').click(function(){
+            var type = $('#input_password').attr('type');
+            if(type== 'password'){
+                $('#input_password').attr('type', 'text');
+                $( "#checkPassword i" ).removeClass('icon-eye').addClass( "icon-eye-slash" );
+            }else{
+                $('#input_password').attr('type', 'password');
+                $( "#checkPassword i" ).removeClass('icon-eye-slash').addClass( "icon-eye" );
+            }
+            // $(this).is(':checked') ? $('#input_password').attr('type', 'text') : $('#input_password').attr('type', 'password');
+        });
+        $(".group3").colorbox({transition: "none", width: "auto", height: "auto"});
         sessionStorage.setItem("status", false);
-
-        $("#email_form").submit(function (e) {
+        $("#email_form").click(function (e) {
+            if (!validateEmail($('#contentselect').val())) {
+                toastr.error('{{__('messages.email  valid between 4 to 100 character')}}');
+                return false;
+            }
+            $('#get_email').hide();
+            $('#get_pasword').show();
+        })
+        $("#email_password_form").submit(function (e) {
 
             if (!validateEmail($('#contentselect').val())) {
                 toastr.error('{{__('messages.email  valid between 4 to 100 character')}}');
@@ -90,42 +129,65 @@
                 contentType: false,
                 cache: false,
                 processData: false,
-                success: function (data, textStatus, jqXHR) {
-                    console.log(data);
-                    data = JSON.parse(data);
-                    console.log(data);
-                    if (data.Successful == 'register'  || data.Successful == 'password') {
-                        // $('.sing_up_form').show();
-                        $('.sing_up_form').attr('href', "{{route('getInfo')}}" + username)
-                        $('.sing_up_form').click();
-                    } else if (data.status == 'login') {
+                success: function (response, textStatus, jqXHR) {
+                    console.log(response);
+                    if (response.status == 'failed' ) {
+                        var message = response.data;
+                        if(message && (typeof message === 'object' || typeof message === 'Array') ) {
 
-                        toastr.success(data.Successful);
+                            $.each(message, function (index, value) {
+                                $.each(value, function (key, item) {
+                                    toastr.error(item);
+
+                                });
+
+                            });
+                        } else {
+                            toastr.error(message);
+                        }
+                        $(':input[type="submit"]').prop('disabled', false);
+                        $('#loding_email').hide( );
+                    }
+                    if (response.status=='success') {
+
+                        toastr.success(response.data.message);
                         $(".ajax").colorbox.close();
                         window.location = "members/myAccount";
 
-                    } else if (data.status == 'email_not_accept') {
-                        $(':input[type="submit"]').prop('disabled', false);
-                        $('#loding_email').hide( );
-
-                        toastr.error(data.error);
-
-                        return false;
-
-                    } else if (data.Successful) {
-                        $(':input[type="submit"]').prop('disabled', false);
-                        $('#loding_email').hide( );
-
-                        return false;
-
-                    } else {
-
-                        toastr.error(data.error);
-                        $(':input[type="submit"]').prop('disabled', false);
-                        $('#loding_email').hide( );
-
-                        return false;
                     }
+
+                    {{--if (response.Successful == 'register'  || data.Successful == 'password') {--}}
+                    {{--    // $('.sing_up_form').show();--}}
+                    {{--    $('.sing_up_form').attr('href', "{{route('getInfo')}}" + username)--}}
+                    {{--    $('.sing_up_form').click();--}}
+                    {{--} else if (data.status == 'login') {--}}
+
+                    {{--    toastr.success(data.Successful);--}}
+                    {{--    $(".ajax").colorbox.close();--}}
+                    {{--    window.location = "members/myAccount";--}}
+
+                    {{--} else if (data.status == 'email_not_accept') {--}}
+                    {{--    $(':input[type="submit"]').prop('disabled', false);--}}
+                    {{--    $('#loding_email').hide( );--}}
+
+                    {{--    toastr.error(data.error);--}}
+
+                    {{--    return false;--}}
+
+                    {{--} else if (data.Successful) {--}}
+                    {{--    $(':input[type="submit"]').prop('disabled', false);--}}
+                    {{--    $('#loding_email').hide( );--}}
+
+                    {{--    return false;--}}
+
+                    {{--} else {--}}
+
+                    {{--    toastr.error(data.error);--}}
+                    {{--    $(':input[type="submit"]').prop('disabled', false);--}}
+                    {{--    $('#loding_email').hide( );--}}
+
+                    {{--    return false;--}}
+                    {{--}--}}
 
                 },
                 error: function (data, textStatus, errorThrown) {

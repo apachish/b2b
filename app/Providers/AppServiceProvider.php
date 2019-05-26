@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Category;
 use App\CategoryMenu;
 use App\Country;
 use App\Menu;
@@ -83,6 +84,26 @@ class AppServiceProvider extends ServiceProvider
                     ->get();
                 $list_menu = [];
                 foreach ($menus as $menu) {
+                    if($menu->type_menu == 'category'){
+                        $categories = Category::where('status',1)->where('parent_id',Null)->orderByRaw('RAND()')->take(18)->get();
+                        $base_url = 'home/category';
+                        $item = [];
+                        $i=1;
+                        foreach ($categories as $cat){
+                            $row = new \stdClass();
+
+                            $row->title =  $cat->getCategoryTitle();
+                            $row->base_url='home.categories';
+                            $row->class='';
+                            $row->page_url=json_encode(['slug'=>app()->getLocale()=='fa'?$cat->slug_fa:$cat->slug]);
+                            $metaData['value'] = $cat->id;
+                            $metaData['title'] = $cat->getCategoryTitle();
+                            $metaData['url'] = route('home.categories',['slug'=>app()->getLocale()=='fa'?$cat->slug_fa:$cat->slug]);
+                            $row->metaData = json_encode($metaData);
+                            $menu->menus[$i++] = $row;
+                        }
+                        $menu->menus = $menu->menus->sortKeysDesc();
+                    }
                     $list_menu[$menu->position] = $menu;
                 }
                 $view->routeName = "";
