@@ -3,6 +3,7 @@
 use App\Article;
 use App\Banner;
 use App\Category as CategoryAlias;
+use App\Comment;
 use App\Lead;
 use App\Media;
 use App\PagePosition;
@@ -45,7 +46,9 @@ class UserSeed extends Seeder
 
             }
         });
-        factory(Article::class, 100)->create();
+        factory(Article::class, 100)->create()->each(function ($article) {
+            $article->comments()->saveMany(factory(Comment::class, rand(1, 10))->make());
+        });
         factory(Testimonial::class, 100)->create();
 
     }

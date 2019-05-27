@@ -23,6 +23,8 @@ Route::get('/home', 'IndexController@index')->name('home');
 Route::get('reCaptcha', 'IndexController@reCaptcha')->name('reCaptcha');
 Route::get('/pages/{page_slug?}', 'PagesController@index')->name('home.pages');
 Route::get('/articles/{article_slug?}', 'ArticlesController@index')->name('home.articles');
+Route::get('/articles/{article_slug?}/comment', 'ArticlesController@loadComment')->name('home.articles.comments');
+Route::post('/articles/{article_slug?}/comment/send', 'ArticlesController@sendComment')->name('home.articles.comments.send');
 Route::get('/contact_us', 'ContactUsController@index')->name('home.contact_us');
 Route::get('/site-map', 'IndexController@siteMap')->name('home.site-map');
 Route::get('advertisement', 'AdvertisementController@index')->name('advertisement');
