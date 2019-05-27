@@ -192,7 +192,7 @@
                             <h4><?= __('messages.Type Lead')?></h4>
                             <div class="col-xs-12 divfilter">
                                 <p><input {{($type == 'buyselllead' || $type == 'selllead') ? "checked" : ""}} type="checkbox" value="1" name="filter[adType]"><label>{{__('messages.Sell')}}</label></p>
-                                <p><input {{ ($type == 'buyselllead' || $type == 'buylead') ? "checked" : "" }} type="checkbox" value="2" name="filter[adType]"><label>{{__('messages.Buy')}}</label></p>
+                                <p><input {{ ($type == 'buyselllead' || $type == 'buy-lead') ? "checked" : "" }} type="checkbox" value="2" name="filter[adType]"><label>{{__('messages.Buy')}}</label></p>
                             </div>
                         </div>
                         <!--          <div class="col-lg-3 col-sm-2 col-md-2 col-xs-12 divfilter divfilter5">-->

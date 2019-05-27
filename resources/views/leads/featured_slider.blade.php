@@ -20,16 +20,16 @@
                     <div class="pro_list">
                         <div class="pro_pc">
                             <figure>
-                                <a href="{{route('home.leads.details', ['cat_id'=>$products_featured[$i]['categoryId'],'id' => $products_featured[$i]['id']])}}"
+                                <a href="{{route('home.leads.leads',['slug_categories'=>$products_featured[$i]->categories->first()->slug,'slug_leads'=> $products_featured[$i]->id])}}"
                                    title=""><img src="{{'images/medias/photos/'.data_get($products_featured[$i],'medias.0.media')}}"
                                                  alt="{{$products_featured[$i]->name}}}"></a></figure>
                         </div>
                         <p class="fs11 weight700 blue mt8"><a
-                                    href="{{route('home.leads.details', ['cat_id'=>$products_featured[$i]['categoryId'],'id' => $products_featured[$i]['id']])}}"
+                                    href="{{route('home.leads.leads',['slug_categories'=>$products_featured[$i]->categories->first()->slug,'slug_leads'=> $products_featured[$i]->id])}}"
                                     class="uo"
                                     title= "{{$products_featured[$i]->name}}">{{short_string($products_featured[$i]->name,14)}}</a></p>
                         <p class="fs11 red weight600"><a
-                                    href="{{route('company.detail', ['cat_id'=>$products_featured[$i]['categoryId'],'id' => $products_featured[$i]['supplier_id']])}}"
+                                    href="{{route('home.companies.info', ['slug_companies'=>$products_featured[$i]->user->slug])}}"
                                     class="uo"
                                     title="{{$products_featured[$i]->user->fullName}}">{{short_string($products_featured[$i]->user->fullName,30)}}</a>
                         </p>

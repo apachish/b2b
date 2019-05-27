@@ -21,6 +21,7 @@ class Lead extends Model
         return $this->belongsToMany(Category::class)->withTimestamps();//withPivot(['created_at'])//change pivot to tag
     }
 
+
     public function medias()
     {
         return $this->belongsToMany(Media::class)->withTimestamps();//withPivot(['created_at'])//change pivot to tag

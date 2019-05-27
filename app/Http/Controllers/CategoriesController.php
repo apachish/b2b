@@ -8,7 +8,7 @@ use phpDocumentor\Reflection\Types\Null_;
 
 class CategoriesController extends Controller
 {
-    public function index(Request $request, $slug = null)
+    public function index(Request $request, $slug_categories = null)
     {
         $compact = [];
         $category =  [];
@@ -26,8 +26,8 @@ class CategoriesController extends Controller
         $compact['breadcrumbs'] = [];
         $compact['page_name'] = "";
 
-        if ($slug) {
-            $category = Category::Where('slug_fa', $slug)->orWhere('slug', $slug)->withDepth()->with('ancestors')->firstOrFail();
+        if ($slug_categories) {
+            $category = Category::Where('slug_fa', $slug_categories)->orWhere('slug', $slug_categories)->withDepth()->with('ancestors')->firstOrFail();
             $id = $category->id;
             $categories = Category::withDepth()->where('parent_id', $category->id)->with(['descendants' => function ($query) {
                 return $query->take(5);
@@ -53,8 +53,8 @@ class CategoriesController extends Controller
                 }
             }
             $categories = $categories->paginate(18);
-            $page = $slug;
-            $params['slug'] = $slug;
+            $page = $slug_categories;
+            $params['slug'] = $slug_categories;
 
         } else {
             $categories = Category::whereParentId(Null)->with(['descendants' => function ($query) {

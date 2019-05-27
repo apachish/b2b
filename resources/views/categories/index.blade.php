@@ -176,15 +176,16 @@
                     <!--                        <img src="/images/mb3.gif" width="468" height="60" alt="">-->
                     </p>
                     <div class="hidden-xs products-home col-lg-12">
+{{--                        #todo  list lead related category--}}
                         <p class="morelink products-home-more"><a
-                                    href="{{route('home.featured')."?category=&featured=".$type_featured}}"
+                                    href="{{route('home.featured',['select'=>'all'])}}"
                                     title="View All">{{ __("messages.View All") }}</a>
                         </p>
                         <h3 class="title-cat products-home-title">{{ __("messages.Products") }}</h3>
                         <!--list row 1-->
                         @include('leads.featured_slider',['products_featured' => $products_featured1, 'index' => 1])
                     </div>
-                    @include('companies.company_featured',['company_featured' => $companies, 'company_featured_type' => 2])
+                    @include('companies.company_featured',['company_featured' => $companies, 'company_featured_type' => 2,'category_slug'=>null])
                     <p class="imginnerbtn">
                     {{ $banner_middle_2 }}
                     <!--                        <img src="/images/mb3.gif" width="468" height="60" alt="">-->

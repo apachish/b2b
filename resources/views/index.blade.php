@@ -99,7 +99,7 @@
         </div>
         @if (data_get($articles,1))
             <div class="container aboutus">
-                <p class="morelink"><a href="{{route("home.articles.details", ["slug" => $articles[1]->slug])}}"
+                <p class="morelink"><a href="{{route("home.articles", ["article-slug" => $articles[1]->slug])}}"
                                        title="Read More" class="more-about">{{__("messages.More")}}</a></p>
                 <h3 class="title-cat">{{$articles[1]->title}} </h3>
                 <p class="des-about">{{$articles[1]->description}}</div>

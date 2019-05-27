@@ -346,8 +346,17 @@
             </div>
             <div class="mb-footer">
                 <div class="pull-right">
-                    <a href="{{route('logout')}}"
-                       class="btn btn-success btn-lg">{{__("messages.Yes")}}</a>
+                        <a  href="{{ route('logout') }}" title="{{__('messages.Logout')}}" class="btn btn-success btn-lg"
+                            onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+
+                            {{__("messages.Yes")}}
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+
                     <button class="btn btn-default btn-lg mb-control-close">{{ __("messages.NO")}}</button>
                 </div>
             </div>

@@ -81,7 +81,7 @@
                                             <option {{ !empty($page['member_link_item']) && $page['member_link_item']=='manage_leads'?'selected':''}}  value="manage_leads" >{{__("messages.Manage Leads")}}</option>
                                             <option {{ !empty($page['member_link_item']) && $page['member_link_item']=='manage_enquiry'?'selected':''}}  value="manage_enquiry" >{{__("messages.Manage Enquiries")}}</option>
                                             <option {{ !empty($page['member_link_item']) && $page['member_link_item']=='edit_account'?'selected':''}}  value="edit_account" >{{__("messages.Update Profile Info")}}</option>
-                                            <option {{ !empty($page['member_link_item']) && $page['member_link_item']=='myaccount'?'selected':''}}  value="myaccount" >{{__("messages.profile")}}</option>
+                                            <option {{ !empty($page['member_link_item']) && $page['member_link_item']=='my-account'?'selected':''}}  value="my-account" >{{__("messages.profile")}}</option>
                                             <option {{ !empty($page['member_link_item']) && $page['member_link_item']=='login'?'selected':''}}  value="login" >{{__("messages.LogIn")}}</option>
                                             <option {{ !empty($page['member_link_item']) && $page['member_link_item']=='register'?'selected':''}}  value="register" >{{__("messages.Register")}}</option>
                                             <option {{ !empty($page['member_link_item']) && $page['member_link_item']=='logout'?'selected':''}}  value="logout" >{{__("messages.LogOut")}}</option>
@@ -123,7 +123,7 @@
                                             <option {{data_get($page,'type_category')=='companies'?'selected':''}}  value="companies">{{__("messages.Companies")}}</option>
                                             <option {{data_get($page,'type_category')=='buyselllead'?'selected':''}} value="buyselllead">{{__("messages.Product")}}</option>
                                             <option {{data_get($page,'type_category')=='selllead'?'selected':''}} value="selllead">{{__("messages.Sell")}}</option>
-                                            <option {{data_get($page,'type_category')=='buylead'?'selected':''}} value="buylead">{{__("messages.Buy")}}</option>
+                                            <option {{data_get($page,'type_category')=='buy-lead'?'selected':''}} value="buy-lead">{{__("messages.Buy")}}</option>
                                         </select>
                                         <span class="help-block"></span>
                                     </div>

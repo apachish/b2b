@@ -743,7 +743,7 @@
     <script>
         $(document).ready(function ($) {
 
-            $(".group1").colorbox({rel: 'group1', width: "30%"});
+            $(".group1").colorbox({rel: 'group1',  width: "auto", height: "320px"});
             $('.changelocal').on('click', function () {
                 $('body').removeClass('loaded');
 

@@ -11,31 +11,29 @@ use App\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Encryption\Encrypter;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Foundation\Auth\VerifiesEmails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 
-class UserController extends Controller
+class AuthController extends Controller
 {
-    use VerifiesEmails;
+    use AuthenticatesUsers;
+    protected $redirectTo = '/members/my-account';
     public function __construct()
     {
         $this->middleware('check-location');
 
     }
 
-    public function login()
+    public function showLoginForm()
     {
         return view('users.login');
 
     }
 
-    public function email()
-    {
-        return view('users.login');
 
-    }
 
     public function register(Request $request)
     {

@@ -60,9 +60,9 @@
                         </div>
                         <div class="ads_type">
                             <a href="{{ route('home.companies', $params) }}" {{ $type == 'companies' ? 'class="act"' : '' }}>{{ __("messages.Companies") }}</a>
-                            <a href="{{ route('home.buyselllead', $params) }}" {{ ($type == 'buyselllead' || $type == 'category') ? 'class="act"' : '' }}>{{ __("messages.Products") }}</a>
-                            <a href="{{ route('home.buylead', $params) }}" {{ $type == 'buylead' ? 'class="act"' : '' }}>{{ __("messages.Buy Leads") }}</a>
-                            <a href="{{ route('home.selllead', $params) }}" {{ $type == 'selllead' ? 'class="act"' : '' }}>{{ __("messages.Sell Leads") }}</a>
+                            <a href="{{ route('home.leads', $params) }}" {{ ($type == 'buyselllead' || $type == 'category') ? 'class="act"' : '' }}>{{ __("messages.Products") }}</a>
+                            <a href="{{ route('home.leads.buy', $params) }}" {{ $type == 'buy-lead' ? 'class="act"' : '' }}>{{ __("messages.Buy Leads") }}</a>
+                            <a href="{{ route('home.leads.sell', $params) }}" {{ $type == 'sell-lead' ? 'class="act"' : '' }}>{{ __("messages.Sell Leads") }}</a>
                         </div>
                         @if ($type == 'companies')
                             <form action="{{route($routeName,$paramss)}}" method="post" id="form_filter">

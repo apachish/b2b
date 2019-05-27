@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Article;
 use App\Banner;
 use App\Category;
+use App\CategoryMenu;
 use App\Lead;
 use App\Testimonial;
 use App\User;
@@ -28,7 +29,7 @@ class IndexController extends Controller
             ->take(30)->get();
         $products_featured = Lead::whereStatus(1)->with(['user', 'medias' => function ($q) {
             $q->where('is_default', true);
-        }])->where('approval_status', 2)->orderByRaw('RAND()')->take(30)->get();
+        },'categories'])->where('approval_status', 2)->orderByRaw('RAND()')->take(30)->get();
 
         $categories = Category::get()->toTree();
         $period_array = [
@@ -60,5 +61,17 @@ class IndexController extends Controller
             ],
             'data' => ['captcha' => captcha_src('flat')]
         ], 200);
+    }
+
+    public function siteMap(Request $request){
+        $portal = \Cache::get('portal');
+        $menus = CategoryMenu::with('menus')->where('locale', app()->getLocale())
+            ->whereHas('menus', function ($q) {
+                $q->where('status', 1);
+            })->whereHas('portals', function ($q) use ($portal) {
+                $q->where('portal_id', $portal->id);
+            })
+            ->get();
+        return view('site-map',compact('menus'));
     }
 }

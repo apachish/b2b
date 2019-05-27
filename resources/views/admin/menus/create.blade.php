@@ -107,7 +107,7 @@
                                                 <option value="companies">{{__("messages.Companies")}}</option>
                                                 <option value="buyselllead">{{__("messages.Product")}}</option>
                                                 <option value="selllead">{{__("messages.Sell")}}</option>
-                                                <option value="buylead">{{__("messages.Buy")}}</option>
+                                                <option value="buy-lead">{{__("messages.Buy")}}</option>
                                             </select>
                                             <span class="help-block"></span>
                                         </div>
@@ -127,7 +127,7 @@
                                                 <option value="logout">{{__("messages.LogOut")}}</option>
                                                 <option value="login">{{__("messages.LogIn")}}</option>
                                                 <option value="register">{{__("messages.Register")}}</option>
-                                                <option value="myaccount">{{__("messages.Profile")}}</option>
+                                                <option value="my-account">{{__("messages.Profile")}}</option>
                                             </select>
                                             <span class="help-block"></span>
                                         </div>

@@ -1,17 +1,17 @@
 <div class="{{$class}} col-lg-6 col-md-6 col-xs-12">
     <div class="leadsbody">
         <h3 class="title-leads">{{$title_lead}}<a
-                    href="{{route("home.products", ['type' => $type])}}"
+                    href="{{route("home.leads", ['type' => $type])}}"
                     class="allleads">{{sizeof($leads)}}</a></h3>
         <a class="morelead_buy"
-           href="{{route('home.products', ['type' => $type])}}">{{__('messages.View All')}}
+           href="{{route('home.leads', ['type' => $type])}}">{{__('messages.View All')}}
         </a>
         <div style="height:120px;" class="rel o-hid">
             <div class="{{sizeof($leads) >= 10 ?$scroll_class:"" }} body-leads">
                 <ul class="leads_list">
                     @foreach ($leads as $lead)
                         <li>
-                            <a href="{{route('home.leads.details',['id'=>$lead->id,'category_id'=> ''])}}"
+                            <a href="{{route('home.leads.leads',['slug_categories'=>$lead->categories->first()->slug,'slug_leads'=> $lead->id])}}"
                                title="">{{$lead->name}}<span
                                         class="date-lead">{{app()->getLocale()=='fa'?toJalali($lead->publish_at):$lead->publish_at}}</span></a>
                         </li>

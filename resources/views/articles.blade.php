@@ -6,7 +6,7 @@
     <h3 class="title-cat">{{__("messages.Articles")}}  </h3>
     <div class="bodyarticles">
         <p class="art-title"><a
-                href="{{route('home.articles.details',['id'=>$articles[0]->id])}}">{{$articles[$i]->title}}</a>
+                href="{{route('home.articles',['article-slug'=>$articles[0]->slug])}}">{{$articles[$i]->title}}</a>
         </p>
         <p class="art-date">{{ __("messages.Posted on")}}
             : {{$articles[$i]->updated_at}}

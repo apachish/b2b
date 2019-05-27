@@ -26,7 +26,7 @@
 </style>
 </head>
 <div class="p10 pt5 pb0">
-    <form action="{{route('email')}}" id="email_form" class="form-horizontal"
+    <form action="{{route('popup-login')}}" id="email_password_form" class="form-horizontal"
           method="post" enctype="multipart/form-data">
         {{csrf_field()}}
         <div id="get_email">
@@ -36,22 +36,23 @@
                     <input id="country_selector" class="datatext p8 w40 radius-3 vam" type="text">
                     <label for="country_selector"
                            style="display:none;">{{__("messages.Select a country here...")}}</label>
-                    <input type="text" name="identity" placeholder="{{__("messages.Email")}}"
+                    <input type="text" name="email" placeholder="{{__("messages.Email")}}"
                            class="contentselect p8 w40 radius-3 vam"
                            id="contentselect">
             </span>
         <p class="textsafe"><i class="icon-check-circle">{{__("messages.Your email is safe with us")}}</i></p>
 
-        <input name="input" type="button" id="submit" value="{{__("messages.Sign In")}}">
-        <i class="icon-android-send"></i>
+            <a id="click_email">
+        <input name="input" type="button" id="submit"   value="{{__("messages.Sign In")}}">
+        <i class="icon-android-send"></i></a>
 
         </p>
         </div>
-        <div id="get_pasword"  style="display: none">
+        <div id="get_password"  style="display: none">
             <p class="textemail"><i class="icon-email"></i>{{__('messages.Enter your Password')}}</p>
             <p class="mt8">
             <span class="box">
-                    <input type="password" name="credential" placeholder="{{__("messages.Password")}} "
+                    <input type="password" name="password" placeholder="{{__("messages.Password")}} "
                            class="contentselect p8 w40 radius-3 vam" value="{{old('password')}}"
                            id="input_password"><a toggle="#password-field" id="checkPassword"><i class="icon-eye"></i></a>
             </span>
@@ -66,8 +67,9 @@
                     {{__('messages.Forgot my password')}}
                 </p>
             </a>
-            <input name="input" type="submit" id="submit" value="{{__('messages.Login')}}">
+            <input name="input" type="submit" id="submit" value="{{__('messages.Sign In')}}">
             <i class="icon-android-send"></i>
+            <img src="/img/blueimp/loading.gif" id="loding_email"  style="width: 30px;height: 30px;display: none"/>
 
             </p>
         </div>
@@ -100,35 +102,32 @@
         });
         $(".group3").colorbox({transition: "none", width: "auto", height: "auto"});
         sessionStorage.setItem("status", false);
-        $("#email_form").click(function (e) {
+        $("#click_email").click(function (e) {
             if (!validateEmail($('#contentselect').val())) {
                 toastr.error('{{__('messages.email  valid between 4 to 100 character')}}');
                 return false;
             }
             $('#get_email').hide();
-            $('#get_pasword').show();
+            $('#get_password').show();
         })
         $("#email_password_form").submit(function (e) {
 
-            if (!validateEmail($('#contentselect').val())) {
-                toastr.error('{{__('messages.email  valid between 4 to 100 character')}}');
-                return false;
-            }
+
             $(':input[type="submit"]').prop('disabled', true);
             $('#loding_email').show( );
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
             var formObj = $(this);
             var formURL = formObj.attr("action");
-            var formData = new FormData(this);
-            var username = $('#contentselect').val();
-
             $.ajax({
                 url: formURL,
                 type: 'POST',
-                data: formData,
-                mimeType: "multipart/form-data",
-                contentType: false,
-                cache: false,
-                processData: false,
+                data: $('#email_password_form').serialize(),
+                dataType: "json",
                 success: function (response, textStatus, jqXHR) {
                     console.log(response);
                     if (response.status == 'failed' ) {
@@ -152,7 +151,7 @@
 
                         toastr.success(response.data.message);
                         $(".ajax").colorbox.close();
-                        window.location = "members/myAccount";
+                        window.location = "members/my-account";
 
                     }
 
