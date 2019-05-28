@@ -132,7 +132,7 @@ class PortalTableSeeder extends Seeder
                 'id' => 5,
                 'title' => 'worldbtob',
                 'description' => '',
-                'domain' => 'b2b.worldbtob.com',
+                'domain' => '/b2b.worldbtob.com',
                 'locale' => 'fa',
                 'status'=>1,
                 'social' => json_encode([
