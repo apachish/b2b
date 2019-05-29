@@ -181,7 +181,7 @@
                     <div class="mb-footer">
                         <div class="pull-right">
                             <button class="btn btn-success btn-lg mb-control-yes">{{ __("messages.Yes")}}</button>
-                            <button class="btn btn-default btn-lg mb-control-close">{{ __("messages.No")}}</button>
+                            <button class="btn btn-default btn-lg mb-control-close">{{ __("messages.NO")}}</button>
                         </div>
                     </div>
                 </div>

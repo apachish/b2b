@@ -17,9 +17,9 @@ class CreatePagesTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('friendly_url');
-            $table->text('short_description');
-            $table->text('description');
-            $table->string('image');
+            $table->text('short_description')->nullable();
+            $table->longText('description');
+            $table->string('image')->nullable();
             $table->boolean('status');
             $table->string('locale');
             $table->unsignedBigInteger('last_modified_by');

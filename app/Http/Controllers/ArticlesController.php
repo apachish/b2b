@@ -19,7 +19,7 @@ class ArticlesController extends Controller
         if ($article_slug) {
             $article = Article::with(['comments' => function ($query) use($order_by) {
                 $query->take(5)->orderBy('created_at', 'DESC')->get();
-            }])->whereSlug($article_slug)->first();
+            }])->whereSlug($article_slug)->whereStatus(1)->whereLocale(app()->getLocale())->first();
             return view('articles.show', compact('article','banner_left','testimonials'));
 
         } else {

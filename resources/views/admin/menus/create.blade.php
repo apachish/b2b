@@ -76,7 +76,7 @@
                                     <div class="form-group" id="parent">
                                         <label class="col-md-3 control-label">{{__("messages.Select Category Menu ")}}</label>
                                         <div class="col-md-9">
-                                            <select class="form-control" id="parent" name="category">
+                                            <select class="form-control" id="parent" name="parent_id">
                                                 <option value="">{{__("messages.Select Category Menu")}}</option>
 
                                                 @foreach ($category_menus as $category_menu)
@@ -86,19 +86,7 @@
                                             <span class="help-block"></span>
                                         </div>
                                     </div>
-                                    <div class="form-group" id="parent">
-                                        <label class="col-md-3 control-label">{{__("messages.Select Parent")}}</label>
-                                        <div class="col-md-9">
-                                            <select class="form-control" id="parent" name="parent">
-                                                <option value="">{{__("messages.Select Parent")}}</option>
 
-                                                @foreach ($menus as $menu)
-                                                    <option value="{{$menu['id']}}">{{$menu['title']}}</option>
-                                                @endforeach
-                                            </select>
-                                            <span class="help-block"></span>
-                                        </div>
-                                    </div>
                                     <div class="form-group extend" id="type_category" style="display: none">
                                         <label class="col-md-3 control-label">{{__("messages.Select Category Type")}}</label>
                                         <div class="col-md-9">

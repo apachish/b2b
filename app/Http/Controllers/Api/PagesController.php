@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Resources\PageCollection;
 use App\Page;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -13,9 +14,20 @@ class PagesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request,$id=null,$status='active',$language=false)
     {
-        //
+        $pages = Page::query();
+        if($status){
+            $status = $status=='active'?1:0;
+            $pages->where('status',$status);
+        }
+        $search = data_get($request,'term.term');
+        if($search){
+            $pages->where('name','like','%'.$search.'%');
+        }
+        $pages = $pages->get();
+        $pages = new PageCollection($pages);
+        return $pages;
     }
 
     /**
@@ -82,21 +94,5 @@ class PagesController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function move()
-    {
-        $pages =\DB::table('tbl_cms_pages')->get();
-        foreach ($pages as $page){
-            Page::create([
-                'name'=>$page->page_name,
-                'short_description'=>$page->page_short_description,
-                'description'=>$page->page_description,
-                'image'=>$page->image,
-                'status'=>1,
-                'locale'=>$page->language,
-                'last_modified_by'=>1
-            ]);
-        }
     }
 }

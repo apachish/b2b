@@ -6,5 +6,8 @@ use Illuminate\Http\Request;
 
 class HelpsController extends Controller
 {
-    //
+    public function index()
+    {
+        
+    }
 }

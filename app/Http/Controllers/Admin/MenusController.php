@@ -38,9 +38,8 @@ class MenusController extends Controller
     {
         $seller_type = config('global.seller_type');
         $category_menus = CategoryMenu::where('status',1)->get();
-        $menus = Menu::with('categoryMenu')->get();
 
-        return view('admin.menus.create',compact('seller_type','category_menus','menus'));
+        return view('admin.menus.create',compact('seller_type','category_menus'));
 
     }
 
@@ -84,12 +83,12 @@ class MenusController extends Controller
                         $data['metaData']['title'] = $category->name;
                         $data['metaData']['title_fa'] = $category->name_fa;
                         $data['metaData']['url'] = $base_url.'/'. $category->getCategoryId();
-                        $data['pageUrl'] = json_encode(['id'=>$category->id]) ;
+                        $data['page_url'] = json_encode(['id'=>$category->id]) ;
                     }else{
                         $data['metaData']['value'] = "";
                         $data['metaData']['title'] = "";
                         $data['metaData']['url'] = $base_url;
-                        $data['pageUrl'] = json_encode([]) ;
+                        $data['page_url'] = json_encode([]) ;
                     }
                     break;
                 case 'product':
@@ -100,12 +99,12 @@ class MenusController extends Controller
                             $data['metaData']['value'] = $product->id;
                             $data['metaData']['title'] = $product->name;
                             $data['metaData']['url'] = $base_url.'/'. $product->id;
-                            $data['pageUrl'] = json_encode(['id'=>$product->id]) ;
+                            $data['page_url'] = json_encode(['id'=>$product->id]) ;
                         }else{
                             $data['metaData']['value'] = "";
                             $data['metaData']['title'] = "";
                             $data['metaData']['url'] = $base_url;
-                            $data['pageUrl'] = json_encode([]) ;
+                            $data['page_url'] = json_encode([]) ;
                         }
                     }
                     break;
@@ -117,12 +116,12 @@ class MenusController extends Controller
                             $data['metaData']['value'] = $article->id;
                             $data['metaData']['title'] = $article->titile;
                             $data['metaData']['url'] = $base_url.'/'. $article->id;
-                            $data['pageUrl'] = json_encode(['id'=>$article->id]) ;
+                            $data['page_url'] = json_encode(['id'=>$article->id]) ;
                         }else{
                             $data['metaData']['value'] = "";
                             $data['metaData']['title'] = "";
                             $data['metaData']['url'] = $base_url;
-                            $data['pageUrl'] = json_encode([]) ;
+                            $data['page_url'] = json_encode([]) ;
                         }
                     }
                     break;
@@ -134,7 +133,7 @@ class MenusController extends Controller
                             $data['metaData']['value'] = $page->id;
                             $data['metaData']['title'] = $page->name;
                             $data['metaData']['url'] = $base_url.'/'.$page->friendly_url.'/'. $page->id;
-                            $data['pageUrl'] = json_encode(['id'=>$page->id,'page'=>$page->friendly_url]) ;
+                            $data['page_url'] = json_encode(['id'=>$page->id,'page'=>$page->friendly_url]) ;
                         }
 
                     }
@@ -174,7 +173,7 @@ class MenusController extends Controller
                 case 'company':
                     $base_url = 'companies';
                     if(!empty($request->sellerType)){
-                        $data['pageUrl'] = json_encode(['type'=>$request->sellerType]) ;
+                        $data['page_url'] = json_encode(['type'=>$request->sellerType]) ;
                         $data['metaData']['sellerType'] = $request->sellerType;
                     }
                     break;
@@ -182,9 +181,9 @@ class MenusController extends Controller
                     $base_url = 'members'.(!empty($request->member_link_item)?"/".$request->member_link_item:"");
                     if(!empty($request->member_link_item) && ($request->member_link_item=='post_lead' || $request->member_link_item=='newleads') && !empty($request->type_lead)){
                         $base_url .= "/type_ad";
-                        $data['pageUrl'] = json_encode(['type_ad'=>$request->type_lead]) ;
+                        $data['page_url'] = json_encode(['type_ad'=>$request->type_lead]) ;
                     }else{
-                        $data['pageUrl'] = json_encode([]) ;
+                        $data['page_url'] = json_encode([]) ;
 
                     }
                     $data['metaData']['type_lead'] = !empty($request->type_lead)?$request->type_lead:"";
@@ -192,7 +191,7 @@ class MenusController extends Controller
                     break;
 
             }
-            $data['baseUrl'] = $base_url;
+            $data['base_url'] = $base_url;
             $data['metaData'] = json_encode(isset($request->metaData)?$request->metaData:[]);
             $menu = Menu::created($data);
 
@@ -221,18 +220,17 @@ class MenusController extends Controller
      */
     public function edit($id)
     {
-        $menu = CategoryMenu::find($id);
+        $menu = Menu::find($id);
         if($menu== null) abort(404);
         $seller_type = config('global.seller_type');
         $category_menus = CategoryMenu::where('status',1)->get();
-        $menus = Menu::with('categoryMenu')->get();
         $page=[];
         if(!empty($menu['metaData'])) {
             $page = json_decode($menu['metaData'], true);
         }
 
 
-        return view('admin.menus.edit',compact('menu','page','menus','category_menus','seller_type'));
+        return view('admin.menus.edit',compact('menu','page','category_menus','seller_type'));
 
     }
 
@@ -252,7 +250,7 @@ class MenusController extends Controller
             'locale'=>'required',
             'type'=>'required'
         ]);
-        $menu = CategoryMenu::find($id);
+        $menu = Menu::find($id);
         if($menu== null) abort(404);
         $base_url = '';
         $data = $request->all();
@@ -279,12 +277,12 @@ class MenusController extends Controller
                         $data['metaData']['title'] = $category->name;
                         $data['metaData']['title_fa'] = $category->name_fa;
                         $data['metaData']['url'] = $base_url.'/'. $category->getCategoryId();
-                        $data['pageUrl'] = json_encode(['id'=>$category->id]) ;
+                        $data['page_url'] = json_encode(['id'=>$category->id]) ;
                     }else{
                         $data['metaData']['value'] = "";
                         $data['metaData']['title'] = "";
                         $data['metaData']['url'] = $base_url;
-                        $data['pageUrl'] = json_encode([]) ;
+                        $data['page_url'] = json_encode([]) ;
                     }
                     break;
                 case 'product':
@@ -295,12 +293,12 @@ class MenusController extends Controller
                             $data['metaData']['value'] = $product->id;
                             $data['metaData']['title'] = $product->name;
                             $data['metaData']['url'] = $base_url.'/'. $product->id;
-                            $data['pageUrl'] = json_encode(['id'=>$product->id]) ;
+                            $data['page_url'] = json_encode(['id'=>$product->id]) ;
                         }else{
                             $data['metaData']['value'] = "";
                             $data['metaData']['title'] = "";
                             $data['metaData']['url'] = $base_url;
-                            $data['pageUrl'] = json_encode([]) ;
+                            $data['page_url'] = json_encode([]) ;
                         }
                     }
                     break;
@@ -312,12 +310,12 @@ class MenusController extends Controller
                             $data['metaData']['value'] = $article->id;
                             $data['metaData']['title'] = $article->titile;
                             $data['metaData']['url'] = $base_url.'/'. $article->id;
-                            $data['pageUrl'] = json_encode(['id'=>$article->id]) ;
+                            $data['page_url'] = json_encode(['id'=>$article->id]) ;
                         }else{
                             $data['metaData']['value'] = "";
                             $data['metaData']['title'] = "";
                             $data['metaData']['url'] = $base_url;
-                            $data['pageUrl'] = json_encode([]) ;
+                            $data['page_url'] = json_encode([]) ;
                         }
                     }
                     break;
@@ -328,8 +326,8 @@ class MenusController extends Controller
                         if($page instanceof Page){
                             $data['metaData']['value'] = $page->id;
                             $data['metaData']['title'] = $page->name;
-                            $data['metaData']['url'] = $base_url.'/'.$page->friendly_url.'/'. $page->id;
-                            $data['pageUrl'] = json_encode(['id'=>$page->id,'page'=>$page->friendly_url]) ;
+                            $data['metaData']['url'] = $base_url.'/'.$page->friendly_url;
+                            $data['page_url'] = json_encode(['page'=>$page->friendly_url]) ;
                         }
 
                     }
@@ -369,7 +367,7 @@ class MenusController extends Controller
                 case 'company':
                     $base_url = 'companies';
                     if(!empty($request->sellerType)){
-                        $data['pageUrl'] = json_encode(['type'=>$request->sellerType]) ;
+                        $data['page_url'] = json_encode(['type'=>$request->sellerType]) ;
                         $data['metaData']['sellerType'] = $request->sellerType;
                     }
                     break;
@@ -377,9 +375,9 @@ class MenusController extends Controller
                     $base_url = 'members'.(!empty($request->member_link_item)?"/".$request->member_link_item:"");
                     if(!empty($request->member_link_item) && ($request->member_link_item=='post_lead' || $request->member_link_item=='newleads') && !empty($request->type_lead)){
                         $base_url .= "/type_ad";
-                        $data['pageUrl'] = json_encode(['type_ad'=>$request->type_lead]) ;
+                        $data['page_url'] = json_encode(['type_ad'=>$request->type_lead]) ;
                     }else{
-                        $data['pageUrl'] = json_encode([]) ;
+                        $data['page_url'] = json_encode([]) ;
 
                     }
                     $data['metaData']['type_lead'] = !empty($request->type_lead)?$request->type_lead:"";
@@ -387,7 +385,7 @@ class MenusController extends Controller
                     break;
 
             }
-            $data['baseUrl'] = $base_url;
+            $data['base_url'] = $base_url;
             $data['metaData'] = json_encode(isset($request->metaData)?$request->metaData:[]);
             $menu->update($data);
 

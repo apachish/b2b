@@ -21,12 +21,12 @@
         </div>
         @if($type=='buy')
             <a class="more-leads {{ auth()->check()?"":"group1"}}"
-               href="{{auth()->check()?route('members.post_lead.type_ad',['type_ad' => 'buy']):route('singUp') }}"
+               href="{{auth()->check()?route('members.leads.post.type_ad',['type_ad' => 'buy']):route('singUp') }}"
 
                title="{{auth()->check() ? __('messages.Post Buying Leads') : __('messages.Sign In')}}">{{__('messages.Post Buying Leads')}}</a>
         @else
             <a class="more-leads {{ auth()->check()?"":"group1"}}"
-               href="{{auth()->check()?route('members.post_lead.type_ad',['type_ad' => 'sell']):route('singUp') }}"
+               href="{{auth()->check()?route('members.leads.post.type_ad',['type_ad' => 'sell']):route('singUp') }}"
 
                title="{{auth()->check() ? __('messages.Post Selling Leads') : __('messages.Sign In')}}">{{__('messages.Post Selling Leads')}}</a>
         @endif

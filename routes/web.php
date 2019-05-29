@@ -17,6 +17,7 @@ Auth::routes();
 //Route move
 Route::get('/move', 'Admin\CategoriesController@move');
 Route::get('translators/move','Admin\TranslatorsController@move');
+Route::get('page/move','Admin\PagesController@move');
 //Route Guest
 Route::get('/','IndexController@index');
 Route::get('/home', 'IndexController@index')->name('home');

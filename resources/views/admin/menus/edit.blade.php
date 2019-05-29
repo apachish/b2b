@@ -135,20 +135,7 @@
                                             <option value="">{{__("messages.Select Category Menu")}}</option>
 
                                             @foreach ($category_menus as $category_menu)
-                                                <option {{ $category_menu['id'] == $menu['category']?'selected':''}} value="{{$category_menu['id']}}">{{$category_menu['title']."-".$category_menu['position']}}</option>
-                                            @endforeach
-                                        </select>
-                                        <span class="help-block"></span>
-                                    </div>
-                                </div>
-                                <div class="form-group" id="parent" >
-                                    <label class="col-md-3 control-label">{{__("messages.Select Parent")}}</label>
-                                    <div class="col-md-9">
-                                        <select class="form-control" id="parent" name="parent">
-                                            <option value="">{{__("messages.Select Parent")}}</option>
-
-                                            @foreach ($menus as $men)
-                                                <option {{ $men==$menu['parent']?'selected':''}} value="{{$men['id']}}">{{$men['title']}}</option>
+                                                <option {{ $category_menu['id'] == $menu['parent_id']?'selected':''}} value="{{$category_menu['id']}}">{{$category_menu['title']."-".$category_menu['position']}}</option>
                                             @endforeach
                                         </select>
                                         <span class="help-block"></span>
@@ -469,8 +456,9 @@
                         },
                         processResults: function (data) {
                             return {
-                                results: $.map(data, function(obj) {
-                                    return { id: obj.pageId, text: obj.pageName };
+                                results: $.map(data.data, function(obj) {
+                                    console.log(obj.name);
+                                    return { id: obj.id, text: obj.name };
                                 })
                             };
                         }
@@ -532,7 +520,7 @@
                     $('#type_category').show();
                     $('#' + select).show();
                     $('.select2_category').select2({
-                        placeholder: "{{__('messages.Select a Category')}}",
+                        placeholder: "{{ __('messages.Select  Category')}}",
                         width: '100%',
                         minimumInputLength: 2,
                         tags: [],

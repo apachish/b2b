@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enquiry;
 use App\Ip;
+use App\PagePosition;
 use Illuminate\Http\Request;
 
 class ContactUsController extends Controller
@@ -17,6 +18,12 @@ class ContactUsController extends Controller
     {
         $this->middleware('check-location')->only('postRequest');
 
+    }
+
+    public function index()
+    {
+        $positions = PagePosition::get();
+        return view('contact-us.index',compact('positions'));
     }
     public function postRequest(Request $request)
     {

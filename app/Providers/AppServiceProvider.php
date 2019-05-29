@@ -54,6 +54,7 @@ class AppServiceProvider extends ServiceProvider
             if ($portal) {
                 $site_info = json_decode($portal->meta_data, true);
                 $view->social = json_decode($portal->social, true);
+                $view->meta_data = json_decode($portal->meta_data, true);
                 \Cache::rememberForever('portal',function () use($portal){
                    return $portal;
                 });
