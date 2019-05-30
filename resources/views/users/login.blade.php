@@ -61,7 +61,7 @@
                     <input  type="checkbox" value="1"  checked name="remember_me" >
                     <span>{{__('messages.Keep Me Logged In')}})</span> </label>
             </p>
-            <a  href="{{route('members.forgot_password')}}"
+            <a  href="{{route('forgot.password')}}"
                 class="group3 sing_up_form" title="{{__('messages.Forgot my password')}}">
                 <p class="textsafe"><i class="icon-lock"></i>
                     {{__('messages.Forgot my password')}}

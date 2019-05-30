@@ -108,7 +108,7 @@
                                     <li>
                                         <a href="{{ route('singIn') }}"
                                            title="{{__('messages.Sign In')}}"
-                                           class="group1 sing_up">{{__('messages.Sign In')}}
+                                           class="group1 sing_in">{{__('messages.Sign In')}}
                                         </a>
                                     </li>
                                     @if (Route::has('singUp'))
@@ -637,10 +637,9 @@
             </div>
             <div class="col-lg-4 col-md-4 col-sm-5 col-xs-12">
                 @if (Route::has('refer-friend'))
-                    <a href="{{route('refer-friend')}}. " ?link=" .Request::url() . "
-                       &text="  {{base64_encode(__("messages.Site Buysellyab"))}} "
-                       class="footera ajax group1 refer_friend">
-                        <img src="/images/b_icon1.png" alt="">{{__("messages.Refer to friend")}}</a>
+                    <a href='{{route('refer-friend')."?link=".Request::url()."&text=".base64_encode(__("messages.Site Buysellyab"))}}'
+                       class="footera ajax group_refer_friend refer_friend" title="{{__("messages.Refer to friend")}}">
+                        <img src="/images/b_icon1.png" alt="{{__("messages.Refer to friend")}}" ">{{__("messages.Refer to friend")}}</a>
 
                 @endif
             </div>
@@ -744,6 +743,7 @@
         $(document).ready(function ($) {
 
             $(".group1").colorbox({rel: 'group1',  width: "auto", height: "320px"});
+            $(".group_refer_friend").colorbox({rel: 'group_refer_friend',  width: "400px", height: "370px"});
             $('.changelocal').on('click', function () {
                 $('body').removeClass('loaded');
 

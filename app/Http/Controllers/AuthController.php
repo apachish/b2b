@@ -147,7 +147,6 @@ class AuthController extends Controller
                 ]
             ], 200);
         }
-        if (auth()->check()) {
             return response()->json([
                 'status' => 'failed',
                 'meta' => [
@@ -157,7 +156,7 @@ class AuthController extends Controller
                 'data' => [
                     'login' => false
                 ]
-            ], 401);
-        }
+            ], 200);
+
     }
 }

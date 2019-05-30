@@ -28,15 +28,18 @@ $(document).ready(function () {
 });
 
     var ButtonValue;
-    var myVar = setInterval(myTimer,  20 * 60 * 1000);
+    var myVar = setInterval(myTimer,  20 * 60 *1000);
 
     function myTimer() {
         $.get('/users/checkLogin', function(data, status){
             if(!data.data.login){
                 if ($('#cboxOverlay').css('display')=='block'){
                     console.log('omadam1');
-                }else if ($(".sing_up").length){
-                    $('.sing_up').click();
+                    clearInterval(myVar);
+
+                }else if ($(".sing_in").length){
+                    $('.sing_in').click();
+
                     console.log('omadam');
                 }else {
                     console.log('stop');

@@ -31,11 +31,13 @@ Route::get('/site-map', 'IndexController@siteMap')->name('home.site-map');
 Route::get('advertisement', 'AdvertisementController@index')->name('advertisement');
 Route::get('help', 'HelpsController@index')->name('help');
 Route::post('search', 'SearchController@index')->name('search');
-Route::post('refer-friend', 'SearchController@index')->name('refer-friend');
+Route::get('refer-friend', 'InviteController@form')->name('refer-friend');
+Route::post('refer-friend/send', 'InviteController@send')->name('refer-friend.send');
 Route::get('testimonials/{slug?}', 'TestimonialsController@index')->name('testimonials');
 Route::post('newsLetter', 'NewsLettersController@send')->name('newsLetter');
 Route::post('post_request', 'ContactUsController@postRequest')->name('post_request');
 Route::post('featured/{type?}/category/{slug_category?}', 'FeaturedsController@postRequest')->name('home.featured');
+Route::get('users/checkLogin', 'AuthController@checkLogin')->name('checkLogin');
 Route::prefix('auth')
     ->group(function () {
         Route::get('singIn', 'AuthController@showLoginForm')->name('singIn');
@@ -44,8 +46,7 @@ Route::prefix('auth')
         Route::post('checkRegister', 'AuthController@checkRegister')->name('checkRegister');
         Route::post('store', 'AuthController@store')->name('users.store');
         Route::get('getInfo', 'AuthController@getInfo')->name('getInfo');
-        Route::get('checkLogin', 'AuthController@checkLogin')->name('checkLogin');
-        Route::get('checkLogin', 'AuthController@checkLogin')->name('forgot/password');
+        Route::get('forgot/password', 'ForgotPasswordController@showForm')->name('forgot.password');
     });
 Route::prefix('members')
     ->group(function () {});
