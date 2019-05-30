@@ -18,6 +18,7 @@ class PagesController extends Controller
         $order_by = $request->order_by?:'DESC';
         if ($page_slug) {
             $page = Page::whereSlug($page_slug)->whereStatus(1)->whereLocale(app()->getLocale())->first();
+            if($page == null) abort(404);
             return view('pages.show', compact('page','banner_left','testimonials','banner_button'));
 
         } else {
