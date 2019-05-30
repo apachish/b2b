@@ -246,7 +246,6 @@ class CategoriesController extends Controller
         $import_excel->sheet = [$import_excel];
         $category = Excel::import($import_excel, public_path($path . $filename));
         $excel_import = with(new ExcelImport(public_path($path . $filename), $import_excel->category_array))->import();
-        dd($excel_import);
         return redirect('admin/categories');
 
     }

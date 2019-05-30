@@ -119,6 +119,10 @@ Route::middleware('auth')
                 Route::get('leads/excel/upload','LeadsController@Formupload');
                 Route::post('leads/excel/upload','LeadsController@uploadExcel')->name('uploadExcelLead');
                 Route::resource('requests','RequestsController');
+                Route::resource('pages','PagesController');
+                Route::post('pages/status/change/{id}','PagesController@changeStatus')->name('pages.status');
+                Route::get('pages/get/dataTable','PagesController@dataTable')->name('pages.dataTable');
+
                 Route::resource('articles','ArticlesController');
                 Route::resource('comments','CommentsController');
                 Route::resource('members','MembersController');

@@ -81,7 +81,7 @@
         <li class="xn-openable">
             <a href="#"><span class="fa fa-qrcode"></span> <span class="xn-text">{{__('messages.Other Management')}}</span></a>
             <ul>
-                <li><a href="{{url('admin/staticpages')}}"><span class="fa fa-columns"></span> {{__('messages.Static Pages')}}</a></li>
+                <li><a href="{{route('pages.index')}}"><span class="fa fa-columns"></span> {{__('messages.Static Pages')}}</a></li>
                 <li><a href="{{url('admin/mailcontents')}}"><span class="fa fa-envelope"></span>{{__('messages.Mail Contents')}}</a></li>
                 <li><a href="{{url('admin/enquiry')}}"><span class="fa fa-comment"></span> {{__('messages.Manage Enquiry/Bug')}}</a></li>
                 <li><a href="{{url('admin/enquiry/request_call')}}"><span class="fa fa-phone-square"></span> {{__('messages.Manage Requst A Call')}}</a></li>

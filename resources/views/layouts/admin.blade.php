@@ -41,7 +41,9 @@
     {{--    <link href="{{ asset('css/admin/app.css') }}" rel="stylesheet">--}}
     <link rel="stylesheet" type="text/css" id="theme" href="/css/admin/theme-default.css"/>
     <link rel="stylesheet" type="text/css" id="theme" href="/css/toastr.css"/>
+    <link rel="stylesheet" href="/noty/lib/noty.css">
     @yield('css')
+    <script type="text/javascript" src="/noty/lib/noty.js"></script>
 
 </head>
 <body>
@@ -389,6 +391,7 @@
 
 <script type="text/javascript" src="/js/admin/plugins/moment.min.js"></script>
 <script type="text/javascript" src="/js/admin/plugins/daterangepicker/daterangepicker.js"></script>
+
 <!-- END THIS PAGE PLUGINS-->
 
 <!-- START TEMPLATE -->
@@ -400,4 +403,5 @@
 
 <script type="text/javascript" src="/js/admin/plugins.js"></script>
 <script type="text/javascript" src="/js/admin/actions.js"></script>
+
 </html>

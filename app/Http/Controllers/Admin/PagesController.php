@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Page;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
+use Illuminate\Validation\Rule;
 
 class PagesController extends Controller
 {
@@ -15,9 +17,37 @@ class PagesController extends Controller
      */
     public function index()
     {
-        //
+
+        $pages = Page::select('id','name','friendly_url','image',
+            'status','locale','last_modified_by','short_description')->paginate(10);
+        $count = Page::count();
+        return view('admin.pages.index',compact('pages','count'));
     }
 
+    public function dataTable(Request $request)
+    {
+        $search = $request->search;
+        $offset = data_get($request,'start',0);
+        $limit = data_get($request,'length',10);
+        $search = $request->search;
+        $list = Page::select('id','name','friendly_url','image',
+            'status','locale','last_modified_by','short_description');
+        if (data_get($search, 'value')) {
+            $list->where('name','like',"%".data_get($search, 'value')."%")
+                ->orWhere('locale','like',"%".data_get($search, 'value')."%");
+
+        }
+        $count = $list->count();
+        $list = $list->skip($offset)->take($limit)->get();
+        return  $response = array(
+            "draw"=> intval($request->draw),
+            "recordsTotal"=> $count,
+            "recordsFiltered"=> $count,
+            "data"=>$list,
+        );;
+
+
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -25,7 +55,7 @@ class PagesController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.pages.create');
     }
 
     /**
@@ -36,7 +66,24 @@ class PagesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:100',
+            'language' => ['required',Rule::in(['fa','en'])],
+            'description' => 'required|max:1000',
+        ]);
+        Page::create([
+            'name'=>$request->name,
+            'short_description'=>$request->name,
+            'description'=>$request->name,
+            'image'=>$request->file('image')?Page::upload($request->image):'',
+            'status'=>$request->status,
+            'locale'=>$request->language,
+            'last_modified_by'=>auth()->id()
+        ]);
+        flash(__('messages.create Page'));
+
+        return redirect('admin/pages');
+
     }
 
     /**
@@ -47,7 +94,8 @@ class PagesController extends Controller
      */
     public function show($id)
     {
-        //
+        $page = Page::findOrFail($id);
+        return $page;
     }
 
     /**
@@ -58,7 +106,8 @@ class PagesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $page = Page::findOrFail($id);
+        return view('admin.pages.edit',compact('page'));
     }
 
     /**
@@ -70,7 +119,25 @@ class PagesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $page = page::findOrFail($id);
+        $request->validate([
+            'name' => 'required|max:100',
+            'language' => ['required',Rule::in(['fa','en'])],
+            'description' => 'required|max:1000',
+        ]);
+        $page->update([
+            'name'=>$request->name,
+            'short_description'=>$request->name,
+            'description'=>$request->name,
+            'image'=>$request->file('image')?Page::upload($request->image):$page->image,
+            'status'=>$request->status,
+            'locale'=>$request->language,
+            'last_modified_by'=>auth()->id()
+        ]);
+        flash(__('messages.edit Page'));
+
+        return redirect('admin/pages');
+
     }
 
     /**
@@ -81,9 +148,58 @@ class PagesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $page = Page::find($id);
+        if($page == null)
+        {
+            return response()->json([
+                'status' => 'failed',
+                'meta' => [
+                    'code' => 400,
+                    'message' => __('messages.not found page'),
+                ],
+                'data' => []
+            ],200);
+        }
+        File::delete(public_path(Page::$path.$page->image));
+        $page->delete();
+        flash(__('messages.delete Page'));
+
+        return response()->json([
+            'status' => 'success',
+            'meta' => [
+                'code' => 200,
+                'message' => __('messages.Delete status page'),
+            ],
+            'data' => []
+        ],200);
+
     }
 
+    public function changeStatus(Request $request,$id)
+    {
+        $page = Page::find($id);
+        if($page == null)
+        {
+            return response()->json([
+                'status' => 'failed',
+                'meta' => [
+                    'code' => 400,
+                    'message' => __('messages.not found page'),
+                ],
+                'data' => []
+            ],200);
+        }
+        $page->status = $request->status;
+        $page->update();
+        return response()->json([
+            'status' => 'success',
+            'meta' => [
+                'code' => 200,
+                'message' => __('messages.change status page'),
+            ],
+            'data' => []
+        ],200);
+    }
     public function move()
     {
         $pages =\DB::table('tbl_cms_pages')->get();
