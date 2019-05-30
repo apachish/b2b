@@ -231,8 +231,8 @@
                     </div>
                     <div class="topsearch">
                         <div class="sendquery">
-                            @if (Route::has('contact_us'))
-                                <a href="{{route('contact_us')}}" class="sendquerybtn"
+                            @if (Route::has('home.contact_us'))
+                                <a href="{{route('home.contact_us')}}" class="sendquerybtn"
                                    title="{{__('messages.Send Your Query')}}">{{__('messages.Send Your Query')}}</a>
                             @endif
                         </div>
