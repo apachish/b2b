@@ -125,6 +125,7 @@ Route::middleware('auth')
 
                 Route::resource('articles','ArticlesController');
                 Route::post('articles/status/change/{id}','ArticlesController@changeStatus')->name('articles.status');
+                Route::post('articles/action/row','ArticlesController@actionRow')->name('articles.action');
                 Route::get('articles/get/dataTable','ArticlesController@dataTable')->name('articles.dataTable');
                 Route::resource('comments','CommentsController');
                 Route::resource('members','MembersController');

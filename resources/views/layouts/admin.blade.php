@@ -44,6 +44,8 @@
     <link rel="stylesheet" href="/noty/lib/noty.css">
     @yield('css')
     <script type="text/javascript" src="/noty/lib/noty.js"></script>
+    <script type="text/javascript" src="/Lang_js/src/lang.js"></script>
+    <script type="text/javascript" src="/js/language.js"></script>
 
 </head>
 <body>

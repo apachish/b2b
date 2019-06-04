@@ -23,6 +23,7 @@
         "vue": "^2.5.17"
     },
     "dependencies": {
+        "lang.js": "^1.1.14",
         "noty": "^3.2.0-beta"
     }
 }

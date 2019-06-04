@@ -5,7 +5,7 @@
     <ul class="breadcrumb">
         <li><a href="{{route('admin')}}">{{__("messages.Home")}}</a></li>
         <li ><a href="{{route('pages.index')}}">{{__("messages.Pages")}}</a></li>
-        <li class="active"><a href="#">{{__("messages.Create")}}</a></li>
+        <li class="active"><a href="#">{{__("messages.Add")}}</a></li>
     </ul>
     <!-- END BREADCRUMB -->
 
@@ -21,7 +21,7 @@
                     {{csrf_field()}}
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h3 class="panel-title"><strong>{{__("messages.Create")}}</strong> {{__("messages.Page")}}</h3>
+                            <h3 class="panel-title"><strong>{{__("messages.Add")}}</strong> {{__("messages.Page")}}</h3>
                             <ul class="panel-controls">
                                 <li><a href="#" class="panel-remove"><span class="fa fa-times"></span></a></li>
                             </ul>
