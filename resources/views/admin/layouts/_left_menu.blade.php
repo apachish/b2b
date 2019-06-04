@@ -45,15 +45,15 @@
         <li class="xn-openable">
             <a href="#"><span class="fa fa-file-text-o"></span> <span class="xn-text">{{__('messages.Article Management')}}</span></a>
             <ul>
-                <li><a href="{{url('admin/article')}}"><span class="fa fa-file-text"></span> {{__('messages.Articles')}}</a></li>
-                <li><a href="{{url('admin/comment')}}"><span class="fa fa-comment"></span> {{__('messages.Comments')}}</a></li>
+                <li><a href="{{route('articles.index')}}"><span class="fa fa-file-text"></span> {{__('messages.Articles')}}</a></li>
+                <li><a href="{{route('comments.index')}}"><span class="fa fa-comment"></span> {{__('messages.Comments')}}</a></li>
             </ul>
         </li>
         <li class="xn-openable">
             <a href="#"><span class="fa fa-user"></span> <span class="xn-text">{{__('messages.Members Management')}}</span></a>
             <ul>
                 <li>
-                    <a href="{{url('admin/members')}}"><span class="fa fa-user"></span> {{__('messages.Members')}}</a>
+                    <a href="{{route('members.index')}}"><span class="fa fa-user"></span> {{__('messages.Members')}}</a>
                     <div class="informer informer-danger">New</div>
                 </li>
                 <li><a href="{{url('admin/members/manage_membership')}}"><span class="fa fa-tags"></span> {{__('messages.Membership')}}</a></li>
@@ -63,9 +63,9 @@
         <li class="xn-openable">
             <a href="tables.html"><span class="fa fa-globe"></span> <span class="xn-text">{{__('messages.Location Management')}}</span></a>
             <ul>
-                <li><a href="{{url('admin/country')}}"><span class="fa fa-map-marker"></span> {{__('messages.Countries')}}</a></li>
-                <li><a href="{{url('admin/state')}}"><span class="fa fa-location-arrow"></span>{{__('messages.States')}}</a></li>
-                <li><a href="{{url('admin/city')}}"><span class="fa fa-location-arrow"></span> {{__('messages.Cities')}}</a></li>
+                <li><a href="{{route('countries.index')}}"><span class="fa fa-map-marker"></span> {{__('messages.Countries')}}</a></li>
+                <li><a href="{{route('states.index')}}"><span class="fa fa-location-arrow"></span>{{__('messages.States')}}</a></li>
+                <li><a href="{{route('cities.index')}}"><span class="fa fa-location-arrow"></span> {{__('messages.Cities')}}</a></li>
             </ul>
         </li>
         <li class="xn-openable">
@@ -76,7 +76,7 @@
             </ul>
         </li>
         <li>
-            <a href="{{url('admin/newsletter')}}"><span class="fa fa-envelope-o"></span> <span class="xn-text">{{__('messages.NewsLetter')}}</span></a>
+            <a href="{{route('admin.newsletters.index')}}"><span class="fa fa-envelope-o"></span> <span class="xn-text">{{__('messages.NewsLetter')}}</span></a>
         </li>
         <li class="xn-openable">
             <a href="#"><span class="fa fa-qrcode"></span> <span class="xn-text">{{__('messages.Other Management')}}</span></a>

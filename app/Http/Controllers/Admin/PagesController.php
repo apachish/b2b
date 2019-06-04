@@ -69,12 +69,12 @@ class PagesController extends Controller
         $request->validate([
             'name' => 'required|max:100',
             'language' => ['required',Rule::in(['fa','en'])],
-            'description' => 'required|max:1000',
+            'description' => 'required|max:10000',
         ]);
         Page::create([
             'name'=>$request->name,
-            'short_description'=>$request->name,
-            'description'=>$request->name,
+            'short_description'=>$request->short_description,
+            'description'=>$request->description,
             'image'=>$request->file('image')?Page::upload($request->image):'',
             'status'=>$request->status,
             'locale'=>$request->language,
@@ -123,12 +123,13 @@ class PagesController extends Controller
         $request->validate([
             'name' => 'required|max:100',
             'language' => ['required',Rule::in(['fa','en'])],
-            'description' => 'required|max:1000',
+            'short_description' => 'sometimes|max:1000',
+            'description' => 'required|max:10000000',
         ]);
         $page->update([
             'name'=>$request->name,
-            'short_description'=>$request->name,
-            'description'=>$request->name,
+            'short_description'=>$request->short_description,
+            'description'=>$request->description,
             'image'=>$request->file('image')?Page::upload($request->image):$page->image,
             'status'=>$request->status,
             'locale'=>$request->language,

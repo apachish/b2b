@@ -29,45 +29,50 @@
 
                         <form id="formtranslator" action="" method="post">
                             {{csrf_field()}}
-                            <a href="{{route('pages.create')}}" class="btn btn-info "><i
+                            <a href="{{route('articles.create')}}" class="btn btn-info "><i
                                         class="fa fa-plus"></i></a>
+                            <button type="submit" name="action" value="active"
+                                    class="btn btn-success"><i class="glyphicon glyphicon-info-sign"></i>{{__("messages.Active") }}</button>
+                            <button type="submit" name="action" value="deactivate"
+                                    class="btn btn-warning"><i class="glyphicon glyphicon-info-sign"></i>{{__("messages.activate") }}</button>
 
+                            <button type="submit" name="action" value="delete"
+                                    class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i>{{__("messages.lete") }}</button>
+                            <button  name="order_submit" type="submit" class="btn btn-info " value="order_submit"><i
+                                        class="glyphicon glyphicon-sort-by-order"></i>{{__("messages.bmit Order") }}</button>
                             <div class="panel-body">
                                 @include('flash::message')
 
-                                <table id="page_table" class="table ">
+                                <table id="article_table" class="table ">
                                     <thead>
                                     <tr>
                                         <th>
                                             <input type="checkbox" onclick="$('input[name*=\'arr_ids\']').attr('checked', this.checked);" />
                                         </th>
-                                        <th>{{ __("messages.Page Name") }}</th>
-                                        <th>{{ __("messages.Details") }}</th>
+                                        <th>{{ __("messages.Title / Detail") }}</th>
+                                        <th>{{ __("messages.Ordering") }}</th>
                                         <th>{{ __("messages.Language") }}</th>
                                         <th>{{ __("messages.Status") }}</th>
                                         <th>{{ __("messages.Action") }}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach ($pages as $i=>$page)
+                                    @foreach ($articles as $i=>$article)
                                         <tr>
                                             <td>
-                                                {{$page->id}}
+                                                {{$article->id}}
                                             </td>
-                                            <td>{{$page->name}}</td>
+                                            <td>{{$article->title}}</td>
                                             <td>
-                                                <a type="button" class=" mb-control details"
-                                                   data-details="message-box-info-details"
-                                                   data-url="{{route('pages.show',['id'=>$page->id])}}"
-                                                   data-box="#message-box-info-details">{{__('messages.View Details')}}</a>
+                                                {{$article->sort_order}}
                                             </td>
-                                            <td>{{$page->locale}}</td>
+                                            <td>{{__('messages.'.$article->locale)}}</td>
                                             <td>
-                                               {{$page->status}}
+                                               {{$article->status}}
                                             </td>
-                                            <td><a href="{{route('pages.edit',['id'=>$page->id])}}"><i
+                                            <td><a href="{{route('articles.edit',['id'=>$article->id])}}"><i
                                                             class="fa fa-pencil"></i></a>
-                                                <a class="delete" href="#" data-id="{{$page->id}}"><i
+                                                <a class="delete" href="#" data-id="{{$article->id}}"><i
                                                             class="glyphicon glyphicon-remove-circle"></i></a>
                                             </td>
                                         </tr>
@@ -207,16 +212,15 @@
                 }
                 $(document).ready(function () {
 
-                    var table = $('#page_table').DataTable({
+                    var table = $('#article_table').DataTable({
                         "processing": true,
                         "serverSide": true,
-                        // "ajax": 'http://b2bshahriar.com/api/translate',
                         "deferLoading": '{{$count}}',
-                        "ajax": '/admin/pages/get/dataTable',
+                        "ajax": '/admin/articles/get/dataTable',
                         "columns": [
                             {"data": "id"},
-                            {"data": "name"},
-                            {"data": ""},
+                            {"data": "title"},
+                            {"data": "sort_order"},
                             {"data": "locale"},
                             {"data": "status"},
                             {"data": ""}
@@ -231,12 +235,31 @@
                                 orderable: false,
                                 searchable: false
 
+                            },{
+                                'targets': 1,
+                                render: function (data, type, row) {
+                                    return '<p>'+row.title+'</p><a type="button" class=" mb-control details" data-details="message-box-info-details" ' +
+                                        '   onclick="myDetails('+ row.id +')"'  +
+                                        'data-box="#message-box-info-details">{{__('messages.View Details')}}</a>';
+                                },
+                                className: "dt-body-center",
+                                orderable: false,
+                                searchable: false
+
                             }, {
                                 'targets': 2,
                                 render: function (data, type, row) {
-                                    return '<a type="button" class=" mb-control details" data-details="message-box-info-details" ' +
-                                        '   onclick="myDetails('+ row.id +')"'  +
-                                        'data-box="#message-box-info-details">{{__('messages.View Details')}}</a>';
+                                    return '<input type="number" name="order[]" value="'+row.sort_order+'" class="sortOrder form-control"\n'+
+'                                                   id="sortOrder_'+row.sort_order+'">';
+                                },
+                                className: "dt-body-center",
+                                orderable: false,
+                                searchable: false
+
+                            },{
+                                'targets': 3,
+                                render: function (data, type, row) {
+                                    return  trans.get('messages.'+row.local);
                                 },
                                 className: "dt-body-center",
                                 orderable: false,

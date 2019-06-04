@@ -124,19 +124,21 @@ Route::middleware('auth')
                 Route::get('pages/get/dataTable','PagesController@dataTable')->name('pages.dataTable');
 
                 Route::resource('articles','ArticlesController');
+                Route::post('articles/status/change/{id}','ArticlesController@changeStatus')->name('articles.status');
+                Route::get('articles/get/dataTable','ArticlesController@dataTable')->name('articles.dataTable');
                 Route::resource('comments','CommentsController');
                 Route::resource('members','MembersController');
                 Route::resource('membership','MembershipController');
                 Route::resource('orders','OrdersController');
                 Route::resource('countries','CountriesController');
-                Route::resource('satates','SatatesController');
+                Route::resource('states','SatatesController');
                 Route::resource('cities','CitiesController');
                 Route::resource('/menus/categories','CategoriesMenuController',[
                     'as' => 'menus'
                 ]);
                 Route::resource('menus','MenusController');
                 Route::resource('newsletters','NewslettersController',[
-                    'as' => 'admin.newsletters'
+                    'as' => 'admin'
                 ]);
                 Route::resource('templates/mail','TemplatesMailController');
                 Route::resource('enquiries','EnquiriesController');
