@@ -4,25 +4,22 @@
 
     <!-- START BREADCRUMB -->
     <ul class="breadcrumb">
-        <li><a href="<?= $this->url('admin') ?>"><?= $this->translate("Home") ?></a></li>
-        <li><a href="<?= $this->url('admin/products') ?>"><?= $this->translate("Leads") ?></a></li>
-        <li class="active"><a href="#"><?= $this->translate("Edit") ?></a></li>
+        <li><a href="{{ route('admin')}}">{{ __("messages.Home") }}</a></li>
+        <li><a href="{{ route('leads.index')}}">{{ __("messages.Leads") }}</a></li>
+
+        <li class="active"><a href="#">{{ __("messages.Edit") }}</a></li>
     </ul>
     <!-- END BREADCRUMB -->
     <!-- PAGE CONTENT WRAPPER -->
     <div class="page-content-wrap">
-        <?php
-        if ($error)
-            foreach ($error as $key => $message) {
-                echo '<span class="error-bubble col-xs-6 col-xs-offset-6">
-				  <span class="error-message">' . $key . '=>' . $message . '</span>
-				</span>';
-            }
-        ?>
+        @include('admin.error')
+
         <div class="row">
             <div class="col-md-12">
-                <form action="<?= $this->url('admin/products/edit', array("id" => $lead['id'])) ?>" id="jvalidate"
+                <form action="{{route('leads.edit', array("id" => $lead->id)}} " id="jvalidate"
                       class="form-horizontal" method="post" enctype="multipart/form-data">
+                    {{csrf_field()}}
+                    @method('PATCH')
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h3 class="panel-title">
