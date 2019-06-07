@@ -13,9 +13,36 @@ class Lead extends Model
     use SluggableScopeHelpers;
     use UploadImage;
 
-    protected $fillable = ['user_id', 'name', 'ad_type', 'no_of_visits', 'product_friendly_url', 'description', 'detail_description', 'status',
-        'new_status', 'approval_status', 'push_request', 'sort_order', 'publish_at', 'meta_data', 'city_id', 'locale', 'meta_keywords'];
+    protected $fillable = ['user_id', 'name', 'ad_type', 'no_of_visits', 'product_friendly_url', 'description', 'detail_description', 'status'
+        , 'approval_status', 'push_request', 'sort_order', 'publish_at', 'meta_data', 'city_id', 'locale', 'meta_keywords'];
+    const STATUS_INACTIVE    = 0;
+    const STATUS_ACTIVE       = 1;
 
+    const APPROVAL_STATUS_PENDING    = 1;
+    const APPROVAL_STATUS_APPROVED       = 2;
+    const APPROVAL_STATUS_REJECTED     = 3;
+    public function typeApprovalStatus($type=null)
+    {
+        $approval_status = [
+            self::APPROVAL_STATUS_PENDING    => __('messages.Pending'),
+            self::APPROVAL_STATUS_APPROVED       => __('messages.Approved'),
+            self::APPROVAL_STATUS_REJECTED     => __('messages.Rejected'),
+
+        ];
+        if($type == 'key') return array_keys($approval_status);
+        if($type && array_key_exists($type,$approval_status)) return $approval_status[$type];
+        return [];
+    }
+    public function typeStatus($type=null)
+    {
+        $type_status = [
+            self::STATUS_INACTIVE    => __('messages.Inactive'),
+            self::STATUS_ACTIVE       =>  __('messages.Active'),
+        ];
+        if($type == 'key') return array_keys($type_status);
+        if($type && array_key_exists($type,$type_status)) return $type_status[$type];
+        return '';
+    }
     public function categories()
     {
         return $this->belongsToMany(Category::class)->withTimestamps();//withPivot(['created_at'])//change pivot to tag
@@ -26,7 +53,6 @@ class Lead extends Model
     {
         return $this->belongsToMany(Media::class)->withTimestamps();//withPivot(['created_at'])//change pivot to tag
     }
-
 
     public function pagePositions()
     {
@@ -41,6 +67,9 @@ class Lead extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+    public function featured(){
+        return $this->belongsToMany(PagePosition::class,'page_position_model','id','id_model')->where('model',PagePosition::TYPE_MODEL_LEAD);
     }
     /**
      * Return the sluggable configuration array for this model.

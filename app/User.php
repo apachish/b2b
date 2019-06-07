@@ -57,8 +57,8 @@ class User extends Authenticatable implements MustVerifyEmail
     public function getDisplayName(){
         return $this->first_name." ".$this->last_name;
     }
-    public function getCompanyName($user){
-        return $user->company_name?:$user->first_name." ".$user->last_name;
+    public function getCompanyName(){
+        return $this->company_name?:$this->first_name." ".$this->last_name;
     }
     public function leads()
     {

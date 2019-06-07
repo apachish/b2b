@@ -116,6 +116,8 @@ Route::middleware('auth')
                 Route::get('categories/excel/upload','CategoriesController@formUpload');
                 Route::post('categories/excel/import','CategoriesController@import')->name('categories.import');
                 Route::resource('leads','LeadsController');
+                Route::get('leads/get/dataTable','LeadsController@dataTable')->name('leads.dataTable');
+
                 Route::get('leads/excel/upload','LeadsController@Formupload');
                 Route::post('leads/excel/upload','LeadsController@uploadExcel')->name('uploadExcelLead');
                 Route::resource('requests','RequestsController');
