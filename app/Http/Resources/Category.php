@@ -30,7 +30,7 @@ class Category extends JsonResource
             'meta_title' => $this->meta_title,
             'meta_keywords' => $this->meta_keywords,
             'meta_description' => $this->meta_description,
-            'title' => app()->getLocale()=='fa'?$this->name_fa:$this->name_fa,
+            'text' => app()->getLocale()=='fa'?$this->name_fa:$this->name,
             'noProduct' => Lead::with('categories')
                 ->whereHas('categories', function($q) use ($id) {
                     $q->where('category_id', $id);

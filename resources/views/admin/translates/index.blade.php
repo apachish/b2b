@@ -30,7 +30,7 @@
 
                     <form id="formtranslator" action="{{ route('admin.translates.change') }}" method="post">
                         {{csrf_field()}}
-                        <a href="{{route('translators.create')}}" class="btn btn-info "><i
+                        <a href="{{route('admin.translators.create')}}" class="btn btn-info "><i
                                     class="fa fa-plus"></i></a>
                         <button class="btn btn-info "><i
                                     class="fa fa-exchange"></i></button>

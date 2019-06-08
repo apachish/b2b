@@ -18,8 +18,8 @@ trait UploadImage
 
     public static function upload(UploadedFile $originalImage)
     {
-
-        self::$path = public_path() . '/images/' . self::$section . '/';
+        if (!self::$path)
+            self::$path = public_path() . '/images/' . self::$section . '/';
         self::$url = '/images/' . self::$section . '/';
         $image = Image::make($originalImage);
         $extension = $originalImage->getClientOriginalExtension();
@@ -30,10 +30,9 @@ trait UploadImage
         if ($file_name) {
             $file_name .= "_";
         }
-        if (self::$id) {
-            $file_name = time();
-        }
-        $file_name .= $extension;
+        $file_name .= time();
+
+        $file_name .= ".".$extension;
         $thumbnail = 'thumbnail_' . $file_name;
         $image->save(self::$path . $file_name);
         $image->resize(self::$width, self::$height);

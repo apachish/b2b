@@ -167,8 +167,8 @@ class ArticlesController extends Controller
                 'data' => []
             ], 200);
         }
-        \File::delete(public_path(Article::$path . $page->image));
-        $page->delete();
+        \File::delete(public_path(Article::$path . $article->image));
+        $article->delete();
         flash(__('messages.delete article'));
 
         return response()->json([
@@ -184,8 +184,8 @@ class ArticlesController extends Controller
 
     public function changeStatus(Request $request, $id)
     {
-        $page = Article::find($id);
-        if ($page == null) {
+        $article = Article::find($id);
+        if ($article == null) {
             return response()->json([
                 'status' => 'failed',
                 'meta' => [
@@ -195,8 +195,8 @@ class ArticlesController extends Controller
                 'data' => []
             ], 200);
         }
-        $page->status = $request->status;
-        $page->update();
+        $article->status = $request->status;
+        $article->update();
         return response()->json([
             'status' => 'success',
             'meta' => [

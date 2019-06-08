@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Membership;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Validation\Rule;
@@ -16,9 +17,9 @@ class MembershipController extends Controller
     public function index()
     {
 
-        $articles = Article::orderBy('sort_order')->paginate(10);
-        $count = Article::count();
-        return view('admin.articles.index', compact('articles', 'count'));
+        $memberships = Membership::orderBy('updated_at','DESC')->paginate(10);
+        $count = Membership::count();
+        return view('admin.memberships.index', compact('memberships', 'count'));
     }
 
     public function dataTable(Request $request)
@@ -27,14 +28,36 @@ class MembershipController extends Controller
         $offset = data_get($request, 'start', 0);
         $limit = data_get($request, 'length', 10);
         $search = $request->search;
-        $list = Article::query();
+        $list = Membership::query();
         if (data_get($search, 'value')) {
-            $list->where('title', 'like', "%" . data_get($search, 'value') . "%")
+            $list->where('plan_name', 'like', "%" . data_get($search, 'value') . "%")
                 ->orWhere('locale', 'like', "%" . data_get($search, 'value') . "%");
 
         }
         $count = $list->count();
-        $list = $list->skip($offset)->take($limit)->get();
+        $list = $list->orderBy('updated_at','DESC')->skip($offset)->take($limit)->get();
+        $memberships = $list->map(function ($membership) {
+            $status = '<select class="form-control status" onchange="changeStatus(this,' . $membership->id . ',\'status\')" name="change_status" data-id="' . $membership->id . '" id="Status_' . $membership->id . '">';
+            $status .= '<option value=0';
+            if ($membership->status == 0)
+                $status .= 'selected';
+
+            $status .= '>' . __("messages.Inactive") . '</option>';
+            $status .= '<option value=1';
+            if ($membership->status == 1)
+                $status .= 'selected';
+            $status .= '>' . __("messages.Active") . '</option>';
+            $status .= '</select>';
+            $membership->select_status = $status;
+            $membership->col_id = '<input type="checkbox" name="arr_ids[]" value="' . $membership->id . '" />';
+
+            $action = '<a href="' . route('admin.members.memberships.edit', ['id' => $membership->id]) . '"><i  class="fa fa-pencil"></i></a>';
+            $action .= '<a class="delete" data-id="' . $membership->id . '" href="#" onclick="myDelete(' . $membership->id . ')"><i class="glyphicon glyphicon-remove-circle"></i></a>';
+            $membership->action = $action;
+            $membership->created_at_col = app()->getLocale() == 'fa' ? toJalali($membership->created_at) : $membership->created_at;
+            $membership->updated_at_col = app()->getLocale() == 'fa' ? toJalali($membership->updated_at) : $membership->updated_at;
+            return $membership;
+        });
         return $response = array(
             "draw" => intval($request->draw),
             "recordsTotal" => $count,
@@ -52,7 +75,7 @@ class MembershipController extends Controller
      */
     public function create()
     {
-        return view('admin.articles.create');
+        return view('admin.memberships.create');
     }
 
     /**
@@ -64,26 +87,26 @@ class MembershipController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|max:100',
-            'language' => ['required', Rule::in(['fa', 'en'])],
-            'description' => 'required|max:10000',
-            'body' => 'required|max:1000000',
-            'sort_order' => 'required|numeric',
+            'plan_name' => 'required|max:100',
+            'price' => 'required',
+            'duration' => 'required|numeric',
+            'product_upload' => 'required|numeric',
+            'no_of_category' => 'required|numeric',
+            'no_of_enquiry' => 'required|numeric',
         ]);
-        Article::create([
-            'title' => $request->title,
-            'body' => $request->body,
-            'sort_order' => $request->sort_order,
-            'description' => $request->description,
-            'image' => $request->file('image') ? Article::upload($request->image) : '',
+        Membership::create([
+            'plan_name' => $request->plan_name,
+            'price' => $request->price,
+            'duration' => $request->duration,
+            'product_upload' => $request->product_upload,
             'status' => $request->status,
             'locale' => $request->language,
-            'feature' => $request->feature,
-            'user_id' => auth()->id()
+            'no_of_category' => $request->no_of_category,
+            'no_of_enquiry' => $request->no_of_enquiry
         ]);
-        flash(__('messages.create Article'));
+        flash(__('messages.create membership'));
 
-        return redirect('admin/articles');
+        return redirect('admin/memberships');
 
     }
 
@@ -95,8 +118,8 @@ class MembershipController extends Controller
      */
     public function show($id)
     {
-        $article = Article::findOrFail($id);
-        return $article;
+        $membership = Membership::findOrFail($id);
+        return $membership;
     }
 
     /**
@@ -107,8 +130,8 @@ class MembershipController extends Controller
      */
     public function edit($id)
     {
-        $article = Article::findOrFail($id);
-        return view('admin.articles.edit', compact('article'));
+        $membership = Membership::findOrFail($id);
+        return view('admin.memberships.edit', compact('membership'));
     }
 
     /**
@@ -120,30 +143,29 @@ class MembershipController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $article = Article::findOrFail($id);
+        $membership = Membership::findOrFail($id);
         $request->validate([
-            'title' => 'required|max:100',
-            'language' => ['required', Rule::in(['fa', 'en'])],
-            'short_description' => 'sometimes|max:1000',
-            'description' => 'required|max:10000000',
-            'sort_order' => 'required|numeric',
+            'plan_name' => 'required|max:100',
+            'price' => 'required',
+            'duration' => 'required|numeric',
+            'product_upload' => 'required|numeric',
+            'no_of_category' => 'required|numeric',
+            'no_of_enquiry' => 'required|numeric',
 
         ]);
-        $article->update([
-            'name' => $request->name,
-            'body' => $request->body,
-            'sort_order' => $request->sort_order,
-
-            'description' => $request->description,
-            'image' => $request->file('image') ? Article::upload($request->image) : $article->image,
+        $membership->update([
+            'plan_name' => $request->plan_name,
+            'price' => $request->price,
+            'duration' => $request->duration,
+            'product_upload' => $request->product_upload,
             'status' => $request->status,
             'locale' => $request->language,
-            'feature' => $request->feature,
-            'user_id' => auth()->id()
+            'no_of_category' => $request->no_of_category,
+            'no_of_enquiry' => $request->no_of_enquiry
         ]);
-        flash(__('messages.edit Page'));
+        flash(__('messages.edit membership'));
 
-        return redirect('admin/articles');
+        return redirect('admin/memberships');
 
     }
 
@@ -155,26 +177,25 @@ class MembershipController extends Controller
      */
     public function destroy($id)
     {
-        $article = Article::find($id);
-        if ($article == null) {
+        $membership = Membership::find($id);
+        if ($membership == null) {
             return response()->json([
                 'status' => 'failed',
                 'meta' => [
                     'code' => 400,
-                    'message' => __('messages.not found article'),
+                    'message' => __('messages.not found memberships'),
                 ],
                 'data' => []
             ], 200);
         }
-        \File::delete(public_path(Article::$path . $page->image));
-        $page->delete();
+        $membership->delete();
         flash(__('messages.delete article'));
 
         return response()->json([
             'status' => 'success',
             'meta' => [
                 'code' => 200,
-                'message' => __('messages.Delete status article'),
+                'message' => __('messages.Delete status memberships'),
             ],
             'data' => []
         ], 200);
@@ -183,77 +204,27 @@ class MembershipController extends Controller
 
     public function changeStatus(Request $request, $id)
     {
-        $page = Article::find($id);
-        if ($page == null) {
+        $membership = Membership::find($id);
+        if ($membership == null) {
             return response()->json([
                 'status' => 'failed',
                 'meta' => [
                     'code' => 400,
-                    'message' => __('messages.not found article'),
+                    'message' => __('messages.not found memberships'),
                 ],
                 'data' => []
             ], 200);
         }
-        $page->status = $request->status;
-        $page->update();
+        $membership->status = $request->status;
+        $membership->update();
         return response()->json([
             'status' => 'success',
             'meta' => [
                 'code' => 200,
-                'message' => __('messages.change status article'),
+                'message' => __('messages.change status memberships'),
             ],
             'data' => []
         ], 200);
     }
 
-    public function actionRow(Request $request)
-    {
-        $ids = $request->arr_ids;
-        if (!$ids) {
-            flash(__('messages.no select item'));
-            return redirect('admin/articles');
-
-        }
-        foreach ($ids as $id) {
-            $article = Article::find($id);
-            if ($article == null) {
-                return response()->json([
-                    'status' => 'failed',
-                    'meta' => [
-                        'code' => 400,
-                        'message' => __('messages.not found article'),
-                    ],
-                    'data' => []
-                ], 200);
-            }
-            switch ($request->action) {
-                case 'active':
-                    $article->status = 1;
-                    $article->update();
-                    flash(__('messages.update status'));
-
-                    break;
-                case 'deactivate':
-                    $article->status = 0;
-                    $article->update();
-                    flash(__('messages.update status'));
-
-                    break;
-                case 'delete':
-                    $article->delete();
-                    flash(__('messages.delete article'));
-
-                    break;
-                case 'order_submit':
-                    $article->sort_order = $request->order[$id];
-                    $article->update();
-                    flash(__('messages.order change'));
-
-                    break;
-
-            }
-        }
-
-        return redirect('admin/articles');
-    }
 }

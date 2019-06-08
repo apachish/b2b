@@ -4,7 +4,8 @@
 
 <ul class="breadcrumb">
     <li><a href="{{route('admin')}}">{{__("messages.Home")}}</a></li>
-    <li ><a href="{{route('pages.index')}}">{{__("messages.Articles")}}</a></li>
+    <li><a href="{{ route('admin.members.index')}}">{{ __("messages.Members Management") }}</a></li>
+    <li><a href="{{ route('admin.members.memberships.index')}}">{{ __("messages.Membership") }}</a></li>
     <li class="active"><a href="#">{{__("messages.Edit")}}</a></li>
 </ul>
 <!-- END BREADCRUMB -->
@@ -16,13 +17,13 @@
 
     <div class="row">
         <div class="col-md-12">
-            <form   action="{{route("articles.update",['id'=>$article->id])}}" id="postForm"  class="form-horizontal"  method="post" enctype="multipart/form-data">
+            <form   action="{{route("admin.members.memberships.update",['id'=>$membership->id])}}" id="postForm"  class="form-horizontal"  method="post" enctype="multipart/form-data">
 
                 {{csrf_field()}}
                 @method('PATCH')
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title"><strong>{{__("messages.Edit")}}</strong> {{__("messages.Article")}}</h3>
+                        <h3 class="panel-title"><strong>{{__("messages.Edit")}}</strong> {{__("messages.MemberShip")}}</h3>
                         <ul class="panel-controls">
                             <li><a href="#" class="panel-remove"><span class="fa fa-times"></span></a></li>
                         </ul>
@@ -36,64 +37,93 @@
 
                             <div class="col-md-12">
 
+
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label">{{__("messages.Title")}}</label>
+                                    <label class="col-md-3 control-label">{{__("messages.Membership Name")}}</label>
                                     <div class="col-md-9">
                                         <div class="input-group input-group-lg">
-                                            <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                            <input type="text" name="title" id="title" value="{{$article->title}}" class=" form-control"/>
+                                                <span class="input-group-addon"><span
+                                                            class="fa fa-pencil"></span></span>
+                                            <input type="text" name="plan_name" id="plan_name"
+                                                   value="{{ $membership['plan_name'] }}" class=" form-control"/>
                                         </div>
                                         <span class="help-block">{{__("messages.Except character:space-#-@-$ min value = 3")}}</span>
                                     </div>
                                 </div>
+
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label">{{__("messages.Ordering")}}</label>
+                                    <label class="col-md-3 control-label">{{__("messages.Membership Price")}}</label>
                                     <div class="col-md-9">
-                                            <input type="number" name="sort_order" id="sort_order" value="{{$article->sort_order}}" class=" form-control"/>
-                                        <span class="help-block">{{__("messages.only number  value = 3")}}</span>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">{{__("messages.page Short Description")}}</label>
-                                    <div class="col-md-9 col-xs-12">
-                                        <textarea class="form-control" name="description" rows="5">{{$article->description}}</textarea>
-                                        <span class="help-block">{{__("messages.short text view description")}}</span>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">{{__("messages.Page Description")}}</label>
-                                    <div class="col-md-9">
-                                        <div class="input-group">
-                                            <textarea name="body" id="body" class=" form-control summernote">{!!  $article->body!!}</textarea>
+                                        <div class="input-group input-group-lg">
+                                                <span class="input-group-addon"><span
+                                                            class="fa fa-pencil"></span></span>
+                                            <input type="text" name="price" id="price" value="{{$membership['price']}}"
+                                                   class=" form-control"/>
                                         </div>
+                                        <span class="help-block">{{__("messages.insert only number")}}</span>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label">{{__("messages.Image")}}</label>
+                                    <label class="col-md-3 control-label">{{__("messages.Membership Duration")}}</label>
                                     <div class="col-md-9">
-                                        <input type="file" multiple class="file" name="image" data-preview-file-type="any"/>
-                                        <span class="help-block">{{__("messages.Input type file")}}</span>
+                                        <div class="input-group input-group-lg">
+                                                <span class="input-group-addon"><span
+                                                            class="fa fa-pencil"></span></span>
+                                            <select name="duration" id="duration" data-live-search="true"
+                                                    class="form-control">
+                                                <option value="">{{__("messages.Select Membership Duration")}}</option>
+
+                                                @for($i=1;$i<=12;$i++)
+                                                    <option {{ $membership['duration']?'selected':''}} value="{{ $i }}">{{ $i }}</option>
+                                                @endfor
+                                            </select>
+                                        </div>
+                                        <span class="help-block">{{__("messages.select number")}}</span>
                                     </div>
                                 </div>
-                                <div class=" form-group" >
-                                    <label class="col-md-3 control-label"></label>
-
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">{{__("messages.Allow Select Category")}}</label>
                                     <div class="col-md-9">
-                                        @if(file_exists(public_path('images/articles/'.$article->image)))
-
-                                        <a class="image" href="{{asset('images/articles/'.$article->image)}}" title="{{$article->name}}" data-gallery>
-                                            <img src="{{asset('images/articles/'.$article->image)}}" alt="{{$article->name}}" width="173px" height="129px"/>
-                                        </a>
-                                        @endif
-
+                                        <div class="input-group input-group-lg">
+                                                <span class="input-group-addon"><span
+                                                            class="fa fa-pencil"></span></span>
+                                            <input type="number" name="no_of_category" id="no_of_category"
+                                                   value="{{ $membership['no_of_category'] }}" class=" form-control"/>
+                                        </div>
+                                        <span class="help-block">{{__("messages.insert only number")}}</span>
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">{{__("messages.Allow Create Lead")}}</label>
+                                    <div class="col-md-9">
+                                        <div class="input-group input-group-lg">
+                                                <span class="input-group-addon"><span
+                                                            class="fa fa-pencil"></span></span>
+                                            <input type="number" name="product_upload" id="product_upload"
+                                                   value="{{ $membership['product_upload'] }}" class=" form-control"/>
+                                        </div>
+                                        <span class="help-block">{{__("messages.insert only number")}}</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">{{__("messages.No. Of Enquiry")}}</label>
+                                    <div class="col-md-9">
+                                        <div class="input-group input-group-lg">
+                                                <span class="input-group-addon"><span
+                                                            class="fa fa-pencil"></span></span>
+                                            <input type="number" name="no_of_enquiry" id="no_of_enquiry"
+                                                   value="{{ $membership['no_of_enquiry'] }}" class=" form-control"/>
+                                        </div>
+                                        <span class="help-block">{{__("messages.insert only number")}}</span>
+                                    </div>
+                                </div>
+
                                 <div class="form-group">
                                     <label class="col-md-3 control-label">{{__("messages.Select status")}}</label>
                                     <div class="col-md-9">
                                         <select class="form-control " name="status">
-                                            <option value="0" {{$article->status==0?"selected":""}} >{{__("messages.Unactivated")}}</option>
-                                            <option value="1" {{$article->status==1?"selected":""}} >{{__("messages.active")}}</option>
+                                            <option value="0" {{ $membership['status']== 0?'selected':'' }}>{{__("messages.Inactive")}}</option>
+                                            <option value="1" {{ $membership['status']== 1?'selected':'' }}>{{__("messages.active")}}</option>
                                         </select>
                                         <span class="help-block"></span>
                                     </div>
@@ -102,28 +132,16 @@
                                     <label class="col-md-3 control-label">{{__("messages.Select Language")}}</label>
                                     <div class="col-md-9">
                                         <select class="form-control " name="language">
-                                            <option value="en" {{$article->locale=='en'?"selected":""}}>{{__("messages.en_US")}}</option>
-                                            <option value="fa"  {{$article->locale=='fa'?"selected":""}}>{{__("messages.fa_IR")}}</option>
+                                            <option {{  $membership['language']== 'fa'?'selected':'' }} value="fa">{{__("messages.fa")}}</option>
+                                            <option {{ $membership['language'] == 'en'?'selected':'' }} value="en">{{__("messages.en")}}</option>
                                         </select>
                                         <span class="help-block"></span>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label"></label>
-
-                                    <div class="col-md-9">
-                                        <label class="check"><input type="checkbox" class="icheckbox"
-                                                                    name="feature"
-                                                                    value="1"
-                                            />{{__("messages.Feature")}}</label>
-                                        <span class="help-block">{{__("messages.Selected For Feature Article")}}</span>
                                     </div>
                                 </div>
                                 <div class="block push-up-10 ">
                                 </div>
                             </div>
                         </div>
-
                     </div>
                     <div class="panel-footer">
                         <button class="btn btn-primary" type="reset" onClick="$('#validate').validationEngine('hide');">{{__("messages.Clear Form")}}</button>

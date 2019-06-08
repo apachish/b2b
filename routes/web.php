@@ -83,7 +83,8 @@ Route::middleware('auth')
         Route::get('/member/manage-leads', 'HomeController@index')->name('members.leads.list');
         Route::get('/member/manage-enquiry', 'HomeController@index')->name('members.leads.enquiry');
         Route::get('/member/edit-account', 'HomeController@index')->name('members.edit_account');
-        Route::get('/member/post_lead/{type_ad?}', 'HomeController@index')->name('members.leads.post.type_ad');
+        Route::get('/member/post_lead/{type_ad?}', 'LeadsController@create')->name('members.leads.post.type_ad');
+        Route::post('/member/post_lead/{type_ad?}/store', 'LeadsController@store')->name('members.leads.post.type_ad.store');
         Route::get('/member/newleads/{type_ad}', 'HomeController@index')->name('members.newleads.type_ad');
         Route::get('/member/logout', 'HomeController@index')->name('members.logout');
 
@@ -112,49 +113,106 @@ Route::middleware('auth')
 //    Route::get('comment','IndexController@index')->name('comment');
 //    Route::get('enquiry-request_call','IndexController@index')->name('enquiry-request_call');
 
-                Route::resource('categories','CategoriesController');
-                Route::get('categories/excel/upload','CategoriesController@formUpload');
-                Route::post('categories/excel/import','CategoriesController@import')->name('categories.import');
-                Route::resource('leads','LeadsController');
-                Route::get('leads/get/dataTable','LeadsController@dataTable')->name('leads.dataTable');
-
-                Route::get('leads/excel/upload','LeadsController@Formupload');
-                Route::post('leads/excel/upload','LeadsController@uploadExcel')->name('uploadExcelLead');
-                Route::resource('requests','RequestsController');
-                Route::resource('pages','PagesController');
-                Route::post('pages/status/change/{id}','PagesController@changeStatus')->name('pages.status');
-                Route::get('pages/get/dataTable','PagesController@dataTable')->name('pages.dataTable');
-
-                Route::resource('articles','ArticlesController');
-                Route::post('articles/status/change/{id}','ArticlesController@changeStatus')->name('articles.status');
-                Route::post('articles/action/row','ArticlesController@actionRow')->name('articles.action');
-                Route::get('articles/get/dataTable','ArticlesController@dataTable')->name('articles.dataTable');
-                Route::resource('comments','CommentsController');
-                Route::resource('members','MembersController');
-                Route::resource('membership','MembershipController');
-                Route::resource('orders','OrdersController');
-                Route::resource('countries','CountriesController');
-                Route::resource('states','SatatesController');
-                Route::resource('cities','CitiesController');
-                Route::resource('/menus/categories','CategoriesMenuController',[
-                    'as' => 'menus'
+                Route::resource('categories','CategoriesController',[
+                    'as' => 'admin'
                 ]);
-                Route::resource('menus','MenusController');
+                Route::get('categories/excel/upload','CategoriesController@formUpload')->name('admin.categories.excel.upload');
+                Route::post('categories/excel/import','CategoriesController@import')->name('categories.import');
+                Route::resource('leads','LeadsController',[
+                    'as' => 'admin'
+                ]);
+                Route::get('leads/get/dataTable','LeadsController@dataTable')->name('admin.leads.dataTable');
+                Route::post('leads/status/change/{id}','LeadsController@changeStatus')->name('admin.leads.status');
+                Route::get('leads/details/form/{id}','LeadsController@formDetails')->name('admin.leads.details.form');
+                Route::post('leads/details/update/{id}','LeadsController@details')->name('admin.leads.details.update');
+
+                Route::get('leads/excel/upload','LeadsController@Formupload')->name('admin.leads.excel.upload');
+                Route::post('leads/excel/upload','LeadsController@uploadExcel')->name('admin.uploadExcelLead');
+                Route::resource('requests','RequestsController',[
+                    'as' => 'admin.leads'
+                ]);
+                Route::resource('pages','PagesController',[
+                    'as' => 'admin'
+                ]);
+                Route::post('pages/status/change/{id}','PagesController@changeStatus')->name('admin.pages.status');
+                Route::get('pages/get/dataTable','PagesController@dataTable')->name('admin.pages.dataTable');
+
+                Route::resource('articles','ArticlesController',[
+                    'as' => 'admin'
+                ]);
+                Route::post('articles/status/change/{id}','ArticlesController@changeStatus')->name('admin.articles.status');
+                Route::post('articles/action/row','ArticlesController@actionRow')->name('admin.articles.action');
+                Route::get('articles/get/dataTable','ArticlesController@dataTable')->name('admin.articles.dataTable');
+                Route::resource('comments','CommentsController',[
+                    'as' => 'admin'
+                ]);
+                Route::resource('members','MembersController',[
+                    'as' => 'admin'
+                ]);
+                Route::post('members/status/change/{id}','MembersController@changeStatus')->name('admin.members.status');
+                Route::post('members/action/row','MembersController@actionRow')->name('admin.members.action');
+                Route::get('members/get/dataTable','MembersController@dataTable')->name('admin.members.dataTable');
+                Route::resource('memberships','MembershipController',[
+                    'as' => 'admin.members'
+                ]);
+                Route::get('memberships/get/dataTable','MembershipController@dataTable')->name('admin.memberships.dataTable');
+                Route::post('memberships/status/change/{id}','MembershipController@changeStatus')->name('admin.memberships.status');
+
+                Route::resource('orders','OrdersController',[
+                    'as' => 'admin.members'
+                ]);
+                Route::resource('countries','CountriesController',[
+                    'as' => 'admin'
+                ]);
+                Route::resource('states','SatatesController',[
+                    'as' => 'admin'
+                ]);
+                Route::resource('cities','CitiesController',[
+                    'as' => 'admin'
+                ]);
+                Route::resource('/menus/categories','CategoriesMenuController',[
+                    'as' => 'admin.menus'
+                ]);
+                Route::resource('menus','MenusController',[
+                    'as' => 'admin'
+                ]);
                 Route::resource('newsletters','NewslettersController',[
                     'as' => 'admin'
                 ]);
-                Route::resource('templates/mail','TemplatesMailController');
-                Route::resource('enquiries','EnquiriesController');
-                Route::resource('banners','BannersController');
-                Route::resource('advertises','AdvertisesController');
-                Route::resource('testimonials','TestimonialsController');
-                Route::resource('helps','HelpsController');
-                Route::resource('portals','PortalsController');
-                Route::resource('translators','TranslatorsController');
+                Route::resource('templates/mail','TemplatesMailController',[
+                    'as' => 'admin'
+                ]);
+                Route::resource('enquiries','EnquiriesController',[
+                    'as' => 'admin'
+                ]);
+
+                Route::resource('banners','BannersController',[
+                    'as' => 'admin'
+                ]);
+                Route::resource('advertises','AdvertisesController',[
+                    'as' => 'admin'
+                ]);
+                Route::resource('testimonials','TestimonialsController',[
+                    'as' => 'admin'
+                ]);
+                Route::resource('helps','HelpsController',[
+                    'as' => 'admin'
+                ]);
+                Route::resource('portals','PortalsController',[
+                    'as' => 'admin'
+                ]);
+                Route::resource('translators','TranslatorsController',[
+                    'as' => 'admin'
+                ]);
                 Route::post('translators/change','TranslatorsController@change')->name('admin.translates.change');
                 Route::get('translators/get/dataTable','TranslatorsController@dataTable')->name('admin.translates.dataTable');
-                Route::resource('sliders','SlidersController');
-                Route::resource('search','SearchController');
+                Route::get('searchList','SearchsController@index')->name('admin.searchList');
+                Route::resource('sliders','SlidersController',[
+                    'as' => 'admin'
+                ]);
+                Route::resource('search','SearchController',[
+                    'as' => 'admin'
+                ]);
 
             });
     });

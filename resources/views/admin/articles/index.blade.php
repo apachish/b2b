@@ -27,9 +27,9 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
 
-                        <form id="formtranslator" action="{{route('articles.action')}}" method="post">
+                        <form id="formtranslator" action="{{route('admin.articles.action')}}" method="post">
                             {{csrf_field()}}
-                            <a href="{{route('articles.create')}}" class="btn btn-info "><i
+                            <a href="{{route('admin.articles.create')}}" class="btn btn-info "><i
                                         class="fa fa-plus"></i></a>
                             <button type="submit" name="action" value="active"
                                     class="btn btn-success"><i class="glyphicon glyphicon-info-sign"></i>{{__("messages.Active") }}</button>
@@ -70,7 +70,7 @@
                                             <td>
                                                {{$article->status}}
                                             </td>
-                                            <td><a href="{{route('articles.edit',['id'=>$article->id])}}"><i
+                                            <td><a href="{{route('admin.articles.edit',['id'=>$article->id])}}"><i
                                                             class="fa fa-pencil"></i></a>
                                                 <a class="delete" href="#" data-id="{{$article->id}}"><i
                                                             class="glyphicon glyphicon-remove-circle"></i></a>

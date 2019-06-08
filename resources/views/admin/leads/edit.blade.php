@@ -13,24 +13,24 @@
     <!-- PAGE CONTENT WRAPPER -->
     <div class="page-content-wrap">
         @include('admin.error')
-
         <div class="row">
             <div class="col-md-12">
-                <form action="{{route('leads.edit', array("id" => $lead->id)}} " id="jvalidate"
+                <form action="{{route('leads.update', array("id" => $lead->id))}} " id="jvalidate"
                       class="form-horizontal" method="post" enctype="multipart/form-data">
                     {{csrf_field()}}
                     @method('PATCH')
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h3 class="panel-title">
-                                <strong><?= $this->translate("Edit") ?></strong> <?= $this->translate("Lead") ?></h3>
+                                <strong>{{__('messages.Edit')}}</strong> {{__("messages.Lead")}} </h3>
                             <ul class="panel-controls">
                                 <li><a href="#" class="panel-remove"><span class="fa fa-times"></span></a></li>
                             </ul>
                         </div>
                         <div class="panel-body">
                             <p>
-                                <?= $this->translate("[ ( File should be .jpg, .png, .gif format and file size should not be more then 2 MB (2048 KB)) ( Best image size 173X80 ) ]") ?>
+                                {{__("messages.[ ( File should be .jpg, .png, .gif format and file size should not be more then 2 MB (2048 KB)) ( Best image size 173X80 ) ]")}}
+                                }}
                             </p>
                         </div>
                         <div class="panel-body">
@@ -39,98 +39,108 @@
                                 <div class="form-group ">
 
                                     <label class="col-sm-3 control-label"
-                                           for="company_name"><?= $this->translate('Lead Type') ?> <b class="red">*</b>
+                                           for="company_name">{{__('messages.Lead Type')}} <b class="red">*</b>
                                         :</label>
                                     <div class="col-sm-9">
                                         <p class="boxlead">
                                             <label>
-                                                <input name="adType" type="radio"
-                                                       value="1" <?= $type_ad == '1' ? 'checked' : "" ?>
-                                                       onclick="$('.sell_only').show(0);">
-                                                <?= $this->translate('Sell Lead') ?></label>
+                                                <input name="ad_type" type="radio"
+                                                       value="sell" {{$lead->ad_type == 'sell' ? 'checked' : ""}}
+                                                       onclick="$('.sell_only').show(0);" >
+                                                {{__('messages.Sell Lead')}}</label>
                                             &nbsp;&nbsp;
                                             <label>
-                                                <input name="adType" type="radio"
-                                                       value="2" <?= $type_ad == '2' ? 'checked' : "" ?>
+                                                <input name="ad_type" type="radio"
+                                                       value="buy" {{$lead->ad_type == 'buy' ? 'checked' : ""}}
                                                        onclick="$('.sell_only').hide(0);">
-                                                <?= $this->translate('Buy Lead') ?></label>
+                                                {{__('messages.Buy Lead')}}</label>
                                         </p>
                                     </div>
                                 </div>
 
                                 <div class="form-group ">
                                     <label class="col-sm-3 control-label"
-                                           for="category"><?= $this->translate('Posted In') ?> <b class="red">*</b>
+                                           for="category">{{__('messages.Posted In')}} <b class="red">*</b>
                                         :</label>
                                     <div class="col-sm-9">
 
                                         <select name="category" id="category" class="form-control selectpicker"
                                                 data-show-subtext="true" data-live-search="true">
 
-                                            <option value=""><?= $this->translate('Select Category') ?></option>
-                                            <?php foreach ($categories as $category): ?>
-                                            <option <?= $lead['category'] == (int)$category['id'] ? "selected" : "" ?>
-                                                    value="<?= $category['id'] ?>"><?= $category['text'] ?></option>
-                                            <?php endforeach; ?>
+                                            <option value="">{{__('messages.Select Category')}}</option>
+                                            @foreach ($categories as $category)
+                                                <option {{$parent_parent__id == $category->id ? "selected" : ""}}
+                                                        value="{{ $category->id}}">{{ $category->getCategoryTitle()}}</option>
+                                            @endforeach
                                         </select>
 
                                     </div>
                                 </div>
                                 <div class="form-group " id="div_category2"
-                                     style="<?= $subcategories ? "" : "display: none" ?>">
+                                     style="{{ $subcategories  ? "" : "display: none" }}">
                                     <label class="col-sm-3 control-label" for="category2"></label>
                                     <div class="col-sm-9">
                                         <select name="category2" class="form-control" id="category2" class="mt5"
                                                 data-show-subtext="true" data-live-search="true">
-                                            <option value=""><?= $this->translate('Select Category') ?></option>
-                                            <?php foreach ($subcategories as $category): ?>
-                                            <option <?= $lead['category2'] == (int)$category['id'] ? "selected" : "" ?>
-                                                    value="<?= $category['id'] ?>"><?= $category['text'] ?></option>
-                                            <?php endforeach; ?>
+                                            <option value="">{{__('messages.Select Category')}}</option>
+                                            @foreach ($subcategories as $category)
+                                                <option {{ $parent_id == $category->id ? "selected" : ""}}
+                                                        value="{{ $category->id}}">{{ $category->getCategoryTitle()}}</option>
+                                            @endforeach
                                         </select>
 
                                     </div>
                                 </div>
                                 <div class="form-group  " id="div_category3"
-                                     style="<?= $subsubcategories ? "" : "display: none" ?>">
+                                     style="{{ $sub_sub_categories ? "" : "display: none" }}">
                                     <label class="col-sm-3 control-label" for="category3"></label>
                                     <div class="col-sm-9">
                                         <select name="category3[]" class="form-control" id="category3" class="mt5"
                                                 class="js-example-basic-multiple" multiple="multiple">
-                                            <option value=""><?= $this->translate('Select Category') ?></option>
-                                            <?php foreach ($subsubcategories as $category): ?>
-                                            <option
-                                                <?= in_array((int)$category['id'], $lead['category3']) ? "selected" : "" ?>
-                                                value="<?= $category['id'] ?>"><?= $category['text'] ?></option>
-                                            <?php endforeach; ?>
+                                            <option value="">{{__('messages.Select Category')}}</option>
+                                            @foreach ($sub_sub_categories as $category)
+
+                                                <option {{ in_array($category->id,$category_lead->pluck('id')->toArray()) ? "selected" : ""}}
+                                                        value="{{ $category->id}}">{{ $category->getCategoryTitle()}}</option>
+                                            @endforeach
                                         </select>
 
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label"
-                                           for="lead_title"><?= $this->translate('Title') ?>
+                                    for="lead_title">{{__('messages.Title')}}
                                         <b class="red">*</b> :</label>
                                     <div class="col-sm-9">
                                         <div class="input-group input-group-lg">
                                             <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                            <input class="inouttyeptext form-control " name="productName"
-                                                   id="productName"
-                                                   type="text" value="<?= $lead['productName'] ?>">
+                                            <input class="inouttyeptext form-control " name="name"
+                                                   id="name"
+                                            type="text" value="{{$lead->name}}">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group sell_only" <?= $type_ad == '2' ? 'style="display: none"' : '' ?> >
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">{{__("messages.meta Keywords") }}</label>
+                                    <div class="col-sm-9">
+                                        <textarea class="tagsinput  form-control"
+                                                  name="meta_keywords"
+                                                  cols="40" rows="7" id="meta_keywords"
+                                                  class="db full">{{$lead->meta_keywords}}</textarea>
+                                        <span class="help-block"><{{__("messages.input different type title lead for search") }}</span>
+                                    </div>
+                                </div>
+                                <div class="form-group sell_only" {{$lead->ad_type == '2' ? 'style="display: none"' : ''}} >
                                     <label class="col-sm-3 control-label"
-                                           for="img1"><?= $this->translate('Product Images') ?> <b class="red">*</b>
+                                           for="img1">{{__('messages.Product Images')}} <b class="red">*</b>
                                         :</label>
                                     <div class="col-sm-9">
 
                                         <div class="form-group">
                                             <label class="col-md-1 control-label">1.</label>
                                             <div class="col-md-11">
-                                                <input type="file" class="form-control" name="img[0]" id="img1"/>
-                                                <span class="help-block"><?= $this->translate("Input type file") ?></span>
+                                                <input type="file" class="form-control" name="image[0]" id="img1"/>
+                                                <span class="help-block"><{{__("messages.Input type file") }}</span>
                                             </div>
                                         </div>
                                         <div class=" form-group gallery">
@@ -138,16 +148,11 @@
 
                                             <div class="col-md-9 gallery-item">
                                                 <div class="image">
-                                                    <?php
-                                                    $url = $this->baseUrl . '/images/noimages.jpg';
-                                                    if (isset($lead['medias'][0])) {
-                                                        $url_thumb = $lead['medias'][0]['thumb'];
-                                                        $url = $lead['medias'][0]['original'];
-                                                    }
-                                                    ?>
-                                                    <a class="image" href="<?= $url ?>" title="<?= $lead['id'] ?>"
+                                                    <a class="image" href="{{ url('images/medias/photos/'.data_get($lead,'medias.0.media','noImage.png')) }}"
+                                                       title="{{$lead->id}}"
                                                        data-gallery>
-                                                        <img src="<?= $url_thumb ?>" alt="<?= $lead['id'] ?>"
+                                                        <img src="{{ url('images/medias/photos/'.data_get($lead,'medias.0.media','noImage.png')) }}"
+                                                             alt="{{$lead->id}}"
                                                              width="173px" height="129px"/>
                                                     </a>
                                                 </div>
@@ -156,8 +161,8 @@
                                         <div class="form-group">
                                             <label class="col-md-1 control-label">2.</label>
                                             <div class="col-md-11">
-                                                <input type="file" class="form-control" name="img[1]" id="img2"/>
-                                                <span class="help-block"><?= $this->translate("Input type file") ?></span>
+                                                <input type="file" class="form-control" name="image[1]" id="img2"/>
+                                                <span class="help-block"><{{__("messages.Input type file") }}</span>
                                             </div>
                                         </div>
                                         <div class=" form-group gallery">
@@ -165,16 +170,11 @@
 
                                             <div class="col-md-9 gallery-item">
                                                 <div class="image">
-                                                    <?php
-                                                    $url = $this->baseUrl . '/images/noimages.jpg';
-                                                    if (isset($lead['medias'][1])) {
-                                                        $url_thumb = $lead['medias'][1]['thumb'];
-                                                        $url = $lead['medias'][1]['original'];
-                                                    }
-                                                    ?>
-                                                    <a class="image" href="<?= $url ?>" title="<?= $lead['id'] ?>"
+                                                    <a class="image" href="{{ url('images/medias/photos/'.data_get($lead,'medias.1.media','noImage.png')) }}"
+                                                       title="{{$lead->id}}"
                                                        data-gallery>
-                                                        <img src="<?= $url_thumb ?>" alt="<?= $lead['id'] ?>"
+                                                        <img src="{{ url('images/medias/photos/'.data_get($lead,'medias.1.media','noImage.png')) }}"
+                                                             alt="{{$lead->id}}"
                                                              width="173px" height="129px"/>
                                                     </a>
                                                 </div>
@@ -183,8 +183,8 @@
                                         <div class="form-group">
                                             <label class="col-md-1 control-label">3.</label>
                                             <div class="col-md-11">
-                                                <input type="file" class="form-control" name="img[2]" id="img3"/>
-                                                <span class="help-block"><?= $this->translate("Input type file") ?></span>
+                                                <input type="file" class="form-control" name="image[2]" id="img3"/>
+                                                <span class="help-block"><{{__("messages.Input type file") }}</span>
                                             </div>
                                         </div>
                                         <div class=" form-group gallery">
@@ -192,16 +192,12 @@
 
                                             <div class="col-md-9 gallery-item">
                                                 <div class="image">
-                                                    <?php
-                                                    $url = $this->baseUrl . '/images/noimages.jpg';
-                                                    if (isset($lead['medias'][2])) {
-                                                        $url_thumb = $lead['medias'][2]['thumb'];
-                                                        $url = $lead['medias'][2]['original'];
-                                                    }
-                                                    ?>
-                                                    <a class="image" href="<?= $url ?>" title="<?= $lead['id'] ?>"
+
+                                                    <a class="image" href="{{ url('images/medias/photos/'.data_get($lead,'medias.2.media','noImage.png')) }}"
+                                                       title="{{$lead->id}}"
                                                        data-gallery>
-                                                        <img src="<?= $url_thumb ?>" alt="<?= $lead['id'] ?>"
+                                                        <img src="{{url('images/medias/photos/'.data_get($lead,'medias.2.media','noImage.png'))  }}"
+                                                             alt="{{$lead->id}}"
                                                              width="173px" height="129px"/>
                                                     </a>
                                                 </div>
@@ -210,8 +206,8 @@
                                         <div class="form-group">
                                             <label class="col-md-1 control-label">4.</label>
                                             <div class="col-md-11">
-                                                <input type="file" class="form-control" name="img[3]" id="img4"/>
-                                                <span class="help-block"><?= $this->translate("Input type file") ?></span>
+                                                <input type="file" class="form-control" name="image[3]" id="img4"/>
+                                                <span class="help-block"><{{__("messages.Input type file") }}</span>
                                             </div>
                                         </div>
                                         <div class=" form-group gallery">
@@ -219,16 +215,12 @@
 
                                             <div class="col-md-9 gallery-item">
                                                 <div class="image">
-                                                    <?php
-                                                    $url = $this->baseUrl . '/images/noimages.jpg';
-                                                    if (isset($lead['medias'][3])) {
-                                                        $url_thumb = $lead['medias'][3]['thumb'];
-                                                        $url = $lead['medias'][3]['original'];
-                                                    }
-                                                    ?>
-                                                    <a class="image" href="<?= $url ?>" title="<?= $lead['id'] ?>"
+
+                                                    <a class="image" href="{{url('images/medias/photos/'.data_get($lead,'medias.3.media','noImage.png')) }}"
+                                                       title="{{$lead->id}}"
                                                        data-gallery>
-                                                        <img src="<?= $url_thumb ?>" alt="<?= $lead['id'] ?>"
+                                                        <img src="{{ url('images/medias/photos/'.data_get($lead,'medias.3.media','noImage.png')) }}"
+                                                             alt="{{$lead->id}}"
                                                              width="173px" height="129px"/>
                                                     </a>
                                                 </div>
@@ -238,40 +230,32 @@
                                 </div>
                                 <div class="form-group  short_description">
                                     <label class="col-sm-3 control-label"
-                                           for="short_description"><?= $this->translate('Short  Description') ?> <b
+                                    for="short_description">{{__('messages.Short  Description')}} <b
                                                 class="red">*</b> :</label>
                                     <div class=" col-sm-9">
                                         <textarea class="inouttyeptext form-control summernote"
-                                                  name="productsDescription" cols="40" rows="2" id="productsDescription"
-                                                  class="db full"><?= $lead['productsDescription'] ?></textarea>
+                                                  name="description" cols="40" rows="2" id="productsDescription"
+                                                  class="db full">{{$lead->description}}</textarea>
                                         <p class="charlimit"></p>
                                         <p>
-                                            <span class="CharacterLimit"><?= $this->translate('Character Limit') ?>: 200</span>
+                                            <span class="CharacterLimit">{{__('messages.Character Limit')}}: 200</span>
                                         </p>
                                     </div>
                                 </div>
 
                                 <div class="form-group  detail_description">
                                     <label class="col-sm-3 control-label"
-                                           for="detail_description"><?= $this->translate('Detailed  Description') ?> <b
+                                    for="detail_description">{{__('messages.Detailed  Description')}} <b
                                                 class="red">*</b> :</label>
                                     <div class=" col-sm-9">
-                                        <textarea class="inouttyeptext form-control summernote" name="detailDescription"
+                                        <textarea class="inouttyeptext form-control summernote"
+                                                  name="detail_description"
                                                   cols="40" rows="7" id="detailDescription"
-                                                  class="db full"><?= $lead['detailDescription'] ?></textarea>
+                                                  class="db full">{{$lead->detail_description}}</textarea>
                                         <p class="charlimit"></p>
                                         <p>
-                                            <span class="CharacterLimit"><?= $this->translate('Character Limit') ?>: 1000</span>
+                                            <span class="CharacterLimit">{{__('messages.Character Limit')}}: 1000</span>
                                         </p>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label"><?= $this->translate("meta Keywords") ?></label>
-                                    <div class="col-md-9">
-                                        <input type="text" name="metaKeywords" class="tagsinput"
-                                               value="<?= $lead['metaKeywords'] ?>"/>
-
-                                        <span class="help-block"><?= $this->translate("input different type title lead for search") ?></span>
                                     </div>
                                 </div>
 
@@ -280,9 +264,9 @@
                         </div>
                         <div class="panel-footer">
                             <button class="btn btn-primary" type="reset"
-                                    onClick="$('#validate').validationEngine('hide');"><?= $this->translate("Clear Form") ?></button>
+                                    onClick="$('#validate').validationEngine('hide');"><{{__("messages.Clear Form") }}</button>
                             <button class="btn btn-primary submit"
-                                    type="submit"><?= $this->translate("Submit") ?></button>
+                                    type="submit">{{__("messages.Edit") }}</button>
                         </div>
                     </div>
                 </form>
@@ -298,27 +282,21 @@
         <a class="play-pause"></a>
         <ol class="indicator"></ol>
     </div>
-    </div>
-    </div>
 
-    </div>
 @endsection
 @section('javascript')
-    <link rel="stylesheet" href="<?= $this->basePath('select2/select2.css') ?>">
+    <link rel="stylesheet" href="{{ asset('select2/select2.css')}}">
     <script type="text/javascript" src="/select2/select2.min.js"></script>
-    <script type='text/javascript' src='/js/plugins/icheck/icheck.min.js'></script>
-    <script type="text/javascript" src="/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
-    <script type="text/javascript" src="/js/plugins/blueimp/jquery.blueimp-gallery.min.js"></script>
-    <script type="text/javascript" src="/js/plugins/tagsinput/jquery.tagsinput.min.js"></script>
+    <script type='text/javascript' src='/js/admin/plugins/icheck/icheck.min.js'></script>
+    <script type="text/javascript" src="/js/admin/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
+    <script type="text/javascript" src="/js/admin/plugins/blueimp/jquery.blueimp-gallery.min.js"></script>
+    <script type="text/javascript" src="/js/admin/plugins/tagsinput/jquery.tagsinput.min.js"></script>
 
     <!-- END PAGE PLUGINS -->
-    <script type="text/javascript" src="/js/plugins/summernote/summernote.js"></script>
+    <script type="text/javascript" src="/js/admin/plugins/summernote/summernote.js"></script>
 
     <!-- START TEMPLATE -->
-    <script type="text/javascript" src="/js/admin/settings.js"></script>
 
-    <script type="text/javascript" src="/js/admin/plugins.js"></script>
-    <script type="text/javascript" src="/js/admin/actions.js"></script>
     <script>
         $(document).ready(function () {
             $('input[name="adType"]').on('change', function () {
@@ -332,7 +310,7 @@
             })
 
             var $select2 = $('#category').select2({
-                placeholder: "<?=$this->translate("SELECT Category")?>",
+                placeholder: "{{__("messages.SELECT Category")}}",
                 width: '70%',
                 allowClear: true,
                 data: [],
@@ -344,16 +322,16 @@
                 $("#category3").val('').trigger('change');
                 if (parent_id) {
                     $('#div_category2').show();
-                    $.get("/api/category?p_pid=" + parent_id, function (data) {
+                    $.get("/api/categories/" + parent_id, function (data) {
                         console.log(data);
-                        var categories = data;
+                        var categories = data.data;
                         console.log(categories);
                         categories.unshift({
                             id: "",
-                            text: '<?=$this->translate("SELECT Category")?>'
+                            text: '{{__("messages.SELECT Category")}}'
                         });
                         $("#category2").select2({
-                            placeholder: "<?=$this->translate("SELECT Category")?>",
+                            placeholder: "{{__("messages.SELECT Category")}}",
                             width: '70%',
                             allowClear: false,
                             data: categories,
@@ -364,17 +342,17 @@
                             if (parent) {
                                 $('#category3_div').show();
                                 console.log(parent);
-                                $.get("/api/category?p_pid=" + parent_id + "&pid=" + parent, function (data) {
+                                $.get("/api/categories/" + parent, function (data) {
                                     console.log(data);
-                                    var categories = data;
+                                    var categories = data.data;
                                     categories.unshift({
                                         id: "",
-                                        text: '<?=$this->translate("SELECT Category")?>'
+                                        text: '{{__("messages.SELECT Category")}}'
                                     });
 
                                     // mostly used event, fired to the original element when the value changes
                                     $("#category3").select2({
-                                        placeholder: "<?=$this->translate("SELECT Category")?>",
+                                        placeholder: "{{__("messages.SELECT Category")}}",
                                         width: '70%',
                                         allowClear: true,
                                         data: categories,
@@ -383,7 +361,7 @@
                             } else {
                                 $('#category3_div').hide();
                                 $("#category3").select2({
-                                    placeholder: "<?=$this->translate("SELECT Category")?>",
+                                    placeholder: "{{__("messages.SELECT Category")}}",
                                     width: '70%',
                                     allowClear: true,
                                     data: [],
@@ -396,13 +374,13 @@
                     $('#div_category2').hide();
                     $('#div_category3').hide();
                     $("#category2").select2({
-                        placeholder: "<?=$this->translate("SELECT Category")?>",
+                        placeholder: "{{__("messages.SELECT Category")}}",
                         width: '70%',
                         allowClear: true,
                         data: [],
                     });
                     $("#category3").select2({
-                        placeholder: "<?=$this->translate("SELECT Category")?>",
+                        placeholder: "{{__("messages.SELECT Category")}}",
                         width: '70%',
                         allowClear: true,
                         data: [],
@@ -414,7 +392,7 @@
             if (parent_id) {
                 $('#div_category2').show();
                 $("#category2").select2({
-                    placeholder: "<?=$this->translate("SELECT Category")?>",
+                    placeholder: "{{__("messages.SELECT Category")}}",
                     width: '70%',
                     allowClear: false,
                     data: [],
@@ -425,17 +403,17 @@
                     if (parent) {
                         $('#div_category3').show();
                         console.log(parent);
-                        $.get("/api/category?p_pid=" + parent_id + "&pid=" + parent, function (data) {
+                        $.get("/api/categories/"+ parent, function (data) {
                             console.log(data);
-                            var categories = data;
+                            var categories = data.data;
                             categories.unshift({
                                 id: "",
-                                text: '<?=$this->translate("SELECT Category")?>'
+                                text: '{{__("messages.SELECT Category")}}'
                             });
 
                             // mostly used event, fired to the original element when the value changes
                             $("#category3").select2({
-                                placeholder: "<?=$this->translate("SELECT Category")?>",
+                                placeholder: "{{__("messages.SELECT Category")}}",
                                 width: '70%',
                                 allowClear: true,
                                 data: categories,
@@ -444,7 +422,7 @@
                     } else {
                         $('#div_category3').hide();
                         $("#category3").select2({
-                            placeholder: "<?=$this->translate("SELECT Category")?>",
+                            placeholder: "{{__("messages.SELECT Category")}}",
                             width: '70%',
                             allowClear: true,
                             data: [],
@@ -459,7 +437,7 @@
                     console.log(parent);
                     // mostly used event, fired to the original element when the value changes
                     $("#category3").select2({
-                        placeholder: "<?=$this->translate("SELECT Category")?>",
+                        placeholder: "{{__("messages.SELECT Category")}}",
                         width: '70%',
                         allowClear: true,
                         data: [],
