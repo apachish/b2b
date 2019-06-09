@@ -80,11 +80,11 @@ Route::middleware('auth')
 
         //Route login user
         Route::get('members/my-account', 'HomeController@index')->name('members.my-account');
-        Route::get('/member/manage-leads', 'HomeController@index')->name('members.leads.list');
+        Route::get('/member/manage-leads', 'LeadsController@index')->name('members.leads.list');
         Route::get('/member/manage-enquiry', 'HomeController@index')->name('members.leads.enquiry');
         Route::get('/member/edit-account', 'HomeController@index')->name('members.edit_account');
+        Route::post('/member/post_lead/store', 'LeadsController@store')->name('members.leads.post.store');
         Route::get('/member/post_lead/{type_ad?}', 'LeadsController@create')->name('members.leads.post.type_ad');
-        Route::post('/member/post_lead/{type_ad?}/store', 'LeadsController@store')->name('members.leads.post.type_ad.store');
         Route::get('/member/newleads/{type_ad}', 'HomeController@index')->name('members.newleads.type_ad');
         Route::get('/member/logout', 'HomeController@index')->name('members.logout');
 

@@ -44,7 +44,7 @@ class AppServiceProvider extends ServiceProvider
             $view->telephone = "";
             $countries = Country::where('status', 1)->get();
             $view->countries = $countries;
-            $user_country = auth()->check() ? auth()->user()->country : null;
+            $user_country = auth()->check() ? auth()->user()->country->id : null;
             if (!$user_country) {
                 $ip_info = \Cache::get(Request::ip());
                 $user_country = data_get($ip_info, 'country_id');

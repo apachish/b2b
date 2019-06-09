@@ -30,8 +30,8 @@
                 </li>
                 <li class="dropdown"><a href="javascript:void(0)">{{ __('messages.Manage Account') }}</a>
                     <ul class="dropdown-menu">
-                        <!--                                <li><a href="--><?//= url('members/change_password') }}<!--"-->
-                            <!--                                       title="--><?//= __('messages.Change Password') }}<!--">--><?//= __('messages.Change Password') }}<!--</a></li>-->
+                        <li><a href="{{url('members/change_password') }}"
+                             title="{{ __('messages.Change Password') }}">{{ __('messages.Change Password') }}</a></li>
                             <li><a href="{{ url('members/remove_account') }}"
                                    title="{{ __('messages.Remove Account') }}">{{ __('messages.Remove Account') }}</a></li>
                     </ul>

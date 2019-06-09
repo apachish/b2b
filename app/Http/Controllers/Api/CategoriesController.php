@@ -14,22 +14,23 @@ class CategoriesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request,$id=null,$status='active',$language=false)
+
+    public function index(Request $request, $id = null, $status = 'active', $language = false)
     {
         $category = Category::query();
-        if($status){
-            $status = $status=='active'?1:0;
-            $category->where('status',$status);
+        if ($status) {
+            $status = $status == 'active' ? 1 : 0;
+            $category->where('status', $status);
         }
-        $search = data_get($request,'term.term');
-        if($search){
-            $category->where('name','like','%'.$search.'%');
-            $category->Orwhere('name_fa','like','%'.$search.'%');
+        $search = data_get($request, 'term.term');
+        if ($search) {
+            $category->where('name', 'like', '%' . $search . '%');
+            $category->Orwhere('name_fa', 'like', '%' . $search . '%');
 
         }
-        $category->where('parent_id',$id);
+        $category->where('parent_id', $id);
         $categories = $category->get();
-        $categories = new CategoryCollection($categories,$language?:app()->getLocale());
+        $categories = new CategoryCollection($categories, $language ?: app()->getLocale());
         return $categories;
     }
 
@@ -46,7 +47,7 @@ class CategoriesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -57,18 +58,23 @@ class CategoriesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        //
+        $category = Category::query();
+        $category->where('status', 1);
+        $category->where('id', $id);
+        $categories = $category->get();
+        $categories = new CategoryCollection($categories,  app()->getLocale());
+        return $categories;
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -79,8 +85,8 @@ class CategoriesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -91,7 +97,7 @@ class CategoriesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

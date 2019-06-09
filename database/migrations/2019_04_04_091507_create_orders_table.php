@@ -36,7 +36,6 @@ class CreateOrdersTable extends Migration
             $table->integer('no_of_enquiry')->default(0);
             $table->integer('duration');
             $table->string('price');
-            $table->string('member_type');
             $table->dateTime('exp_date');
             $table->dateTime('activation_date');
             $table->enum('payment_status',[0,1,2,3,4])->default(0);//0=pending,1=paid,2=delete,3=cancel,4=returned

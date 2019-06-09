@@ -663,7 +663,6 @@
                 src="{{app()->getLocale() ==  'fa' ? '/images/request_call_fa.jpeg' : '/images/request_call.gif'}}"
                 alt=""></a>
     <div class="req_form fs12 dn">
-
         <form id="popup_form" action="{{route('post_request')}}" method="post">
 
             <p><label for="name">{{__("messages.Full Name")}}</label></p>
@@ -676,9 +675,9 @@
             <p><select name="country" class="country w100 p4 radius-3">
                     <option value="">{{__('messages.SELECT Country')}}</option>
                     @foreach ($countries as $country)
-                        <option {{($user_country ==$country->id)?"selected":""}}
+                        <option {{( $user_country ==$country->id)?"selected":""}}
                                 value="{{$country->id}}">
-                            {{app()->getLocale()=='fa'?$country->name_fa:$country->name}}
+                            {{$country->getName()}}
                         </option>
                     @endforeach
                 </select></p>
