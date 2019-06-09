@@ -22,12 +22,13 @@ class LeadsController extends Controller
 
     public function index(Request $request)
     {
-        $leads = Lead::with(['medias' => function ($q) {
+        $leads = auth()->user()->leads()->with(['medias' => function ($q) {
             $q->where('is_default', true);
         }, 'categories' => function ($q) {
             $q->with('ancestors');
         }])->orderBy('updated_at','DESC')->paginate(10);
-        return view('leads.index',compact('leads'));
+        $filter = [];
+        return view('leads.index',compact('leads','filter'));
     }
     public function create(Request $request, $type_ad = 'buy')
     {
@@ -75,7 +76,8 @@ class LeadsController extends Controller
             $categories = Category::where('parent_id', Null)->where('status', 1)->get();
             $subcategories = [];
         }
-        return view('leads.create', compact('membership', 'selectItem', 'type_ad', 'categories', 'subcategories', 'AllowedUploadProduct', 'id_category_user'));
+        $sort_order = auth()->user()->leads()->count()+1;
+        return view('leads.create', compact('membership', 'selectItem', 'type_ad', 'categories', 'subcategories', 'sort_order','AllowedUploadProduct', 'id_category_user'));
     }
 
     public function store(StoreLead $request)
@@ -89,6 +91,9 @@ class LeadsController extends Controller
                 'detail_description' => $request->detail_description,
                 'meta_data' => json_encode($ip_info),
                 'meta_keywords' => $request->meta_keywords,
+                'sort_order' => $request->sort_order,
+                'city_id'=>data_get($ip_info,'city_id'),
+                'locale'=>app()->getLocale()
             ]);
         if ($request->category3) {
             $lead->categories()->syncWithoutDetaching($request->category3);

@@ -27,5 +27,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CategorySeeder::class);
         $this->call(PagePositionSeed::class);
         $this->call(UserSeed::class);
+        $this->call(PageSeed::class);
+        $this->call(MembershipSeed::class);
     }
 }
