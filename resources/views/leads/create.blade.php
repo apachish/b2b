@@ -134,10 +134,11 @@
                         <h2 class="title-cat">{{__('messages.Post New Lead')}}</h2>
                         <form class="changpass editlead" id="create_lead" enctype="multipart/form-data" method="post"
                               action="{{route('members.leads.post.store')}}">
+                            {{csrf_field()}}
                             <fieldset>
                                 <p class="textform">{{__('messages.Insert Your Lead Information')}} </p>
                                 <div class="row">
-                                    @include('contact-us.error')
+                                    @include('leads.error')
 
                                 </div>
                                 <div class="form-group row">
@@ -147,13 +148,13 @@
                                     <div class="col-sm-9">
                                         <p class="boxlead">
                                             <label>
-                                                <input name="adType" type="radio" value="sell"
+                                                <input name="ad_type" type="radio" value="sell"
                                                        {{($type_ad=='sell')?'checked':""}} onclick="$('.sell_only').show(0);"
                                                        title="{{__('messages.adType')}}">
                                                 {{__('messages.Sell Lead')}}</label>
                                             &nbsp;&nbsp;
                                             <label>
-                                                <input name="adType" type="radio" value="buy"
+                                                <input name="ad_type" type="radio" value="buy"
                                                        {{($type_ad=='buy')?'checked':""}} onclick="$('.sell_only').hide(0);"
                                                        title="{{__('messages.adType')}}">
                                                 {{__('messages.Buy Lead')}}</label>
@@ -208,6 +209,7 @@
                                     <div class="col-sm-9">
                                         <input class="inouttyeptext form-control " name="name" id="name"
                                                type="text" value="{{old('name')}}">
+                                        <input type="hidden" name="sort_order" value="{{$sort_order}}">
                                     </div>
                                 </div>
 
@@ -216,19 +218,19 @@
                                         <b class="red">*</b> :</label>
                                     <div class="col-sm-9">
                                         <p class="boxlead"> 1.
-                                            <input name="img[]" id="img1" type="file" class="w90 form-control"
+                                            <input name="image[0]" id="img1" type="file" class="w90 form-control"
                                                    style="border:0" title="{{__('messages.Image')}}">
                                         </p>
                                         <p class="boxlead"> 2.
-                                            <input name="img[]" id="img2" type="file" class="w90 form-control"
+                                            <input name="image[1]" id="img2" type="file" class="w90 form-control"
                                                    style="border:0" title="{{__('messages.Image')}}">
                                         </p>
                                         <p class="boxlead"> 3.
-                                            <input name="img[]" id="img3" type="file" class="w90 form-control"
+                                            <input name="image[2]" id="img3" type="file" class="w90 form-control"
                                                    style="border:0" title="{{__('messages.Image')}}">
                                         </p>
                                         <p class="boxlead"> 4.
-                                            <input name="img[]" id="img4" type="file" class="w90 form-control"
+                                            <input name="image[4]" id="img4" type="file" class="w90 form-control"
                                                    style="border:0" title="{{__('messages.Image')}}">
                                         </p>
                                     </div>

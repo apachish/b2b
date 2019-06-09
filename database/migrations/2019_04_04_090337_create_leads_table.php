@@ -1,5 +1,6 @@
 <?php
 
+use App\Lead;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -28,11 +29,11 @@ class CreateLeadsTable extends Migration
             $table->string('product_friendly_url');
             $table->string('description');
             $table->text('detail_description');
-            $table->enum('status',[0,1,-1])->comment('0-> new ,1-> active,-1->deactivate');
-            $table->tinyInteger('approval_status');
+            $table->enum('status',Lead::typeStatus('key'))->default(0)->comment('0-> new ,1-> active,-1->deactivate');
+            $table->enum('approval_status', Lead::typeApprovalStatus('key'))->default(1);
             $table->boolean('push_request')->default(false);
-            $table->integer('sort_order');
-            $table->dateTime('publish_at');
+            $table->integer('sort_order')->default(0);
+            $table->dateTime('publish_at')->nullable();
             $table->text('meta_data')->nullable();
             $table->unsignedBigInteger('city_id');
 

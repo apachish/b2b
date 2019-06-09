@@ -15,13 +15,14 @@ class Lead extends Model
 
     protected $fillable = ['user_id', 'name', 'ad_type', 'no_of_visits', 'product_friendly_url', 'description', 'detail_description', 'status'
         , 'approval_status', 'push_request', 'sort_order', 'publish_at', 'meta_data', 'city_id', 'locale', 'meta_keywords'];
-    const STATUS_INACTIVE    = 0;
+    const STATUS_NEW    = 0;
+    const STATUS_INACTIVE    = -1;
     const STATUS_ACTIVE       = 1;
 
     const APPROVAL_STATUS_PENDING    = 1;
     const APPROVAL_STATUS_APPROVED       = 2;
     const APPROVAL_STATUS_REJECTED     = 3;
-    public function typeApprovalStatus($type=null)
+    public static function typeApprovalStatus($type=null)
     {
         $approval_status = [
             self::APPROVAL_STATUS_PENDING    => __('messages.Pending'),
@@ -33,9 +34,10 @@ class Lead extends Model
         if($type && array_key_exists($type,$approval_status)) return $approval_status[$type];
         return [];
     }
-    public function typeStatus($type=null)
+    public static function typeStatus($type=null)
     {
         $type_status = [
+            self::STATUS_NEW    => __('messages.New'),
             self::STATUS_INACTIVE    => __('messages.Inactive'),
             self::STATUS_ACTIVE       =>  __('messages.Active'),
         ];
