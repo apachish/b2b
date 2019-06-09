@@ -17,4 +17,11 @@ class City extends Model
     {
         return $this->belongsTo(State::class);
     }
+    public function getName()
+    {
+        if (app()->getLocale() == 'fa')
+            if ($this->name_fa)
+                return $this->name_fa;
+        return $this->name;
+    }
 }

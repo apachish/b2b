@@ -17,7 +17,7 @@ class Page extends Model
     ];
     public function __construct(array $attributes = [])
     {
-        self::$section = 'articles';
+        self::$section = 'pages';
         self::$path = public_path() . '/images/' . self::$section . '/';
         parent::__construct($attributes);
     }

@@ -33,7 +33,7 @@ class CreateLeadsTable extends Migration
             $table->boolean('push_request')->default(false);
             $table->integer('sort_order');
             $table->dateTime('publish_at');
-            $table->text('meta_data');
+            $table->text('meta_data')->nullable();
             $table->unsignedBigInteger('city_id');
 
             $table->foreign('city_id')
@@ -42,7 +42,7 @@ class CreateLeadsTable extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
             $table->string('locale')->default('fa');
-            $table->text('meta_keywords');
+            $table->text('meta_keywords')->nullable();
             $table->timestamps();
         });
     }

@@ -170,6 +170,7 @@ return [
          */
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Mews\Captcha\CaptchaServiceProvider::class,
+        RSmalc\Noty\NotyServiceProvider::class,
 
         /*
          * Application Service Providers...

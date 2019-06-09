@@ -22,8 +22,8 @@ class CreateArticlesTable extends Migration
             $table->string('image')->default('noImage.png');
             $table->mediumInteger('sort_order');
             $table->boolean('status')->default(false);
-            $table->string('locale');
-            $table->boolean('feature');
+            $table->string('locale')->default('fa');
+            $table->boolean('feature')->default(false);
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')
                 ->references('id')

@@ -49,7 +49,7 @@ $(document).on('ready', function (e) {
             $("#div_category2").show();
             // mostly used event, fired to the original element when the value changes
             $.ajax({
-                url: "/api/category?p_pid=" + parent_id,
+                url: "/api/categories/" + parent_id,
                 type: 'Get',
                 success: function (data) {
                     var option = "<option value=''>{{__('Select  Sub Category')}}</option>";
