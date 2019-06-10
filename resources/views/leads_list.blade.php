@@ -11,7 +11,7 @@
                 <ul class="leads_list">
                     @foreach ($leads as $lead)
                         <li>
-                            <a href="{{route('home.leads.leads',['slug_categories'=>$lead->categories->first()->slug,'slug_leads'=> $lead->id])}}"
+                            <a href="{{route('home.leads.leads',['slug_categories'=>$lead->categories->first()->slug,'slug_leads'=> $lead->product_friendly_url])}}"
                                title="">{{$lead->name}}<span
                                         class="date-lead">{{app()->getLocale()=='fa'?toJalali($lead->publish_at):$lead->publish_at}}</span></a>
                         </li>
