@@ -10,7 +10,9 @@ class UsersController extends Controller
     {
         $user = auth()->user();
         $leads = $user->leads()->take(5)->get();
-        $requests = [];
+        $requests = \App\Request::whereHas('lead',function ($leads){
+            $leads->where('user_id',auth()->id());
+        })->get();
         return view('users.profile',compact('user','leads','requests'));
     }
 }

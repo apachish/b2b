@@ -79,7 +79,7 @@
                         <p class="datereq">{{$request->created_at}}</p>
                         <p class="Enquiriestext">
                             {{short_string($request->comments,100)}}
-                            <a href="{{route('members/request',['id'=>$request->id])}}" class="morelink">{{__("messages.more")}}</a>
+                            <a href="{{route('members.request.show',['id'=>$request->id])}}" class="morelink">{{__("messages.more")}}</a>
                         </p>
                         <p class="Enquiriesfor">{{__("messages.Enquiry For")}} : <b>
                                 <a href="{{route('home.leads.leads',['slug_categories'=>$lead->categories->first()->slug,'slug_leads'=> $lead->product_friendly_url])}}"
@@ -87,7 +87,7 @@
                         <div>
                             <a class="deletereq" href="#" title="Delete Record">
                                 <i class="icon-android-delete"></i></a>
-                            <p class="Detailsreq"> <a href="{{route('members/request',['id'=>$request->id])}}>" class="uu"
+                            <p class="Detailsreq"> <a href="{{route('members.request.show',['id'=>$request->id])}}>" class="uu"
                                                       title="{{__("messages.View Details")}}">{{__("messages.View Details")}}</a> </p>
                         </div>
                     </div>

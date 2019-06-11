@@ -89,6 +89,8 @@ Route::middleware('auth')
         Route::post('/member/post_lead/delete/{slug_lead}', 'LeadsController@store')->name('members.leads.post.delete');
         Route::get('/member/post_lead/{type_ad?}', 'LeadsController@create')->name('members.leads.post.type_ad');
         Route::get('/member/newleads/{type_ad}', 'HomeController@index')->name('members.newleads.type_ad');
+        Route::get('/member/requests', ' RequestsController@index')->name('members.request.index');
+        Route::get('/member/requests/{id}', ' RequestsController@show')->name('members.request.show');
         Route::get('/member/logout', 'HomeController@index')->name('members.logout');
 
         //Route login admin
