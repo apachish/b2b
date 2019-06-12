@@ -6,12 +6,16 @@ use App\Category as CategoryAlias;
 use App\Comment;
 use App\Lead;
 use App\Media;
+use App\Membership;
+use App\Order;
 use App\PagePosition;
 use App\Request as RequestAlias;
 use App\Seller;
 use App\Testimonial;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class UserSeed extends Seeder
 {
@@ -28,6 +32,33 @@ class UserSeed extends Seeder
             if ($rand) {
                 $user->sellers()->syncWithoutDetaching($this->seller_select());
                 $user->categories()->syncWithoutDetaching($this->category_select($user->category_id));
+                $membership = Order::where('member_id', $user->id)->where('upgrade_status', 'New')->where('exp_date', '>', Carbon::now())->first();
+                if ($membership == null) {
+                    $plan = Membership::where('price', 0)->where('status', 1)->where('locale', app()->getLocale())->first();
+                    do {
+                        $uniq_code = "INVOICE-" . Str::random(6);
+                    } while (Order::whereOrderNo($uniq_code)->count() > 0);
+                    if ($plan) {
+                        $membership = Order::create([
+                            'order_no' => $uniq_code,
+                            'member_id' => $user->id,
+                            'plan_id' => $plan->id,
+                            'plan_name' => $plan->plan_name,
+                            'price' => $plan->price,
+                            'duration' => $plan->duration,
+                            'allowed_products' => $plan->product_upload,
+                            'allowed_request' => $plan->no_of_enquiry,
+                            'activation_date' => Carbon::now(),
+                            'exp_date' => Carbon::now()->addMonth($plan->duration),
+                            'payment_status' => '0',
+                            'payment_mode' => 'Paypal',
+                            'upgrade_status' => 'New'
+                        ]);
+                    }
+                }
+                $number_product = rand(1, 6);
+                $membership->post_products = $number_product;
+                $membership->update();
                 $user->leads()->saveMany(factory(Lead::class, rand(1, 6))->make())->each(function ($lead) use ($user) {
                     $lead->categories()->syncWithoutDetaching($this->category_select());
                     $lead->medias()->syncWithoutDetaching($this->media_select());

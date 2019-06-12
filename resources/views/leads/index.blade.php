@@ -43,14 +43,13 @@
 
                             <div class="col-sm-6 col-xs-12">
                                 {{ __("messages.Filter Records") }}:
-                                <form method="POST" action="#">
-                                    {{csrf_field()}}
+                                <form method="Get" action="#">
 
-                                    <select name="type_ad" class="selectordering" onchange="this.form.submit()">
-                                        <option {{ $filter == '1' ? 'selected' : "" }}
-                                                value="1">{{ __("messages.Sell Leads") }}</option>
-                                        <option {{ $filter == '2' ? 'selected' : "" }}
-                                                value="2">{{ __("messages.Buy Leads") }}</option>
+                                    <select name="ad_type" class="selectordering" onchange="this.form.submit()">
+                                        <option {{ $filter == 'sell' ? 'selected' : "" }}
+                                                value="sell">{{ __("messages.Sell Leads") }}</option>
+                                        <option {{ $filter == 'buy' ? 'selected' : "" }}
+                                                value="buy">{{ __("messages.Buy Leads") }}</option>
                                         <option value="" {{ $filter == '' ? 'selected' : "" }}>{{ __("messages.All Records") }}</option>
                                     </select>
                                 </form>
@@ -58,7 +57,7 @@
                             <div class="col-sm-6 col-xs-12">
                                 {{--paginatiom--}}
                             </div>
-                            <form method="POST" action="#">
+                            <form method="Get" action="#">
 
                                 <div class="col-sm-8 col-xs-12">
                                     <input type="text" class="form-control" name="search" value=""
@@ -86,12 +85,12 @@
                                             <div class="col-md-6 col-sm-7 col-xs-12">
                                                 <p class="titelead"><a
                                                             href="{{route('home.leads.leads',['slug_categories'=>$lead->categories->first()->slug,'slug_leads'=> $lead->product_friendly_url])}}"
-                                                            target="_blank" class="uu">{{$lead['productName']}}</a></p>
+                                                            target="_blank" class="uu">{{$lead['name']}}</a></p>
                                                 <p class="typelead">{{ __("messages.For")}} {{ __('messages.'.$lead->ad_type)}}</p>
                                                 <p class="datelead">{{ __("messages.Last Modified")}}
-                                                    : {{$lead['productUpdatedDate']}}</p>
+                                                    : {{app()->getLocale()=='fa'?toJalali($lead['updated_at']):$lead['updated_at']}}</p>
                                                 <p class="datelead">{{ __("messages.Status")}}
-                                                    : {{__('messages.'.$lead->approval_status)}}</p>
+                                                    : {{$lead->getApprovalStatus()}}</p>
                                             </div>
                                             <div class=" col-md-4 col-sm-3 col-xs-12 actiondiv">
                                                 <strong>{{ __("messages.Action")}}:</strong> <a
@@ -113,13 +112,17 @@
                         <div class="ordering">
                             <div class="col-sm-6 col-xs-12">
                                 {{ __("messages.Filter Records") }}:
-                                <select name="filter" class="selectordering">
-                                    <option {{ $filter == 'sell' ? 'selected' : "" }}
-                                            value="sell">{{ __("messages.Sell Leads") }}</option>
-                                    <option {{ $filter == 'buy' ? 'selected' : "" }}
-                                            value="buy">{{ __("messages.Buy Leads") }}</option>
-                                    <option {{ $filter == '' ? 'selected' : "" }}>{{ __("messages.All Records") }}</option>
-                                </select>
+
+                                <form method="Get" action="#">
+
+                                    <select name="ad_type" class="selectordering" onchange="this.form.submit()">
+                                        <option {{ $filter == 'sell' ? 'selected' : "" }}
+                                                value="sell">{{ __("messages.Sell Leads") }}</option>
+                                        <option {{ $filter == 'buy' ? 'selected' : "" }}
+                                                value="buy">{{ __("messages.Buy Leads") }}</option>
+                                        <option value="" {{ $filter == '' ? 'selected' : "" }}>{{ __("messages.All Records") }}</option>
+                                    </select>
+                                </form>
                             </div>
                             <div class="col-sm-6 col-xs-12">
                                 {{--paginatiom--}}

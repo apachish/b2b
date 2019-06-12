@@ -45,6 +45,24 @@ class Lead extends Model
         if($type && array_key_exists($type,$type_status)) return $type_status[$type];
         return '';
     }
+    public function getStatus(){
+        $type_status = [
+            self::STATUS_NEW    => __('messages.New'),
+            self::STATUS_INACTIVE    => __('messages.Inactive'),
+            self::STATUS_ACTIVE       =>  __('messages.Active'),
+        ];
+        return $type_status[$this->status];
+    }
+    public function getApprovalStatus(){
+        $approval_status = [
+            self::APPROVAL_STATUS_PENDING    => __('messages.Pending'),
+            self::APPROVAL_STATUS_APPROVED       => __('messages.Approved'),
+            self::APPROVAL_STATUS_REJECTED     => __('messages.Rejected'),
+
+        ];
+        return $approval_status[$this->approval_status];
+
+    }
     public function categories()
     {
         return $this->belongsToMany(Category::class)->withTimestamps();//withPivot(['created_at'])//change pivot to tag

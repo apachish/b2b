@@ -161,7 +161,9 @@
     </script>
 @endsection
 @section('javascript')
-    <script type="text/javascript">
+            <script type="text/javascript" src="/js/main.js"></script>
+
+            <script type="text/javascript">
         jQuery(document).ready(function ($) {
             $('#mega-2').dcVerticalMegaMenu({
                 rowItems: '5',

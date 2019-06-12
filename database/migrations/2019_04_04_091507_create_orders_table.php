@@ -29,18 +29,18 @@ class CreateOrdersTable extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
             $table->string('plan_name');
-            $table->integer('post_products')->default(0);
-            $table->integer('posted_in_category')->default(0);
+            $table->integer('allowed_request')->default(0);
             $table->integer('category_allowed')->default(0);
             $table->integer('allowed_products')->default(0);
-            $table->integer('no_of_enquiry')->default(0);
+            $table->integer('post_products')->default(0);
+            $table->integer('no_of_request')->default(0);
             $table->integer('duration');
-            $table->string('price');
+            $table->string('price')->default(0);
             $table->dateTime('exp_date');
             $table->dateTime('activation_date');
             $table->enum('payment_status',[0,1,2,3,4])->default(0);//0=pending,1=paid,2=delete,3=cancel,4=returned
             $table->string('payment_mode');
-            $table->string('upgrade_status');
+            $table->string('upgrade_status')->nullable();
             $table->timestamps();
         });
     }

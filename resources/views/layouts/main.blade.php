@@ -722,22 +722,7 @@
     <script type="text/javascript" src="/js/script.int.dg.js"></script>
     <script type="text/javascript" src="/js/custom_index.js"></script>
     <script type="text/javascript" src="/js/fluid_dg.min.js"></script>
-    <script>
-        $(function () {
-            $('#fluid_dg_wrap_1').fluid_dg({
-                thumbnails: false,
-                width: '520px',
-                height: '250px',
-                loader: 'none',
-                fx: 'scrollTop,scrollBottom',
-                navigation: 'false',
-                playPause: 'false',
-                hover: 'false',
-                time: 3000
-            });
-        })
 
-    </script>
     <script>
         $(document).ready(function ($) {
 

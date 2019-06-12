@@ -85,7 +85,8 @@ Route::middleware('auth')
         Route::get('/member/manage-enquiry', 'HomeController@index')->name('members.leads.enquiry');
         Route::get('/member/edit-account', 'HomeController@index')->name('members.edit_account');
         Route::post('/member/post_lead/store', 'LeadsController@store')->name('members.leads.post.store');
-        Route::post('/member/post_lead/edit/{slug_lead}', 'LeadsController@store')->name('members.leads.post.edit');
+        Route::get('/member/post_lead/edit/{slug_lead}', 'LeadsController@edit')->name('members.leads.post.edit');
+        Route::get('/member/post_lead/update/{slug_lead}', 'LeadsController@update')->name('members.leads.post.update');
         Route::post('/member/post_lead/delete/{slug_lead}', 'LeadsController@store')->name('members.leads.post.delete');
         Route::get('/member/post_lead/{type_ad?}', 'LeadsController@create')->name('members.leads.post.type_ad');
         Route::get('/member/newleads/{type_ad}', 'HomeController@index')->name('members.newleads.type_ad');
