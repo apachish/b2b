@@ -36,7 +36,8 @@
                     <input id="country_selector" class="datatext p8 w40 radius-3 vam" type="text">
                     <label for="country_selector"
                            style="display:none;">{{__("messages.Select a country here...")}}</label>
-                    <input type="text" name="email" placeholder="{{__("messages.Email")}}"
+                    <input type="email" name="email" placeholder="{{__("messages.Email")}}"
+                           value="{{$email}}"
                            class="contentselect p8 w40 radius-3 vam"
                            id="contentselect">
             </span>
@@ -53,7 +54,7 @@
             <p class="mt8">
             <span class="box">
                     <input type="password" name="password" placeholder="{{__("messages.Password")}} "
-                           class="contentselect p8 w40 radius-3 vam" value="{{old('password')}}"
+                           class="contentselect p8 w40 radius-3 vam" value="{{$password}}"
                            id="input_password"><a toggle="#password-field" id="checkPassword"><i class="icon-eye"></i></a>
             </span>
             <p class="textsafe">
@@ -69,7 +70,7 @@
             </a>
             <input name="input" type="submit" id="submit" value="{{__('messages.Sign In')}}">
             <i class="icon-android-send"></i>
-            <img src="/img/blueimp/loading.gif" id="loding_email"  style="width: 30px;height: 30px;display: none"/>
+            <img src="/images/loading.gif" id="loding_email"  style="width: 30px;height: 30px;display: none"/>
 
             </p>
         </div>
@@ -83,9 +84,9 @@
 <script type="application/javascript">
 
     $("#country_selector").countrySelect({
-        //defaultCountry: "jp",
+        defaultCountry: "ir",
         //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
-        preferredCountries: ['{{strtolower(app()->getLocale())}}']
+        preferredCountries: ["{{$countryCode}}"]
     });
     $(document).ready(function () {
 
@@ -129,85 +130,27 @@
                 data: $('#email_password_form').serialize(),
                 dataType: "json",
                 success: function (response, textStatus, jqXHR) {
-                    console.log(response);
-                    if (response.status == 'failed' ) {
-                        var message = response.data;
-                        if(message && (typeof message === 'object' || typeof message === 'Array') ) {
+                    window.location = "members/my-account";
 
-                            $.each(message, function (index, value) {
-                                $.each(value, function (key, item) {
-                                    toastr.error(item);
-
-                                });
-
-                            });
-                        } else {
-                            toastr.error(message);
-                        }
-                        $(':input[type="submit"]').prop('disabled', false);
-                        $('#loding_email').hide( );
-                    }
-                    if (response.status=='success') {
-
-                        toastr.success(response.data.message);
-                        $(".ajax").colorbox.close();
-                        window.location = "members/my-account";
-
-                    }
-
-                    {{--if (response.Successful == 'register'  || data.Successful == 'password') {--}}
-                    {{--    // $('.sing_up_form').show();--}}
-                    {{--    $('.sing_up_form').attr('href', "{{route('getInfo')}}" + username)--}}
-                    {{--    $('.sing_up_form').click();--}}
-                    {{--} else if (data.status == 'login') {--}}
-
-                    {{--    toastr.success(data.Successful);--}}
-                    {{--    $(".ajax").colorbox.close();--}}
-                    {{--    window.location = "members/myAccount";--}}
-
-                    {{--} else if (data.status == 'email_not_accept') {--}}
-                    {{--    $(':input[type="submit"]').prop('disabled', false);--}}
-                    {{--    $('#loding_email').hide( );--}}
-
-                    {{--    toastr.error(data.error);--}}
-
-                    {{--    return false;--}}
-
-                    {{--} else if (data.Successful) {--}}
-                    {{--    $(':input[type="submit"]').prop('disabled', false);--}}
-                    {{--    $('#loding_email').hide( );--}}
-
-                    {{--    return false;--}}
-
-                    {{--} else {--}}
-
-                    {{--    toastr.error(data.error);--}}
-                    {{--    $(':input[type="submit"]').prop('disabled', false);--}}
-                    {{--    $('#loding_email').hide( );--}}
-
-                    {{--    return false;--}}
-                    {{--}--}}
 
                 },
                 error: function (data, textStatus, errorThrown) {
                     console.log(data.responseText);
                     data = JSON.parse(data.responseText);
+                    var message = data.errors;
+                    if(message && (typeof message === 'object' || typeof message === 'Array') ) {
 
-                    console.log(textStatus);
-                    $(':input[type="submit"]').prop('disabled', false);
-                    if (typeof data.error === 'array') {
-                        $.each(data.error, function( index, value ) {
-                            $.each(value, function( index1, value1 ) {
-                                toastr.error(value1);
+                        $.each(message, function (index, value) {
+                            $.each(value, function (key, item) {
+                                toastr.error(item);
+
                             });
 
-                            // alert( index + ": " + value );
                         });
-                    }else if(typeof data.error === 'string') {
-                        toastr.error(data.error);
-                    }else{
-                        toastr.error('{{__('messages.can not register')}}');
+                    } else {
+                        toastr.error(message);
                     }
+                    $(':input[type="submit"]').prop('disabled', false);
 
                 }
             });

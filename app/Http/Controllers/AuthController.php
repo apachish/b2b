@@ -8,6 +8,7 @@ use App\Events\RegisterEvent;
 use App\State;
 use App\Traits\AES;
 use App\User;
+use Cache;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Encryption\Encrypter;
@@ -19,7 +20,9 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    use AuthenticatesUsers;
+    use AuthenticatesUsers{
+        login as protected parent_login;
+        }
     protected $redirectTo = '/members/my-account';
     public function __construct()
     {
@@ -27,17 +30,31 @@ class AuthController extends Controller
 
     }
 
-    public function showLoginForm()
+    public function showLoginForm(Request $request)
     {
-        return view('users.login');
+
+        $ip_info = \Cache::get($request->ip());
+        $countryCode = strtolower(data_get($ip_info,'countryCode','IR'));
+        $email = Cache::get('email','');
+        $password = Cache::get('password','');
+        return view('users.login',compact('email','password','countryCode'));
 
     }
-
+    public function login(Request $request)
+    {
+        $this->parent_login($request);
+        Cache::forever('email', $request->email);
+        Cache::forever('password', $request->password);
+        return response()->json([
+            'status' => 'success',
+            'data' => ['send' => 'ok']
+        ], 200, []);
+    }
 
 
     public function register(Request $request)
     {
-        $ip_info = \Cache::get($request->ip());
+        $ip_info = Cache::get($request->ip());
         $countryCode = strtolower(data_get($ip_info, 'countryCode', 'IR'));
         return view('users.register', compact('countryCode'));
 
@@ -72,7 +89,7 @@ class AuthController extends Controller
         $country = Country::find($request->country);
         $states = State::where('country_id', $country->id)->get();
         $category = Category::where('parent_id', null)->get();
-        $ip_info = \Cache::get($request->ip());
+        $ip_info = Cache::get($request->ip());
         $city = data_get($ip_info, 'state_id');
 
         return view('users.register_final', compact('email', 'country', 'states', 'category', 'city', 'code'));
@@ -104,7 +121,7 @@ class AuthController extends Controller
         $key = base64_decode(substr($key, 7));
        $crypt =  Crypt::generateKey($key);
         $temp = Crypt::encryptString($login);
-        $portal = \Cache::get('portal');
+        $portal = Cache::get('portal');
 
         //$crypt->decrypt('value');
         $user = User::create(

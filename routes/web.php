@@ -80,7 +80,7 @@ Route::middleware('auth')
 
         //Route login user
         Route::get('members/myaccount', 'UsersController@profile')->name('members.my-account');
-        Route::get('members/my-account', 'HomeController@index')->name('members.my-account');
+        Route::get('members/my-account', 'UsersController@profile')->name('members.my-account');
         Route::get('/member/manage-leads', 'LeadsController@index')->name('members.leads.list');
         Route::get('/member/manage-enquiry', 'HomeController@index')->name('members.leads.enquiry');
         Route::get('/member/edit-account', 'HomeController@index')->name('members.edit_account');
