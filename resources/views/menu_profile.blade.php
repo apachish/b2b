@@ -7,7 +7,7 @@
                 <li class="dropdown"><a href="javascript:void(0)"
                                         title="{{ __('messages.My Profile') }}">{{ __('messages.My Profile') }}</a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{ url('company/detail', ['id' => auth()->id()]) }}"
+                        <li><a href="{{ route('home.companies.info', ['slug_companies' => auth()->user()->slug]) }}"
                                target="_blank"
                                title="{{ __('messages.View My Profile') }}">{{ __('messages.View My Profile') }}</a></li>
                         <li><a href="{{ url('members/edit_account') }}"

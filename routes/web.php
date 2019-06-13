@@ -59,7 +59,7 @@ Route::prefix('categories')
 Route::prefix('companies')
     ->group(function () {
         Route::get('/list', 'CompaniesController@index')->name('home.companies.list');
-        Route::get('/profile/{slug_companies}', 'CompaniesController@index')->name('home.companies.info');
+        Route::get('/profile/{slug_companies}', 'CompaniesController@show')->name('home.companies.info');
         Route::get('/{slug_categories?}', 'CategoriesController@index')->name('home.companies');
         Route::get('/{slug_categories?}/leads/{slug_leads?}', 'LeadsController@index')->name('home.companies.leads');
 

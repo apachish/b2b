@@ -25,7 +25,7 @@
             </div>
             <i  class="right-align icon-angle-left"></i>
             <div  class="right-align divinhere" itemscope="" itemtype="">
-                <span itemprop="title"><strong>{{__("Dashboard")}}</strong></span>
+                <span itemprop="title"><strong>{{__("messages.Dashboard")}}</strong></span>
             </div>
         </div>
     </section>
