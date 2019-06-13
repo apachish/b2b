@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Seller;
 use Illuminate\Http\Request;
 
 class UsersController extends Controller
@@ -14,5 +15,17 @@ class UsersController extends Controller
             $leads->where('user_id',auth()->id());
         })->get();
         return view('users.profile',compact('user','leads','requests'));
+    }
+
+    public function edit()
+    {
+        $user = auth()->user();
+        $sellers = Seller::all();
+        return view('users.edit',compact('user','sellers'));
+    }
+
+    public function update(Request $request)
+    {
+
     }
 }

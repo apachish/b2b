@@ -40,53 +40,59 @@
                                     <p> - {{__('messages.'.$seller->title)}}</p>
                                     @endforeach
                                     </p>
-                                    <p class="dealinfo"><b class="blue1"><?= __("messages.Deals in") ?>
-                                            :</b> <?= !empty($company['categoryTitle']) ? $company['categoryTitle'] : "" ?>
-                                    </p>
+                                    <p class="dealinfo"><b class="blue1">{{__("messages.Deals in")}}:</b></p>
+                                    @foreach($company->categories as $category)
+                                        <p>{{$category->getCategoryTitle()}}</p>
+                                    @endforeach
+
                                     <p class="titlecontactinfo"><?= __("messages.Company Profile") ?></p>
                                     <p class="textinfo">
-                                        <?= $company['companyDetails'] ?>
+                                        {{$company->company_details}}
                                     </p>
                             </div>
                         </div>
                         <h2 class="title-cat">{{__("messages.Leads From this Company")}}</h2>
                         <div class="ads_type">
                             @if ($adType == "buy" && $membership)
-                                <a href="{{ route('home.companies.info', ['slug_companies' => $item->slug]) . '?adType=buy' }}" {{$adType == "buy" ? 'class="act"' : ''}} >{{__("messages.Buy Leads")}}</a>
+                                <a href="{{ route('home.companies.info', ['slug_companies' => $company->slug]) . '?adType=buy' }}"
+                                        {{$adType == "buy" ? 'class=act' : ''}}
+                                >{{__("messages.Buy Leads")}}</a>
 
                             @endif
                             @if ($adType == "sell" || $membership)
-                                <a href="{{ route('home.companies.info', ['slug_companies' => $item->slug]) . '?adType=sell' }}" {{$adType == "sell" ? 'class="act"' : ''}} >{{__("messages.Sell Leads")}}</a>
+                                <a href="{{ route('home.companies.info', ['slug_companies' => $company->slug]) . '?adType=sell' }}"
+                                        {{$adType == "sell" ? 'class=act' : ''}}
+                                >{{__("messages.Sell Leads")}}</a>
                             @endif
                         </div>
                         <div class="ts_inr_list companies">
                             <ul>
-                                @foreach ($products as $item)
+                                @foreach ($leads as $item)
                                     <li>
                                         <div class="title">
                                             <p class="title-company"><a
-                                                        href="<?= $this->url('home/product', ['cat_id' => $item['categoryId'], 'id' => $item['id']]) ?>"
-                                                        class="uo"><?= $item['productName'] ?></a></p>
-                                            <p class="location"><?= $this->translate($company['cityTitle']) ?>
-                                                , <?= $this->translate($company['countryTitle']) ?></p>
+                                                        href="{{route('home.leads.leads',['slug_categories'=>$item->categories->first()->slug,'slug_leads'=> $item->product_friendly_url])}}"
+                                                        class="uo">{{$item->name}}</a></p>
+                                            <p class="location">{{$company->city->getName()}}
+                                                , {{$company->country->getName()}}</p>
                                         </div>
                                         <p class="textcompanies"><b>
                                                 @if ( $adType == 'sell' || $membership)
                                                     <a href="{{route('home.companies.info', ['slug_companies' => $company->slug])}}"
                                                        class="uo">{{$company->company_name}}</a>
                                                 @elseif ( $adType == 'buy')
-                                                    <?= $this->translate('Buyer') . "  " . $company['firstName'] ?>
+                                                    {{ __('messages.Buyer') . "  " . $company->first_name}}
                                                 @endif
                                                 -</b> <span
                                                     class="gray">
-                                                            "("
-                                        @foreach($company->sellers as $seller)
-                                            {{__('messages.'.$seller->title).','}}
-                                            @endforeach
-                                                    ")"
+                                                            (
+                                        @foreach($company->sellers as $i => $seller)
+                                                    {{__('messages.'.$seller->title).($i+1!=$company->sellers->count()?',':'')}}
+                                                @endforeach
+                                                        )
                                         </span></p>
                                         <div class="bodylead">
-                                            <p class="typelead">{{__("messages.For")}} {{__('messages.'.$item->ad_type)}}></p>
+                                            <p class="typelead">{{__("messages.For")}} {{__('messages.'.$item->ad_type)}}</p>
                                             <p class="textlead">{{$item->description}}</p>
                                             <a href="{{route('home.leads.leads',['slug_categories'=>$item->categories->first()->slug,'slug_leads'=> $item->product_friendly_url])}}"
                                                class="btnsend"><i
@@ -102,43 +108,42 @@
 
                             </div>
                             <div class="col-sm-9 col-xs-12">
-                                {{ $items->links()}}
+                                {{ $leads->links()}}
 
                             </div>
                         </div>
 
+                        @include('banner_middle',['offset'=>0,'limit' => 1])
 
-                        <p class="imginnerbtn"> {{$banner_middle_2}}</p>
                     </div>
 
                     <div class="col-lg-3 col-sm-12 col-md-3 col-xs-12  left-sidebar-inner details2">
                         <ul class="leftmenu">
                             @foreach ($categories as $category)
-                            <li>
-                                <a href="{{route('home.categories',['slug'=>app()->getLocale()=='fa'?$category->slug_fa:$category->slug])}}">{{$category->getCategoryTitle()}}</a>
-                            </li>
+                                <li>
+                                    <a href="{{route('home.categories',['slug'=>app()->getLocale()=='fa'?$category->slug_fa:$category->slug])}}">{{$category->getCategoryTitle()}}</a>
+                                </li>
                             @endforeach
-                            <li><a href="<?= $this->url("home/category"); ?>"><?= __("messages.View All") ?></a></li>
+                            <li><a href="{{route('home.categories')}}">{{__("messages.View All")}}</a></li>
 
                         </ul>
                         @include('companies/refer_friend')
 
-                        <div class="imgleftsidebar imgleftsidebar2">
-                            {{$banner_left}}
-                        </div>
+                        @include('banner_left',['offset'=>0,'limit' => 5])
+
                         @include('companies.company_featured',[ 'company_featured_type' => 4,'category_slug'=>null])
 
-                        <div class="imgleftsidebar">
-                            {{$banner_left_2}}
-                        </div>
+                        @include('banner_left',['offset'=>5,'limit' => 6])
 
                     </div>
                 </div>
-                <p class="imginnerbtn">{{$banner_middle}}</p>
+
 
             </div>
         </section>
     </div>
+    @include('banner_button')
+
 @endsection
 @section('javascript')
 @endsection
