@@ -30,7 +30,7 @@ Route::get('/contact_us', 'ContactUsController@index')->name('home.contact_us');
 Route::get('/site-map', 'IndexController@siteMap')->name('home.site-map');
 Route::get('advertisement', 'AdvertisementController@index')->name('advertisement');
 Route::get('help', 'HelpsController@index')->name('help');
-Route::post('help/rate', 'HelpsController@index')->name('help.rate');
+Route::post('help/rate/{id_faq}', 'HelpsController@rate')->name('help.rate');
 Route::post('search', 'SearchController@index')->name('search');
 Route::get('refer-friend', 'InviteController@form')->name('refer-friend');
 Route::post('refer-friend/send', 'InviteController@send')->name('refer-friend.send');

@@ -38,7 +38,7 @@
                             @foreach ($category_faqs as $category_faq)
                                 <h3 class="titlefaq" id="{{\Illuminate\Support\Str::slug($category_faq->name)}}">
                                     <img src="images/blt0.png" class="fl mr5 mt2" alt=""> {{$category_faq->name}}
-                                    - {{$category_faq->faq_count}}</h3>
+                                    - {{$category_faq->faqs_count}}</h3>
                                 <ul class="fq">
                                     @foreach ($category_faq->faqs as $faq)
                                         <li><a href="javascript:void(0)"><i
@@ -47,10 +47,10 @@
                                             <div class="faq-text">
                                                 <p>{{$faq->answer}}</p>
                                                 <p class="fq_help">{{ __('Does this answer help you?')}} <a
-                                                            href="javascript:rate(1,'{{route('help.rate', ['id' => $faq->id])}}','{{$faq->id}}');"
+                                                            href="javascript:rate('yes','{{route('help.rate', ['id_faq' => $faq->id])}}','{{$faq->id}}');"
                                                             class="yes">{{__('messages.Yes')}}-<span
                                                                 id="yes_{{$faq->id}}">{{$faq->yes}}</span></a> <a
-                                                            href="javascript:rate(2,'{{route('help.rate', ['id' => $faq->id])}}','{{$faq->id}}');"
+                                                            href="javascript:rate('no','{{route('help.rate', ['id_faq' => $faq->id])}}','{{$faq->id}}');"
                                                             class="no">{{__('messages.NO')}}-<span
                                                                 id="no_{{$faq->id}}">{{$faq->no}}</span></a></p>
                                             </div>
@@ -93,21 +93,47 @@
         });
 
         function rate(rate, route, id) {
-
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
             $.ajax({
                 url: route,
                 type: 'POST',
                 data: {rate: rate},
-                success: function (data) {
-                    console.log(data);
-                    if (data.status) {
-                        toastr.success(data.message);
-                        $('#yes_' + id).html(data.rateYes);
-                        $('#no_' + id).html(data.rateNo);
+                success: function (response) {
+                    if (response.status == 'failed' ) {
+                        var message = response.meta.message;
+                        if(message && (typeof message === 'object' || typeof message === 'Array') ) {
 
-                    } else {
-                        toastr.error(data.message);
+                            $.each(message, function (index, value) {
+                                $.each(value, function (key, item) {
+                                    toastr.error(item);
+
+                                });
+
+                            });
+                        } else {
+                            toastr.error(message);
+                        }
                     }
+                    if (response.status=='success') {
+
+                        toastr.success(response.meta.message);
+                        $('#yes_' + id).html(response.data.yes);
+                            $('#no_' + id).html(response.data.no);
+
+                    }
+                    // console.log(data);
+                    // if (data.status) {
+                    //     toastr.success(data.message);
+                    //     $('#yes_' + id).html(data.rateYes);
+                    //     $('#no_' + id).html(data.rateNo);
+                    //
+                    // } else {
+                    //     toastr.error(data.message);
+                    // }
 
                 }
                 , error: function (jqXHR, textStatus, errorThrown) {
