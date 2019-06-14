@@ -21,15 +21,14 @@ class CreateFaqsTable extends Migration
                 ->on('category_faq')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-            $table->string('question');
-            $table->string('answer');
-            $table->string('question_fa');
-            $table->string('answer_fa');
-            $table->integer('yes');
-            $table->integer('no');
-            $table->tinyInteger('sort_order');
-            $table->boolean('status');
-            $table->text('meta_data');
+            $table->string('question',1000);
+            $table->text('answer');
+            $table->enum('locale',['fa','en'])->default('fa');
+            $table->integer('yes')->default(0);
+            $table->integer('no')->default(0);
+            $table->tinyInteger('sort_order')->default(0);
+            $table->boolean('status')->default(false);
+            $table->text('meta_data')->nullable();
             $table->timestamps();
         });
     }

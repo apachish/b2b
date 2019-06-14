@@ -35,7 +35,7 @@
                 @include('users.info_user')
                 <div class="row">
                     <div class="col-lg-9 col-sm-9 col-md-9 col-xs-12 divmaincontent">
-                        <h2 class="title-cat">{{__("messages.Update Profile)}}</h2>
+                        <h2 class="title-cat">{{__("messages.Update Profile")}}</h2>
                         <form style="margin-top:15px;" class="changpass editlead" enctype="multipart/form-data"
                               method="post" action="{{route('members.update_account')}}" novalidate="novalidate">
                             <div class="error_message red"></div>
@@ -85,19 +85,12 @@
                                     <div class="col-sm-9">
 
                                         @foreach($sellers as $seller)
-                                            if(is_array($user['sellerType']) &&
-                                            in_array($seller_type[$i],$user['sellerType'])){
-                                            $sel="checked";
-                                            }else{
-                                            $sel="";
-                                            }
-                                            }}
-                                            <p>
-                                                <input type="checkbox" name="sellerType[]"
-                                                       value="{{$seller->title}}" {{in_array($seller->id,$user->sellers->pluck('id'))?"checked":""}} />
-                                                <span class="spansellertype">{{__('messages.'.$seller->title)}}</span>
-                                            </p>
-
+                                            <div class="row">
+                                                <div class="col-sm-1"><input type="checkbox" name="sellerType[]"
+                                                                             value="{{$seller->title}}" {{in_array($seller->id,$user->sellers->pluck('id')->toArray())?"checked":""}} />
+                                                </div>
+                                                <div class="col-sm-9 spansellertype">{{__('messages.'.$seller->title)}}</div>
+                                            </div>
                                         @endforeach
                                         <span class="db i gray fs12 mt5 arial red"></span>
 
@@ -111,7 +104,7 @@
                                         <select name="category" id="category" class="form-control selectpicker"
                                                 data-show-subtext="true" data-live-search="true">
 
-                                            <option value="">{{__("messages.Select Category')}}</option>
+                                            <option value="">{{__("messages.Select Category")}}</option>
                                             @foreach ($categories as $category)
                                                 <option {{ $user->category->id == $category->id?"selected":"" }}
                                                         value="{{ $category->id }}">{{ $category->getCategoryTitle()}}</option>
@@ -130,8 +123,35 @@
                                                    placeholder="{{ __("messages.search")}}"
                                                    style=" width:100%">
                                             <span id="subcat_id_checkbox">
-                                {{ $deals_in}}
-        </span></div>
+                                                @foreach($deals_in as $deal)
+
+                                                    <div class="row">
+                                                         <div class="col-sm-1" style="text-align: left">
+                                                                         {{"|__"}}
+                                                               </div>
+                                                        <div class="col-sm-6">
+                                                        <span>{{$deal->getCategoryTitle()}}</span></div>
+                                                    </div>
+                                                    @if($deal->descendants)
+                                                        @foreach($deal->descendants as $descendants)
+                                                            <div class='row contact-cat'>
+                                                               <div class="col-sm-2" style="text-align: left">
+                                                                         {{"|______"}}
+                                                               </div>
+                                                                <div class="col-sm-6">
+                                                                          <input type="checkbox" name="dealsIn[]"
+                                                                                 value="{{$descendants->id}}"
+                                                                                  {{in_array($descendants->id,$user->categories->pluck('id')->toArray())?"checked":""}}>
+                                                                         &nbsp;{{$descendants->getCategoryTitle()}}
+                                                                </div>
+
+                                                           </div>
+                                                        @endforeach
+                                                    @endif
+
+
+                                                @endforeach
+                                        </span></div>
                                     </div>
                                     <span class="db i gray fs12 mt5 arial red"></span>
 
@@ -181,7 +201,7 @@
                                         <select name="country" id="country" class="form-control selectpicker"
                                                 data-show-subtext="true" data-live-search="true">
 
-                                            <option value="">{{__("messages.Select Country')}}</option>
+                                            <option value="">{{__("messages.Select Country")}}</option>
                                             @foreach($countries as $country)
                                                 <option {{ $user->country->id == $country->id ?"selected":"" }} value="{{ $country->id}}">{{$country->getName()}}</option>
                                             @endforeach

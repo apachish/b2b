@@ -30,6 +30,7 @@ Route::get('/contact_us', 'ContactUsController@index')->name('home.contact_us');
 Route::get('/site-map', 'IndexController@siteMap')->name('home.site-map');
 Route::get('advertisement', 'AdvertisementController@index')->name('advertisement');
 Route::get('help', 'HelpsController@index')->name('help');
+Route::post('help/rate', 'HelpsController@index')->name('help.rate');
 Route::post('search', 'SearchController@index')->name('search');
 Route::get('refer-friend', 'InviteController@form')->name('refer-friend');
 Route::post('refer-friend/send', 'InviteController@send')->name('refer-friend.send');
@@ -82,7 +83,9 @@ Route::middleware('auth')
         Route::get('members/myaccount', 'UsersController@profile')->name('members.my-account');
         Route::get('members/my-account', 'UsersController@profile')->name('members.my-account');
         Route::get('/member/manage-leads', 'LeadsController@index')->name('members.leads.list');
-        Route::get('/member/manage-enquiry', 'HomeController@index')->name('members.leads.enquiry');
+        Route::get('/member/membership_plans', 'MembershipsController@index')->name('members.membership.plans');
+        Route::get('/member/membership_plans/{plan_id}/pay', 'MembershipsController@pay')->name('members.membership.plans.pay');
+        Route::post('/member/membership_plans/{order_id}/payment', 'MembershipsController@payment')->name('members.membership.payment');
         Route::get('/member/edit/account', 'UsersController@edit')->name('members.edit_account');
         Route::patch('/member/update/account', 'UsersController@update')->name('members.update_account');
         Route::post('/member/post_lead/store', 'LeadsController@store')->name('members.leads.post.store');
@@ -91,8 +94,14 @@ Route::middleware('auth')
         Route::post('/member/post_lead/delete/{slug_lead}', 'LeadsController@store')->name('members.leads.post.delete');
         Route::get('/member/post_lead/{type_ad?}', 'LeadsController@create')->name('members.leads.post.type_ad');
         Route::get('/member/newleads/{type_ad}', 'HomeController@index')->name('members.newleads.type_ad');
-        Route::get('/member/requests', ' RequestsController@index')->name('members.request.index');
-        Route::get('/member/requests/{id}', ' RequestsController@show')->name('members.request.show');
+        Route::get('/member/requests', 'RequestsController@index')->name('members.request.index');
+        Route::get('/member/requests/{id}', 'RequestsController@show')->name('members.request.show');
+        Route::post('/member/requests/{request_id}/replay', 'RequestsController@show')->name('members.request.replay');
+        Route::delete('/member/requests/{id}', ' RequestsController@delete')->name('members.request.delete');
+        Route::get('/member/change_password', 'UsersController@changePasswordForm')->name('members.change.password.form');
+        Route::post('/member/change/password', 'UsersController@changePassword')->name('members.change.password');
+        Route::get('/member/remove_account', 'UsersController@removeAccountForm')->name('members.remove.account.form');
+        Route::post('/member/remove/account', 'UsersController@removeAccount')->name('members.remove.account');
         Route::get('/member/logout', 'HomeController@index')->name('members.logout');
 
         //Route login admin

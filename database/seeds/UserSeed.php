@@ -4,6 +4,7 @@ use App\Article;
 use App\Banner;
 use App\Category as CategoryAlias;
 use App\Comment;
+use App\Faq;
 use App\Lead;
 use App\Media;
 use App\Membership;
@@ -81,6 +82,7 @@ class UserSeed extends Seeder
             $article->comments()->saveMany(factory(Comment::class, rand(1, 10))->make());
         });
         factory(Testimonial::class, 100)->create();
+        factory(Faq::class, 100)->create();
 
     }
 

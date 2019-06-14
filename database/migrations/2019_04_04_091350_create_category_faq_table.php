@@ -15,11 +15,9 @@ class CreateCategoryFaqTable extends Migration
     {
         Schema::create('category_faq', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('category_name');
-            $table->string('category_name_fa');
-            $table->string('category_image');
-            $table->string('category_description');
-            $table->unsignedBigInteger('parent_id');
+            $table->string('name');
+            $table->string('description')->nullable();
+            $table->unsignedBigInteger('parent_id')->nullable();
             $table->foreign('parent_id')
                 ->references('id')
                 ->on('category_faq')
@@ -27,9 +25,10 @@ class CreateCategoryFaqTable extends Migration
                 ->onUpdate('cascade');
             $table->tinyInteger('sort_order');
             $table->boolean('status')->default(false);
-            $table->string('meta_title');
-            $table->string('meta_keywords');
-            $table->string('meta_description');
+            $table->enum('locale',['fa','en']);
+            $table->string('meta_title')->nullable();
+            $table->string('meta_keywords')->nullable();
+            $table->string('meta_description')->nullable();
             $table->timestamps();
         });
     }
