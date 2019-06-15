@@ -238,9 +238,9 @@ class LeadsController extends Controller
         $categories = Category::orderByRaw('RAND()')->take(10)->get();
 
         $company_featured = User::with('category')->where('featured_company', 1)->whereStatus(1)->orderByRaw('RAND()')->take(6)->get();
-        $banner_left = Banner::where('banner_position', Banner::BANNER_POSITION_LEFT)->where('status', 1)->orderByRaw('RAND()')->skip(0)->take(6)->get();
-        $banner_button = Banner::where('banner_position', Banner::BANNER_POSITION_BOTTOM)->where('status', 1)->orderByRaw('RAND()')->take(2)->get();
-        $banner_middle = Banner::where('banner_position', Banner::BANNER_POSITION_MIDDLE)->where('status', 1)->orderByRaw('RAND()')->take(1)->get();
+        $banner_left = Banner::where('banner_position', Banner::BANNER_POSITION_LEFT)->where('image','!=',0)->where('status', 1)->orderByRaw('RAND()')->skip(0)->take(6)->get();
+        $banner_button = Banner::where('banner_position', Banner::BANNER_POSITION_BOTTOM)->where('image','!=',0)->where('status', 1)->orderByRaw('RAND()')->take(2)->get();
+        $banner_middle = Banner::where('banner_position', Banner::BANNER_POSITION_MIDDLE)->where('image','!=',0)->where('status', 1)->orderByRaw('RAND()')->take(1)->get();
         return view('leads.list', compact('leads', 'ad_type', 'title_page', 'company_featured', 'banner_left',
             'banner_button', 'banner_middle','membership','countItem','categories'));
     }

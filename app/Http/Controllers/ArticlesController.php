@@ -13,7 +13,7 @@ class ArticlesController extends Controller
     public function index(Request $request, $article_slug = null)
     {
         $order_by = $request->order_by?:'DESC';
-        $banner_left = Banner::where('banner_position', Banner::BANNER_POSITION_LEFT)->where('status', 1)->orderByRaw('RAND()')->skip(0)->take(6)->get();
+        $banner_left = Banner::where('banner_position', Banner::BANNER_POSITION_LEFT)->where('image','!=',0)->where('status', 1)->orderByRaw('RAND()')->skip(0)->take(6)->get();
         $testimonials = Testimonial::whereStatus(1)->orderBy('created_at', 'desc')->take(10)->get();
 
         if ($article_slug) {

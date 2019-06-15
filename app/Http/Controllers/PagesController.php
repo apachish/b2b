@@ -11,9 +11,9 @@ class PagesController extends Controller
 {
     public function index(Request $request,$page_slug=null)
     {
-        $banner_left = Banner::where('banner_position', Banner::BANNER_POSITION_LEFT)->where('status', 1)->orderByRaw('RAND()')->skip(0)->take(6)->get();
+        $banner_left = Banner::where('banner_position', Banner::BANNER_POSITION_LEFT)->where('image','!=',0)->where('status', 1)->orderByRaw('RAND()')->skip(0)->take(6)->get();
         $testimonials = Testimonial::whereStatus(1)->orderBy('created_at', 'desc')->take(10)->get();
-        $banner_button = Banner::where('banner_position', Banner::BANNER_POSITION_BOTTOM)->where('status', 1)->orderByRaw('RAND()')->take(2)->get();
+        $banner_button = Banner::where('banner_position', Banner::BANNER_POSITION_BOTTOM)->where('image','!=',0)->where('status', 1)->orderByRaw('RAND()')->take(2)->get();
 
         $order_by = $request->order_by?:'DESC';
         if ($page_slug) {
