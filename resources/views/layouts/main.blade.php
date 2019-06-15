@@ -157,7 +157,7 @@
                                                 <li>
                                                     <a href="{{$menu->base_url?route($menu->base_url, $param):""}}"
                                                        title="{{$menu->title }}"
-                                                       class="{{data_get($menu,'class')}}"
+                                                       class="{{ auth()->check()?str_replace('group1','',data_get($menu,'class')):data_get($menu,'class')}}"
                                                     >
                                                         {{$menu->title}}
                                                     </a>
@@ -184,7 +184,7 @@
                                                 <li>
                                                     <a href="{{$menu->base_url?route($menu->base_url, $param):""}}"
                                                        title="{{$menu->title }}"
-                                                       class="{{data_get($menu,'class')}}"
+                                                       class="{{ auth()->check()?str_replace('group1','',data_get($menu,'class')):data_get($menu,'class')}}"
                                                     >
                                                         {{$menu->title}}
                                                     </a>
@@ -352,7 +352,8 @@
 
                         <li>
                             <a href="{{$href}}"
-                               title="{{$menu->title}}" class="{{data_get($menu,'class')}}"
+                               title="{{$menu->title}}"
+                               class="{{ auth()->check()?str_replace('group1','',data_get($menu,'class')):data_get($menu,'class')}}"
 
                             >{{$menu->title}}
                             </a>
@@ -387,7 +388,8 @@
 
                         <li>
                             <a href="{{$href}}"
-                               title="{{$menu->title}}" class="{{data_get($menu,'class')}}"
+                               title="{{$menu->title}}"
+                               class="{{ auth()->check()?str_replace('group1','',data_get($menu,'class')):data_get($menu,'class')}}"
 
                             >{{$menu->title}}
                             </a>
@@ -420,7 +422,8 @@
 
                         <li>
                             <a href="{{$href}}"
-                               title="{{$menu->title}}" class="{{data_get($menu,'class')}}"
+                               title="{{$menu->title}}"
+                               class="{{ auth()->check()?str_replace('group1','',data_get($menu,'class')):data_get($menu,'class')}}"
 
                             >{{$menu->title}}
                             </a>
@@ -456,7 +459,8 @@
 
                         <li>
                             <a href="{{$href}}"
-                               title="{{$menu->title}}" class="{{data_get($menu,'class')}}"
+                               title="{{$menu->title}}"
+                               class="{{ auth()->check()?str_replace('group1','',data_get($menu,'class')):data_get($menu,'class')}}"
 
                             >{{$menu->title}}
                             </a>
@@ -490,7 +494,8 @@
 
                         <li>
                             <a href="{{$href}}"
-                               title="{{$menu->title}}" class="{{data_get($menu,'class')}}"
+                               title="{{$menu->title}}"
+                               class="{{ auth()->check()?str_replace('group1','',data_get($menu,'class')):data_get($menu,'class')}}"
 
                             >{{$menu->title}}
                             </a>
@@ -516,7 +521,8 @@
 
                         <li>
                             <a href="{{route($menu->base_url,$param)}}"
-                               title="{{$menu->title}}" class="{{data_get($menu,'class')}}"
+                               title="{{$menu->title}}"
+                               class="{{ auth()->check()?str_replace('group1','',data_get($menu,'class')):data_get($menu,'class')}}"
 
                             >{{$menu->title}}
                             </a>
@@ -551,7 +557,8 @@
 
                         <li>
                             <a href="{{$href}}"
-                               title="{{$menu->title}}" class="{{data_get($menu,'class')}}"
+                               title="{{$menu->title}}"
+                               class="{{ auth()->check()?str_replace('group1','',data_get($menu,'class')):data_get($menu,'class')}}"
 
                             >{{$menu->title}}
                             </a>
@@ -589,7 +596,8 @@
                         @endif
                         <li class="col-lg-2 col-sm-2 col-xs-12 col-md-2">
                             <a href="{{$href}}"
-                               title="{{$menu->title}}" class="{{data_get($menu,'class')}}"
+                               title="{{$menu->title}}"
+                               class="{{ auth()->check()?str_replace('group1','',data_get($menu,'class')):data_get($menu,'class')}}"
 
                             ><span class="title">{{$menu->title}}</span>
                             </a>

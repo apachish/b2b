@@ -16,7 +16,8 @@
                                             alt="" width="100px" height="100px"></a></figure>
                         </div>
                         <p class="pro-list-title"><a
-                                    href="{{route('home.companies.info', ['slug_companies' => $company->slug])}}" class="uo"
+                                    href="{{route('home.companies.info', ['slug_companies' => $company->slug])}}"
+                                    class="uo"
                                     title="">{{$company->getCompanyName($company)}}</a>
                         </p>
                         <p class="pro-detials">
@@ -69,7 +70,13 @@
                                     class="uo"
                                     title="">{{$company->getCompanyName($company)}}</a>
                         </p>
-                        <p class="pro-detials"><{{__($messages.featured['sellerType']) }}</p>
+                        <p class="pro-detials">
+                            @if($company->sellers )
+                                @foreach($company->sellers as $i=>$seller)
+                                    <span>  {{$i!=0?'-':""}}{{__('messages.'.$seller->title)}}</span>
+                                @endforeach
+                            @endif
+                        </p>
                     </div>
                 </li>
             @endforeach

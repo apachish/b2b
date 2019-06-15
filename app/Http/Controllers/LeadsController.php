@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Banner;
 use App\Category;
 use App\Http\Requests\EditLead;
 use App\Http\Requests\StoreLead;
@@ -9,6 +10,7 @@ use App\Lead;
 use App\Media;
 use App\Membership;
 use App\Order;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -35,7 +37,7 @@ class LeadsController extends Controller
             $search = $request->search;
             $leads->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%" . $search . "%");
-                });
+            });
         }
         $leads = $leads->orderBy('updated_at', 'DESC')->paginate(10);
         $filter = $request->ad_type;
@@ -215,5 +217,31 @@ class LeadsController extends Controller
         }
         return redirect('/member/manage-leads');
 
+    }
+
+    public function list(Request $request, $ad_type = null, $order_by = 'created_at', $type_order = 'DESC')
+    {
+        $limit = $request->get('limit', 12);
+        $leads = Lead::where('status', 1)->where('approval_status', 2)->where('locale', app()->getLocale())->orderBy($order_by, $type_order);
+        if ($ad_type)
+            $leads->where('ad_type', $ad_type);
+        $countItem = $leads->count();
+        $leads = $leads->paginate($limit);
+        $title_page = __('messages.Leads');
+        if ($ad_type == 'sell') {
+            $title_page = __('messages.Selling Leads');
+        } elseif ($ad_type == 'buy') {
+            $title_page = __('messages.Buying Leads');
+
+        }
+        $membership = Order::where('member_id', auth()->id())->where('price','!=',0)->where('upgrade_status', 'New')->where('exp_date', '>', Carbon::now())->first();
+        $categories = Category::orderByRaw('RAND()')->take(10)->get();
+
+        $company_featured = User::with('category')->where('featured_company', 1)->whereStatus(1)->orderByRaw('RAND()')->take(6)->get();
+        $banner_left = Banner::where('banner_position', Banner::BANNER_POSITION_LEFT)->where('status', 1)->orderByRaw('RAND()')->skip(0)->take(6)->get();
+        $banner_button = Banner::where('banner_position', Banner::BANNER_POSITION_BOTTOM)->where('status', 1)->orderByRaw('RAND()')->take(2)->get();
+        $banner_middle = Banner::where('banner_position', Banner::BANNER_POSITION_MIDDLE)->where('status', 1)->orderByRaw('RAND()')->take(1)->get();
+        return view('leads.list', compact('leads', 'ad_type', 'title_page', 'company_featured', 'banner_left',
+            'banner_button', 'banner_middle','membership','countItem','categories'));
     }
 }

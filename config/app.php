@@ -171,6 +171,7 @@ return [
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Mews\Captcha\CaptchaServiceProvider::class,
         RSmalc\Noty\NotyServiceProvider::class,
+        Spatie\TranslationLoader\TranslationServiceProvider::class,
 
         /*
          * Application Service Providers...

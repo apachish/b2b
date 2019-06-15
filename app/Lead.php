@@ -88,6 +88,10 @@ class Lead extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function city(){
+        return $this->belongsTo(City::class);
+
+    }
     public function featured(){
         return $this->belongsToMany(PagePosition::class,'page_position_model','id','id_model')->where('model',PagePosition::TYPE_MODEL_LEAD);
     }
