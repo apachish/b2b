@@ -17,10 +17,10 @@ class IndexController extends Controller
 {
     public function index()
     {
-        $banner_right = Banner::where('banner_position', Banner::BANNER_POSITION_RIGHT)->where('status', 1)->orderByRaw('RAND()')->skip(0)->take(4)->get();
-        $banner_left = Banner::where('banner_position', Banner::BANNER_POSITION_LEFT)->where('status', 1)->orderByRaw('RAND()')->skip(0)->take(6)->get();
-        $banner_button = Banner::where('banner_position', Banner::BANNER_POSITION_BOTTOM)->where('status', 1)->orderByRaw('RAND()')->take(2)->get();
-        $home_scrolling = Banner::where('banner_position', Banner::BANNER_POSITION_HOME_SCROLLING)->where('status', 1)->orderByRaw('RAND()')->take(4)->get();
+        $banner_right = Banner::where('banner_position', Banner::BANNER_POSITION_RIGHT)->where('image','!=',0)->where('status', 1)->orderByRaw('RAND()')->skip(0)->take(4)->get();
+        $banner_left = Banner::where('banner_position', Banner::BANNER_POSITION_LEFT)->where('image','!=',0)->where('status', 1)->orderByRaw('RAND()')->skip(0)->take(6)->get();
+        $banner_button = Banner::where('banner_position', Banner::BANNER_POSITION_BOTTOM)->where('image','!=',0)->where('status', 1)->orderByRaw('RAND()')->take(2)->get();
+        $home_scrolling = Banner::where('banner_position', Banner::BANNER_POSITION_HOME_SCROLLING)->where('image','!=',0)->where('status', 1)->orderByRaw('RAND()')->take(4)->get();
         $leads_buy = Lead::whereAdType('buy')->whereStatus(1)->where('approval_status', 2)->orderByRaw('RAND()')
             ->where('publish_at', '>', Carbon::now()->subDay(3))
             ->take(30)->get();
