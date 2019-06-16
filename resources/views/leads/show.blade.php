@@ -71,7 +71,7 @@
                             @endforeach
                         @endif
                     </i></p>
-                <a href="{{route('members.request.send',['slug_leads'=>$lead->product_friendly_url])}}" class="btnsend">
+                <a href="{{route('leads.request.send',['slug_leads'=>$lead->product_friendly_url])}}" class="btnsend">
                     <i class="icon-email"></i>{{ __("messages.Send Enquiry")}}</a>
             </div>
         </section>
@@ -156,7 +156,7 @@
                                         <div class="bodylead">
                                             <p class="typelead">{{ __("messages.For")}} {{__("messages.".($item->ad_type))}}</p>
                                             <p class="textlead">{{$item->description}}</p>
-                                            <a href="{{route('members.request.send',['slug_leads'=>$lead->product_friendly_url])}}"
+                                            <a href="{{route('leads.request.send',['slug_leads'=>$lead->product_friendly_url])}}"
                                                class="btnsend"><i
                                                         class="icon-email"></i>{{ __("messages.Send Enquiry")}}</a>
                                         </div>

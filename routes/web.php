@@ -35,7 +35,9 @@ Route::post('help/rate/{id_faq}', 'HelpsController@rate')->name('help.rate');
 Route::post('search', 'SearchController@index')->name('search');
 Route::get('refer-friend', 'InviteController@form')->name('refer-friend');
 Route::post('refer-friend/send', 'InviteController@send')->name('refer-friend.send');
-Route::get('testimonials/{slug?}', 'TestimonialsController@index')->name('testimonials');
+Route::get('testimonials', 'TestimonialsController@index')->name('testimonials');
+Route::get('testimonials/{slug}', 'TestimonialsController@show')->name('testimonials.show');
+Route::post('testimonials/store', 'TestimonialsController@store')->name('testimonials.store');
 Route::post('newsLetter', 'NewsLettersController@send')->name('newsLetter');
 Route::post('post_request', 'ContactUsController@postRequest')->name('post_request');
 Route::post('featured/{type?}/category/{slug_category?}', 'FeaturedsController@postRequest')->name('home.featured');
@@ -106,8 +108,8 @@ Route::middleware('auth')
         Route::post('/member/remove/account', 'UsersController@removeAccount')->name('members.remove.account');
         Route::get('/member/logout', 'HomeController@index')->name('members.logout');
 
-        Route::get('/leads/requests/{slug_lead}/send', 'RequestsController@send')->name('members.request.send');
-        Route::post('/leads/requests/{slug_lead}/store', 'RequestsController@store')->name('members.request.store');
+        Route::get('/leads/requests/{slug_lead}/send', 'RequestsController@send')->name('leads.request.send');
+        Route::post('/leads/requests/{slug_lead}/store', 'RequestsController@store')->name('leads.request.store');
         //Route login admin
 
         Route::middleware('admin')

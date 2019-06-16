@@ -31,7 +31,7 @@
 
                             <h6>{{ __("messages.Have an Advertisement Related Query?") }}</h6>
                             <p>{{ __("messages.Just Give the Below Information:") }}</p>
-                            @include('admin.error')
+                            @include('banners.error')
                             @include('flash::message')
 
 
@@ -130,7 +130,7 @@
                                     </div>
                                     @endforeach
                                 </div>
-                                <div class="col-lg-12">
+                                <div class="col-lg-3">
                                     <input name="verification_code_advertisement" id="verification_code_advertisement" type="text"
                                            title="{{__('messages.verification_code')}}"
                                            placeholder="{{__("messages.Enter the security code") }}"
