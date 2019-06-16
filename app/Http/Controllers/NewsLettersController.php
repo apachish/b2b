@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class NewsLettersController extends Controller
 {
+    public function create()
+    {
+        return view('newsletters.create');
+    }
     public function send(Request $request)
     {
         $validator = Validator()->make($request->all(), [

@@ -735,6 +735,7 @@
         $(document).ready(function ($) {
 
             $(".group1").colorbox({rel: 'group1',  width: "auto", height: "320px"});
+            $(".group2").colorbox({rel: 'group2',  width: "auto", height: "320px"});
             $(".group_refer_friend").colorbox({rel: 'group_refer_friend',  width: "400px", height: "370px"});
             $('.changelocal').on('click', function () {
                 $('body').removeClass('loaded');

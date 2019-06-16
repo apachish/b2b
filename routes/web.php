@@ -38,6 +38,7 @@ Route::post('refer-friend/send', 'InviteController@send')->name('refer-friend.se
 Route::get('testimonials', 'TestimonialsController@index')->name('testimonials');
 Route::get('testimonials/{slug}', 'TestimonialsController@show')->name('testimonials.show');
 Route::post('testimonials/store', 'TestimonialsController@store')->name('testimonials.store');
+Route::get('newsLetter', 'NewsLettersController@create')->name('newsLetter');
 Route::post('newsLetter', 'NewsLettersController@send')->name('newsLetter');
 Route::post('post_request', 'ContactUsController@postRequest')->name('post_request');
 Route::post('featured/{type?}/category/{slug_category?}', 'FeaturedsController@postRequest')->name('home.featured');
