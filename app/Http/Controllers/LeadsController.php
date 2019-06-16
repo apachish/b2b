@@ -68,10 +68,12 @@ class LeadsController extends Controller
         $banner_button = Banner::where('banner_position', Banner::BANNER_POSITION_BOTTOM)->where('image', '!=', 0)->where('status', 1)->orderByRaw('RAND()')->take(2)->get();
         $banner_middle  = Banner::where('banner_position', Banner::BANNER_POSITION_MIDDLE)->where('image', '!=', 0)->where('status', 1)->orderByRaw('RAND()')->take(1)->get();
         $membership = Order::where('member_id', auth()->id())->where('upgrade_status', 'New')->where('exp_date', '>', Carbon::now())->first();
-
+        $featureds =  Lead::whereStatus(1)->with(['user', 'medias' => function ($q) {
+            $q->where('is_default', true);
+        },'categories'])->where('approval_status', 2)->orderByRaw('RAND()')->take(5)->get();
         return view('leads.show', compact('lead', 'category', 'leads',
             'countItem', 'banner_left', 'banner_button', 'membership', 'ad_type',
-            'banner_middle'
+            'banner_middle','featureds'
         ));
     }
 
