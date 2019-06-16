@@ -38,8 +38,8 @@
                     <fieldset class="contact_form Advertisementform" style="border:none;">
                         <div>
                             <div class="contactform col-lg6 col-md-7 col-xs-12">
-                                <h2 class="title-cat"><{{__('messages.Have a Query')}}? <b class="">
-                                    <{{__("messages.Just Fill the Below Information") }}:
+                                <h2 class="title-cat">{{__('messages.Have a Query')}}? <b class="">
+                                        {{__("messages.Just Fill the Below Information") }}:
                                     </b>
                                 </h2>
                                 <div class="form-group">
@@ -55,18 +55,18 @@
                                             <label>
                                                 <input class="type_contacts" name="type" type="radio" value="1"
                                                        title="{{__('messages.type')}}" {{old('type')==1?"checked":""}} >
-                                                <{{__('messages.Enquiry') }}</label>
+                                                {{__('messages.Enquiry') }}</label>
                                             &nbsp;&nbsp;
                                             <label>
                                                 <input class="type_contacts" name="type" type="radio" value="2"
                                                        title="{{__('messages.type')}}" {{old('type')==2?"checked":""}} >
-                                                <{{__('messages.Bug Report') }}
+                                                {{__('messages.Bug Report') }}
                                                 &nbsp;&nbsp;
                                             </label>
                                             <label>
                                                 <input class="type_contacts" name="type" type="radio" value="3"
                                                        title="{{__('messages.type')}}" {{old('type')==3?"checked":""}} >
-                                                <{{__('messages.Advertise Request') }}</label>
+                                                {{__('messages.Advertise Request') }}</label>
                                         </p>
 
                                     </div>
@@ -87,7 +87,7 @@
                                         <p>
                                             <input type="text" name="companyName" id="company"
                                                    title="{{__('messages.companyName')}}"
-                                                   placeholder="<{{__("messages.Company Name")}}"
+                                                   placeholder="{{__("messages.Company Name")}}"
                                                    value="{{old('companyName')}}">
                                         </p>
                                         <p class="mt5 fls">
@@ -98,31 +98,31 @@
                                                 title="{{__('messages.bannerPosition')}}"
                                                 class="form-control inouttyeptext">
 
-                                            <option value=""><{{__("messages.Select position") }}</option>
+                                            <option value="">{{__("messages.Select position") }}</option>
 
                                             <option {{old('type')=="Right"?"selected":""}}  value="Right">
-                                                <{{__("messages.Right Main Page")}} »
-                                                <{{__("messages.Banner Size In Location (190x275)") }}</option>
+                                                {{__("messages.Right Main Page")}} »
+                                                {{__("messages.Banner Size In Location (190x275)") }}</option>
                                             >
 
                                             <option {{old('type')=="Left"?"selected":""}} value="Left">
-                                                <{{__("messages.Left")}} »
-                                                <{{__("messages.Banner Size In Location(190x275)") }}</option>
+                                                {{__("messages.Left")}} »
+                                                {{__("messages.Banner Size In Location(190x275)") }}</option>
 
                                             <option {{old('type')=="Middle"?"selected":""}} value="Middle">
-                                                <{{__("messages.Middle")}} »
-                                                <{{__("messages.Banner Size In Location(468x60)") }}</option>
+                                                {{__("messages.Middle")}} »
+                                                {{__("messages.Banner Size In Location(468x60)") }}</option>
 
                                             <option {{old('type')=="Bottom"?"selected":""}} value="Bottom">
-                                                <{{__("messages.Bottom")}} »
-                                                <{{__("messages.Banner Size In Location(470x95)") }}</option>
+                                                {{__("messages.Bottom")}} »
+                                                {{__("messages.Banner Size In Location(470x95)") }}</option>
 
                                             <option {{old('type')=="Home Scrolling"?"selected":""}} value="Home Scrolling">
-                                                <{{__("messages.Home Scrolling Main Page")}} »
-                                                <{{__("messages.Banner Size In Location(480x250)") }}</option>
+                                                {{__("messages.Home Scrolling Main Page")}} »
+                                                {{__("messages.Banner Size In Location(480x250)") }}</option>
                                         </select>
                                         <button type="button" class="btn btn-primary" data-toggle="modal"
-                                                data-target="#myModal"><{{__("messages.help Location")}}</button>
+                                                data-target="#myModal">{{__("messages.help Location")}}</button>
                                         <div id="myModal" class="modal fade" tabindex="-1" role="dialog">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
@@ -135,7 +135,7 @@
                                         <select name="timeDuration" id="timeDuration"
                                                 title="{{__('messages.timeDuration')}}"
                                                 class="form-control inouttyeptext">
-                                            <option value=""><{{__("messages.Select duration in month")}}</option>
+                                            <option value="">{{__("messages.Select duration in month")}}</option>
 
                                             @for($i=1;$i<=12;$i++)
                                             <option {{old('timeDuration')==$i?'selected':""}}   value={{$i}} >{{$i}}</option>
@@ -144,7 +144,7 @@
                                         <div class="col-md-12">
                                             <p style="text-align: right">
                                                 <label>
-                                                    <{{__("messages.Which page?") }}
+                                                    {{__("messages.Which page?") }}
                                                 </label>
                                             </p>
                                         </div>
@@ -155,7 +155,7 @@
                                                                             {{old('bannerPage') && in_array($position->id, old('bannerPage')) ? "checked" : ""}}
                                                                             value="{{$position->id}}"
                                                                             class="icheckbox"/>
-                                                    <{{__("messages.".$position->name) }}
+                                                    {{__("messages.".$position->name) }}
                                                 </label>
                                             </div>
                                         @endforeach

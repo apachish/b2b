@@ -33,7 +33,7 @@ class CreateMenusTable extends Migration
             $table->string('locale');
             $table->string('class')->nullable();
 
-            $table->enum('permission',['admin','guest','customer'])->default('guest');
+            $table->enum('permission',['all','guest','user'])->default('guest');
             $table->timestamps();
         });
     }

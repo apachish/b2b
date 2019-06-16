@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -55,8 +56,8 @@ class AppServiceProvider extends ServiceProvider
                 $site_info = json_decode($portal->meta_data, true);
                 $view->social = json_decode($portal->social, true);
                 $view->meta_data = json_decode($portal->meta_data, true);
-                \Cache::rememberForever('portal',function () use($portal){
-                   return $portal;
+                \Cache::rememberForever('portal', function () use ($portal) {
+                    return $portal;
                 });
                 $view->telephone = !empty($site_info['telephone']) ? $site_info['telephone'] : "";
             }
@@ -84,66 +85,71 @@ class AppServiceProvider extends ServiceProvider
                     })
                     ->get();
                 $list_menu = [];
+                $route_current = Request::route() ? Request::route()->getName() : "";
+                $view->routeName = $route_current;
                 foreach ($menus as $menu) {
-                    if($menu->type_menu == 'category'){
-                        $categories = Category::where('status',1)->where('parent_id',Null)->orderByRaw('RAND()')->take(18)->get();
-                        $base_url = 'home/category';
-                        $item = [];
-                        $i=1;
-                        foreach ($categories as $cat){
+                    if ($menu->type_menu == 'category') {
+                        $categories = Category::where('status', 1)->where('parent_id', Null)->orderByRaw('RAND()')->take(18)->get();
+                        $i = 1;
+                        $menu_category = $menu->menus;
+                        foreach ($categories as $cat) {
                             $row = new \stdClass();
-
-                            $row->title =  $cat->getCategoryTitle();
-                            $row->base_url='home.categories';
-                            $row->class='';
-                            $row->page_url=json_encode(['slug'=>app()->getLocale()=='fa'?$cat->slug_fa:$cat->slug]);
-                            $metaData['value'] = $cat->id;
-                            $metaData['title'] = $cat->getCategoryTitle();
-                            $metaData['url'] = route('home.categories',['slug'=>app()->getLocale()=='fa'?$cat->slug_fa:$cat->slug]);
-                            $row->metaData = json_encode($metaData);
-                            $menu->menus[$i++] = $row;
+                            $row->href = route('home.categories', ['slug' => app()->getLocale() == 'fa' ? $cat->slug_fa : $cat->slug]);
+                            $row->title = $cat->getCategoryTitle();
+                            $row->class = "";
+                            $row->permission = "all";
+                            $menu_category->push($row);
                         }
-                        $menu->menus = $menu->menus->sortKeysDesc();
+                        $menu->menus = $menu_category->sortKeysDesc();
                     }
-                    $list_menu[$menu->position] = $menu;
+                    $filter = $menu->menus->filter(function ($set){
+                        return ((data_get($set, 'permission') == 'user' && auth()->user()) ||
+                            (data_get($set, 'permission') == 'guest' && !auth()->user()) ||
+                            data_get($set, 'permission') == 'all'
+                        );
+                    });
+                    $filter->map(function ($set) use ($route_current) {
+                        if ($set->href) return $set;
+                        $class = "class=act";
+                        $set->class_active = "";
+                        $params_url = $set->page_url ? json_decode($set->page_url, true) : [];
+                        $set->metaData = $set->metaData ? json_decode($set['metaData'], true) : [];
+                        $url = !empty($metaData['url']) ? $metaData['url'] : '/';
+                        if (auth()->check()) {
+                            $set->class = str_replace('group1', '', $set->class);
+                        }
+                        if (Str::contains($set->class, 'group1')) {
+                            $set->href = route('singIn');
+                        } elseif ($set->type == 'url') {
+                            $set->href = $set['base_url'];
+                        } else {
+                            $set->href = $set['base_url'] ? route($set['base_url'], $params_url) : "#";
+                        }
+                        if (!empty($set['base_url']) && $set['base_url'] == Request::route()->getName()) {
+                            $set->class_active = $class;
+                        } elseif (!empty($set['base_url']) && $set['base_url'] != 'home') {
+
+                            $current = explode('/', $route_current);
+                            $set_current = explode('/', $set['base_url']);
+                            $array = $set_current + $current;
+                            $path = implode('/', $array);
+                            if ($route_current == $path) {
+                                $set->class_active = $class;
+                            }
+
+                        }
+                    });
+                     $menu = collect($menu)->put('menus',$filter);
+                    $list_menu[data_get($menu,'position')] = $menu;
                 }
-                $view->routeName = "";
-                if (Request::route())
-                    $view->routeName = Request::route()->getName();
                 $view->title_menu = null;
                 foreach (data_get($list_menu, 'main_menu.menus') as $menu_main) {
                     if ($menu_main->base_url == $view->routeName)
                         $view->title_menu = $menu_main->title;
                 }
-
-                //Route::getCurrentRoute()->getPath();
                 $view->menus = $list_menu;
             }
 
         });
-
-
-//        $menu = DB::table('tbl_menu')->get();
-//        $id=1;
-//        foreach ($menu as $i){
-//            $out[] = [
-//                'id'=> $id,
-//                'type'=>$i->type,
-//                'parent_id'=>$i->parent,
-//                'base_url'=>$i->base_url,
-//                'page_url'=>$i->page_url,
-//                'title'=>$i->title,
-//                'meta_data'=>$i->meta_data,
-//                'order_menu'=>$i->order_menu,
-//                'status'=>true,
-//                'language'=>$i->language=='en_US'?'en':($i->language=='fa_IR'?'fa':''),
-//                'category'=>$i->category,
-//                'class'=>$i->class,
-//
-//
-//            ];
-//            $id++;
-//        }
-//        echo json_encode($out);exit;
     }
 }
