@@ -71,7 +71,7 @@
                                     <li>
                                         <div class="title">
                                             <p class="title-company"><a
-                                                        href="{{route('home.leads.leads',['slug_categories'=>$item->categories->first()->slug,'slug_leads'=> $item->product_friendly_url])}}"
+                                                        href="{{route('home.leads.show',['slug_categories'=>$item->categories->first()->getCategorySlug(),'slug_leads'=> $item->product_friendly_url])}}"
                                                         class="uo">{{$item->name}}</a></p>
                                             <p class="location">{{$company->city->getName()}}
                                                 , {{$company->country->getName()}}</p>
@@ -94,7 +94,7 @@
                                         <div class="bodylead">
                                             <p class="typelead">{{__("messages.For")}} {{__('messages.'.$item->ad_type)}}</p>
                                             <p class="textlead">{{$item->description}}</p>
-                                            <a href="{{route('home.leads.leads',['slug_categories'=>$item->categories->first()->slug,'slug_leads'=> $item->product_friendly_url])}}"
+                                            <a href="{{route('home.leads.show',['slug_categories'=>$item->categories->first()->slug,'slug_leads'=> $item->product_friendly_url])}}"
                                                class="btnsend"><i
                                                         class="icon-email"></i>{{ __("messages.Send Enquiry")}}</a>
                                         </div>

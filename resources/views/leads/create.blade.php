@@ -172,7 +172,7 @@
                                                 title="{{__('messages.categoryId')}}">
 
                                             <option value="">{{__('messages.Select Category')}}</option>
-                                            @foreach ($categories as $category):?>
+                                            @foreach ($categories as $category)
                                             <option {{sizeof($categories)==1?"selected":""}} value="{{$category->id}}">{{$category->getCategoryTitle()}}</option>
                                             @endforeach
                                         </select>

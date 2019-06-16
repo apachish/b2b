@@ -31,4 +31,8 @@ class Category extends Model
     {
         return app()->getLocale()=='fa'?$this->name_fa:$this->name;
     }
+    public function getCategorySlug()
+    {
+        return app()->getLocale()=='fa'?$this->slug_fa:$this->slug;
+    }
 }

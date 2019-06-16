@@ -197,9 +197,9 @@
                             @if (Route::has('help'))
                                 <li><a href="{{route('help')}}">{{__("messages.Help Center")}}</a></li>
                             @endif
-                            @if (Route::has('advertisement'))
+                            @if (Route::has('advertisement.create'))
                                 <li>
-                                    <a href="{{route('advertisement')}}">{{__("messages.Advertise with Us")}}</a>
+                                    <a href="{{route('advertisement.create')}}">{{__("messages.Advertise with Us")}}</a>
                                 </li>
                             @endif
                         </ul>

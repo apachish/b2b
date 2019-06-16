@@ -84,7 +84,7 @@
                                             <div class="col-md-2 col-sm-2 col-xs-1">{{$i}}.</div>
                                             <div class="col-md-6 col-sm-7 col-xs-12">
                                                 <p class="titelead"><a
-                                                            href="{{route('home.leads.leads',['slug_categories'=>$lead->categories->first()->slug,'slug_leads'=> $lead->product_friendly_url])}}"
+                                                            href="{{route('home.leads.show',['slug_categories'=>$lead->categories->first()->getCategorySlug(),'slug_leads'=> $lead->product_friendly_url])}}"
                                                             target="_blank" class="uu">{{$lead['name']}}</a></p>
                                                 <p class="typelead">{{ __("messages.For")}} {{ __('messages.'.$lead->ad_type)}}</p>
                                                 <p class="datelead">{{ __("messages.Last Modified")}}

@@ -119,7 +119,7 @@
                                        class="morelink">{{__("messages.more")}}</a>
                                 </p>
                                 <p class="Enquiriesfor">{{__('messages.Enquiry For')}} : <b><a
-                                                href="{{route('home.leads.leads',['slug_categories'=>$request->lead->categories->first()->slug,'slug_leads'=> $request->lead->product_friendly_url])}}"
+                                                href="{{route('home.leads.show',['slug_categories'=>$request->lead->categories->first()->getCategorySlug(),'slug_leads'=> $request->lead->product_friendly_url])}}"
                                                 target="_blank">
                                             {{$request->lead->name}}
                                             - {{__("messages.For")}} {{__("messages.".$request->lead->ad_type)}}</a></b>

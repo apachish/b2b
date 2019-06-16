@@ -173,9 +173,16 @@ class LeadsController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request,$slug_categories,$slug_leads)
     {
-        //
+        Lead::where('product_friendly_url',$slug_leads)->whereHas('categories',function ($query) use($slug_categories){
+            if(app()->getLocale()=='fa')
+            $query->where('slug_fa',$slug_categories);
+            else
+                $query->where('slug',$slug_categories);
+
+        })->first();
+        return view('show');
     }
 
     /**

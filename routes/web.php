@@ -28,7 +28,8 @@ Route::get('/articles/{article_slug?}/comment', 'ArticlesController@loadComment'
 Route::post('/articles/{article_slug?}/comment/send', 'ArticlesController@sendComment')->name('home.articles.comments.send');
 Route::get('/contact_us', 'ContactUsController@index')->name('home.contact_us');
 Route::get('/site-map', 'IndexController@siteMap')->name('home.site-map');
-Route::get('advertisement', 'AdvertisementController@index')->name('advertisement');
+Route::get('advertisement', 'AdvertisementController@create')->name('advertisement.create');
+Route::post('advertisement/store', 'AdvertisementController@store')->name('advertisement.store');
 Route::get('help', 'HelpsController@index')->name('help');
 Route::post('help/rate/{id_faq}', 'HelpsController@rate')->name('help.rate');
 Route::post('search', 'SearchController@index')->name('search');
@@ -75,6 +76,7 @@ Route::prefix('leads')
         Route::get('/{slug_categories?}', 'CategoriesController@index')->name('home.leads');
         Route::get('/{slug_categories?}/leads/{slug_leads?}', 'LeadsController@index')->name('home.leads.leads');
     });
+Route::get('categories/{slug_categories?}/leads/{slug_leads?}', 'LeadsController@show')->name('home.leads.show');
 
 Route::middleware('auth')
     ->group(function () {
@@ -94,8 +96,6 @@ Route::middleware('auth')
         Route::post('/member/post_lead/delete/{slug_lead}', 'LeadsController@store')->name('members.leads.post.delete');
         Route::get('/member/post_lead/{type_ad?}', 'LeadsController@create')->name('members.leads.post.type_ad');
         Route::get('/member/newleads/{type_ad}', 'LeadsController@list')->name('members.newleads.type_ad');
-        Route::get('/member/requests/{slug_lead}/send', 'RequestsController@send')->name('members.request.send');
-        Route::post('/member/requests/{slug_lead}/store', 'RequestsController@store')->name('members.request.store');
         Route::get('/member/requests', 'RequestsController@index')->name('members.request.index');
         Route::get('/member/requests/{id}', 'RequestsController@show')->name('members.request.show');
         Route::post('/member/requests/{request_id}/replay', 'RequestsController@show')->name('members.request.replay');
@@ -106,6 +106,8 @@ Route::middleware('auth')
         Route::post('/member/remove/account', 'UsersController@removeAccount')->name('members.remove.account');
         Route::get('/member/logout', 'HomeController@index')->name('members.logout');
 
+        Route::get('/leads/requests/{slug_lead}/send', 'RequestsController@send')->name('members.request.send');
+        Route::post('/leads/requests/{slug_lead}/store', 'RequestsController@store')->name('members.request.store');
         //Route login admin
 
         Route::middleware('admin')

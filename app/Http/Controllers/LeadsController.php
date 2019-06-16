@@ -44,6 +44,37 @@ class LeadsController extends Controller
         return view('leads.index', compact('leads', 'filter'));
     }
 
+    public function show(Request $request, $slug_categories, $slug_leads)
+    {
+        $lead = Lead::where('product_friendly_url', $slug_leads)->with(['medias' => function ($q) {
+            $q->where('is_default', true);
+        }])->whereHas('categories', function ($query) use ($slug_categories) {
+            if (app()->getLocale() == 'fa')
+                $query->where('slug_fa', $slug_categories);
+            else
+                $query->where('slug', $slug_categories);
+
+        })->firstOrFail();
+        if (app()->getLocale() == 'fa')
+            $category = Category::where('slug_fa', $slug_categories)->with('ancestors')->first();
+        else
+            $category = Category::where('slug', $slug_categories)->with('ancestors')->first();
+        $ad_type = $request->get('ad_type', $lead->ad_type);
+        $limit = $request->get('limit', 10);
+        $leads = Lead::where('status', 1)->where('approval_status', 2)->where('user_id', $lead->user_id)->where('ad_type',$ad_type);
+        $countItem = $leads->count();
+        $leads =     $leads->paginate($limit);
+        $banner_left = Banner::where('banner_position', Banner::BANNER_POSITION_LEFT)->where('image', '!=', 0)->where('status', 1)->orderByRaw('RAND()')->skip(0)->take(6)->get();
+        $banner_button = Banner::where('banner_position', Banner::BANNER_POSITION_BOTTOM)->where('image', '!=', 0)->where('status', 1)->orderByRaw('RAND()')->take(2)->get();
+        $banner_middle  = Banner::where('banner_position', Banner::BANNER_POSITION_MIDDLE)->where('image', '!=', 0)->where('status', 1)->orderByRaw('RAND()')->take(1)->get();
+        $membership = Order::where('member_id', auth()->id())->where('upgrade_status', 'New')->where('exp_date', '>', Carbon::now())->first();
+
+        return view('leads.show', compact('lead', 'category', 'leads',
+            'countItem', 'banner_left', 'banner_button', 'membership', 'ad_type',
+            'banner_middle'
+        ));
+    }
+
     public function create(Request $request, $type_ad = 'buy')
     {
         $selectItem = 0;
@@ -234,14 +265,14 @@ class LeadsController extends Controller
             $title_page = __('messages.Buying Leads');
 
         }
-        $membership = Order::where('member_id', auth()->id())->where('price','!=',0)->where('upgrade_status', 'New')->where('exp_date', '>', Carbon::now())->first();
+        $membership = Order::where('member_id', auth()->id())->where('price', '!=', 0)->where('upgrade_status', 'New')->where('exp_date', '>', Carbon::now())->first();
         $categories = Category::orderByRaw('RAND()')->take(10)->get();
 
         $company_featured = User::with('category')->where('featured_company', 1)->whereStatus(1)->orderByRaw('RAND()')->take(6)->get();
-        $banner_left = Banner::where('banner_position', Banner::BANNER_POSITION_LEFT)->where('image','!=',0)->where('status', 1)->orderByRaw('RAND()')->skip(0)->take(6)->get();
-        $banner_button = Banner::where('banner_position', Banner::BANNER_POSITION_BOTTOM)->where('image','!=',0)->where('status', 1)->orderByRaw('RAND()')->take(2)->get();
-        $banner_middle = Banner::where('banner_position', Banner::BANNER_POSITION_MIDDLE)->where('image','!=',0)->where('status', 1)->orderByRaw('RAND()')->take(1)->get();
+        $banner_left = Banner::where('banner_position', Banner::BANNER_POSITION_LEFT)->where('image', '!=', 0)->where('status', 1)->orderByRaw('RAND()')->skip(0)->take(6)->get();
+        $banner_button = Banner::where('banner_position', Banner::BANNER_POSITION_BOTTOM)->where('image', '!=', 0)->where('status', 1)->orderByRaw('RAND()')->take(2)->get();
+        $banner_middle = Banner::where('banner_position', Banner::BANNER_POSITION_MIDDLE)->where('image', '!=', 0)->where('status', 1)->orderByRaw('RAND()')->take(1)->get();
         return view('leads.list', compact('leads', 'ad_type', 'title_page', 'company_featured', 'banner_left',
-            'banner_button', 'banner_middle','membership','countItem','categories'));
+            'banner_button', 'banner_middle', 'membership', 'countItem', 'categories'));
     }
 }

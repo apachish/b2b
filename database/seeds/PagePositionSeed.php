@@ -23,8 +23,8 @@ class PagePositionSeed extends Seeder
             ['id' => 7, 'name' => 'Search'],
             ['id' => 8, 'name' => 'Articles'],
             ['id' => 9, 'name' => 'Testimonial'],
-            ['id' => 10, 'name' => 'help'],
-            ['id' => 11, 'name' => 'contactUs'],
+            ['id' => 10, 'name' => 'in help'],
+            ['id' => 11, 'name' => 'in contactUs'],
             ['id' => 12, 'name' => 'pages'],
         ];
         foreach (array_chunk($pages, 250) as $set) {

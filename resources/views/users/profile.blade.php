@@ -40,7 +40,7 @@
                         <ul>
                             @foreach ($leads as $lead)
                             <li>
-                                <p class="titlereq"><a href="{{route('home.leads.leads',['slug_categories'=>$lead->categories->first()->slug,'slug_leads'=> $lead->product_friendly_url])}}" target="_blank" class="uo">{{$lead->name}} - <b class="black weight400">{{__('messages.To')}} {{__('messages.'.$lead->ad_type)}}</b></a></p>
+                                <p class="titlereq"><a href="{{route('home.leads.show',['slug_categories'=>$lead->categories->first()->getCategorySlug(),'slug_leads'=> $lead->product_friendly_url])}}" target="_blank" class="uo">{{$lead->name}} - <b class="black weight400">{{__('messages.To')}} {{__('messages.'.$lead->ad_type)}}</b></a></p>
                                 <p class="datereq">{{__('messages.Last Modified')}}: {{app()->getLocale()=='fa'?toJalali($lead->updated_at):$lead->updated_at}}</p>
                                 <a class="deleterecord" data-toggle="modal" data-target="#myModal"
                                    data-url="{{route('members.leads.post.delete',['slug_leads'=> $lead->product_friendly_url])}}"
@@ -82,7 +82,7 @@
                             <a href="{{route('members.request.show',['id'=>$request->id])}}" class="morelink">{{__("messages.more")}}</a>
                         </p>
                         <p class="Enquiriesfor">{{__("messages.Enquiry For")}} : <b>
-                                <a href="{{route('home.leads.leads',['slug_categories'=>$lead->categories->first()->slug,'slug_leads'=> $lead->product_friendly_url])}}"
+                                <a href="{{route('home.leads.show',['slug_categories'=>$lead->categories->first()->slug,'slug_leads'=> $lead->product_friendly_url])}}"
                                    target="_blank">{{$request->lead->name}}- {{__("messages.For")}} {{__('messages.'.$request->lead->ad_type)}}</a></b></p>
                         <div>
                             <a class="deletereq" href="#" title="Delete Record">

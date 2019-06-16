@@ -5,4 +5,3 @@
 @endsection
 @section('javascript')
 @endsection
-

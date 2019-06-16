@@ -31,7 +31,7 @@
                                     <li>
                                         <div class="title">
                                             <p class="title-company"><a
-                                                        href="{{route('home.leads.leads',['slug_categories'=>$lead->categories->first()->slug,'slug_leads'=> $lead->product_friendly_url])}}"
+                                                        href="{{route('home.leads.show',['slug_categories'=>$lead->categories->first()->getCategorySlug(),'slug_leads'=> $lead->product_friendly_url])}}"
                                                         class="uo">{{$lead->name}}</a></p>
                                             <p class="location">{{$lead->city->getName()}}
                                                 ,
@@ -58,7 +58,7 @@
                                                     </span></p>
                                             <div class="col-lg-3">
                                                 <figure>
-                                                    <a href="{{route('home.leads.leads',['slug_categories'=>$lead->categories->first()->slug,'slug_leads'=> $lead->product_friendly_url])}}">
+                                                    <a href="{{route('home.leads.show',['slug_categories'=>$lead->categories->first()->getCategorySlug(),'slug_leads'=> $lead->product_friendly_url])}}">
                                                         <img src="{{url('images/medias/photos/'.data_get($lead,'medias.0.media','noImage.png'))}}"
                                                              alt="{{$lead->name}}}">
                                                     </a></figure>
@@ -67,7 +67,7 @@
                                                 <div class="bodylead">
                                                     <p class="typelead">{{ __("messages.For")}} {{__('messages'.$lead->ad_type)}}</p>
                                                     <p class="textlead">{{$lead->description}}</p>
-                                                    <a href="{{route('members.request.send',['slug_leads'=>$lead->product_friendly_url])}}"
+                                                    <a href="{{route('leads.request.send',['slug_leads'=>$lead->product_friendly_url])}}"
                                                        class="btnsend"><i
                                                                 class="icon-email"></i>{{__("messages.Send Enquiry")}}
                                                     </a>

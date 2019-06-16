@@ -20,12 +20,12 @@
                     <div class="pro_list">
                         <div class="pro_pc">
                             <figure>
-                                <a href="{{route('home.leads.leads',['slug_categories'=>$products_featured[$i]->categories->first()->slug,'slug_leads'=> $products_featured[$i]->id])}}"
+                                <a href="{{route('home.leads.show',['slug_categories'=>$products_featured[$i]->categories->first()->getCategorySlug(),'slug_leads'=> $products_featured[$i]->id])}}"
                                    title=""><img src="{{'images/medias/photos/'.data_get($products_featured[$i],'medias.0.media')}}"
                                                  alt="{{$products_featured[$i]->name}}}"></a></figure>
                         </div>
                         <p class="fs11 weight700 blue mt8"><a
-                                    href="{{route('home.leads.leads',['slug_categories'=>$products_featured[$i]->categories->first()->slug,'slug_leads'=> $products_featured[$i]->id])}}"
+                                    href="{{route('home.leads.show',['slug_categories'=>$products_featured[$i]->categories->first()->getCategorySlug(),'slug_leads'=> $products_featured[$i]->id])}}"
                                     class="uo"
                                     title= "{{$products_featured[$i]->name}}">{{short_string($products_featured[$i]->name,14)}}</a></p>
                         <p class="fs11 red weight600"><a
