@@ -259,7 +259,7 @@ class LeadsController extends Controller
         if ($ad_type)
             $leads->where('ad_type', $ad_type);
         $countItem = $leads->count();
-        $leads = $leads->paginate($limit);
+        $result = $leads->paginate($limit);
         $title_page = __('messages.Leads');
         if ($ad_type == 'sell') {
             $title_page = __('messages.Selling Leads');
@@ -274,7 +274,7 @@ class LeadsController extends Controller
         $banner_left = Banner::where('banner_position', Banner::BANNER_POSITION_LEFT)->where('image', '!=', 0)->where('status', 1)->orderByRaw('RAND()')->skip(0)->take(6)->get();
         $banner_button = Banner::where('banner_position', Banner::BANNER_POSITION_BOTTOM)->where('image', '!=', 0)->where('status', 1)->orderByRaw('RAND()')->take(2)->get();
         $banner_middle = Banner::where('banner_position', Banner::BANNER_POSITION_MIDDLE)->where('image', '!=', 0)->where('status', 1)->orderByRaw('RAND()')->take(1)->get();
-        return view('leads.list', compact('leads', 'ad_type', 'title_page', 'company_featured', 'banner_left',
+        return view('leads.list', compact('result', 'ad_type', 'title_page', 'company_featured', 'banner_left',
             'banner_button', 'banner_middle', 'membership', 'countItem', 'categories'));
     }
 }

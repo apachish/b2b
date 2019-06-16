@@ -87,7 +87,6 @@ class MenuTableSeeder extends Seeder
             array('id' => '73','type' => 'page','parent_id' => '15','base_url' => 'home.pages','page_url' => '{"page":"\\u0634\\u0631\\u0627\\u06cc\\u0637-\\u0648-\\u0636\\u0648\\u0627\\u0628\\u0637"}','title' => 'شرایط و ضوابط','meta_description' => NULL,'meta_keyword' => NULL,'meta_data' => '{"value":40,"title":"\\\\u0634\\\\u0631\\\\u0627\\\\u06cc\\\\u0637 \\\\u0648 \\\\u0636\\\\u0648\\\\u0627\\\\u0628\\\\u0637","url":"home\\\\\\/pages\\\\\\/40\\\\\\/\\\\u0634\\\\u0631\\\\u0627\\\\u06cc\\\\u0637 \\\\u0648 \\\\u0636\\\\u0648\\\\u0627\\\\u0628\\\\u0637\\\\\\/40"}','order_menu' => '9','status' => '1','locale' => 'fa','class' => NULL,'permission' => 'all','created_at' => '2019-05-24 14:51:24','updated_at' => '2019-05-29 11:12:24')
         );
 
-
         foreach ($menus as $set) {
             \App\Menu::create($set);
 

@@ -13,7 +13,7 @@
                 </div>
                 <i class="right-align icon-angle-left"></i>
                 <div class="right-align divinhere" itemscope="" itemtype="{{ route('search')}}">
-                    <span itemprop="title"><strong>{{$title}}</strong></span>
+                    <span itemprop="title"><strong>{{$title_page}}</strong></span>
                 </div>
             </div>
         </section>
@@ -29,13 +29,13 @@
                                 <div class="col-sm-8 col-xs-12">
                                     <p class="boxlead">
 
-                                        @foreach ($seller_type as $seller_item){
+                                        @foreach ($seller_type as $seller_item)
 
                                         <label>
                                             <input name="seller[]" class="form_filter" type="checkbox"
-                                                   value="{{$seller_item}}"
+                                                   value="{{$seller_item->id}}"
                                                     {{in_array($seller_item,$seller)?"checked":""}} >
-                                            {{__('messages.'.$seller_item)}}
+                                            {{__('messages.'.$seller_item->title)}}
                                         </label>
                                         @endforeach
                                     </p>
@@ -43,10 +43,10 @@
                                 <div class="col-sm-4 col-xs-12">
                                     | <label class="label_filter">{{__('messages.Sort by')}}</label>
                                     <select class="form-control form_filter select" data-live-search="true" name="city">
-                                        <option value="">{{_('messages.City')}}</option>
+                                        <option value="">{{__('messages.Select a City...')}}</option>
 
                                         @foreach ($cities as $key=>$city)
-                                            <option {{!empty($city_filter == $key)?"selected":""}} value='{{$key}}'>{{$city}}</option>
+                                            <option {{!empty($city_filter == $city->id)?"selected":""}} value='{{$city->id}}'>{{$city->getName()}}</option>
 
                                         @endforeach
                                     </select>
@@ -108,21 +108,20 @@
                                 <span class="totlpage">{{__('messages.Total Company')}} : {{$countItem}}</span>
                             </div>
                             <div class="col-sm-9 col-xs-12">
-                                {{ $items->links()}}
+                                {{ $result->links()}}
                             </div>
                         </div>
 
-                        <p class="imginnerbtn"><img src="/images/mb3.gif" width="468" height="60" alt=""></p>
+                        @include('banner_middle',['offset'=>0,'limit' => 1])
+
                     </div>
                     <div class="col-lg-3 col-sm-12 col-md-3 col-xs-12  left-sidebar-inner ">
-                        <div class="imgleftsidebar imgleftsidebar2">
-                            {{$banner_left}}
-                        </div>
+                        @include('banner_left',['offset'=>0,'limit' => 5])
+
                         @include('companies.company_featured',[ 'company_featured_type' => 1,'category_slug'=>null])
 
-                        <div class="imgleftsidebar">
-                            {{$banner_left_2}}
-                        </div>
+                        @include('banner_left',['offset'=>5,'limit' => 6])
+
                     </div>
 
 

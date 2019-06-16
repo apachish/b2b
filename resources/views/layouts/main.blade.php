@@ -208,8 +208,8 @@
                             @endif
                         </div>
                         @if (Route::has('search'))
-                            <form class="formsearch" action="{{route('search')}}" method="get">
-
+                            <form class="formsearch" action="{{route('search')}}" method="post">
+                                {{csrf_field()}}
                                 <div class="srch_area  form-row align-items-center">
                                     <div class="txtsearchtop">
                                         <label class="sr-only" for="inlineFormInput">{{__("messages.Name")}}?></label>
@@ -619,7 +619,7 @@
                     var option = "";
                     $("#livesearch").html("");
 
-                    $.each(data, function (index, value) {
+                    $.each(data.data, function (index, value) {
                         console.log(value);
                         if (value.text) {
                             option += "<p><a style='cursor: pointer' class='text_search'>" + value.text + "</a></p>"

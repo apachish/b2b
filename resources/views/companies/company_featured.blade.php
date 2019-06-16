@@ -12,7 +12,7 @@
                         <div class="pro_pc">
                             <figure><a href="{{route('home.companies.info', ['slug_companies' => $company->slug])}}"
                                        title=""><img
-                                            src="{{url('images/logo/'.$company->logo)}}"
+                                            src="{{url('images/logo/'.$company->company_logo)}}"
                                             alt="" width="100px" height="100px"></a></figure>
                         </div>
                         <p class="pro-list-title"><a
@@ -21,7 +21,9 @@
                                     title="">{{$company->getCompanyName($company)}}</a>
                         </p>
                         <p class="pro-detials">
-                            {{$company->viewSellers}}
+                        @foreach($company->sellers as $seller)
+                            <p> - {{__('messages.'.$seller->title)}}</p>
+                            @endforeach
                         </p>
                         <p class="pro-list-des">{{$company->company_details}}</p>
                     </div>

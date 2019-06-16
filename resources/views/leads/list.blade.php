@@ -26,8 +26,8 @@
                         <h2 class="title-cat">{{$title_page}}</h2>
                         <div class="ts_inr_list companies">
                             <ul>
-                                @if($leads)
-                                    @foreach ($leads as $lead)
+                                @if($result)
+                                    @foreach ($result as $lead)
                                     <li>
                                         <div class="title">
                                             <p class="title-company"><a
@@ -86,7 +86,7 @@
                                 <span class="totlpage">{{__("messages.Total Leads")}} : {{$countItem}}</span>
                             </div>
                             <div class="col-sm-9 col-xs-12">
-                                {{$leads->links()}}
+                                {{$result->links()}}
                             </div>
                         </div>
 
