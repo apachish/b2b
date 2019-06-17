@@ -13,7 +13,7 @@ class StoreAdvertisment extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,21 @@ class StoreAdvertisment extends FormRequest
     public function rules()
     {
         return [
-            //
-        ];
+            'captcha_request' => 'required|captcha',
+            'email' => 'required|email',
+            'name' => 'required',
+            'mobile' => ['required',new PhoneNumber()],
+            'phone_number' => 'required',
+            'company_name' => 'required',
+            'banner_position' => 'required',
+            'time_duration' => 'required|max:12|min:1',
+            'image' => 'required|mimes:jpeg,bmp,png'|'max:30240',
+            'banner_page' => 'required',
+            'banner_url' => 'required',
+            'parentId' => 'required',
+            'parent' => 'required',
+            'category' => 'required',
+            'comment' => 'required',
+            ];
     }
 }

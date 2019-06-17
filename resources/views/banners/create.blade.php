@@ -43,9 +43,9 @@
                                            placeholder="{{ __("messages.Email") }} *">
                                     <input class="form-control inouttyeptext" type="text" name="mobile" id="mobile" value="{{old('mobile')}}"
                                            placeholder="{{ __("messages.Mobile Number") }} *">
-                                    <input class="form-control inouttyeptext" type="text" name="phoneNumber" value="{{old('phoneNumber')}}"
+                                    <input class="form-control inouttyeptext" type="text" name="phone_number" value="{{old('phone_number')}}"
                                            id="phoneNumber" placeholder="{{ __("messages.Phone Number") }}">
-                                    <input class="form-control inouttyeptext" type="text" name="companyName" value="{{old('companyName')}}"
+                                    <input class="form-control inouttyeptext" type="text" name="company_name" value="{{old('company_name')}}"
                                            id="companyName" placeholder="{{ __("messages.Company Name") }}">
                                     <div class="inouttyeptext spanuploadbanner">
                                         <span> {{ __("messages.Upload Banner") }} * :</span><input name="bannerImage"
