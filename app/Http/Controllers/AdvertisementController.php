@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Http\Requests\StoreAdvertisment;
 use App\PagePosition;
 use Illuminate\Http\Request;
 
@@ -15,8 +16,9 @@ class AdvertisementController extends Controller
 
         return view('banners.create',compact('positions','categories'));
     }
-    public function store()
+    public function store(StoreAdvertisment $request)
     {
+
         flash(__('messages.Your banner request has been sent successfully.'));
 
         return redirect('advertisement');
