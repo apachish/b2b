@@ -172,6 +172,8 @@ return [
         Mews\Captcha\CaptchaServiceProvider::class,
         RSmalc\Noty\NotyServiceProvider::class,
         Spatie\TranslationLoader\TranslationServiceProvider::class,
+        Propaganistas\LaravelPhone\PhoneServiceProvider::class,
+        Arcanedev\LogViewer\LogViewerServiceProvider::class,
 
         /*
          * Application Service Providers...
