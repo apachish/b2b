@@ -26,7 +26,6 @@
         "rsmalc/laravel-noty": "^2.0",
         "spatie/laravel-translation-loader": "^2.3",
         "propaganistas/laravel-phone": "^4.1",
-        "laravel/horizon": "^3.0",
         "laravel/telescope": "^2.0",
         "spatie/laravel-activitylog": "^3.2",
         "spatie/laravel-permission": "^2.12",
