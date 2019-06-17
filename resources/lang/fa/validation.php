@@ -126,7 +126,7 @@ return [
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
+    'phone' => 'فیلد :attribute باید شامل شماره معتبر باشد.',
     'custom' => [
         'attribute-name' => [
             'rule-name' => 'custom-message',
