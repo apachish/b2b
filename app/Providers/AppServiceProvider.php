@@ -34,7 +34,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
-
         view()->composer('*', function ($view) {
             if (starts_with(Request::root(), 'http://')) {
                 $domain = substr(Request::root(), 7); // $domain is now 'www.example.com'
@@ -53,6 +52,11 @@ class AppServiceProvider extends ServiceProvider
             $view->user_country = $user_country;
             $portal = Portal::whereDomain($domain)->first();
             if ($portal) {
+                if(session()->get('locale')){
+                    app()->setLocale(session()->get('locale'));
+                }else{
+                    app()->setLocale($portal->locale);
+                }
                 $site_info = json_decode($portal->meta_data, true);
                 $view->social = json_decode($portal->social, true);
                 $view->meta_data = json_decode($portal->meta_data, true);

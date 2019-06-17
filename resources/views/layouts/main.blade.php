@@ -119,11 +119,11 @@
 
                             @switch ( app()->getLocale())
                                 @case('en')
-                                <a href='#' id='fa_IR' class='changelocal' title='{{__('messages.Farsi')}}'><img
+                                <a href='{{route('change.locale',['lang'=>'fa'])}}' id='fa_IR' class='' title='{{__('messages.Farsi')}}'><img
                                             src='/images/flag/fa.png'></a>
                                 @break
                                 @case('fa')
-                                <a href='#' id='en_US' class='changelocal' title='{{__('messages.English')}}'> <img
+                                <a href='{{route('change.locale',['lang'=>'en'])}}' id='en_US' class='' title='{{__('messages.English')}}'> <img
                                             src='/images/flag/en.png'></a>
                                 @break
                             @endswitch
@@ -577,11 +577,14 @@
                 if (port == "443") {
                     http = "https://"
                 }
-
-                $.post(http + "{{$_SERVER['HTTP_HOST']}}/change-locale", {locale: locale}, function (data, status) {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.post(http + "{{$_SERVER['HTTP_HOST']}}/change-locale/"+locale, {locale: locale}, function (data, status) {
                     console.log(data);
 
-                    window.location = "/";
                 });
             })
         });

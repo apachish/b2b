@@ -33,6 +33,7 @@ Route::post('advertisement/store', 'AdvertisementController@store')->name('adver
 Route::get('help', 'HelpsController@index')->name('help');
 Route::post('help/rate/{id_faq}', 'HelpsController@rate')->name('help.rate');
 Route::post('search', 'SearchController@index')->name('search');
+Route::get('change-locale/{lang}', 'IndexController@changeLocale')->name('change.locale');
 Route::get('refer-friend', 'InviteController@form')->name('refer-friend');
 Route::post('refer-friend/send', 'InviteController@send')->name('refer-friend.send');
 Route::get('testimonials', 'TestimonialsController@index')->name('testimonials');
