@@ -144,9 +144,9 @@
                     <div class="row rowimginnerbtn">
                         <p class="imginnerbtn">{{$banner_middle}}</p>
                     </div>
-                    @include('companies.company_featured',['company_featured' => $companies, 'company_featured_type' => 2,'category'=>$id])
+                    @include('companies.company_featured',['company_featured' => $companies, 'company_featured_type' => 2])
 
-                    @include('leads.featured_horizontal',['products_featured' => $products_featured1, 'type_featured' => $type_featured,'id'=>$id])
+                    @include('leads.featured_horizontal',['products_featured' => $products_featured1, 'type_featured' => $type_featured])
                     <div class="row rowimginnerbtn">
                         <p class="imginnerbtn">{{$banner_middle_2}}</p>
                     </div>

@@ -25,6 +25,7 @@ class CategoriesController extends Controller
         $compact['params'] = [];
         $compact['breadcrumbs'] = [];
         $compact['page_name'] = "";
+        $compact['category_slug'] = $slug_categories;
 
         if ($slug_categories) {
             $category = Category::Where('slug_fa', $slug_categories)->orWhere('slug', $slug_categories)->withDepth()->with('ancestors')->firstOrFail();
