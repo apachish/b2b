@@ -4,7 +4,7 @@
             <p class="title">{{__('messages.Post Your')}} </p>
             <h2 class="title2">{{__('messages.Testimonial')}} </h2>
             <p class="mt7">
-                <input class="inouttyeptext form-control" title="{{__('messages.posterName')}} " name="posterName" id="posterName" type="text" placeholder="{{__('messages.Full Name')}} *">
+                <input class="inouttyeptext form-control" title="{{__('messages.posterName')}} " name="poster_name" id="poster_name" type="text" placeholder="{{__('messages.Full Name')}} *">
             </p>
             <p class="mt7">
                 <input class="inouttyeptext form-control" name="email" id="email" type="email" placeholder="{{__('messages.Email')}} *">
@@ -13,7 +13,7 @@
                 <input class="inouttyeptext form-control" name="company" title="{{__('messages.company')}}" id="company" type="text" placeholder="{{__('messages.Company')}} *">
             </p>
             <p class="mt7">
-                                        <textarea class="form-control inouttyeptext" title="{{__('messages.testimonialDescription')}}" name="testimonialDescription" id="testimonialDescription" class="db"
+                                        <textarea class="form-control inouttyeptext" title="{{__('messages.testimonialDescription')}}" name="description" id="description" class="db"
                                                   cols="45" rows="7" placeholder="{{ __("messages.Testimonials") }} *"
                                                   style="height:132px"></textarea>
             </p>
@@ -35,7 +35,7 @@
             </p>
             <div class="form-group row">
                 <div class="col-sm-9">
-                    <img src="/img/blueimp/loading.gif" id="loding_Testimonial"  style="width: 30px;height: 30px;display: none"/>
+                    <img src="/images/loading.gif" id="loding_Testimonial"  style="width: 30px;height: 30px;display: none"/>
 
                     <input name="send" type="submit" class="btn btn-primary" id="button_Testimonial" value="{{__('messages.Post Testimonial')}}">
                 </div>
@@ -61,7 +61,7 @@
                 url: formURL,
                 type: 'POST',
                 data:  postData,
-                success: function(data, textStatus, jqXHR)
+                success: function(response, textStatus, jqXHR)
                 {
 
                     if (response.status == 'failed' ) {
@@ -92,12 +92,17 @@
 
                     document.getElementById('verification_code_testimonial').value='';
                     document.getElementById('verification_code_testimonial').focus();
+                    $('#button_Testimonial').show( );
+                    $('#loding_Testimonial').hide();
+
                     return true;
 
                 },
                 error: function(data,jqXHR, textStatus, errorThrown)
                 {
                     console.log(data.responseText);
+                    $('#button_Testimonial').show( );
+                    $('#loding_Testimonial').hide( );
 
                     $('.reCaptcha-img').attr('src',response.data.captcha);
                     document.getElementById('verification_code_testimonial').value='';

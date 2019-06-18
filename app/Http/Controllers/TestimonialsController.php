@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class TestimonialsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('check-location')->only('store');
+
+    }
     public function index(Request $request)
     {
         $limit = $request->get('limit',15);
@@ -25,5 +30,41 @@ class TestimonialsController extends Controller
         $testimonial = Testimonial::whereSlug($slug)->whereStatus(1)->first();
         return view('testimonials.show',compact('testimonial','banner_left','banner_button'));
 
+    }
+
+    public function store(Request $request)
+    {
+        $validator = Validator()->make($request->all(), [
+            'captcha_request' => 'required|captcha',
+            'poster_name' => 'required|max:150',
+            'email' => 'required|email',
+            'description'=>'required',
+        ]);
+        return response()->json([
+            'status' => 'failed',
+            'meta' => [
+                'code' => 400,
+                'message' => $validator->errors(),
+            ],
+            'data' => ['captcha'=>captcha_src('flat')]
+        ], 200);
+        $ip_info = \Cache::get($request->ip());
+
+        Testimonial::create([
+            'city_id'=>data_get($ip_info,'city_id'),
+            'poster_name'=>$request->poster_name,
+            'company'=>$request->company,
+            'email'=>$request->email,
+            'description'=>$request->description,
+            'locale'=>app()->getLocale(),
+        ]);
+        return response()->json([
+            'status' => 'success',
+            'meta' => [
+                'code' => 200,
+                'message' => __('messages.successfully to send Text!'),
+            ],
+            'data' => ['captcha'=>captcha_src('flat')]
+        ], 200);
     }
 }

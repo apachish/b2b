@@ -15,10 +15,9 @@ class CreateTestimonialsTable extends Migration
     {
         Schema::create('testimonials', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('title');
             $table->string('poster_name');
             $table->string('slug');
-            $table->string('company');
+            $table->string('company')->nullable();
             $table->string('email');
             $table->text('description');
             $table->unsignedBigInteger('city_id');
@@ -28,7 +27,7 @@ class CreateTestimonialsTable extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
             $table->boolean('is_footer')->default(false);
-            $table->boolean('status')->default(false);
+            $table->enum('status',[-1,0,1])->default(0);
             $table->string('locale')->default('fa');
             $table->timestamps();
         });

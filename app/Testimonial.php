@@ -10,8 +10,8 @@ class Testimonial extends Model
 {
     use Sluggable;
     use SluggableScopeHelpers;
-    protected $fillable = ['city_id',
-        'title',
+    protected $fillable = [
+        'city_id',
         'poster_name',
         'company',
         'email',

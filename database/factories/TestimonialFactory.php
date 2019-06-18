@@ -17,7 +17,6 @@ $factory->define(Testimonial::class, function (Faker $faker) {
     $language = Arr::random(['fa', 'en']);
     return [
         'city_id' => City::where('country_id', 108)->inRandomOrder()->first()->id,
-        'title' => $faker->realText(20),
         'poster_name' => $faker->name(),
         'company' => $faker->company,
         'email' => $faker->email,
