@@ -129,7 +129,7 @@ class AppServiceProvider extends ServiceProvider
                         } else {
                             $set->href = $set['base_url'] ? route($set['base_url'], $params_url) : "#";
                         }
-                        if (!empty($set['base_url']) && $set['base_url'] == Request::route()->getName()) {
+                        if (!empty($set['base_url']) && $set['base_url'] == $route_current) {
                             $set->class_active = $class;
                         } elseif (!empty($set['base_url']) && $set['base_url'] != 'home') {
 

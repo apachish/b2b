@@ -213,7 +213,7 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group row sell_only" {{($type_ad == 'buy' ) ? 'style="display: none"' : ''}} >
+                                <div class="form-group row sell_only" style="{{($type_ad == 'buy' ) ? "display: none" : ''}}" >
                                     <label class="col-sm-3 col-form-label" for="img1">{{__('messages.Product Images')}}
                                         <b class="red">*</b> :</label>
                                     <div class="col-sm-9">

@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="css/countrySelect.css">
+<link rel="stylesheet" href="/css/countrySelect.css">
 <style>
     .row {
         float: right;
@@ -78,7 +78,7 @@
     </form>
 </div>
 <!-- Load jQuery from CDN so can run demo immediately -->
-<script src="js/countrySelect.min.js"></script>
+<script src="/js/countrySelect.min.js"></script>
 <script type="text/javascript" src="/js/toastr.js"></script>
 
 <script type="application/javascript">
@@ -130,7 +130,7 @@
                 data: $('#email_password_form').serialize(),
                 dataType: "json",
                 success: function (response, textStatus, jqXHR) {
-                    window.location = "members/my-account";
+                    window.location = "/members/my-account";
 
 
                 },

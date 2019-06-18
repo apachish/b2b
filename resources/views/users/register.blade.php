@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="css/countrySelect.css">
+<link rel="stylesheet" href="/css/countrySelect.css">
 <style>
     .row {
         float: right;
@@ -52,7 +52,7 @@
     </form>
 </div>
 <!-- Load jQuery from CDN so can run demo immediately -->
-<script src="js/countrySelect.min.js"></script>
+<script src="/js/countrySelect.min.js"></script>
 <script type="text/javascript" src="/js/toastr.js"></script>
 
 <script type="application/javascript">
