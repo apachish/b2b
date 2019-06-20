@@ -44,7 +44,7 @@ class Portal
 
             });
         }
-        cache()->rememberForever(session_id()."_locale",function (){
+        cache()->rememberForever(session_id()."_locale",function () use($portal){
             if(session()->get('locale')){
                 app()->setLocale(session()->get('locale'));
             }else{
