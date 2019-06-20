@@ -1,0 +1,16 @@
+# enable the directives - assuming they're not enabled globally
+ExpiresActive on
+
+# send an Expires: header for each of these mimetypes (as defined by server)
+ExpiresByType image/png "access plus 1 month"
+ExpiresByType image/gif "access plus 1 month"
+ExpiresByType image/jpeg "access plus 1 month"
+
+# css may change a bit sometimes, so define shorter expiration
+ExpiresByType text/css "access plus 1 days"
+
+# special MIME type for icons - see http://www.iana.org/assignments/media-types/image/vnd.microsoft.icon
+AddType image/vnd.microsoft.icon .ico
+# now we have icon MIME type, we can use it
+# my favicon doesn't change much
+ExpiresByType image/vnd.microsoft.icon "access plus 3 months"
