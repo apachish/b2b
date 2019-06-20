@@ -35,36 +35,19 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
         view()->composer('*', function ($view) {
-            if (starts_with(Request::root(), 'http://')) {
-                $domain = substr(Request::root(), 7); // $domain is now 'www.example.com'
+            if (Str::contains(request()->root(),'http://')) {
+                $domain = substr(request()->root(), 7); // $domain is now 'www.example.com'
             }
-            if (starts_with(Request::root(), 'https://')) {
-                $domain = substr(Request::root(), 7); // $domain is now 'www.example.com'
+            if (Str::contains(request()->root(),'https://')) {
+                $domain = substr(request()->root(), 8); // $domain is now 'www.example.com'
             }
-            $view->telephone = "";
-            $countries = Country::where('status', 1)->get();
-            $view->countries = $countries;
-            $user_country = auth()->check() ? auth()->user()->country->id : null;
-            if (!$user_country) {
-                $ip_info = \Cache::get(Request::ip());
-                $user_country = data_get($ip_info, 'country_id');
-            }
-            $view->user_country = $user_country;
-            $portal = Portal::whereDomain($domain)->first();
-            if ($portal) {
-                if(session()->get('locale')){
-                    app()->setLocale(session()->get('locale'));
-                }else{
-                    app()->setLocale($portal->locale);
-                }
-                $site_info = json_decode($portal->meta_data, true);
-                $view->social = json_decode($portal->social, true);
-                $view->meta_data = json_decode($portal->meta_data, true);
-                \Cache::rememberForever('portal', function () use ($portal) {
-                    return $portal;
-                });
-                $view->telephone = !empty($site_info['telephone']) ? $site_info['telephone'] : "";
-            }
+            $portal = cache()->get($domain);
+            $view->telephone = $portal->telephone;
+            $view->countries = cache()->get('countries');
+            $view->user_country = cache()->get(session()->getId()."_Country");
+            $view->social = $portal->social;
+            $view->meta_data =  $portal->meta_data;
+
             if (Request::is('admin*')) {
                 $view->Count_notification_product_enquiry = 0;
                 $view->notification_product_enquiry = [];
