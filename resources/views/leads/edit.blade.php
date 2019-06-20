@@ -235,10 +235,10 @@
                                             <div class="col-md-9 gallery-item">
                                                 <div class="image">
                                                     <a class="image" href="{{ url('images/medias/photos/'.data_get($lead,'medias.0.media','noImage.png')) }}"
-                                                       title="{{$lead->id}}"
+                                                       title="{{$lead->name}}"
                                                        data-gallery>
                                                         <img src="{{ url('images/medias/photos/'.data_get($lead,'medias.0.media','noImage.png')) }}"
-                                                             alt="{{$lead->id}}"
+                                                             alt="{{$lead->name}}"
                                                              width="173px" height="129px"/>
                                                     </a>
                                                 </div>
@@ -254,10 +254,10 @@
                                             <div class="col-md-9 gallery-item">
                                                 <div class="image">
                                                     <a class="image" href="{{ url('images/medias/photos/'.data_get($lead,'medias.1.media','noImage.png')) }}"
-                                                       title="{{$lead->id}}"
+                                                       title="{{$lead->name}}"
                                                        data-gallery>
                                                         <img src="{{ url('images/medias/photos/'.data_get($lead,'medias.1.media','noImage.png')) }}"
-                                                             alt="{{$lead->id}}"
+                                                             alt="{{$lead->name}}"
                                                              width="173px" height="129px"/>
                                                     </a>
                                                 </div>
@@ -273,10 +273,10 @@
                                             <div class="col-md-9 gallery-item">
                                                 <div class="image">
                                                     <a class="image" href="{{ url('images/medias/photos/'.data_get($lead,'medias.2.media','noImage.png')) }}"
-                                                       title="{{$lead->id}}"
+                                                       title="{{$lead->name}}"
                                                        data-gallery>
                                                         <img src="{{ url('images/medias/photos/'.data_get($lead,'medias.2.media','noImage.png')) }}"
-                                                             alt="{{$lead->id}}"
+                                                             alt="{{$lead->name}}"
                                                              width="173px" height="129px"/>
                                                     </a>
                                                 </div>
@@ -292,10 +292,10 @@
                                             <div class="col-md-9 gallery-item">
                                                 <div class="image">
                                                     <a class="image" href="{{ url('images/medias/photos/'.data_get($lead,'medias.3.media','noImage.png')) }}"
-                                                       title="{{$lead->id}}"
+                                                       title="{{$lead->name}}"
                                                        data-gallery>
                                                         <img src="{{ url('images/medias/photos/'.data_get($lead,'medias.3.media','noImage.png')) }}"
-                                                             alt="{{$lead->id}}"
+                                                             alt="{{$lead->name}}"
                                                              width="173px" height="129px"/>
                                                     </a>
                                                 </div>

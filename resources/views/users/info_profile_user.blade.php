@@ -27,7 +27,7 @@
                                 <b>{{__("messages.Website:")}}</b> {{$user->website}}</p>
                         </div>
                         <p class="morelinkinfo">
-                            <a href="{{ url('company/detail',['id'=>$user->id])}}" class="btn btn-dark" target="_blank">
+                            <a href="{{ route('home.companies.info', ['slug_companies' => $user->slug])}}" class="btn btn-dark" target="_blank">
                                 {{__("messages.View Profile")}}</a>
                             <a href="{{ url('members/edit_account')}}"
                                class="btn btn-dark">{{__("messages.Update Profile")}}

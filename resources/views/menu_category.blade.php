@@ -16,7 +16,7 @@
                             @endif
                         <li class="dc-mega-li" id="menu-item-{{$i_row}}">
                             <a class="dc-mega"
-                               href="{{route('home.categories',['slug'=>app()->getLocale()=='fa'?$category->slug_fa:$category->slug]) }}"
+                               href="{{route('home.categories',["slug_categories" => $category->getCategorySlug()]) }}"
                                data-id="{{$category->id }}"
                                title=" {{app()->getLocale()=='fa'?$category->name_fa:$category->name }}"
                                alt=" {{app()->getLocale()=='fa'?$category->name_fa:$category->name }}"
@@ -40,7 +40,7 @@
                                                 <li id="menu-item-{{$i_row}}-{{$li}}" class="mega-unit mega-hdr">
                                                     <h5>
                                                         <a
-                                                                href="{{route('home.categories',['slug'=>app()->getLocale()=='fa'?$sub_category->slug_fa:$sub_category->slug]) }}"
+                                                                href="{{route('home.categories',['slug_categories'=>$sub_category->getCategorySlug()]) }}"
                                                            title="{{app()->getLocale()=='fa'?$sub_category->name_fa:$sub_category->name }}">
                                                             {{app()->getLocale()=='fa'?$sub_category->name_fa:$sub_category->name }}
                                                         </a>

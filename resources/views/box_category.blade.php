@@ -13,12 +13,12 @@
                 @endif
 
                 <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12 cat-list-home">
-                    <a href="{{route("home.categories", ["id" => $category->id])}}"
+                    <a href="{{route("home.categories", ["slug_categories" => $category->getCategorySlug()])}}"
                        title="{{ app()->getLocale()=='fa'?$category->name_fa:$category->name}}"
                        class="title-cat">{{ app()->getLocale()=='fa'?$category->name_fa:$category->name }}</a>
                     <div class="cat_box">
                         <a class="cat-img"
-                           href="{{route("home.categories", ["id" => $category->id])}}"
+                           href="{{route("home.categories",["slug_categories" => $category->getCategorySlug()])}}"
                            title="{{ $category->title}}">
                             <img src="{{url('images/category/'.$category->image)}}"
                                  width="173" height="80"

@@ -141,7 +141,9 @@
                                             <li>
                                                 <div class="title">
                                                     <p class="title-company"><a
-                                                                href="{{ route('home/product', ['cat_id' => $this->id, 'id' => $item['id']]) }}"
+                                                                href="{{
+                                                                route('home.leads.show',['slug_categories'=>$item->categories->first()->getCategorySlug(),'slug_leads'=> $item->product_friendly_url])
+                                                                }}"
                                                                 class="uo">{{ $item['productName'] }}</a></p>
                                                     <p class="location">{{ $item['cityTitle'] }}
                                                         , {{ $item['countryTitle'] }}</p>
@@ -164,7 +166,7 @@
                                                     </p>
                                                     <div class="col-lg-3">
                                                         <figure>
-                                                            <a href="{{ route('home/product', ['cat_id' => $this->id, 'id' => $item['id']]) }}"><img
+                                                            <a href="{{ route('home.leads.show',['slug_categories'=>$item->categories->first()->getCategorySlug(),'slug_leads'=> $item->product_friendly_url]) }}"><img
                                                                         src="{{ $item['image'] }}" alt=""></a>
                                                         </figure>
                                                     </div>
@@ -176,7 +178,7 @@
                                                                class="abtnmore">{{__("messages.Read More")}}<i
                                                                         class="icon-android-more-horizontal"></i></a>
 
-                                                            <a href="{{ route('home/product/enquiry', ['cat_id' => $this->id, 'id' => $item['id']]) }}"
+                                                            <a href="{{ route('leads.request.send', [ 'slug_lead' => $item->product_friendly_url]) }}"
                                                                class="btnsend"><i
                                                                         class="icon-email"></i>{{ __("messages.Send Enquiry") }}
                                                             </a>
