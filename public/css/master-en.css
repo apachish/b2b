@@ -217,3 +217,23 @@ header .topnav ul.nav li ul li {text-align: left;}
     left: 0;
     right: auto;
 }
+
+
+#email_form #submit, #forget_form #submit, #email_password_form #submit {
+
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+    text-transform: capitalize;
+}
+
+.Buyer-Info-wrapper .btnsend i.icon-email {
+    position: absolute;
+    left: 16px;
+    font-size: 38px;
+    top: 4px;
+    right: auto;
+}
+
+.Buyer-Info-wrapper .btnsend{    padding-left: 45px;
+    padding-right: 21px;}
