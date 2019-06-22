@@ -20,5 +20,7 @@ Route::get('search','Api\SearchController@index');
 Route::get('categories/show/{id}','Api\CategoriesController@show');
 Route::get('categories/{id?}/{status?}/{language?}','Api\CategoriesController@index');
 Route::get('pages/{id?}/{status?}/{language?}','Api\PagesController@index');
+Route::get('countries/{id_country}/states','Api\StatesController@index');
+Route::get('countries/{id_country}/states/{id_state}/cities','Api\CitiesController@index');
 
 //Route::resource('categories','Admin\CategoriesController');

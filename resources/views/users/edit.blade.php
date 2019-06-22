@@ -87,7 +87,8 @@
                                         @foreach($sellers as $seller)
                                             <div class="row">
                                                 <div class="col-sm-1"><input type="checkbox" name="sellerType[]"
-                                                                             value="{{$seller->title}}" {{in_array($seller->id,$user->sellers->pluck('id')->toArray())?"checked":""}} />
+                                                                             value="{{$seller->id}}"
+                                                            {{in_array($seller->id,$user->sellers->pluck('id')->toArray())?"checked":""}} />
                                                 </div>
                                                 <div class="col-sm-9 spansellertype">{{__('messages.'.$seller->title)}}</div>
                                             </div>
@@ -101,12 +102,12 @@
                                                 class="red">*</b> :</label>
                                     <div class="col-sm-9">
 
-                                        <select name="category" id="category" class="form-control selectpicker"
+                                        <select name="category_id" id="category" class="form-control selectpicker"
                                                 data-show-subtext="true" data-live-search="true">
 
                                             <option value="">{{__("messages.Select Category")}}</option>
                                             @foreach ($categories as $category)
-                                                <option {{ $user->category->id == $category->id?"selected":"" }}
+                                                <option {{ $user->category && $user->category->id == $category->id?"selected":"" }}
                                                         value="{{ $category->id }}">{{ $category->getCategoryTitle()}}</option>
                                             @endforeach
                                         </select>
@@ -161,7 +162,7 @@
                                            for="companyDetails">{{__("messages.Company Details")}} <b
                                                 class="red">*</b> :</label>
                                     <div class="col-sm-9">
-                                                    <textarea class="form-control inouttyeptext" name="companyDetails"
+                                                    <textarea class="form-control inouttyeptext" name="company_details"
                                                               cols="40" rows="7" id="companyDetails"
                                                               class="db full">{{ $user->company_details  }}</textarea>
                                     </div>
@@ -175,9 +176,9 @@
                                     <label class="col-sm-3 col-form-label" for="name">{{__("messages.Owner Name")}} <b
                                                 class="red">*</b> :</label>
                                     <div class="col-sm-9">
-                                        <input class="inouttyeptext inputtype2" name="firstName" id="name" type="text"
+                                        <input class="inouttyeptext inputtype2" name="first_name" id="name" type="text"
                                                class="hlf" placeholder="First Name" value="{{$user->first_name}}">
-                                        <input class="inouttyeptext inputtype2" name="lastName" id="name2" type="text"
+                                        <input class="inouttyeptext inputtype2" name="last_name" id="name2" type="text"
                                                class="hlf" placeholder="Last Name" value="{{$user->last_name}}">
                                     </div>
                                     <span class="db i gray fs12 mt5 arial red"></span>
@@ -198,7 +199,7 @@
                                     <label class="col-sm-3 col-form-label" for="country">{{__("messages.Country")}} <b
                                                 class="red">*</b> :</label>
                                     <div class="col-sm-9">
-                                        <select name="country" id="country" class="form-control selectpicker"
+                                        <select name="country_id" id="country" class="form-control selectpicker"
                                                 data-show-subtext="true" data-live-search="true">
 
                                             <option value="">{{__("messages.Select Country")}}</option>
@@ -215,7 +216,7 @@
                                     <label class="col-sm-3 col-form-label" for="State">{{__("messages.State")}} <b
                                                 class="red">*</b> :</label>
                                     <div class="col-sm-9">
-                                        <select class="form-control inouttyeptext" name="state" id="State">
+                                        <select class="form-control inouttyeptext" name="state_id" id="State">
                                             @foreach($states as $state)
                                                 <option {{ $user->state->id == $state['id']?"selected":"" }} value="{{ $state->id}}">{{$state->getName()}}</option>
                                             @endforeach
@@ -229,7 +230,7 @@
                                     <label class="col-sm-3 col-form-label" for="City">{{__("messages.City")}} <b
                                                 class="red">*</b> :</label>
                                     <div class="col-sm-9">
-                                        <select class="form-control inouttyeptext" name="city" id="City">
+                                        <select class="form-control inouttyeptext" name="city_id" id="City">
                                             @foreach($cites as $city)
                                                 <option {{ $user->city->id == $city['id']?"selected":"" }} value="{{ $city->id}}">{{$city->getName()}}</option>
                                             @endforeach
@@ -262,7 +263,7 @@
                                     <label class="col-sm-3 col-form-label" for="phone">{{__("messages.Phone No.")}}
                                         :</label>
                                     <div class="col-sm-9">
-                                        <input class="form-control inouttyeptext" name="phoneNumber" id="phoneNumber"
+                                        <input class="form-control inouttyeptext" name="phone_number" id="phone_number"
                                                type="text" value="{{ $user->phone_number}}">
                                     </div>
                                 </div>
@@ -337,9 +338,9 @@
                 $("#State").val('').trigger('change');
                 $("#City").val('').trigger('change');
                 if (country) {
-                    $.get("/api/states?country=" + country, function (data) {
+                    $.get("/api/countries/" + country+"/states", function (data) {
                         console.log(data);
-                        var state = data;
+                        var state = data.data;
                         console.log(state);
                         state.unshift({
                             id: "",
@@ -356,9 +357,9 @@
 
                             if (state) {
                                 console.log(parent);
-                                $.get("/api/city?country=" + country + "&state=" + state, function (data) {
+                                $.get("/api/countries/" + country + "/states/" + state+"/cities", function (data) {
                                     console.log(data);
-                                    var city = data;
+                                    var city = data.data;
                                     city.unshift({
                                         id: "",
                                         text: '{{__("messages.SELECT City")}}'
@@ -413,9 +414,9 @@
 
                     if (state) {
                         console.log(state);
-                        $.get("/api/city?country=" + country + "&state=" + state, function (data) {
+                        $.get("/api/countries/" + country + "/states/" + state+"/cities", function (data) {
                             console.log(data);
-                            var city = data;
+                            var city = data.data;
                             city.unshift({
                                 id: "",
                                 text: '{{__("messages.SELECT City")}}'
