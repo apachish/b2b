@@ -42,6 +42,10 @@ class AppServiceProvider extends ServiceProvider
                 $domain = substr(request()->root(), 8); // $domain is now 'www.example.com'
             }
             $portal = cache()->get($domain);
+            if($portal == null) return [];
+            cache()->remember("portal_".session()->getId(),1440,function () use ($portal){
+                return $portal;
+            });
             $view->telephone = $portal->telephone;
             $view->countries = cache()->get('countries');
             $view->user_country = cache()->get(session()->getId()."_Country");

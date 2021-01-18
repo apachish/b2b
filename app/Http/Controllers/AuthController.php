@@ -92,7 +92,7 @@ class AuthController extends Controller
         $ip_info = Cache::get($request->ip());
         $city = data_get($ip_info, 'state_id');
 
-        return view('users.register_final', compact('email', 'country', 'states', 'category', 'city', 'code'));
+        return view('users.register_final', compact('email', 'country', 'states', 'category', 'city'));
 
     }
 
@@ -121,7 +121,7 @@ class AuthController extends Controller
         $key = base64_decode(substr($key, 7));
        $crypt =  Crypt::generateKey($key);
         $temp = Crypt::encryptString($login);
-        $portal = Cache::get('portal');
+        $portal = Cache()->get("portal_".session()->getId());
 
         //$crypt->decrypt('value');
         $user = User::create(
